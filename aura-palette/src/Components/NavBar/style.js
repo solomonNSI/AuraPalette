@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+export const NAVBAR_HEIGHT = 50;
+
 export const NavBar = styled.div`
   background-color: white;
   color: black;
-  height: 50px;
+  height: ${NAVBAR_HEIGHT}px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -13,10 +15,12 @@ export const NavBar = styled.div`
 `;
 
 export const AppName = styled.div`
-  font-size: 30px;
+  font-size: 46px;
   margin: 10px;
-  margin-left: 30px;
-  font-weight: 600;
+  margin-left: 64px;
+  font-family: Palatino;
+  font-weight: 700;
+  letter-spacing: -0.05em;
 `;
 
 export const LoginButton = styled.div`

@@ -1,29 +1,24 @@
-import './App.css';
 import * as S from "./style";
-import { NavBar } from './NavBar/NavBar';
+import { NavBar } from './Components/NavBar/NavBar';
+import { AdjustmentsMenu } from "./Components/AdjustmentsMenu/AdjustmentsMenu";
+import { Palette } from "./Components/Palette/Palette";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar/>
+    <div style={{ backgroundColor: '#eee', height: '100vh' }}>
+      <NavBar/>
 
-        <S.Container>
-          <div>
-            <S.Title>Find a palette for everything.</S.Title>
-            <S.SearchBar/>
-          </div>
-          <S.TopKeywords>
-            Top Keywords
-          </S.TopKeywords>
-        </S.Container>
+      <S.Content>
+        <S.Title>Find a palette for everything.</S.Title>
+        <S.SearchBar/>
+        <S.TopKeywords>Top Searches</S.TopKeywords>
 
-        <S.Container>
-          <S.ColorPaletteContainer>Burada color palette olacak</S.ColorPaletteContainer>
-          <S.MenuContainer>Burada menu olacak</S.MenuContainer>
-        </S.Container>
+        <S.PaletteContainer>
+          <AdjustmentsMenu/>
+          <Palette/>
+        </S.PaletteContainer>
 
-      </header>
+      </S.Content>
     </div>
   );
 }
