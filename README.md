@@ -8,6 +8,7 @@ in Bilkent University for CS491/492 course.
 ##### Install yarn with (for MacOS): 
 ```
 brew install yarn
+yarn install
 ```
 ##### Start project with: 
 ```
