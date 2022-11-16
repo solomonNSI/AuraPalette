@@ -7,7 +7,6 @@ export const Content = styled.div`
   font-family: Helvetica Neue;
   display: flex;
   flex-direction: column;
-  margin: auto;
   width: calc(100%-130px);
 `;
 
@@ -37,9 +36,9 @@ export const TopKeywords = styled.div`
   font-size: 15px;
   margin: 0px 65px 0px 65px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  jusfify-content: space-evenly;
-  gap: calc(100vw / 35);
+  jusfify-content: space-between; // does not work i dont know why
 `;
 
 export const PaletteContainer = styled.div`
