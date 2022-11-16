@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const MenuContainer = styled.div`
   width: 20%;
+  margin-top: 18px;
   margin-left: 65px;
   color: #333333;
   font-weight: medium;
@@ -73,6 +74,6 @@ export const Title = styled.h2`
 
 export const Subtitle = styled.h3`
   font-weight: 500;
-  margin: 20px 0px 15px 0px; 
+  margin: 16px 0px 15px 0px; 
   }
 `;

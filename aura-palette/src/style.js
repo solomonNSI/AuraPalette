@@ -10,11 +10,6 @@ export const Content = styled.div`
   width: calc(100%-130px);
 `;
 
-export const TopSearch = styled.p`
-  font-family: Helvetica Neue;
-  font-weight: 300;
-`;
-
 export const Title = styled.div`
   padding-top: ${NAVBAR_HEIGHT + 30}px;
   text-align: center;
@@ -30,15 +25,28 @@ export const SearchBar = styled.input`
   border: none;
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding-left: 20px;
+
+  &::placeholder {
+    font-weight: 400;
+    color: #33333388;
+  }
 `;
 
 export const TopKeywords = styled.div`
-  font-size: 15px;
-  margin: 0px 65px 0px 65px;
+  width: 100ww;
+  margin: 20px 65px 10px 65px;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  jusfify-content: space-between; // does not work i dont know why
+  jusfify-content: right; // did not work i dont know why
+`;
+
+export const TopSearch = styled.div`
+  font-size: 14px;
+  font-family: Helvetica Neue;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
 `;
 
 export const PaletteContainer = styled.div`
