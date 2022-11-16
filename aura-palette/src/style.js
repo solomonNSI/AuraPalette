@@ -38,7 +38,7 @@ export const TopKeywords = styled.div`
   margin: 0px 65px 0px 65px;
   display: flex;
   align-items: center;
-  jusfify-content: space-between;
+  jusfify-content: space-evenly;
   gap: calc(100vw / 35);
 `;
 
