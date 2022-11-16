@@ -5,8 +5,9 @@ import { StarIcon } from "../../Icons/StarIcon";
 export const Container = styled.div`
   background-color: white;
   border-radius: 8px;
-  width: 900px;
+  width: 80%;
   padding: 0 30px;
+  margin-right: 65px;
 `;
 
 export const PaletteTitle = styled.h2`
