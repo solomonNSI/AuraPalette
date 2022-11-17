@@ -1,4 +1,4 @@
-import * as S from "../AppView/style";
+import * as S from "../ProfileView/style";
 import { NavBar } from "../../Components/NavBar/NavBar";
 
 const Profile = () => {
@@ -6,7 +6,7 @@ const Profile = () => {
     <div style={{ backgroundColor: "#eeeeee", height: "100vh" }}>
       <NavBar />
 
-      Profile Page
+      <S.Title>Profile page</S.Title>
     </div>
   );
 }
