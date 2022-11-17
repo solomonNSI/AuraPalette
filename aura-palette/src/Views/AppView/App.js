@@ -1,7 +1,7 @@
 import * as S from "./style";
-import { NavBar } from "./Components/NavBar/NavBar";
-import { AdjustmentsMenu } from "./Components/AdjustmentsMenu/AdjustmentsMenu";
-import { Palette } from "./Components/Palette/Palette";
+import { NavBar } from "../../Components/NavBar/NavBar";
+import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMenu";
+import { Palette } from "../../Components/Palette/Palette";
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { colorList } from "../../ColorWizard";
+import { colorList } from "../../Helpers/ColorWizard";
 import * as S from "./style";
 
 export const NavBar = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NAVBAR_HEIGHT } from "./Components/NavBar/style";
+import { NAVBAR_HEIGHT } from "../../Components/NavBar/style";
 
 export const Content = styled.div`
   background-color: #eeeeee;
@@ -44,6 +44,7 @@ export const TopKeywords = styled.div`
 export const TopSearch = styled.div`
   font-size: 14px;
   font-family: Helvetica Neue;
+  margin: 0 16px;
   font-weight: 300;
   display: flex;
   justify-content: center;
