@@ -1,7 +1,7 @@
 import React from "react";
+import { colorList } from "../../ColorWizard";
 import * as S from "./style";
 
-  // bi function
 export const NavBar = () => {
   return (
     <S.NavBar>
@@ -10,7 +10,7 @@ export const NavBar = () => {
         <S.StyledProfileIcon height="50px" />
       </S.LoginButton>
 
-      <S.GradientLine />
+      <S.GradientLine colorList={colorList}/>
     </S.NavBar>
   );
 };
