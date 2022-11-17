@@ -1,5 +1,6 @@
 import React from "react";
 import { ExportIcon } from "../../Icons/ExportIcon";
+import { colorList } from "../../ColorWizard";
 import * as S from "./style";
 
 const getColorMode = () => {
@@ -17,22 +18,23 @@ export const Palette = () => {
       </S.Header>
 
       <S.Colors>
-        <S.Color>
-          <S.ColorCode>#AE5353</S.ColorCode>
+        <S.Color colorHex={colorList[0]}>
+          <S.ColorCode>{colorList[0]}</S.ColorCode>
         </S.Color>
-        <S.Color>
-          <S.ColorCode>#AE5353</S.ColorCode>
+        <S.Color colorHex={colorList[1]}>
+          <S.ColorCode>{colorList[1]}</S.ColorCode>
         </S.Color>
-        <S.Color>
-          <S.ColorCode>#AE5353</S.ColorCode>
+        <S.Color colorHex={colorList[2]}>
+          <S.ColorCode>{colorList[2]}</S.ColorCode>
         </S.Color>
-        <S.Color>
-          <S.ColorCode>#AE5353</S.ColorCode>
+        <S.Color colorHex={colorList[3]}>
+          <S.ColorCode>{colorList[3]}</S.ColorCode>
         </S.Color>
-        <S.Color>
-          <S.ColorCode>#AE5353</S.ColorCode>
+        <S.Color colorHex={colorList[4]}>
+          <S.ColorCode>{colorList[4]}</S.ColorCode>
         </S.Color>
       </S.Colors>
+      
     </S.Container>
   );
 };

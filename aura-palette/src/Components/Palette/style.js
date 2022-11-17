@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { StarIcon } from "../../Icons/StarIcon";
 
 export const Container = styled.div`
@@ -30,7 +30,7 @@ export const Colors = styled.div`
 `;
 
 export const Color = styled.div`
-  background-color: #ae5353;
+  background-color: ${props => props.colorHex};
   width: 20%;
   height: 120%;
   border-radius: 8px 8px 0px 0px;
