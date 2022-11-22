@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './Views/AppView/App';
 import Profile from './Views/ProfileView/Profile';
+import Settings from './Views/SettingsView/Settings';
 
 export default function Root() {
   return (
@@ -11,6 +12,7 @@ export default function Root() {
       <Routes>
           <Route index path="/" element={<App />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );

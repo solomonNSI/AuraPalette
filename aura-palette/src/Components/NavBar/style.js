@@ -43,4 +43,6 @@ export const LoginButton = styled.div`
   margin-right: 65px;
 `;
 
-export const StyledProfileIcon = styled(ProfileIcon)``;
+export const StyledProfileIcon = styled(ProfileIcon)`
+  cursor: pointer;
+`;
