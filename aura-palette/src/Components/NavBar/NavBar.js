@@ -8,7 +8,7 @@ export const NavBar = () => {
 
   return (
     <S.NavBar>
-      <S.AppName>aura</S.AppName>
+      <S.AppName onClick={() => navigate("/")}>aura</S.AppName>
       <S.LoginButton>
         <S.StyledProfileIcon height="50px" onClick={() => navigate("/profile")}/>
       </S.LoginButton>

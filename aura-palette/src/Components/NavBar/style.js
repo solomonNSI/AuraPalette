@@ -36,6 +36,7 @@ export const AppName = styled.div`
   font-family: Palatino;
   font-weight: 700;
   letter-spacing: -0.05em;
+  cursor: pointer;
 `;
 
 export const LoginButton = styled.div`
