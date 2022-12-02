@@ -1,9 +1,8 @@
 import React from "react";
-import { colorList } from "../../Helpers/ColorWizard";
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 
-export const NavBar = () => {
+export const NavBar = ({ palette }) => {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +12,7 @@ export const NavBar = () => {
         <S.StyledProfileIcon height="50px" onClick={() => navigate("/profile")}/>
       </S.LoginButton>
 
-      <S.GradientLine colorList={colorList}/>
+      <S.GradientLine colorList={palette}/>
     </S.NavBar>
   );
 };

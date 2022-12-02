@@ -69,11 +69,9 @@ export const Checkmark = styled.span`
 export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 15px 0px; 
-  }
 `;
 
 export const Subtitle = styled.h3`
   font-weight: 500;
   margin: 16px 0px 15px 0px; 
-  }
 `;
