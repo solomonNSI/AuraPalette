@@ -41,60 +41,49 @@ export const AdjustmentsMenu = ({ setHarmony }) => {
         <S.Container>
           <input type="radio" name="harmony" defaultChecked onChange={() => setHarmony("None")} />
           None
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
 
         <S.Container>
-          <input type="radio" name="harmony" onChange={() => {
-              setHarmony("Analogous")
-            }} 
-          />
+          <input type="radio" name="harmony" onChange={() => setHarmony("Analogous")} />
           Analogous
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
 
         <S.Container>
-          <input type="radio" name="harmony"></input>
+          <input type="radio" name="harmony" onChange={() => setHarmony("Monochromatic")} />
           Monochromatic
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
 
         <S.Container>
-          <input type="radio" name="harmony"></input>
+          <input type="radio" name="harmony"  onChange={() => setHarmony("Triads")} />
           Triads
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
 
         <S.Container>
-
         <input type="radio" name="harmony" onChange={() => setHarmony("Complementary")} />
-        <input type="radio" name="harmony" />
           Complementary
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
 
         <S.Container>
-          <input type="radio" name="harmony"></input>
+          <input type="radio" name="harmony" onChange={() => setHarmony("Split Complementary")} />
           Split Complementary
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
 
         <S.Container>
-          <input type="radio" name="harmony"></input>
-          Compound
-          <S.Checkmark className="checkmark"></S.Checkmark>
-        </S.Container>
-
-        <S.Container>
-          <input type="radio" name="harmony"></input>
+          <input type="radio" name="harmony" onChange={() => setHarmony("Shades")} />
           Shades
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
 
         <S.Container>
-          <input type="radio" name="harmony"></input>
+          <input type="radio" name="harmony" onChange={() => setHarmony("Square")} />
           Square
-          <S.Checkmark className="checkmark"></S.Checkmark>
+          <S.Checkmark className="checkmark" />
         </S.Container>
       </div>
     </S.MenuContainer>

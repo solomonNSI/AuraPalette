@@ -21,19 +21,19 @@ export const Palette = ({ palette }) => {
 
       <S.Colors>
         <S.Color colorHex={palette[0]}>
-          <S.ColorCode>{palette[0]}</S.ColorCode>
+          <S.ColorCode>{(palette[0]).toUpperCase()}</S.ColorCode>
         </S.Color>
         <S.Color colorHex={palette[1]}>
-          <S.ColorCode>{palette[1]}</S.ColorCode>
+          <S.ColorCode>{(palette[1]).toUpperCase()}</S.ColorCode>
         </S.Color>
         <S.Color colorHex={palette[2]}>
-          <S.ColorCode>{palette[2]}</S.ColorCode>
+          <S.ColorCode>{(palette[2]).toUpperCase()}</S.ColorCode>
         </S.Color>
         <S.Color colorHex={palette[3]}>
-          <S.ColorCode>{palette[3]}</S.ColorCode>
+          <S.ColorCode>{(palette[3]).toUpperCase()}</S.ColorCode>
         </S.Color>
         <S.Color colorHex={palette[4]}>
-          <S.ColorCode>{palette[4]}</S.ColorCode>
+          <S.ColorCode>{(palette[4]).toUpperCase()}</S.ColorCode>
         </S.Color>
       </S.Colors>
       

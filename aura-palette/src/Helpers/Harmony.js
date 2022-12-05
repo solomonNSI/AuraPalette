@@ -31,7 +31,7 @@ export const getComplementaryPalette = (palette) => {
   return palette;
 };
 
-export const getAnalogousPalette = (palette) => {
+export const getMonochromaticPalette = (palette) => {
   const baseColorHex = palette[2] // take the middle color as the base
   const baseColorHSL = hexToHSL(baseColorHex);
 
@@ -61,3 +61,129 @@ export const getAnalogousPalette = (palette) => {
 
   return palette;
 };
+
+export const getAnalogousPalette = (palette) => {
+  const baseColorHex = palette[2] // take the middle color as the base
+  const baseColorHSL = hexToHSL(baseColorHex);
+
+  // Color [0]
+  var temp = [...baseColorHSL];
+  temp[0] =  Math.abs(baseColorHSL[0] + 30);
+  const color0 = hslToHex(temp[0], temp[1], temp[2]);
+  palette[0] = color0;
+
+  // Color [1]
+  var temp1 = [...baseColorHSL];
+  temp1[0] =  Math.abs(baseColorHSL[0] + 15);
+  const color1 = hslToHex(temp1[0], temp1[1], temp1[2]);
+  palette[1] = color1;
+
+  // Color [3]
+  var temp2 = [...baseColorHSL];
+  temp2[0] =  Math.abs(baseColorHSL[0] - 15);
+  const color2 = hslToHex(temp2[0], temp2[1], temp2[2]);
+  palette[3] = color2;
+
+  // Color [4]
+  var temp3 = [...baseColorHSL];
+  temp3[0] =  Math.abs(baseColorHSL[0] - 30);
+  const color3 = hslToHex(temp3[0], temp3[1], temp3[2]);
+  palette[4] = color3;
+
+  return palette;
+};
+
+
+export const getTriadsPalette = (palette) => {
+  const baseColorHex = palette[2] // take the middle color as the base
+  const baseColorHSL = hexToHSL(baseColorHex);
+
+  // Color [0] Triad 1
+  var temp = [...baseColorHSL];
+  temp[0] =  Math.abs(baseColorHSL[0] + 120);
+  const color0 = hslToHex(temp[0], temp[1], temp[2]);
+  palette[0] = color0;
+
+  // Color [1] Darker Shade 1
+  var temp1 = [...baseColorHSL];
+  temp1[2] =  Math.abs(baseColorHSL[2] - (100% + baseColorHSL[2] / 10) * 8);
+  const color1 = hslToHex(temp1[0], temp1[1], temp1[2]);
+  palette[1] = color1;
+
+  // Color [3] Triad 2
+  var temp2 = [...baseColorHSL];
+  temp2[0] =  Math.abs(baseColorHSL[0] - 120);
+  const color2 = hslToHex(temp2[0], temp2[1], temp2[2]);
+  palette[3] = color2;
+
+  // Color [4] Darker Shade Triad 2 
+  var temp3 = [...temp2];
+  temp3[2] =  Math.abs(temp2[2] - (100% + temp2[2] / 10) * 8);
+  const color3 = hslToHex(temp3[0], temp3[1], temp3[2]);
+  palette[4] = color3;
+
+  return palette;
+};
+
+export const getSplitComplementaryPalette = (palette) => {
+  const baseColorHex = palette[2] // take the middle color as the base
+  const baseColorHSL = hexToHSL(baseColorHex);
+
+  // Color [0] Split Complementary 1
+  var temp = [...baseColorHSL];
+  temp[0] =  Math.abs(baseColorHSL[0] + 150);
+  const color0 = hslToHex(temp[0], temp[1], temp[2]);
+  palette[0] = color0;
+
+  // Color [1] Darker Shade Split Complementary 1
+  var temp1 = [...temp];
+  temp1[2] =  Math.abs(temp[2] - (100% + temp[2] / 10) * 8);
+  const color1 = hslToHex(temp1[0], temp1[1], temp1[2]);
+  palette[1] = color1;
+
+  // Color [3] Split Complementary 2
+  var temp2 = [...baseColorHSL];
+  temp2[0] =  Math.abs(baseColorHSL[0] + 210);
+  const color2 = hslToHex(temp2[0], temp2[1], temp2[2]);
+  palette[3] = color2;
+
+  // Color [4] Darker Shade Split Complementary 2 
+  var temp3 = [...temp2];
+  temp3[2] =  Math.abs(temp2[2] - (100% + temp2[2] / 10) * 8);
+  const color3 = hslToHex(temp3[0], temp3[1], temp3[2]);
+  palette[4] = color3;
+
+  return palette;
+};
+
+export const getSquarePalette = (palette) => {
+  const baseColorHex = palette[2] // take the middle color as the base
+  const baseColorHSL = hexToHSL(baseColorHex);
+
+  // Color [0]
+  var temp = [...baseColorHSL];
+  temp[2] =  Math.abs(baseColorHSL[2] - (100% + baseColorHSL[2] / 10) * 8);
+  const color0 = hslToHex(temp[0], temp[1], temp[2]);
+  palette[0] = color0;
+
+  // Color [1]
+  var temp1 = [...baseColorHSL];
+  temp1[0] =  Math.abs(baseColorHSL[0] + 90);
+  const color1 = hslToHex(temp1[0], temp1[1], temp1[2]);
+  palette[1] = color1;
+
+  // Color [3]
+  var temp2 = [...baseColorHSL];
+  temp2[0] =  Math.abs(baseColorHSL[0] + 180);
+  const color2 = hslToHex(temp2[0], temp2[1], temp2[2]);
+  palette[3] = color2;
+
+  // Color [4]
+  var temp3 = [...baseColorHSL];
+  temp3[0] =  Math.abs(baseColorHSL[0] + 270);
+  const color3 = hslToHex(temp3[0], temp3[1], temp3[2]);
+  palette[4] = color3;
+
+  return palette;
+};
+
