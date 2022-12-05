@@ -45,7 +45,10 @@ export const AdjustmentsMenu = ({ setHarmony }) => {
         </S.Container>
 
         <S.Container>
-          <input type="radio" name="harmony" onChange={() => setHarmony("Analogous")} />
+          <input type="radio" name="harmony" onChange={() => {
+              setHarmony("Analogous")
+            }} 
+          />
           Analogous
           <S.Checkmark className="checkmark"></S.Checkmark>
         </S.Container>

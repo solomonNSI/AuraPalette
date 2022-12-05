@@ -5,26 +5,38 @@ import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
 import { getAnalogousPalette, getComplementaryPalette } from "../../Helpers/Harmony";
 
-const defaultBaseColor = "#0700D6";
-export const defaultPalette = ["#880BE3", "#510CED", defaultBaseColor, "#0C40ED", "#0B76E3"];
+
 
 function App() {
-  const [palette, setPalette] = useState(defaultPalette);
+  const defaultBaseColor = "#0700D6";
+  const defaultPalette = ["#880BE3", "#510CED", defaultBaseColor, "#0C40ED", "#0B76E3"];
+  
+  const [palette, setPalette] = useState({ palette: defaultPalette});
   const [harmony, setHarmony] = useState("None");
 
   // Todo: Fix problem with syncing
   useEffect(() => {
+    console.log("harmony", harmony, "pal", palette.palette);
+    console.log("default", defaultPalette);
     switch(harmony) {
-      case "None": setPalette(defaultPalette); break;
-      case "Analogous": setPalette(getAnalogousPalette(palette)); break;
-      case "Complementary": setPalette(getComplementaryPalette(palette)); break;
-      default: break;
+      case "None": 
+        setPalette( prevState => { return {...prevState, palette: defaultPalette}}); 
+        break;
+      case "Analogous": 
+        setPalette(prevState => { return {...prevState, palette: getAnalogousPalette(palette.palette)}}); 
+        break;
+      case "Complementary":        
+        setPalette(prevState => { return {...prevState, palette: getComplementaryPalette(palette.palette)}}); 
+        break;
+      default:
+        break;
     }
-  }, [harmony, palette]);
+    console.log("updated v", palette.palette);
+  }, [harmony]);
 
   return (
     <div style={{ backgroundColor: "#eeeeee", height: "100vh" }}>
-      <NavBar palette={palette} />
+      <NavBar palette={palette.palette} />
 
       <S.Content>
         <S.Title>Find a palette for everything.</S.Title>
@@ -50,8 +62,8 @@ function App() {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <AdjustmentsMenu palette={palette} setPalette={setPalette} setHarmony={setHarmony} />
-          <Palette palette={palette} />
+          <AdjustmentsMenu palette={palette.palette} setPalette={setPalette} setHarmony={setHarmony} />
+          <Palette palette={palette.palette} />
         </S.PaletteContainer>
       </S.Content>
     </div>

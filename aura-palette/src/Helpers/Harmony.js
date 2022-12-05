@@ -28,7 +28,6 @@ export const getComplementaryPalette = (palette) => {
   temp3[2] = Math.abs(temp2[2] - (100% + temp2[2] / 10) * 4);
   const color4 = hslToHex(temp3[0], temp3[1], temp3[2]);
   palette[4] = color4;
-
   return palette;
 };
 
