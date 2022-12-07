@@ -9,10 +9,13 @@ export const NavBar = ({ palette }) => {
     <S.NavBar>
       <S.AppName onClick={() => navigate("/")}>aura</S.AppName>
       <S.LoginButton>
-        <S.StyledProfileIcon height="50px" onClick={() => navigate("/profile")}/>
+        <S.StyledProfileIcon
+          height="50px"
+          onClick={() => navigate("/profile")}
+        />
       </S.LoginButton>
 
-      <S.GradientLine colorList={palette}/>
+      {/*<S.GradientLine colorList={palette}/>*/}
     </S.NavBar>
   );
 };

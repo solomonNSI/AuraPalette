@@ -18,11 +18,11 @@ export const NavBar = styled.div`
 export const GradientLine = styled.div`
   background: linear-gradient(
     90deg,
-    ${props => props.colorList[0]} 0%,
-    ${props => props.colorList[1]} 20.31%,
-    ${props => props.colorList[2]} 45.83%,
-    ${props => props.colorList[3]} 74.9%,
-    ${props => props.colorList[4]} 100%
+    ${(props) => props.colorList[0]} 0%,
+    ${(props) => props.colorList[1]} 20.31%,
+    ${(props) => props.colorList[2]} 45.83%,
+    ${(props) => props.colorList[3]} 74.9%,
+    ${(props) => props.colorList[4]} 100%
   );
   height: 5px;
   width: 100%;
