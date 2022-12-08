@@ -25,7 +25,7 @@ const SignUp = () => {
 
           <button className="loginButton">Sign Up</button>
           <button className="signUpButton" onClick={() => navigate("/login")}>
-            Already have an account? <strong>Login ></strong>
+            Already have an account? <strong>Login &#62;</strong>
           </button>
         </S.SignUpInside>
       </S.Background>
