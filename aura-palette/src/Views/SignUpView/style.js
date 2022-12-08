@@ -35,7 +35,7 @@ export const SignUpInside = styled.div`
     padding-left: 20px;
   }
 
-  .loginButton {
+  .signUpButton {
     cursor: pointer;
     background-color: #333333;
     height: 55px;
@@ -49,7 +49,7 @@ export const SignUpInside = styled.div`
     align-self: flex-end;
   }
 
-  .signUpButton {
+  .loginButton {
     cursor: pointer;
     background: none;
     height: 50px;
