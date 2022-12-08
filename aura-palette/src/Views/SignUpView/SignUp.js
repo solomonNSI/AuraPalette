@@ -23,8 +23,8 @@ const SignUp = () => {
           <input type="password" placeholder="Password"></input>
           <input type="password" placeholder="Confirm Password"></input>
 
-          <button className="loginButton">Sign Up</button>
-          <button className="signUpButton" onClick={() => navigate("/login")}>
+          <button className="signUpButton">Sign Up</button>
+          <button className="loginButton" onClick={() => navigate("/login")}>
             Already have an account? <strong>Login &#62;</strong>
           </button>
         </S.SignUpInside>
