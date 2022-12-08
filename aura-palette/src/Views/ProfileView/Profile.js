@@ -26,7 +26,7 @@ const Profile = () => {
           <MiniPalette />
           <MiniPalette />
           <MiniPalette />
-          <S.Subtitle>More History ></S.Subtitle>
+          <S.Subtitle>More History &#62;</S.Subtitle>
         </S.Palettes>
       </S.History>
       <S.Favorites>
@@ -41,7 +41,7 @@ const Profile = () => {
           <MiniPalette />
           <MiniPalette />
           <MiniPalette />
-          <S.Subtitle>More Favorites ></S.Subtitle>
+          <S.Subtitle>More Favorites &#62;</S.Subtitle>
         </S.Palettes>
       </S.Favorites>
     </div>
