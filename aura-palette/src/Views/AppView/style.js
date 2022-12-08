@@ -34,11 +34,12 @@ export const SearchBar = styled.input`
 `;
 
 export const TopKeywords = styled.div`
-  width: 100ww;
+  width: 100%;
   margin: 20px 65px 10px 65px;
   display: flex;
   align-items: center;
-  jusfify-content: right; // did not work i dont know why
+  jusfify-content: center;
+  width: 100%;
 `;
 
 export const TopSearch = styled.div`
