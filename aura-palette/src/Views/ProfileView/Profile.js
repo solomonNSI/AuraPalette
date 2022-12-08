@@ -15,7 +15,7 @@ const Profile = () => {
       <NavBar />
 
       <S.History>
-        <S.Title>Adjustments</S.Title>
+        <S.Title>History</S.Title>
         <S.Palettes>
           <MiniPalette />
           <MiniPalette />
@@ -30,7 +30,7 @@ const Profile = () => {
         </S.Palettes>
       </S.History>
       <S.Favorites>
-        <S.Title>Adjustments</S.Title>
+        <S.Title>Favorites</S.Title>
         <S.Palettes>
           <MiniPalette />
           <MiniPalette />
@@ -41,7 +41,7 @@ const Profile = () => {
           <MiniPalette />
           <MiniPalette />
           <MiniPalette />
-          <S.Subtitle>More History ></S.Subtitle>
+          <S.Subtitle>More Favorites ></S.Subtitle>
         </S.Palettes>
       </S.Favorites>
     </div>
