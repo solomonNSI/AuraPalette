@@ -13,18 +13,18 @@ export const Content = styled.div`
 export const Title = styled.div`
   padding-top: ${NAVBAR_HEIGHT + 30}px;
   text-align: center;
-  margin: 0px 65px 0px 65px;
+  margin: 10px 65px 0px 65px;
   font-size: 36px;
   font-weight: 300;
 `;
 
 export const SearchBar = styled.input`
-  margin: 20px 65px 0px 65px;
+  margin: 25px 65px 5px 65px;
   height: 50px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  //box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   padding-left: 20px;
 
   &::placeholder {
