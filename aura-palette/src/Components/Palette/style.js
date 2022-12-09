@@ -6,23 +6,25 @@ export const Container = styled.div`
   background-color: white;
   border-radius: 8px;
   width: 80%;
-  padding: 0 30px;
+  padding: 20px;
   margin-right: 65px;
+  height: calc(100vh - 300px);
 `;
 
 export const PaletteTitle = styled.h2`
   font-weight: 500;
-  margin: 20px auto 15px 0px;
+  margin: 0px auto 0px 0px;
   color: #333333;
 `;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 export const Colors = styled.div`
-  height: 200px;
+  height: 10vw;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -30,7 +32,7 @@ export const Colors = styled.div`
 `;
 
 export const Color = styled.div`
-  background-color: ${props => props.colorHex};
+  background-color: ${(props) => props.colorHex};
   width: 20%;
   height: 120%;
   border-radius: 8px 8px 0px 0px;
@@ -39,8 +41,8 @@ export const Color = styled.div`
 `;
 
 export const ColorCode = styled.div`
-  background-color: #eeeeee;
-  color: #333333;
+  background-color: #333333;
+  color: #eeeeee;
   height: 50px;
   position: relative;
   top: 100%;
@@ -48,17 +50,21 @@ export const ColorCode = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+  font-size: 16px;
+  // box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
 `;
 
 export const ColorModeButton = styled.button`
   display: flex;
   align-items: center;
-  background-color: white;
-  border-radius: 8px;
-  padding: 4px;
-  border: 3px solid #333333;
+  background-color: #333333;
+  border-radius: 4px;
   font-size: 12px;
+  color: white;
+  border: none;
+  height: 26px;
+  padding: 0px 10px;
+  margin-top: 3px;
 `;
 
 export const StyledStarIcon = styled(StarIcon)`

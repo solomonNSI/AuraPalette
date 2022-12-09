@@ -3,38 +3,77 @@ import { NavBar } from "../../Components/NavBar/NavBar";
 import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMenu";
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
-import { getAnalogousPalette, getComplementaryPalette, getMonochromaticPalette, getSplitComplementaryPalette, getSquarePalette, getTriadsPalette } from "../../Helpers/Harmony";
+import {
+  getAnalogousPalette,
+  getComplementaryPalette,
+  getMonochromaticPalette,
+  getSplitComplementaryPalette,
+  getSquarePalette,
+  getTriadsPalette,
+} from "../../Helpers/Harmony";
 
 function App() {
   const defaultBaseColor = "#0700D6";
-  const defaultPalette = ["#E3390B", "#EA0CED", defaultBaseColor, "#0CD4ED", "#7AE688"];
-  
-  const [palette, setPalette] = useState({ palette: defaultPalette});
+  const defaultPalette = [
+    "#E3390B",
+    "#EA0CED",
+    defaultBaseColor,
+    "#0CD4ED",
+    "#7AE688",
+  ];
+
+  const [palette, setPalette] = useState({ palette: defaultPalette });
   const [harmony, setHarmony] = useState("None");
 
   useEffect(() => {
-    switch(harmony) {
-      case "None": 
-        setPalette( prevState => { return {...prevState, palette: defaultPalette}}); 
+    switch (harmony) {
+      case "None":
+        setPalette((prevState) => {
+          return { ...prevState, palette: defaultPalette };
+        });
         break;
-      case "Analogous": 
-        setPalette(prevState => { return {...prevState, palette: getAnalogousPalette(palette.palette)}}); 
+      case "Analogous":
+        setPalette((prevState) => {
+          return {
+            ...prevState,
+            palette: getAnalogousPalette(palette.palette),
+          };
+        });
         break;
       case "Shades":
-      case "Monochromatic": 
-        setPalette(prevState => { return {...prevState, palette: getMonochromaticPalette(palette.palette)}}); 
+      case "Monochromatic":
+        setPalette((prevState) => {
+          return {
+            ...prevState,
+            palette: getMonochromaticPalette(palette.palette),
+          };
+        });
         break;
-      case "Complementary":        
-        setPalette(prevState => { return {...prevState, palette: getComplementaryPalette(palette.palette)}}); 
+      case "Complementary":
+        setPalette((prevState) => {
+          return {
+            ...prevState,
+            palette: getComplementaryPalette(palette.palette),
+          };
+        });
         break;
-      case "Triads":        
-        setPalette(prevState => { return {...prevState, palette: getTriadsPalette(palette.palette)}}); 
+      case "Triads":
+        setPalette((prevState) => {
+          return { ...prevState, palette: getTriadsPalette(palette.palette) };
+        });
         break;
-      case "Split Complementary":        
-        setPalette(prevState => { return {...prevState, palette: getSplitComplementaryPalette(palette.palette)}}); 
+      case "Split Complementary":
+        setPalette((prevState) => {
+          return {
+            ...prevState,
+            palette: getSplitComplementaryPalette(palette.palette),
+          };
+        });
         break;
-      case "Square":        
-        setPalette(prevState => { return {...prevState, palette: getSquarePalette(palette.palette)}}); 
+      case "Square":
+        setPalette((prevState) => {
+          return { ...prevState, palette: getSquarePalette(palette.palette) };
+        });
         break;
       default:
         break;
@@ -69,7 +108,11 @@ function App() {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <AdjustmentsMenu palette={palette.palette} setPalette={setPalette} setHarmony={setHarmony} />
+          <AdjustmentsMenu
+            palette={palette.palette}
+            setPalette={setPalette}
+            setHarmony={setHarmony}
+          />
           <Palette palette={palette.palette} />
         </S.PaletteContainer>
       </S.Content>

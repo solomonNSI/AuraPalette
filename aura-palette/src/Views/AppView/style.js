@@ -13,13 +13,13 @@ export const Content = styled.div`
 export const Title = styled.div`
   padding-top: ${NAVBAR_HEIGHT + 30}px;
   text-align: center;
-  margin: 15px 65px 0px 65px;
+  margin: 0px 65px 0px 65px;
   font-size: 36px;
   font-weight: 300;
 `;
 
 export const SearchBar = styled.input`
-  margin: 30px 65px 0px 65px;
+  margin: 20px 65px 0px 65px;
   height: 50px;
   font-size: 16px;
   border: none;
@@ -40,6 +40,7 @@ export const TopKeywords = styled.div`
   align-items: center;
   jusfify-content: center;
   width: 100%;
+  display: none;
 `;
 
 export const TopSearch = styled.div`
