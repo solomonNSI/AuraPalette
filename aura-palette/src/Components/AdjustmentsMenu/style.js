@@ -12,7 +12,7 @@ export const MenuContainer = styled.div`
   background-color: #dddddd;
   border-radius: 8px;
   padding: 20px;
-  height: calc(100vh - 300px);
+  height: calc(100vh - 320px);
 `;
 
 export const Container = styled.label`
