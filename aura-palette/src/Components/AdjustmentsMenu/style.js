@@ -3,17 +3,23 @@ import styled from "styled-components";
 
 export const MenuContainer = styled.div`
   width: 20%;
-  margin-top: 18px;
+  //margin-top: 18px;
   margin-left: 65px;
+  margin-right: 20px;
   color: #333333;
   font-weight: medium;
+  overflow: scroll;
+  background-color: #dddddd;
+  border-radius: 8px;
+  padding: 20px;
+  height: calc(100vh - 300px);
 `;
 
 export const Container = styled.label`
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   cursor: pointer;
   font-size: 16px;
   display: flex;
@@ -68,10 +74,10 @@ export const Checkmark = styled.span`
 
 export const Title = styled.h2`
   font-weight: 500;
-  margin: 0px 0px 15px 0px; 
+  margin: 0px 0px 16px 0px;
 `;
 
 export const Subtitle = styled.h3`
   font-weight: 500;
-  margin: 16px 0px 15px 0px; 
+  margin: 16px 0px 16px 0px;
 `;
