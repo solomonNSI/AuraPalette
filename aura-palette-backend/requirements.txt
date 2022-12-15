@@ -1,0 +1,8 @@
+django>=4.0.0,<4.1.0
+djangorestframework
+djangorestframework-simplejwt
+pyyaml
+requests
+django-cors-headers
+pyrebase4
+django-environ
