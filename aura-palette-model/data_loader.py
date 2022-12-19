@@ -121,8 +121,8 @@ def p2c_loader(dataset, batch_size, idx=0):
 class Test_Dataset(data.Dataset):
     def __init__(self, input_dict, txt_path, pal_path, img_path, transform=None):
         self.transform = transform
-        with open(img_path, 'rb') as f:
-            self.images = np.asarray(pickle.load(f)) / 255
+        # with open(img_path, 'rb') as f:
+        #     self.images = np.asarray(pickle.load(f)) / 255
         with open(txt_path, 'rb') as fin:
             self.src_seqs = pickle.load(fin)
         with open(pal_path, 'rb') as fin:
