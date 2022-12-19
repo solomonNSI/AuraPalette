@@ -9,7 +9,7 @@ from .solver import Solver
 @api_view(["POST"])
 def get_palette(request, *args, **kwargs):
     data=request.data
-    query = data.get('query')
+    query = data.get("query")
 
     parser = argparse.ArgumentParser()
 
@@ -38,8 +38,7 @@ def get_palette(request, *args, **kwargs):
     parser.add_argument('--lambda_GAN', type=float, default=0.1)
 
         # Directories.
-    parser.add_argument('--text2pal_dir', type=str, default='./models/TPN')
-    parser.add_argument('--pal2color_dir', type=str, default='./models/PCN')
+    parser.add_argument('--text2pal_dir', type=str, default='/Users/solomon/school/App_Aura/AuraPalette/aura-palette-backend/backend/model_api/models/TPN')
     parser.add_argument('--train_sample_dir', type=str, default='./samples/train')
     parser.add_argument('--test_sample_dir', type=str, default='./samples/test')
 
@@ -53,9 +52,10 @@ def get_palette(request, *args, **kwargs):
     args, unknown = parser.parse_known_args()
     print(args)
         
-        # Solver for sampling Text2Colors.
+    # Solver for sampling Text2Colors.
     solver = Solver(args)
 
     formated_query = [query, query]
+    print(solver.sample_TPN(formated_query))
     
-    return JsonResponse({"query": query})
+    return JsonResponse(solver.sample_TPN(formated_query))

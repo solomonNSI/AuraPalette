@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 plt.switch_backend('agg')
 from skimage.color import lab2rgb
 
-from model import TPN
-from data_loader import *
-from util import *
+from .model import TPN
+from .data_loader import *
+from .util import *
 
 class Solver(object):
     def __init__(self, args):
@@ -20,7 +20,8 @@ class Solver(object):
 
     def prepare_dict(self):
         input_dict = Dictionary()
-        src_path = os.path.join('./data/hexcolor_vf/all_names.pkl')
+        print( os.getcwd())
+        src_path = os.path.join('/Users/solomon/school/App_Aura/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/all_names.pkl')
         with open(src_path, 'rb') as f:
             text_data = pickle.load(f)
             f.close()
@@ -58,7 +59,7 @@ class Solver(object):
             self.train_loader, _ = t2p_loader(self.args.batch_size, self.input_dict)
 
             # Load pre-trained GloVe embeddings.
-            emb_file = os.path.join('./data', 'Color-Hex-vf.pth')
+            emb_file = os.path.join('/Users/solomon/school/App_Aura/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:
@@ -88,19 +89,6 @@ class Solver(object):
             self.d_optimizer = torch.optim.Adam(self.D.parameters(),
                                                 lr=self.args.lr, betas=(self.args.beta1, self.args.beta2))
 
-        elif mode == 'train_PCN':
-            # Data loader.
-            self.train_loader, imsize = p2c_loader(self.args.dataset, self.args.batch_size, 0)
-
-            # Generator and discriminator.
-            self.G = PCN.UNet(imsize, self.args.add_L).to(self.device)
-            self.D = PCN.Discriminator(self.args.add_L, imsize).to(self.device)
-
-            # Optimizer.
-            self.g_optimizer = optim.Adam(self.G.parameters(), lr=self.args.lr, weight_decay=self.args.weight_decay)
-            self.d_optimizer = optim.Adam(self.D.parameters(), lr=self.args.lr, weight_decay=self.args.weight_decay)
-            self.g_scheduler = scheduler.ReduceLROnPlateau(g_optimizer, 'min', patience=5, factor=0.1)
-            self.d_scheduler = scheduler.ReduceLROnPlateau(d_optimizer, 'min', patience=5, factor=0.1)
 
         elif mode == 'test_TPN' or 'test_text2colors' or 'sample_TPN':
             
@@ -108,12 +96,12 @@ class Solver(object):
             self.input_dict = self.prepare_dict()
 
             # Load pre-trained GloVe embeddings.
-            emb_file = os.path.join('./data', 'Color-Hex-vf.pth')
+            emb_file = os.path.join('/Users/solomon/school/App_Aura/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:
                 W_emb = load_pretrained_embedding(self.input_dict.word2index,
-                                                  '../data/glove.840B.300d.txt',
+                                                  '/Users/solomon/school/App_Aura/AuraPalette/aura-palette-backend/backend/model_api/data/glove.840B.300d.txt',
                                                   300)
                 W_emb = torch.from_numpy(W_emb)
                 torch.save(W_emb, emb_file)
@@ -354,7 +342,7 @@ class Solver(object):
                           self.args.batch_size*batch_idx+x+1, input_text, num_gen+1))
 
     def sample_TPN(self, queryStrings, numPalettesPerQuery=1):
-
+        print("loasdf", queryStrings)
         # ==================== Preprocessing src_seqs ====================#
         # Return a list of indexes, one for each word in the sentence.
         txt_embeddings = []
