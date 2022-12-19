@@ -4,6 +4,7 @@ from backend_main_api.database import DatabaseAPI
 from .models import User
 from django.core import serializers
 import json
+from django.http import JsonResponse
 
 @api_view(["POST"])
 def register(request, *args, **kwargs):
@@ -30,7 +31,8 @@ def register(request, *args, **kwargs):
     
     # TODO: ADD EXCEPTIONS
     DatabaseAPI.db.child("users").child(uid).set(json_user_info,user['idToken'])
-    return Response({"email": data.get('email'),"name": data.get('name'), "uid":uid})
+    user_token = user['idToken']
+    return JsonResponse({"user_token": user_token})
 
 # TODO: Add exceptions
 @api_view(["POST"])
@@ -38,4 +40,5 @@ def signin(request, *args, **kwargs):
     data=request.data
     user= DatabaseAPI.auth.sign_in_with_email_and_password(data.get('email'), data.get('password'))
     user_token = user['idToken']
-    return Response({"user_token": user_token})
+
+    return JsonResponse({"user_token": user_token})
