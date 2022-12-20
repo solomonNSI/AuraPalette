@@ -17,6 +17,13 @@ export const PaletteTitle = styled.h2`
   color: #333333;
 `;
 
+export const Copy = styled.button`
+  background: none;
+  border: none;
+  margin: 4px 0px 0px 4px;
+  cursor: pointer;
+`;
+
 export const Header = styled.div`
   display: flex;
   align-items: center;
@@ -41,7 +48,6 @@ export const Color = styled.div`
 `;
 
 export const ColorCode = styled.div`
-  cursor: pointer;
   background-color: #333333;
   color: #eeeeee;
   height: 50px;
@@ -51,7 +57,7 @@ export const ColorCode = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 export const ColorModeButton = styled.button`
