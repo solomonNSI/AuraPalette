@@ -10,6 +10,12 @@ export const Content = styled.div`
   width: calc(100%-130px);
 `;
 
+export const Container = styled.div`
+  background-color: #eeeeee;
+  height: 100vh;
+  overflow: hidden;
+`;
+
 export const GradientLine = styled.div`
   background: linear-gradient(
     90deg,

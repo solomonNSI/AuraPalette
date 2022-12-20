@@ -1,0 +1,8 @@
+DATABASE_API_KEY=AIzaSyAk2sTtk92QGcKtt4ryzkzQYMUNWvnOFsk
+AUTH_DOMAIN=the-aura-palette.firebaseapp.com
+DATABASE_URL=https://the-aura-palette-default-rtdb.europe-west1.firebasedatabase.app
+PROJECT_ID=the-aura-palette
+STORAGE_BUCKET=the-aura-palette.appspot.com
+MESSAGING_SENDER_ID=373053131181
+APP_ID=1:373053131181:web:fa2da56042842265813924
+DJANGO_SECRET_KEY=django-insecure-kqh9cu7f4tym1ubc4rs3smjrcrsk!a-cyls7=-j4t+_k(o0-wg

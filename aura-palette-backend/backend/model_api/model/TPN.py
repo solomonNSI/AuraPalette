@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from random import *
-from util import *
+from .util import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 

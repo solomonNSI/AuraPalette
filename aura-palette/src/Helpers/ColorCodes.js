@@ -7,7 +7,7 @@ import React from "react";
 export function hexToRgbWriter(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   var res = [
-    "RGB(" +
+    "RGB (" +
       parseInt(result[1], 16) +
       ", " +
       parseInt(result[2], 16) +
@@ -59,7 +59,7 @@ export function hexToHSLWriter(H) {
 
   var result =
     "HSL" +
-    "(" +
+    " (" +
     Math.round(h) +
     ", " +
     Math.round(s) +
