@@ -46,7 +46,7 @@ const SignUp = () => {
 
           <button className="signUpButton" onClick={() => sendRegisterInfo()}>Sign Up</button>
           <button className="loginButton" onClick={() => navigate("/login")}>
-            Already have an account? <strong>Login &#62;</strong>
+            Already have an account? <strong>Login {">"}</strong>
           </button>
         </S.SignUpInside>
       </S.Background>

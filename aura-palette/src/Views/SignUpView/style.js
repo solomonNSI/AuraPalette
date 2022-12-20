@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { NAVBAR_HEIGHT } from "../../Components/NavBar/style";
 
 export const Background = styled.div`
   align-self: flex-start;
@@ -11,7 +10,6 @@ export const Background = styled.div`
   background-color: #dddddd;
   margin-top: 150px;
   height: auto;
-}
 `;
 
 export const SignUpInside = styled.div`

@@ -41,7 +41,7 @@ const Login = () => {
 
           <button className="loginButton" onClick={() => sendLoginInfo()}>Login</button>
           <button className="signUpButton" onClick={() => navigate("/signup")}>
-            Don't have an account? <strong>Sign Up &#62;</strong>
+            Don't have an account? <strong>Sign Up {">"}</strong>
           </button>
         </S.LoginInside>
       </S.Background>

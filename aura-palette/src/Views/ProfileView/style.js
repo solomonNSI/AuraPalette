@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { NAVBAR_HEIGHT } from "../../Components/NavBar/style";
 
 export const History = styled.div`
   width: 50%;

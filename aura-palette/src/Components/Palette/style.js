@@ -41,6 +41,7 @@ export const Color = styled.div`
 `;
 
 export const ColorCode = styled.div`
+  cursor: pointer;
   background-color: #333333;
   color: #eeeeee;
   height: 50px;
@@ -51,7 +52,6 @@ export const ColorCode = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  // box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
 `;
 
 export const ColorModeButton = styled.button`
