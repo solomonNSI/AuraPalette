@@ -23,6 +23,13 @@ export const Copy = styled.button`
   border: none;
   margin: 4px 0px 0px 4px;
   cursor: pointer;
+
+  &:active {
+      > svg {
+        fill: #888888;
+      }
+    }
+  }
 `;
 
 export const Header = styled.div`
