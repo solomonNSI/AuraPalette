@@ -9,7 +9,7 @@ export const Container = styled.div`
   width: 80%;
   padding: 20px;
   margin-right: 65px;
-  height: calc(100vh - 320px);
+  height: calc(100vh - 300px);
 `;
 
 export const PaletteTitle = styled.h2`
