@@ -159,5 +159,14 @@ export function hexToHSL(H) {
   s = +(s * 100).toFixed(1);
   l = +(l * 100).toFixed(1);
 
-  return [h, s, l];
+  var result =
+    "HSL" +
+    "(" +
+    Math.round(h) +
+    ", " +
+    Math.round(s) +
+    "%, " +
+    Math.round(l) +
+    "%)";
+  return result;
 }
