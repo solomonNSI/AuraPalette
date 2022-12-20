@@ -6,3 +6,6 @@ requests
 django-cors-headers
 pyrebase4
 django-environ
+scikit-image
+matplotlib
+torch
