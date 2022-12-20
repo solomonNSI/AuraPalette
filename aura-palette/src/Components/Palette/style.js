@@ -10,6 +10,7 @@ export const Container = styled.div`
   padding: 20px;
   margin-right: 65px;
   height: calc(100vh - 300px);
+  overflow: scroll;
 `;
 
 export const PaletteTitle = styled.h2`
