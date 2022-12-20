@@ -3,6 +3,8 @@ import { NavBar } from "../../Components/NavBar/NavBar";
 import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMenu";
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
+import { SearchIcon } from "../../Icons/SearchIcon";
+
 import {
   getAnalogousPalette,
   getComplementaryPalette,
@@ -94,7 +96,12 @@ function App() {
 
       <S.Content>
         <S.Title>Find a palette for everything.</S.Title>
-        <S.SearchBar placeholder="Enter a keyword to search..."></S.SearchBar>
+        <S.Bar>
+          <S.SearchBar placeholder="Enter a keyword to search..."></S.SearchBar>
+          <S.SearchButton>
+            <SearchIcon />
+          </S.SearchButton>
+        </S.Bar>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
           <S.TopSearch>water</S.TopSearch>
