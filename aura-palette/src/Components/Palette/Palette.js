@@ -7,7 +7,7 @@ import {
   hexToRgb,
   hexToRgbWriter,
   hslToHex,
-} from "../../Helpers/ColorWizard";
+} from "../../Helpers/ColorCodes";
 
 export const Palette = ({ palette }) => {
   const [colorMode, setColorMode] = useState("HEX");
