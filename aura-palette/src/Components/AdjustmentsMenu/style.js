@@ -30,6 +30,10 @@ export const Container = styled.label`
   -ms-user-select: none;
   user-select: none;
 
+  @media only screen and (min-height: 1000px) {
+    margin-bottom: 14px;
+  }
+
   > input {
     position: absolute;
     opacity: 0;
@@ -75,9 +79,19 @@ export const Checkmark = styled.span`
 export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 10px 0px;
+
+  @media only screen and (min-height: 1000px) {
+    font-weight: 500;
+    margin: 0px 0px 14px 0px;
+  }
 `;
 
 export const Subtitle = styled.h3`
   font-weight: 500;
   margin: 12px 0px 10px 0px;
+
+  @media only screen and (min-height: 1000px) {
+    font-weight: 500;
+    margin: 18px 0px 14px 0px;
+  }
 `;
