@@ -96,12 +96,10 @@ function App() {
 
       <S.Content>
         <S.Title>Find a palette for everything.</S.Title>
-        <S.Bar>
           <S.SearchBar placeholder="Enter a keyword to search..."></S.SearchBar>
-          <S.SearchButton>
+          <S.Search>
             <SearchIcon />
-          </S.SearchButton>
-        </S.Bar>
+          </S.Search>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
           <S.TopSearch>water</S.TopSearch>

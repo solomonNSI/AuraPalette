@@ -40,12 +40,16 @@ export const Title = styled.div`
 `;
 
 export const SearchBar = styled.input`
-  width: 90%;
+  position: relative;
+  top: 0px;
+  left: 0px;
   height: 50px;
   font-size: 16px;
   border: none;
-  border-radius: 5px 0px 0px 5px;
+  border-radius: 5px;
   padding-left: 20px;
+  margin: 20px 65px 0px 65px;
+
 
   &::placeholder {
     font-weight: 400;
@@ -54,9 +58,6 @@ export const SearchBar = styled.input`
 `;
 
 export const Bar = styled.div`
-  margin: 25px 65px 5px 65px;
-  display: flex;
-  align-items: center;
 `;
 
 export const TopKeywords = styled.div`
@@ -84,17 +85,14 @@ export const PaletteContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const SearchButton = styled.button`
-  width: 10%;
+export const Search = styled.button`
   border: none;
   background-color: #ffffff;
-  height: 52px;
-  border-radius: 0px 5px 5px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: end;
+  position: absolute;
+  top: 184px;
+  right: 75px;
 
   > svg {
-    padding-right: 20px;
+    fill: #333333;
   }
 `;
