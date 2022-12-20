@@ -84,6 +84,8 @@ function App() {
     <div style={{ backgroundColor: "#eeeeee", height: "100vh" }}>
       <NavBar palette={palette.palette} />
 
+      <S.GradientLine colorList={palette.palette}/>
+
       <S.Content>
         <S.Title>Find a palette for everything.</S.Title>
         <S.SearchBar placeholder="Enter a keyword to search..."></S.SearchBar>
