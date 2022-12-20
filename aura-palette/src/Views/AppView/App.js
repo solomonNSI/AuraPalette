@@ -26,7 +26,6 @@ function App() {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
 
-
   function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     xmlhttp.open("POST", "http://localhost:8000/model/getpalette/");
