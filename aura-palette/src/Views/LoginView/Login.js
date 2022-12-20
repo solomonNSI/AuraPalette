@@ -9,7 +9,7 @@ const Login = () => {
 
   function sendLoginInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("POST", "http://164.92.237.219/auth/signin/");
+    xmlhttp.open("POST", "https://164.92.237.219/auth/signin/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
     xmlhttp.onload  = function() {
