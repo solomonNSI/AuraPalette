@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { ExportIcon } from "../../Icons/ExportIcon";
 import * as S from "./style";
-import { hexToHSL, hexToRgb, hslToHex } from "../../Helpers/ColorWizard";
+import {
+  hexToHSL,
+  hexToHSLWriter,
+  hexToRgb,
+  hexToRgbWriter,
+  hslToHex,
+} from "../../Helpers/ColorWizard";
 
 export const Palette = ({ palette }) => {
   const [colorMode, setColorMode] = useState("HEX");
@@ -12,10 +18,10 @@ export const Palette = ({ palette }) => {
     else if (colorMode === "HSL") setColorMode("HEX");
   };
 
-  function displayPaletteColors(paletteNumber) {
-    if (colorMode === "RGB") return hexToRgb(palette[paletteNumber]);
-    else if (colorMode === "HSL") return hexToHSL(palette[paletteNumber]);
-    else if (colorMode === "HEX") return palette[paletteNumber].toUpperCase();
+  function displayPaletteColors(colorNumber) {
+    if (colorMode === "RGB") return hexToRgbWriter(palette[colorNumber]);
+    else if (colorMode === "HSL") return hexToHSLWriter(palette[colorNumber]);
+    else if (colorMode === "HEX") return palette[colorNumber].toUpperCase();
   }
 
   return (
