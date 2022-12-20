@@ -79,6 +79,16 @@ export const ColorModeButton = styled.button`
   height: 26px;
   padding: 0px 10px;
   margin-top: 3px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #444444;
+  }
+
+  &:active {
+    cursor: pointer;
+    background-color: #333333;
+  }
 `;
 
 export const StyledStarIcon = styled(StarIcon)`

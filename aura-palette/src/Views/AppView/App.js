@@ -81,10 +81,16 @@ function App() {
   }, [harmony]);
 
   return (
-    <div style={{ backgroundColor: "#eeeeee", height: "100vh" }}>
+    <div
+      style={{
+        backgroundColor: "#eeeeee",
+        height: "100vh",
+        overflow: "hidden",
+      }}
+    >
       <NavBar palette={palette.palette} />
 
-      <S.GradientLine colorList={palette.palette}/>
+      <S.GradientLine colorList={palette.palette} />
 
       <S.Content>
         <S.Title>Find a palette for everything.</S.Title>
