@@ -38,7 +38,7 @@ def get_palette(request, *args, **kwargs):
     parser.add_argument('--lambda_GAN', type=float, default=0.1)
 
         # Directories.
-    parser.add_argument('--text2pal_dir', type=str, default='/Users/solomon/school/App_Aura/AuraPalette/aura-palette-backend/backend/model_api/models/TPN')
+    parser.add_argument('--text2pal_dir', type=str, default='C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/models/TPN')
     parser.add_argument('--train_sample_dir', type=str, default='./samples/train')
     parser.add_argument('--test_sample_dir', type=str, default='./samples/test')
 
