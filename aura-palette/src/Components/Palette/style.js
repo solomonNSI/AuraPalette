@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { StarIcon } from "../../Icons/StarIcon";
+import { CopyIcon } from "../../Icons/CopyIcon";
 
 export const Container = styled.div`
   background-color: white;
