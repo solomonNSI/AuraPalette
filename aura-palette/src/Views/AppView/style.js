@@ -89,7 +89,7 @@ export const Search = styled.button`
   border: none;
   background-color: #ffffff;
   position: absolute;
-  top: 184px;
+  top: 182px;
   right: 75px;
 
   > svg {
