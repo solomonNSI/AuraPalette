@@ -4,6 +4,8 @@ import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMen
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
 import { SearchIcon } from "../../Icons/SearchIcon";
+import axios from "axios";
+import https from "https-browserify";
 
 import {
   getAnalogousPalette,
@@ -28,13 +30,14 @@ function App() {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
 
-  function sendQuery(){
+  async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("POST", "https://164.92.237.219/model/getpalette/");
+    xmlhttp.open("POST", "http://164.92.237.219/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query + '"}';
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
+      console.log(jsonResponse);
       jsonResponse = JSON.parse(jsonResponse);
       var colorResponse = jsonResponse['samples'];
 
@@ -46,6 +49,17 @@ function App() {
       updatePalette(pal);
     };
     xmlhttp.send(qInfo)
+
+    // At request level
+    // const agent = new https.Agent({  
+    //   rejectUnauthorized: false,
+    //   requestCert: false,
+    //   agent: false,
+    // });
+    // await axios.post("http://164.92.237.219/model/getpalette/", {https: agent}).then((resp) => {
+    //   console.log(resp);
+    // })
+
   }
 
   function updatePalette(pal){
