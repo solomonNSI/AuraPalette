@@ -44,8 +44,7 @@ function App() {
       var no = Math.floor(Math.random() * 5);
       var pal = colorResponse[no];
       for ( var i = 0; i < 5; i++) {
-        // if (lock[i] === 0)
-            pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
+        if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
       }
       updatePalette(pal);
     };
