@@ -4,12 +4,11 @@ import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMen
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
 import { SearchIcon } from "../../Icons/SearchIcon";
-import axios from "axios";
-import https from "https-browserify";
 
 import {
   getAnalogousPalette,
   getComplementaryPalette,
+  getDefaultPalette,
   getMonochromaticPalette,
   getSplitComplementaryPalette,
   getSquarePalette,
@@ -29,6 +28,7 @@ function App() {
   const [palette, setPalette] = useState({ palette: defaultPalette });
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
+  const [lock, setLock] = useState([false, false, false, false, false]);
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -43,8 +43,9 @@ function App() {
 
       var no = Math.floor(Math.random() * 5);
       var pal = colorResponse[no];
-      for( var i = 0; i < 5; i++){
-        pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
+      for ( var i = 0; i < 5; i++) {
+        // if (lock[i] === 0)
+            pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
       }
       updatePalette(pal);
     };
@@ -59,14 +60,13 @@ function App() {
     // await axios.post("http://164.92.237.219/model/getpalette/", {https: agent}).then((resp) => {
     //   console.log(resp);
     // })
-
   }
 
   function updatePalette(pal){
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
-          return { ...prevState, palette: pal };
+          return { ...prevState, palette: getDefaultPalette(pal) };
         });
         break;
       case "Analogous":
@@ -80,6 +80,7 @@ function App() {
       case "Shades":
       case "Monochromatic":
         setPalette((prevState) => {
+            console.log(lock)
           return {
             ...prevState,
             palette: getMonochromaticPalette(pal),
@@ -132,17 +133,18 @@ function App() {
   };
 
   useEffect(() => {
+    console.log(lock)
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
-          return { ...prevState, palette: defaultPalette };
+          return { ...prevState, palette: getDefaultPalette(palette.palette, lock) };
         });
         break;
       case "Analogous":
         setPalette((prevState) => {
           return {
             ...prevState,
-            palette: getAnalogousPalette(palette.palette),
+            palette: getAnalogousPalette(palette.palette, lock),
           };
         });
         break;
@@ -151,7 +153,7 @@ function App() {
         setPalette((prevState) => {
           return {
             ...prevState,
-            palette: getMonochromaticPalette(palette.palette),
+            palette: getMonochromaticPalette(palette.palette, lock)
           };
         });
         break;
@@ -159,26 +161,26 @@ function App() {
         setPalette((prevState) => {
           return {
             ...prevState,
-            palette: getComplementaryPalette(palette.palette),
+            palette: getComplementaryPalette(palette.palette, lock),
           };
         });
         break;
       case "Triads":
         setPalette((prevState) => {
-          return { ...prevState, palette: getTriadsPalette(palette.palette) };
+          return { ...prevState, palette: getTriadsPalette(palette.palette, lock) };
         });
         break;
       case "Split Complementary":
         setPalette((prevState) => {
           return {
             ...prevState,
-            palette: getSplitComplementaryPalette(palette.palette),
+            palette: getSplitComplementaryPalette(palette.palette, lock)
           };
         });
         break;
       case "Square":
         setPalette((prevState) => {
-          return { ...prevState, palette: getSquarePalette(palette.palette) };
+          return { ...prevState, palette: getSquarePalette(palette.palette, lock) };
         });
         break;
       default:
@@ -230,7 +232,7 @@ function App() {
             setPalette={setPalette}
             setHarmony={setHarmony}
           />
-          <Palette palette={palette.palette} />
+          <Palette palette={palette.palette} lock={lock} setLock={setLock} />
         </S.PaletteContainer>
       </S.Content>
     </div>

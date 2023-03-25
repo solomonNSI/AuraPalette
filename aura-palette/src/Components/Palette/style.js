@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { StarIcon } from "../../Icons/StarIcon";
-import { CopyIcon } from "../../Icons/CopyIcon";
 
 export const Container = styled.div`
   background-color: white;
@@ -30,7 +29,19 @@ export const Copy = styled.button`
         fill: #888888;
       }
     }
-  }
+`;
+
+export const Lock = styled.button`
+  background: none;
+  border: none;
+  margin: 4px 0px 0px 4px;
+  cursor: pointer;
+
+  &:active {
+      > svg {
+        fill: #888888;
+      }
+    }
 `;
 
 export const Header = styled.div`
@@ -98,4 +109,16 @@ export const ColorModeButton = styled.button`
 
 export const StyledStarIcon = styled(StarIcon)`
   margin: 0 16px;
+`;
+
+export const LockDisplay = styled.div`
+  background-color: #333333;
+  color: #eeeeee;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 105%;
+  border-radius: 8px 8px 8px 8px;
 `;
