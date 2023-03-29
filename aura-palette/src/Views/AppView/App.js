@@ -13,6 +13,7 @@ import {
   getSplitComplementaryPalette,
   getSquarePalette,
   getTriadsPalette,
+  getEditedPalette,
 } from "../../Helpers/Harmony";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
   const [lock, setLock] = useState([false, false, false, false, false]);
+  const [editedColorIndex, setEditedColorIndex] = useState("");
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -63,57 +65,62 @@ function App() {
 
   function updatePalette(pal){
     switch (harmony) {
-      case "None":
-        setPalette((prevState) => {
-          return { ...prevState, palette: getDefaultPalette(pal) };
-        });
-        break;
-      case "Analogous":
-        setPalette((prevState) => {
-          return {
-            ...prevState,
-            palette: getAnalogousPalette(pal),
-          };
-        });
-        break;
-      case "Shades":
-      case "Monochromatic":
-        setPalette((prevState) => {
-            console.log(lock)
-          return {
-            ...prevState,
-            palette: getMonochromaticPalette(pal),
-          };
-        });
-        break;
-      case "Complementary":
-        setPalette((prevState) => {
-          return {
-            ...prevState,
-            palette: getComplementaryPalette(pal),
-          };
-        });
-        break;
-      case "Triads":
-        setPalette((prevState) => {
-          return { ...prevState, palette: getTriadsPalette(pal) };
-        });
-        break;
-      case "Split Complementary":
-        setPalette((prevState) => {
-          return {
-            ...prevState,
-            palette: getSplitComplementaryPalette(pal),
-          };
-        });
-        break;
-      case "Square":
-        setPalette((prevState) => {
-          return { ...prevState, palette: getSquarePalette(pal) };
-        });
-        break;
-      default:
-        break;
+        case "None":
+            setPalette((prevState) => {
+            return { ...prevState, palette: getDefaultPalette(pal) };
+            });
+            break;
+        case "Analogous":
+            setPalette((prevState) => {
+            return {
+                ...prevState,
+                palette: getAnalogousPalette(pal),
+            };
+            });
+            break;
+        case "Shades":
+        case "Monochromatic":
+            setPalette((prevState) => {
+                console.log(lock)
+            return {
+                ...prevState,
+                palette: getMonochromaticPalette(pal),
+            };
+            });
+            break;
+        case "Complementary":
+            setPalette((prevState) => {
+            return {
+                ...prevState,
+                palette: getComplementaryPalette(pal),
+            };
+            });
+            break;
+        case "Triads":
+            setPalette((prevState) => {
+            return { ...prevState, palette: getTriadsPalette(pal) };
+            });
+            break;
+        case "Split Complementary":
+            setPalette((prevState) => {
+            return {
+                ...prevState,
+                palette: getSplitComplementaryPalette(pal),
+            };
+            });
+            break;
+        case "Square":
+            setPalette((prevState) => {
+                return { ...prevState, palette: getSquarePalette(pal) };
+            });
+            break;
+        case "Edit":
+            setPalette((prevState) => {
+                return { ...prevState, palette: getEditedPalette(pal, editedColorIndex) };
+            });
+            break;
+        default:
+            break;
     }
   }
 
@@ -231,7 +238,7 @@ function App() {
             setPalette={setPalette}
             setHarmony={setHarmony}
           />
-          <Palette palette={palette.palette} lock={lock} setLock={setLock} />
+          <Palette palette={palette.palette} lock={lock} setLock={setLock} harmony={harmony} setHarmony={setHarmony} setEditedColorIndex={setEditedColorIndex} />
         </S.PaletteContainer>
       </S.Content>
     </div>
