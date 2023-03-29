@@ -31,6 +31,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [lock, setLock] = useState([false, false, false, false, false]);
   const [editedColorIndex, setEditedColorIndex] = useState("");
+  const [editedColor, setEditedColor] = useState("#000");
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -81,7 +82,6 @@ function App() {
         case "Shades":
         case "Monochromatic":
             setPalette((prevState) => {
-                console.log(lock)
             return {
                 ...prevState,
                 palette: getMonochromaticPalette(pal),
@@ -116,7 +116,7 @@ function App() {
             break;
         case "Edit":
             setPalette((prevState) => {
-                return { ...prevState, palette: getEditedPalette(pal, editedColorIndex) };
+                return { ...prevState, palette: getEditedPalette(pal, editedColorIndex, editedColor) };
             });
             break;
         default:
@@ -139,7 +139,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(lock)
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
@@ -189,10 +188,15 @@ function App() {
           return { ...prevState, palette: getSquarePalette(palette.palette, lock) };
         });
         break;
+        case "Edit":
+        setPalette((prevState) => {
+            return { ...prevState, palette: getEditedPalette(palette.palette, editedColorIndex, editedColor, lock) };
+        });
+        break;
       default:
         break;
     }
-  }, [harmony]);
+  }, [harmony, editedColorIndex, editedColor]);
 
   return (
     <div
@@ -238,7 +242,14 @@ function App() {
             setPalette={setPalette}
             setHarmony={setHarmony}
           />
-          <Palette palette={palette.palette} lock={lock} setLock={setLock} harmony={harmony} setHarmony={setHarmony} setEditedColorIndex={setEditedColorIndex} />
+          <Palette 
+            palette={palette.palette} 
+            lock={lock} 
+            setLock={setLock}
+            setHarmony={setHarmony} 
+            setEditedColorIndex={setEditedColorIndex}
+            setEditedColor={setEditedColor}
+        />
         </S.PaletteContainer>
       </S.Content>
     </div>

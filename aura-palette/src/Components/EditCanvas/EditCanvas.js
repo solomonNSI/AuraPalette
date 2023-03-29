@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import * as S from "./style";
-import { hexToRgb, rgbToHSL } from "../../Helpers/ColorWizard";
+import { hexToRgb, rgbToHex, rgbToHSL } from "../../Helpers/ColorWizard";
 
 export const CANVAS_SIZE = 140;
 
-export const EditCanvas = ({ color }) => {
+export const EditCanvas = ({ color, setEditedColor }) => {
 
     function drawGradient(r, g, b, context) {
         var col = rgbToHSL(r, g, b);
@@ -25,6 +25,10 @@ export const EditCanvas = ({ color }) => {
         context.globalCompositeOperation = "source-over";
     }
 
+    function updateColor(hex){
+        setEditedColor(hex);
+    }
+
     const canvasRef = useRef(null);
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -33,14 +37,14 @@ export const EditCanvas = ({ color }) => {
         context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         drawGradient(hexToRgb(color).r, hexToRgb(color).g, hexToRgb(color).b, context);
 
-        // canvas.addEventListener("click", function (e) {
-        //     var imgData = context.getImageData(e.layerX, e.layerY, 1, 1);
-        //     var hueR = imgData.data[0];
-        //     var hueG = imgData.data[1];
-        //     var hueB = imgData.data[2];
-        //     console.log(imgData.data)
-        //     drawGradient(hueR, hueG, hueB, context);
-        // });
+        canvas.addEventListener("click", function (e) {
+            var imgData = context.getImageData(e.layerX, e.layerY, 1, 1);
+            var hueR = imgData.data[0];
+            var hueG = imgData.data[1];
+            var hueB = imgData.data[2];
+            
+            updateColor(rgbToHex(hueR, hueG, hueB));
+        });
 
     }, [])
 

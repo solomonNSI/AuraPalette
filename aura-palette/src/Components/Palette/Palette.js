@@ -10,7 +10,7 @@ import {
 } from "../../Helpers/ColorCodes";
 import { EditCanvas } from "../EditCanvas/EditCanvas";
 
-export const Palette = ({ palette, lock, setLock, harmony, setHarmony, setEditedColorIndex }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorIndex, setEditedColor }) => {
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not locked");
     const [lock1, setLock1] = useState("Not locked");
@@ -102,7 +102,7 @@ export const Palette = ({ palette, lock, setLock, harmony, setHarmony, setEdited
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock0}</S.LockDisplay>
-                <EditCanvas color={palette[0]}/>
+                <EditCanvas color={palette[0]} setEditedColor={setEditedColor}/>
             </S.Color>
 
 
@@ -125,7 +125,7 @@ export const Palette = ({ palette, lock, setLock, harmony, setHarmony, setEdited
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock1}</S.LockDisplay>
-                <EditCanvas color={palette[1]}/>
+                <EditCanvas color={palette[1]} setEditedColor={setEditedColor}/>
             </S.Color>
 
 
@@ -147,7 +147,7 @@ export const Palette = ({ palette, lock, setLock, harmony, setHarmony, setEdited
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock2}</S.LockDisplay>
-                <EditCanvas color={palette[2]}/>
+                <EditCanvas color={palette[2]} setEditedColor={setEditedColor}/>
             </S.Color>
 
 
@@ -170,7 +170,7 @@ export const Palette = ({ palette, lock, setLock, harmony, setHarmony, setEdited
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock3}</S.LockDisplay>
-                <EditCanvas color={palette[3]}/>
+                <EditCanvas color={palette[3]} setEditedColor={setEditedColor}/>
             </S.Color>
 
 
@@ -193,7 +193,7 @@ export const Palette = ({ palette, lock, setLock, harmony, setHarmony, setEdited
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock4}</S.LockDisplay>
-                <EditCanvas color={palette[4]}/>
+                <EditCanvas color={palette[4]} setEditedColor={setEditedColor}/>
             </S.Color>
         </S.Colors>
     </S.Container>
