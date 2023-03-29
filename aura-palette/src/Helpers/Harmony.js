@@ -39,9 +39,9 @@ export const getComplementaryPalette = (palette, lock) => {
         palette[1] = color1;
     }
 
+    var temp2 = [...baseColorHSL];
     // Color [3] Complimentary Color
     if (!lock[3]) {
-        var temp2 = [...baseColorHSL];
         temp2[0] =  Math.abs(baseColorHSL[0] + 180);
         const complimentaryColorHex = hslToHex(temp2[0], temp2[1], temp2[2]);
         palette[3] = complimentaryColorHex;
@@ -156,9 +156,9 @@ export const getTriadsPalette = (palette, lock) => {
         palette[1] = color1;
     }
 
+    var temp2 = [...baseColorHSL];
     // Color [3] Triad 2
     if (!lock[3]) {
-        var temp2 = [...baseColorHSL];
         temp2[0] =  Math.abs(baseColorHSL[0] - 120);
         const color2 = hslToHex(temp2[0], temp2[1], temp2[2]);
         palette[3] = color2;
@@ -178,10 +178,10 @@ export const getTriadsPalette = (palette, lock) => {
 export const getSplitComplementaryPalette = (palette, lock) => {
     const baseColorHex = palette[2] // take the middle color as the base
     const baseColorHSL = hexToHSL(baseColorHex);
+    var temp = [...baseColorHSL];
 
     // Color [0] Split Complementary 1
     if (!lock[0]) {
-        var temp = [...baseColorHSL];
         temp[0] =  Math.abs(baseColorHSL[0] + 150);
         const color0 = hslToHex(temp[0], temp[1], temp[2]);
         palette[0] = color0;
@@ -195,9 +195,9 @@ export const getSplitComplementaryPalette = (palette, lock) => {
         palette[1] = color1;
     }
 
+    var temp2 = [...baseColorHSL];
     // Color [3] Split Complementary 2
     if (!lock[3]) {
-        var temp2 = [...baseColorHSL];
         temp2[0] =  Math.abs(baseColorHSL[0] + 210);
         const color2 = hslToHex(temp2[0], temp2[1], temp2[2]);
         palette[3] = color2;
