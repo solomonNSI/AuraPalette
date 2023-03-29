@@ -4,7 +4,7 @@ import { hexToRgb, rgbToHex, rgbToHSL } from "../../Helpers/ColorWizard";
 
 export const CANVAS_SIZE = 140;
 
-export const EditCanvas = ({ color, setEditedColor }) => {
+export const EditCanvas = ({ color, setEditedColor, visible }) => {
 
     function drawGradient(r, g, b, context) {
         var col = rgbToHSL(r, g, b);
@@ -49,7 +49,7 @@ export const EditCanvas = ({ color, setEditedColor }) => {
     }, [])
 
     return (
-        <S.Canvas ref={canvasRef} id="colorpicker" width={CANVAS_SIZE} height={CANVAS_SIZE}>
+        <S.Canvas ref={canvasRef} visible={visible} id="colorpicker" width={CANVAS_SIZE} height={CANVAS_SIZE}>
         Oops ... your browser doesn't support the HTML5 canvas element
         </S.Canvas>
   );

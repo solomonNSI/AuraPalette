@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { ExportIcon } from "../../Icons/ExportIcon";
 import { CopyIcon } from "../../Icons/CopyIcon";
 import { LockIcon } from "../../Icons/LockIcon";
@@ -17,6 +17,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
     const [lock2, setLock2] = useState("Not locked");
     const [lock3, setLock3] = useState("Not locked");
     const [lock4, setLock4] = useState("Not locked");
+
+    const [canvas0, setCanvas0] = useState(false);
+    const [canvas1, setCanvas1] = useState(false);
+    const [canvas2, setCanvas2] = useState(false);
+    const [canvas3, setCanvas3] = useState(false);
+    const [canvas4, setCanvas4] = useState(false);
 
     const changeColorMode = () => {
         if (colorMode === "HEX") setColorMode("RGB");
@@ -54,7 +60,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
                 if (lock[3]) return setLock3("Locked");
                 return setLock3("Not Locked");
             }
-            case 3: {         
+            case 4: {         
                 if (lock[4]) return setLock4("Locked");
                 return setLock4("Not Locked");
             }
@@ -62,13 +68,54 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
     }
 
     function updateEditedColor(index) {
-        setHarmony("Edit");      
+        setHarmony("Edit");
+
         switch(index) {
-            case 0: return setEditedColorIndex(0);
-            case 1: return setEditedColorIndex(1);
-            case 2: return setEditedColorIndex(2);
-            case 3: return setEditedColorIndex(3);
-            case 4: return setEditedColorIndex(4);
+            case 0: {
+                if (canvas0) setCanvas0(false);
+                else setCanvas0(true);
+                setCanvas1(false);
+                setCanvas2(false);
+                setCanvas3(false);
+                setCanvas4(false);
+                return setEditedColorIndex(0); 
+            }
+            case 1: { 
+                setCanvas0(false);
+                if (canvas1) setCanvas1(false);
+                else setCanvas1(true);
+                setCanvas2(false);
+                setCanvas3(false);
+                setCanvas4(false);
+                return setEditedColorIndex(1); 
+            }
+            case 2: { 
+                setCanvas0(false);
+                setCanvas1(false);
+                if (canvas2) setCanvas2(false);
+                else setCanvas2(true);
+                setCanvas3(false);
+                setCanvas4(false);
+                return setEditedColorIndex(2); 
+            }
+            case 3: { 
+                setCanvas0(false);
+                setCanvas1(false);
+                setCanvas2(false);
+                if (canvas3) setCanvas3(false);
+                else setCanvas3(true);
+                setCanvas4(false);
+                return setEditedColorIndex(3); 
+            }
+            case 4: { 
+                setCanvas0(false);
+                setCanvas1(false);
+                setCanvas2(false);
+                setCanvas3(false);
+                if (canvas4) setCanvas4(false);
+                else setCanvas4(true);
+                return setEditedColorIndex(4); 
+            }
         }
     }
 
@@ -102,7 +149,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock0}</S.LockDisplay>
-                <EditCanvas color={palette[0]} setEditedColor={setEditedColor}/>
+                <EditCanvas color={palette[0]} setEditedColor={setEditedColor} visible={canvas0} />
             </S.Color>
 
 
@@ -125,7 +172,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock1}</S.LockDisplay>
-                <EditCanvas color={palette[1]} setEditedColor={setEditedColor}/>
+                <EditCanvas color={palette[1]} setEditedColor={setEditedColor} visible={canvas1}/>
             </S.Color>
 
 
@@ -147,7 +194,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock2}</S.LockDisplay>
-                <EditCanvas color={palette[2]} setEditedColor={setEditedColor}/>
+                <EditCanvas color={palette[2]} setEditedColor={setEditedColor} visible={canvas2}/>
             </S.Color>
 
 
@@ -170,7 +217,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock3}</S.LockDisplay>
-                <EditCanvas color={palette[3]} setEditedColor={setEditedColor}/>
+                <EditCanvas color={palette[3]} setEditedColor={setEditedColor} visible={canvas3}/>
             </S.Color>
 
 
@@ -193,7 +240,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
                     </S.Lock>
                 </S.ColorCode>
                 <S.LockDisplay>{lock4}</S.LockDisplay>
-                <EditCanvas color={palette[4]} setEditedColor={setEditedColor}/>
+                <EditCanvas color={palette[4]} setEditedColor={setEditedColor} visible={canvas4}/>
             </S.Color>
         </S.Colors>
     </S.Container>
