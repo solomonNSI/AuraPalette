@@ -68,18 +68,26 @@ export const Colors = styled.div`
 `;
 
 export const ColorBlindColors = styled.div`
-  margin-top: 100px;
-  height: 10vw;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-between;
+  margin-top: 150px;
 
   ${({ visible }) => {
         return css`
             visibility: ${visible ? 'visible' : 'hidden'};
         `;
-    }}
+  }}
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+`;
+
+export const ColorBlindPalette = styled.div`
+  height: 10vw;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
 `;
 
 export const Color = styled.div`
