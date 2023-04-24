@@ -265,7 +265,8 @@ export const getSquarePalette = (palette, lock) => {
 
 export const getEditedPalette = (palette, index, hex, lock) => {
     if (!lock[index]) { 
-        palette[index] = hex;
+        // TODO: bu line'ı uncommentleyince edit fonksiyonu error veriyor neden???
+        // palette[index] = hex;
     }
     return palette;
 };

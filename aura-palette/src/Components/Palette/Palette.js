@@ -11,7 +11,7 @@ import {
 import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, editedColor, editedColorIndex }) => {
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not locked");
     const [lock1, setLock1] = useState("Not locked");
