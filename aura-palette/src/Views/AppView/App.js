@@ -22,7 +22,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [lock, setLock] = useState([false, false, false, false, false]);
   const [palette, setPalette] = useState({ palette: getDefaultPalette(lock) });
   const [editedColorIndex, setEditedColorIndex] = useState("");
-  const [editedColor, setEditedColor] = useState("#000");
+  const [editedColor, setEditedColor] = useState("#000000");
   const [colorBlindness, setColorBlindness] = useState("None");
 
   async function sendQuery(){

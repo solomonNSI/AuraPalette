@@ -126,6 +126,27 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
        else setColorBlindnessVisible(true);
     }, [colorBlindness, harmony, lock0, lock1, lock2, lock3, lock4]);
 
+    function renderBlindColors(){
+        var blindColors = [];
+        for (var i = 0; i < 5; i++) {
+            blindColors.push(
+                <S.Color colorHex={getColorBlindSimulation(palette[i], colorBlindness)}>
+                    <S.ColorCode>
+                    {getColorBlindSimulation(palette[i], colorBlindness)}
+                        <S.Copy
+                        onClick={() => {
+                            navigator.clipboard.writeText(displayPaletteColors(i));
+                        }}
+                        >
+                        <CopyIcon />
+                        </S.Copy>
+                    </S.ColorCode>
+                </S.Color>
+            );
+        }
+        return blindColors;
+    }
+
     return (
     <S.Container className = {DarkMode}>
         <S.Header className = {DarkMode}>
@@ -261,74 +282,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.ColorBlindColors visible={colorBlindnessVisible}>
             <S.PaletteTitle className = {DarkMode}>Color blinds see the palette like this:</S.PaletteTitle>
             <S.ColorBlindPalette>
-                <S.Color colorHex={getColorBlindSimulation(palette[0], colorBlindness)}>
-                    <S.ColorCode>
-                    {getColorBlindSimulation(palette[0], colorBlindness)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(0));
-                        }}
-                        >
-                        <CopyIcon />
-                        </S.Copy>
-                    </S.ColorCode>
-                </S.Color>
-
-
-                <S.Color colorHex={getColorBlindSimulation(palette[1], colorBlindness)}>
-                    <S.ColorCode>
-                    {getColorBlindSimulation(palette[1], colorBlindness)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(0));
-                        }}
-                        >
-                        <CopyIcon />
-                        </S.Copy>
-                    </S.ColorCode>
-                </S.Color>
-
-
-                <S.Color colorHex={getColorBlindSimulation(palette[2], colorBlindness)}>
-                    <S.ColorCode>
-                    {getColorBlindSimulation(palette[2], colorBlindness)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(0));
-                        }}
-                        >
-                        <CopyIcon />
-                        </S.Copy>
-                    </S.ColorCode>
-                </S.Color>
-
-
-                <S.Color colorHex={getColorBlindSimulation(palette[3], colorBlindness)}>
-                    <S.ColorCode>
-                    {getColorBlindSimulation(palette[3], colorBlindness)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(0));
-                        }}
-                        >
-                        <CopyIcon />
-                        </S.Copy>
-                    </S.ColorCode>
-                </S.Color>
-
-
-                <S.Color colorHex={getColorBlindSimulation(palette[4], colorBlindness)}>
-                    <S.ColorCode>
-                    {getColorBlindSimulation(palette[4], colorBlindness)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(0));
-                        }}
-                        >
-                        <CopyIcon />
-                        </S.Copy>
-                    </S.ColorCode>
-                </S.Color>
+                {renderBlindColors()}
             </S.ColorBlindPalette>
         </S.ColorBlindColors>
     </S.Container>
