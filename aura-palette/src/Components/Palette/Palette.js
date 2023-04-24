@@ -9,8 +9,9 @@ import {
   hexToRgbWriter,
 } from "../../Helpers/ColorCodes";
 import { EditCanvas } from "../EditCanvas/EditCanvas";
+import { getColorBlindSimulation, getProtanopiaColor } from "../../Helpers/ColorBlindness";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorIndex, setEditedColor }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorIndex, setEditedColor, colorBlindness }) => {
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not locked");
     const [lock1, setLock1] = useState("Not locked");
@@ -243,6 +244,79 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
                 <EditCanvas color={palette[4]} setEditedColor={setEditedColor} visible={canvas4}/>
             </S.Color>
         </S.Colors>
+
+        {/* COLOR BLIND PALETTE */}
+
+        <S.ColorBlindColors>
+            <S.Color colorHex={getColorBlindSimulation(palette[0], colorBlindness)}>
+                <S.ColorCode>
+                {getColorBlindSimulation(palette[0], colorBlindness)}
+                    <S.Copy
+                    onClick={() => {
+                        navigator.clipboard.writeText(displayPaletteColors(0));
+                    }}
+                    >
+                    <CopyIcon />
+                    </S.Copy>
+                </S.ColorCode>
+            </S.Color>
+
+
+            <S.Color colorHex={getColorBlindSimulation(palette[1], colorBlindness)}>
+                <S.ColorCode>
+                {getColorBlindSimulation(palette[1], colorBlindness)}
+                    <S.Copy
+                    onClick={() => {
+                        navigator.clipboard.writeText(displayPaletteColors(0));
+                    }}
+                    >
+                    <CopyIcon />
+                    </S.Copy>
+                </S.ColorCode>
+            </S.Color>
+
+
+            <S.Color colorHex={getColorBlindSimulation(palette[2], colorBlindness)}>
+                <S.ColorCode>
+                {getColorBlindSimulation(palette[2], colorBlindness)}
+                    <S.Copy
+                    onClick={() => {
+                        navigator.clipboard.writeText(displayPaletteColors(0));
+                    }}
+                    >
+                    <CopyIcon />
+                    </S.Copy>
+                </S.ColorCode>
+            </S.Color>
+
+
+            <S.Color colorHex={getColorBlindSimulation(palette[3], colorBlindness)}>
+                <S.ColorCode>
+                {getColorBlindSimulation(palette[3], colorBlindness)}
+                    <S.Copy
+                    onClick={() => {
+                        navigator.clipboard.writeText(displayPaletteColors(0));
+                    }}
+                    >
+                    <CopyIcon />
+                    </S.Copy>
+                </S.ColorCode>
+            </S.Color>
+
+
+            <S.Color colorHex={getColorBlindSimulation(palette[4], colorBlindness)}>
+                <S.ColorCode>
+                {getColorBlindSimulation(palette[4], colorBlindness)}
+                    <S.Copy
+                    onClick={() => {
+                        navigator.clipboard.writeText(displayPaletteColors(0));
+                    }}
+                    >
+                    <CopyIcon />
+                    </S.Copy>
+                </S.ColorCode>
+            </S.Color>
+        </S.ColorBlindColors>
     </S.Container>
   );
 };

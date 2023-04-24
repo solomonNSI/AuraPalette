@@ -32,6 +32,7 @@ function App() {
   const [lock, setLock] = useState([false, false, false, false, false]);
   const [editedColorIndex, setEditedColorIndex] = useState("");
   const [editedColor, setEditedColor] = useState("#000");
+  const [colorBlindness, setColorBlindness] = useState("None");
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -237,11 +238,7 @@ function App() {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <AdjustmentsMenu
-            palette={palette.palette}
-            setPalette={setPalette}
-            setHarmony={setHarmony}
-          />
+          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} />
           <Palette 
             palette={palette.palette} 
             lock={lock} 
@@ -249,6 +246,7 @@ function App() {
             setHarmony={setHarmony} 
             setEditedColorIndex={setEditedColorIndex}
             setEditedColor={setEditedColor}
+            colorBlindness={colorBlindness} 
         />
         </S.PaletteContainer>
       </S.Content>

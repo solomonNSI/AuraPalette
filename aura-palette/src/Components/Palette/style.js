@@ -58,6 +58,15 @@ export const Colors = styled.div`
   justify-content: space-between;
 `;
 
+export const ColorBlindColors = styled.div`
+  margin-top: 100px;
+  height: 10vw;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+`;
+
 export const Color = styled.div`
   background-color: ${(props) => props.colorHex};
   width: 20%;
