@@ -1,7 +1,8 @@
 import * as S from "../LoginView/style";
-import { NavBar } from "../../Components/NavBar/NavBar";
+import { NavBar, DarkMode } from "../../Components/NavBar/NavBar";
 import { json, useNavigate } from "react-router-dom";
 import { useState } from 'react';
+
 
 const Login = () => {
   const[email,setEmail] = useState("");
@@ -22,30 +23,24 @@ const Login = () => {
 
   const navigate = useNavigate();
   return (
-    <div
-      style={{
-        backgroundColor: "#eeeeee",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+    <S.AppBackground className = {DarkMode}>
+    
       <NavBar />
 
-      <S.Background>
+      <S.Background className = {DarkMode}>
         <S.LoginInside>
-          <S.Title>Login to Aura.</S.Title>
+          <S.Title className = {DarkMode}>Login to Aura.</S.Title>
 
-          <input type="email" placeholder="E-Mail" onChange={(e) => setEmail(e.target.value)}></input>
-          <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
+          <input type="email" placeholder="E-Mail" className = {DarkMode} onChange={(e) => setEmail(e.target.value)}></input>
+          <input type="password" placeholder="Password" className = {DarkMode} onChange={(e) => setPassword(e.target.value)}></input>
 
-          <button className="loginButton" onClick={() => sendLoginInfo()}>Login</button>
-          <button className="signUpButton" onClick={() => navigate("/signup")}>
+          <button className={`loginButton ${DarkMode}`} onClick={() => sendLoginInfo()}>Login</button>
+          <button className={`signUpButton ${DarkMode}`} onClick={() => navigate("/signup")}>
             Don't have an account? <strong>Sign Up {">"}</strong>
           </button>
         </S.LoginInside>
       </S.Background>
-    </div>
+    </S.AppBackground>
   );
 };
 

@@ -1,146 +1,147 @@
 import React from "react";
 import * as S from "./style";
+import { DarkMode } from "../../Components/NavBar/NavBar";
 
 export const AdjustmentsMenu = ({ setHarmony, setColorBlindness }) => {
 
   return (
-    <S.MenuContainer>
-      <S.Title>Adjustments</S.Title>
+    <S.MenuContainer className = {DarkMode}>
+      <S.Title className = {DarkMode}>Adjustments</S.Title>
         <div>
-            <S.Subtitle>Harmony</S.Subtitle>
+            <S.Subtitle className = {DarkMode}>Harmony</S.Subtitle>
 
-            <S.Container>
-            <input type="radio" name="harmony" defaultChecked onChange={() => setHarmony("None")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony" defaultChecked onChange={() => setHarmony("None")} />
             None
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="harmony" onChange={() => setHarmony("Analogous")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony" onChange={() => setHarmony("Analogous")} />
             Analogous
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="harmony" onChange={() => setHarmony("Monochromatic")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony" onChange={() => setHarmony("Monochromatic")} />
             Monochromatic
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="harmony"  onChange={() => setHarmony("Triads")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony"  onChange={() => setHarmony("Triads")} />
             Triads
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="harmony" onChange={() => setHarmony("Complementary")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony" onChange={() => setHarmony("Complementary")} />
             Complementary
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="harmony" onChange={() => setHarmony("Split Complementary")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony" onChange={() => setHarmony("Split Complementary")} />
             Split Complementary
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="harmony" onChange={() => setHarmony("Shades")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony" onChange={() => setHarmony("Shades")} />
             Shades
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="harmony" onChange={() => setHarmony("Square")} />
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="harmony" onChange={() => setHarmony("Square")} />
             Square
-            <S.Checkmark className="checkmark" />
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
         </div>
 
         <div>
-            <S.Subtitle>Color Blindness</S.Subtitle>
+            <S.Subtitle className = {DarkMode}>Medium</S.Subtitle>
 
-            <S.Container>
-            <input type="radio" name="colorblind" defaultChecked onChange={() => setColorBlindness("None")} />
-            None
-            <S.Checkmark className="checkmark" />
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Protanopia")}></input>
-            Protanopia
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Protanomaly")}></input>
-            Protanomaly
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Deuteranopia")}></input>
-            Deuteranopia
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Deuteranomaly")}></input>
-            Deuteranomaly
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Tritanopia")}></input>
-            Tritanopia
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Tritanomaly")}></input>
-            Tritanomaly
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Achromatopsia")}></input>
-            Achromatopsia
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-
-            <S.Container>
-            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Achromatomaly")}></input>
-            Achromatomaly
-            <S.Checkmark className="checkmark"></S.Checkmark>
-            </S.Container>
-        </div>
-
-        <div>
-            <S.Subtitle>Medium</S.Subtitle>
-
-            <S.Container>
-            <input type="radio" name="medium" defaultChecked></input>
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="medium" defaultChecked></input>
             Default
-            <S.Checkmark className="checkmark"></S.Checkmark>
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="medium"></input>
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="medium"></input>
             Press
-            <S.Checkmark className="checkmark"></S.Checkmark>
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="medium"></input>
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="medium"></input>
             Video
-            <S.Checkmark className="checkmark"></S.Checkmark>
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
 
-            <S.Container>
-            <input type="radio" name="medium"></input>
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="medium"></input>
             Website
-            <S.Checkmark className="checkmark"></S.Checkmark>
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+        </div>
+
+        <div>
+            <S.Subtitle className = {DarkMode}>Color Blindness</S.Subtitle>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" defaultChecked onChange={() => setColorBlindness("None")} />
+            None
+            <S.Checkmark className={`checkmark ${DarkMode}`} />
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Protanopia")}></input>
+            Protanopia
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Protanomaly")}></input>
+            Protanomaly
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Deuteranopia")}></input>
+            Deuteranopia
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Deuteranomaly")}></input>
+            Deuteranomaly
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Tritanopia")}></input>
+            Tritanopia
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Tritanomaly")}></input>
+            Tritanomaly
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Achromatopsia")}></input>
+            Achromatopsia
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="colorblind" onChange={() => setColorBlindness("Achromatomaly")}></input>
+            Achromatomaly
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
         </div>
 

@@ -5,7 +5,6 @@ import "./index.css";
 import App from "./Views/AppView/App";
 import Login from "./Views/LoginView/Login";
 import Profile from "./Views/ProfileView/Profile";
-import Settings from "./Views/SettingsView/Settings";
 import SignUp from "./Views/SignUpView/SignUp";
 
 export default function Root() {
@@ -14,7 +13,6 @@ export default function Root() {
       <Routes>
         <Route index path="/" element={<App />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="settings" element={<Settings />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
       </Routes>

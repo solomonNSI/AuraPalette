@@ -1,15 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 
+export const AppBackground = styled.div`
+  background-color: #eeeeee;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+
+  &.dark {
+    background-color: #222222;
+  }
+`;
+
 export const Background = styled.div`
   align-self: flex-start;
-  width: 70%;
+  width: 92%;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #dddddd;
-  margin-top: 150px;
+  margin: 100px 0px 35px;
   height: auto;
+  overflow: scroll;
+  overflow-x: hidden;
+
+  &.dark {
+    background-color: #333333;
+  }
 `;
 
 export const SignUpInside = styled.div`
@@ -31,6 +50,21 @@ export const SignUpInside = styled.div`
     margin-top: 25px;
     font-size: 20px;
     padding-left: 20px;
+
+    &.dark {
+      background-color: #000000;
+      color: #eee;
+
+      ::placeholder {
+        color: #eee;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      height: 40px;
+      width: 90%;
+      font-size: 16px;
+    }
   }
 
   .signUpButton {
@@ -45,6 +79,25 @@ export const SignUpInside = styled.div`
     font-weight: 400;
     color: white;
     align-self: flex-end;
+
+    &:hover {
+      background-color: #444444;
+    }
+
+    &.dark {
+      background-color: #111;
+      color: #ddd;
+      
+      &:hover {
+        background-color: #000;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      height: 40px;
+      font-size: 16px;
+      margin-top: 30px;
+    }
   }
 
   .loginButton {
@@ -60,8 +113,24 @@ export const SignUpInside = styled.div`
     color: #333333;
     align-self: flex-end;
 
+    &:hover {
+      color: #444444;
+    }
+
     strong {
       font-weight: 500;
+    }
+
+    &.dark {
+      color: #ddd;
+
+      &:hover {
+        color: #bbb;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: 16px;
     }
   }
 `;
@@ -70,4 +139,13 @@ export const Title = styled.div`
   font-size: 36px;
   font-weight: 300;
   margin-bottom: 20px;
+
+  &.dark { 
+    color: #eee;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
 `;

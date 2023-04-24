@@ -1,21 +1,30 @@
 import React from "react";
 import { StarIcon } from "../../Icons/StarIcon";
 import styled, { css } from "styled-components";
+import { ExportIcon } from "../../Icons/ExportIcon";
 
 export const Container = styled.div`
   background-color: white;
   border-radius: 8px;
   width: 80%;
   padding: 20px;
-  margin-right: 65px;
+  margin-right: 4%;
   height: calc(100vh - 300px);
   overflow: scroll;
+
+  &.dark {
+    background-color: #000000;
+  }
 `;
 
 export const PaletteTitle = styled.h2`
   font-weight: 500;
   margin: 0px auto 0px 0px;
   color: #333333;
+
+  &.dark {
+    color: #eeeeee;
+  }
 `;
 
 export const Copy = styled.button`
@@ -86,6 +95,7 @@ export const ColorCode = styled.div`
   background-color: #333333;
   color: #eeeeee;
   height: 50px;
+  padding: 5px 0px;
   position: relative;
   top: 100%;
   border-radius: 0px 0px 8px 8px;
@@ -124,7 +134,24 @@ export const ColorModeButton = styled.button`
 
 export const StyledStarIcon = styled(StarIcon)`
   margin: 0 16px;
+  
+  &.dark {
+    path
+    {
+      fill: #888888;
+    }
+  }
 `;
+
+export const StyledExportIcon = styled(ExportIcon)`
+  &.dark {
+    path
+    {
+      fill: #888888;
+    }
+  }
+`;
+
 
 export const LockDisplay = styled.div`
   background-color: #333333;
@@ -136,4 +163,5 @@ export const LockDisplay = styled.div`
   position: relative;
   top: 105%;
   border-radius: 8px 8px 8px 8px;
+  padding: 2px 0px;
 `;

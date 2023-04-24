@@ -1,24 +1,56 @@
 import React from "react";
 import styled from "styled-components";
+import { ExportIcon } from "../../Icons/ExportIcon";
 import { StarIcon } from "../../Icons/StarIcon";
 
 export const Container = styled.div`
-  background-color: white;
+  background-color: none;
   border-radius: 8px;
   width: 100%;
-  height: 15vh;
+  height: 300px;
   border-radius: 0px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #cccccc;
+`;
+
+export const Titles = styled.div`
+  display: flex;
+  flex-direction:column;
+`;
+
+export const PaletteSettings = styled.div`
+  display: flex;
+  flex-direction:row;
+  align-items: center;
 `;
 
 export const PaletteTitle = styled.h3`
   font-weight: 500;
-  margin: 10px auto 15px 0px;
+  margin: 10px auto 0px 0px;
   color: #333333;
+
+  &.dark {
+    color: #eeeeee;
+  }
+`;
+
+export const Date = styled.h3`
+  font-weight: 500;
+  margin: 5px auto 20px 0px;
+  color: #666666;
+  font-size: 14px;
+
+  &.dark {
+    color: #cccccc;
+  }
 `;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
+  flex-direction:row;
+  justify-content: space-between;
 `;
 
 export const Colors = styled.div`
@@ -32,7 +64,7 @@ export const Colors = styled.div`
 export const Color = styled.div`
   background-color: red;
   width: 20%;
-  height: 10vh;
+  height: 180px;
   border-radius: 8px 8px 0px 0px;
   display: flex;
   flex-direction: column;
@@ -48,20 +80,47 @@ export const ColorCode = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
 `;
 
 export const ColorModeButton = styled.button`
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
+background-color: #333333;
+border-radius: 4px;
+font-size: 12px;
+color: white;
+border: none;
+height: 26px;
+padding: 0px 10px;
+margin-top: 3px;
+
+&:hover {
+  cursor: pointer;
+  background-color: #444444;
+}
+
+&:active {
+  cursor: pointer;
   background-color: #333333;
-  border-radius: 8px;
-  font-size: 12px;
-  color: white;
-  border: none;
-  height: 20px;
+}
 `;
 
 export const StyledStarIcon = styled(StarIcon)`
   margin: 0 12px;
+
+  &.dark {
+    path
+    {
+      fill: #888888;
+    }
+  }
+`;
+
+export const StyledExportIcon = styled(ExportIcon)`
+  &.dark {
+    path
+    {
+      fill: #888888;
+    }
+  }
 `;
