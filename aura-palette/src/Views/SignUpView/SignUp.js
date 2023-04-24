@@ -1,9 +1,9 @@
 import * as S from "../SignUpView/style";
-import { NavBar, DarkMode } from "../../Components/NavBar/NavBar";
+import { NavBar } from "../../Components/NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
-const SignUp = () => {
+const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
 
   const[name,setName] = useState("");
@@ -27,7 +27,7 @@ const SignUp = () => {
 
   return (
       <S.AppBackground className = {DarkMode}>
-      <NavBar />
+      <NavBar  DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
       <S.Background className = {DarkMode}>
         <S.SignUpInside className = {DarkMode}>

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { ExportIcon } from "../../Icons/ExportIcon";
-import { DarkMode } from "../../Components/NavBar/NavBar";
 import * as S from "./style";
 
-export const MiniPalette = () => {
+export const MiniPalette = ({ DarkMode }) => {
   const [colorMode, setColorMode] = useState("RGB");
 
   const changeColorMode = () => {

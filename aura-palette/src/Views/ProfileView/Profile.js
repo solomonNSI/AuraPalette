@@ -1,10 +1,9 @@
 import * as S from "../ProfileView/style";
 import React, { useState } from "react";
-import { NavBar, DarkMode } from "../../Components/NavBar/NavBar";
+import { NavBar} from "../../Components/NavBar/NavBar";
 import { MiniPalette } from "../../Components/MiniPalette/MiniPalette";
-import { redirect } from "react-router-dom";
 
-const Profile = () => {
+const Profile = ({ DarkMode, setIsDarkMode }) => {
   const [favoritesEnabled, setFavoritesEnabled] = useState(true);
   const [historyEnabled, setHistoryEnabled] = useState(false);
   const [settingsEnabled, setSettingsEnabled] = useState(false);
@@ -45,7 +44,7 @@ const Profile = () => {
   return (
     <S.AppBackground className = {DarkMode}>
  
-      <NavBar />
+      <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
       <S.Settings className = {DarkMode}>
       <S.Title className = {DarkMode}>Profile Tabs</S.Title>
 
@@ -60,30 +59,30 @@ const Profile = () => {
       <S.SettingsForeground className = {DarkMode} style = {favoritesEnabled ? {display: "block"} : {display: "none"}}>
         <S.Title className = {DarkMode}>Favorites</S.Title>
         <S.Palettes className = {DarkMode}>
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
         </S.Palettes>
       </S.SettingsForeground>
 
       <S.SettingsForeground className = {DarkMode} style = {historyEnabled ? {display: "block"} : {display: "none"}}>
         <S.Title className = {DarkMode}>History</S.Title>
         <S.Palettes>
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
-          <MiniPalette />
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
+          <MiniPalette DarkMode={DarkMode}/>
         </S.Palettes>
       </S.SettingsForeground>
 

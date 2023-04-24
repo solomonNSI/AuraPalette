@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./style";
 import { DarkMode } from "../../Components/NavBar/NavBar";
 
-export const AdjustmentsMenu = ({ setHarmony, setColorBlindness }) => {
+export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, DarkMode }) => {
 
   return (
     <S.MenuContainer className = {DarkMode}>

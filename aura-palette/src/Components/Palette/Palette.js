@@ -4,7 +4,6 @@ import { CopyIcon } from "../../Icons/CopyIcon";
 import { LockIcon } from "../../Icons/LockIcon";
 import { EditIcon } from "../../Icons/EditIcon";
 import * as S from "./style";
-import { DarkMode } from "../../Components/NavBar/NavBar";
 import {
   hexToHSLWriter,
   hexToRgbWriter,
@@ -12,7 +11,7 @@ import {
 import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, editedColor, editedColorIndex }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, DarkMode }) => {
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not locked");
     const [lock1, setLock1] = useState("Not locked");

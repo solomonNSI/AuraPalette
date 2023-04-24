@@ -1,10 +1,10 @@
 import * as S from "../LoginView/style";
-import { NavBar, DarkMode } from "../../Components/NavBar/NavBar";
-import { json, useNavigate } from "react-router-dom";
+import { NavBar } from "../../Components/NavBar/NavBar";
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 
-const Login = () => {
+const Login = ({DarkMode, setIsDarkMode}) => {
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
 
@@ -25,7 +25,7 @@ const Login = () => {
   return (
     <S.AppBackground className = {DarkMode}>
     
-      <NavBar />
+      <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
 
       <S.Background className = {DarkMode}>
         <S.LoginInside>

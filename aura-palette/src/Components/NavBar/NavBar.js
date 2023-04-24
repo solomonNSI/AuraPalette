@@ -2,19 +2,19 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 
-export var DarkMode = "light"
-
-export const NavBar = ({ palette }) => {
+export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
 
-  function setDarkMode(){
-    DarkMode = "dark"; //not working because not refreshing the page 
+  function toggleDarkMode() {
+    console.log("here")
+    if (DarkMode === "dark") setIsDarkMode("light")
+    else setIsDarkMode("dark");
   }
-
   return (
-    <S.NavBar className = {DarkMode}>
+    <S.NavBar className={DarkMode}>
       <S.AppName onClick={() => navigate("/")}>aura</S.AppName>
       <S.LoginButton>
+        <button onClick={() => toggleDarkMode()}>Toggle mode</button>
         <S.StyledProfileIcon className = {DarkMode}
           height="50px"
           onClick={() => navigate("/profile")}

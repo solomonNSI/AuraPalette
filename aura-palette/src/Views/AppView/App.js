@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { NavBar, DarkMode } from "../../Components/NavBar/NavBar";
+import { NavBar } from "../../Components/NavBar/NavBar";
 import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMenu";
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
@@ -16,7 +16,7 @@ import {
   getEditedPalette,
 } from "../../Helpers/Harmony";
 
-function App() {
+function App({ DarkMode, setIsDarkMode }) {
   const defaultBaseColor = "#0700D6";
   const defaultPalette = [
     "#E3390B",
@@ -198,7 +198,7 @@ function App() {
 
   return (
     <S.AppBackground className = {DarkMode}>
-      <NavBar palette={palette.palette} />
+      <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
       <S.GradientLine className = {DarkMode} colorList={palette.palette} />
 
@@ -229,7 +229,7 @@ function App() {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} />
+          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} DarkMode={DarkMode} />
           <Palette 
             palette={palette.palette} 
             lock={lock} 
@@ -239,6 +239,7 @@ function App() {
             setEditedColorIndex={setEditedColorIndex}
             setEditedColor={setEditedColor}
             colorBlindness={colorBlindness} 
+            DarkMode={DarkMode}
         />
         </S.PaletteContainer>
       </S.Content>
