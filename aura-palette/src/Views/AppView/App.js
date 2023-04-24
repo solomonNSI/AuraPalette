@@ -157,10 +157,7 @@ function App() {
       case "Shades":
       case "Monochromatic":
         setPalette((prevState) => {
-          return {
-            ...prevState,
-            palette: getMonochromaticPalette(palette.palette, lock)
-          };
+          return { ...prevState, palette: getMonochromaticPalette(palette.palette, lock)};
         });
         break;
       case "Complementary":
@@ -244,6 +241,7 @@ function App() {
             lock={lock} 
             setLock={setLock}
             setHarmony={setHarmony} 
+            harmony={harmony} 
             setEditedColorIndex={setEditedColorIndex}
             setEditedColor={setEditedColor}
             colorBlindness={colorBlindness} 

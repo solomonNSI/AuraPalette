@@ -74,7 +74,7 @@ export const getMonochromaticPalette = (palette, lock) => {
     // Color [0] Darker Shade 2
     if (!lock[0]) {
         var temp = [...baseColorHSL];
-        temp[2] =  Math.abs(baseColorHSL[2] - (100% + baseColorHSL[2] / 10) * 16);
+        temp[2] =  Math.abs(baseColorHSL[2] - (100% + baseColorHSL[2] / 10) * 10);
         const color0 = hslToHex(temp[0], temp[1], temp[2]);
         palette[0] = color0;
     }
@@ -82,7 +82,7 @@ export const getMonochromaticPalette = (palette, lock) => {
     // Color [1] Darker Shade 1
     if (!lock[1]) {
         var temp1 = [...baseColorHSL];
-        temp1[2] =  Math.abs(baseColorHSL[2] - (100% + baseColorHSL[2] / 10) * 8);
+        temp1[2] =  Math.abs(baseColorHSL[2] - (100% + baseColorHSL[2] / 10) * 5);
         const color1 = hslToHex(temp1[0], temp1[1], temp1[2]);
         palette[1] = color1;
     }
@@ -90,7 +90,7 @@ export const getMonochromaticPalette = (palette, lock) => {
     // Color [3] Lighter Shade 1
     if (!lock[3]) {
         var temp2 = [...baseColorHSL];
-        temp2[2] =  Math.abs(baseColorHSL[2] + (100% + baseColorHSL[2] / 10) * 8);
+        temp2[2] =  Math.abs(baseColorHSL[2] + (100% + baseColorHSL[2] / 10) * 5);
         const color2 = hslToHex(temp2[0], temp2[1], temp2[2]);
         palette[3] = color2;
     }
@@ -98,7 +98,7 @@ export const getMonochromaticPalette = (palette, lock) => {
     // Color [4] Lighter Shade 2
     if (!lock[4]) {
         var temp3 = [...baseColorHSL];
-        temp3[2] =  Math.abs(baseColorHSL[2] + (100% + baseColorHSL[2] / 10) * 16);
+        temp3[2] =  Math.abs(baseColorHSL[2] + (100% + baseColorHSL[2] / 10) * 10);
         const color3 = hslToHex(temp3[0], temp3[1], temp3[2]);
         palette[4] = color3;
     }
