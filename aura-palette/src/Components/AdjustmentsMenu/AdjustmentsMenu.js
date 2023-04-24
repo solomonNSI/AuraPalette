@@ -108,6 +108,12 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness }) => {
             Achromatopsia
             <S.Checkmark className="checkmark"></S.Checkmark>
             </S.Container>
+
+            <S.Container>
+            <input type="radio" name="colorblind" onChange={() => setColorBlindness("Achromatomaly")}></input>
+            Achromatomaly
+            <S.Checkmark className="checkmark"></S.Checkmark>
+            </S.Container>
         </div>
 
         <div>

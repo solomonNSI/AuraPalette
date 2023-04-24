@@ -6,7 +6,6 @@ export const Canvas = styled.canvas`
   top: 110%;
 
   ${({ visible }) => {
-    console.log(visible)
         return css`
             visibility: ${visible ? 'visible' : 'hidden'};
         `;

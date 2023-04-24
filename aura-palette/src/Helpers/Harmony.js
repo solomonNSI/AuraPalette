@@ -1,14 +1,24 @@
 import React from "react";
 import { hexToHSL, hslToHex } from "./ColorWizard";
 
-const defaultBaseColor = "#0700D6";
+const defaultBaseColor = "#6c91bf";
 const defaultPalette = [
-    "#E3390B",
-    "#EA0CED",
+    "#af2bbf",
+    "#a14ebf",
     defaultBaseColor,
-    "#0CD4ED",
-    "#7AE688",
+    "#5fb0b7",
+    "#5bc8af",
   ];
+
+
+// const defaultBaseColor = "#0700D6";
+// const defaultPalette = [
+//     "#E3390B",
+//     "#EA0CED",
+//     defaultBaseColor,
+//     "#0CD4ED",
+//     "#7AE688",
+//   ];
 
 export const getDefaultPalette = (palette, lock) => {
     if (!lock[0]) palette[0] = defaultPalette[0];
