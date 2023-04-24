@@ -1,38 +1,38 @@
 import React from "react";
 import { hexToHSL, hslToHex } from "./ColorWizard";
 
-const defaultBaseColor = "#6c91bf";
-const defaultPalette = [
-    "#af2bbf",
-    "#a14ebf",
-    defaultBaseColor,
-    "#5fb0b7",
-    "#5bc8af",
-  ];
+const harmonyCount = 6;
 
+export const getDefaultPalette = (lock) => {
+    // pick a random base color
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    var randomBaseColor;
+    if (!lock[2]) { // if not locked
+        for (var i = 0; i < 6; i++) 
+            color += letters[Math.floor(Math.random() * 16)];
+        randomBaseColor = color;
+    }
+    else randomBaseColor = localStorage.getItem("baseColor");
+    var randomPalette = [randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor];
 
-// const defaultBaseColor = "#0700D6";
-// const defaultPalette = [
-//     "#E3390B",
-//     "#EA0CED",
-//     defaultBaseColor,
-//     "#0CD4ED",
-//     "#7AE688",
-//   ];
-
-export const getDefaultPalette = (palette, lock) => {
-    if (!lock[0]) palette[0] = defaultPalette[0];
-    if (!lock[1]) palette[1] = defaultPalette[1];
-    if (!lock[2]) palette[2] = defaultPalette[2];
-    if (!lock[3]) palette[3] = defaultPalette[3];
-    if (!lock[4]) palette[4] = defaultPalette[4];
-    return palette;
+    // pick a random harmony
+    const randomInt = Math.floor(Math.random() * harmonyCount) + 1
+    switch (randomInt) {
+        case (1): return getAnalogousPalette(randomPalette, lock);
+        case (2): return getMonochromaticPalette(randomPalette, lock);
+        case (3): return getTriadsPalette(randomPalette, lock);
+        case (4): return getComplementaryPalette(randomPalette, lock);
+        case (5): return getSplitComplementaryPalette(randomPalette, lock);
+        case (6): return getSquarePalette(randomPalette, lock);
+    }
 };
 
 export const getComplementaryPalette = (palette, lock) => {
     const baseColorHex = palette[2] // take the middle color as the base
     const baseColorHSL = hexToHSL(baseColorHex);
 
+    localStorage.setItem("baseColor", palette[2]);
     // Color [0] Darker Shade
     if (!lock[0]) {
         var temp = [...baseColorHSL];
@@ -71,6 +71,7 @@ export const getMonochromaticPalette = (palette, lock) => {
     const baseColorHex = palette[2] // take the middle color as the base
     const baseColorHSL = hexToHSL(baseColorHex);
 
+    localStorage.setItem("baseColor", palette[2]);
     // Color [0] Darker Shade 2
     if (!lock[0]) {
         var temp = [...baseColorHSL];
@@ -110,6 +111,7 @@ export const getAnalogousPalette = (palette, lock) => {
     const baseColorHex = palette[2] // take the middle color as the base
     const baseColorHSL = hexToHSL(baseColorHex);
 
+    localStorage.setItem("baseColor", palette[2]);
     // Color [0]
     if (!lock[0]) {
         var temp = [...baseColorHSL];
@@ -147,9 +149,10 @@ export const getAnalogousPalette = (palette, lock) => {
 
 
 export const getTriadsPalette = (palette, lock) => {
-    const baseColorHex = palette[2] // take the middle color as the base
+    const baseColorHex = palette[2]; // take the middle color as the base
     const baseColorHSL = hexToHSL(baseColorHex);
 
+    localStorage.setItem("baseColor", palette[2]);
     // Color [0] Triad 1
     if (!lock[0]) {
         var temp = [...baseColorHSL];
@@ -190,6 +193,7 @@ export const getSplitComplementaryPalette = (palette, lock) => {
     const baseColorHSL = hexToHSL(baseColorHex);
     var temp = [...baseColorHSL];
 
+    localStorage.setItem("baseColor", palette[2]);
     // Color [0] Split Complementary 1
     if (!lock[0]) {
         temp[0] =  Math.abs(baseColorHSL[0] + 150);
@@ -228,6 +232,7 @@ export const getSquarePalette = (palette, lock) => {
     const baseColorHex = palette[2] // take the middle color as the base
     const baseColorHSL = hexToHSL(baseColorHex);
 
+    localStorage.setItem("baseColor", palette[2]);
     // Color [0]
     if (!lock[0]) {
         var temp = [...baseColorHSL];

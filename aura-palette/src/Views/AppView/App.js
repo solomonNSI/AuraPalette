@@ -17,19 +17,10 @@ import {
 } from "../../Helpers/Harmony";
 
 function App({ DarkMode, setIsDarkMode }) {
-  const defaultBaseColor = "#0700D6";
-  const defaultPalette = [
-    "#E3390B",
-    "#EA0CED",
-    defaultBaseColor,
-    "#0CD4ED",
-    "#7AE688",
-  ];
-
-  const [palette, setPalette] = useState({ palette: defaultPalette });
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
   const [lock, setLock] = useState([false, false, false, false, false]);
+  const [palette, setPalette] = useState({ palette: getDefaultPalette(lock) });
   const [editedColorIndex, setEditedColorIndex] = useState("");
   const [editedColor, setEditedColor] = useState("#000");
   const [colorBlindness, setColorBlindness] = useState("None");
@@ -69,7 +60,7 @@ function App({ DarkMode, setIsDarkMode }) {
     switch (harmony) {
         case "None":
             setPalette((prevState) => {
-            return { ...prevState, palette: getDefaultPalette(pal) };
+            return { ...prevState, palette: getDefaultPalette() };
             });
             break;
         case "Analogous":
@@ -143,7 +134,7 @@ function App({ DarkMode, setIsDarkMode }) {
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
-          return { ...prevState, palette: getDefaultPalette(palette.palette, lock) };
+          return { ...prevState, palette: getDefaultPalette(lock) };
         });
         break;
       case "Analogous":
@@ -194,7 +185,7 @@ function App({ DarkMode, setIsDarkMode }) {
       default:
         break;
     }
-  }, [harmony, editedColorIndex, editedColor]);
+  }, [harmony, editedColorIndex, editedColor, lock]);
 
   return (
     <S.AppBackground className = {DarkMode}>

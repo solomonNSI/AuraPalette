@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ExportIcon } from "../../Icons/ExportIcon";
 import { CopyIcon } from "../../Icons/CopyIcon";
 import { LockIcon } from "../../Icons/LockIcon";
 import { EditIcon } from "../../Icons/EditIcon";
