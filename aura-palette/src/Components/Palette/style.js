@@ -102,7 +102,6 @@ export const Color = styled.div`
 export const ColorCode = styled.div`
   background-color: #333333;
   color: #eeeeee;
-  height: 50px;
   padding: 5px 0px;
   position: relative;
   top: 100%;
