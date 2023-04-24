@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExportIcon } from "../../Icons/ExportIcon";
 import { CopyIcon } from "../../Icons/CopyIcon";
 import { LockIcon } from "../../Icons/LockIcon";
@@ -9,7 +9,7 @@ import {
   hexToRgbWriter,
 } from "../../Helpers/ColorCodes";
 import { EditCanvas } from "../EditCanvas/EditCanvas";
-import { getColorBlindSimulation, getProtanopiaColor } from "../../Helpers/ColorBlindness";
+import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 
 export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorIndex, setEditedColor, colorBlindness }) => {
     const [colorMode, setColorMode] = useState("HEX");
@@ -24,6 +24,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
     const [canvas2, setCanvas2] = useState(false);
     const [canvas3, setCanvas3] = useState(false);
     const [canvas4, setCanvas4] = useState(false);
+
+    const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
 
     const changeColorMode = () => {
         if (colorMode === "HEX") setColorMode("RGB");
@@ -119,6 +121,11 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
             }
         }
     }
+
+    useEffect(() => {
+       if(colorBlindness === "None") setColorBlindnessVisible(false);
+       else setColorBlindnessVisible(true);
+    }, [colorBlindness]);
 
     return (
     <S.Container>
@@ -247,7 +254,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, setEditedColorInde
 
         {/* COLOR BLIND PALETTE */}
 
-        <S.ColorBlindColors>
+        <S.ColorBlindColors visible={colorBlindnessVisible}>
             <S.Color colorHex={getColorBlindSimulation(palette[0], colorBlindness)}>
                 <S.ColorCode>
                 {getColorBlindSimulation(palette[0], colorBlindness)}

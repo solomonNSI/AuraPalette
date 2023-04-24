@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import { StarIcon } from "../../Icons/StarIcon";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   background-color: white;
@@ -65,6 +65,12 @@ export const ColorBlindColors = styled.div`
   flex-direction: row;
   gap: 10px;
   justify-content: space-between;
+
+  ${({ visible }) => {
+        return css`
+            visibility: ${visible ? 'visible' : 'hidden'};
+        `;
+    }}
 `;
 
 export const Color = styled.div`
