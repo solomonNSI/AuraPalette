@@ -1,5 +1,5 @@
 import * as S from "../SignUpView/style";
-import { NavBar } from "../../Components/NavBar/NavBar";
+import { NavBar, DarkMode } from "../../Components/NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
@@ -26,31 +26,24 @@ const SignUp = () => {
 
 
   return (
-    <div
-      style={{
-        backgroundColor: "#eeeeee",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+      <S.AppBackground className = {DarkMode}>
       <NavBar />
 
-      <S.Background>
-        <S.SignUpInside>
-          <S.Title>Sign Up to Aura.</S.Title>
-          <input id="name" type="text" placeholder="Name" onChange={(e) => setName(e.target.value)}></input>
-          <input id="email" type="email" placeholder="E-Mail" onChange={(e) => setEmail(e.target.value)}></input>
-          <input id="password" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
-          <input type="password" placeholder="Confirm Password"></input>
+      <S.Background className = {DarkMode}>
+        <S.SignUpInside className = {DarkMode}>
+          <S.Title className = {DarkMode}>Sign Up to Aura.</S.Title>
+          <input id="name" type="text" className = {DarkMode} placeholder="Name" onChange={(e) => setName(e.target.value)}></input>
+          <input id="email" type="email" className = {DarkMode} placeholder="E-Mail" onChange={(e) => setEmail(e.target.value)}></input>
+          <input id="password" type="password" className = {DarkMode} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
+          <input type="password" className = {DarkMode} placeholder="Confirm Password"></input>
 
-          <button className="signUpButton" onClick={() => sendRegisterInfo()}>Sign Up</button>
-          <button className="loginButton" onClick={() => navigate("/login")}>
+          <button className={`signUpButton ${DarkMode}`} onClick={() => sendRegisterInfo()}>Sign Up</button>
+          <button className={`loginButton ${DarkMode}`} onClick={() => navigate("/login")}>
             Already have an account? <strong>Login {">"}</strong>
           </button>
         </S.SignUpInside>
       </S.Background>
-    </div>
+    </S.AppBackground>
   );
 };
 

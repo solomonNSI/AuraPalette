@@ -2,18 +2,36 @@ import React from "react";
 import styled from "styled-components";
 import { NAVBAR_HEIGHT } from "../../Components/NavBar/style";
 
+export const AppBackground = styled.div`
+  background-color: #eeeeee;
+  height: 100vh;
+  overflow: hidden;
+
+  &.dark {
+    background-color: #222222;
+  }
+`;
+
 export const Content = styled.div`
   background-color: #eeeeee;
   font-family: Helvetica Neue;
   display: flex;
   flex-direction: column;
   width: calc(100%-130px);
+
+  &.dark {
+    background-color: #222222;
+  }
 `;
 
 export const Container = styled.div`
   background-color: #eeeeee;
   height: 100vh;
   overflow: hidden;
+
+  &.dark {
+    background-color: #222222;
+  }
 `;
 
 export const GradientLine = styled.div`
@@ -37,6 +55,11 @@ export const Title = styled.div`
   margin: 10px 65px 0px 65px;
   font-size: 36px;
   font-weight: 300;
+  font-family: Helvetica;
+
+  &.dark {
+    color: #dddddd;
+  }
 `;
 
 export const SearchBar = styled.input`
@@ -46,9 +69,22 @@ export const SearchBar = styled.input`
   height: 50px;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   padding-left: 20px;
-  margin: 20px 65px 0px 65px;
+  margin: 20px 4% 0px 4%;
+
+  :focus {
+    outline: 1px solid #88888888;
+  }     
+
+  &.dark {
+    background-color: #111;
+    color: #fff;
+    
+    ::placeholder {
+      color: #666;
+    }
+  }
 
 
   &::placeholder {
@@ -87,12 +123,12 @@ export const PaletteContainer = styled.div`
 
 export const Search = styled.button`
   border: none;
-  background-color: #ffffff;
+  background: none;
   position: absolute;
-  top: 182px;
-  right: 75px;
+  top: 180px;
+  right: 4.5%;
 
   > svg {
-    fill: #333333;
+    fill: #666666;
   }
 `;

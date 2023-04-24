@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ExportIcon } from "../../Icons/ExportIcon";
+import { DarkMode } from "../../Components/NavBar/NavBar";
 import * as S from "./style";
 
 export const MiniPalette = () => {
@@ -11,14 +12,20 @@ export const MiniPalette = () => {
   };
 
   return (
-    <S.Container>
-      <S.Header>
-        <S.PaletteTitle>Palette</S.PaletteTitle>
-        <S.ColorModeButton onClick={changeColorMode}>
-          {colorMode}
+    <S.Container className = {DarkMode}>
+      <S.Header className = {DarkMode}>
+        <S.Titles className = {DarkMode}>
+          <S.PaletteTitle className = {DarkMode}>Enter Palette Title Here</S.PaletteTitle>
+          <S.Date className = {DarkMode}>Enter Creation Date Here</S.Date>
+        </S.Titles>
+
+        <S.PaletteSettings className = {DarkMode}>
+        <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
+          Color Mode: {colorMode}
         </S.ColorModeButton>
-        <S.StyledStarIcon height="20px" />
-        <ExportIcon height="20px" />
+          <S.StyledStarIcon className = {DarkMode} height="20px" />
+          <S.StyledExportIcon className = {DarkMode} height="20px"/>
+        </S.PaletteSettings>
       </S.Header>
 
       <S.Colors>

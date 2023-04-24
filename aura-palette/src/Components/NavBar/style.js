@@ -13,6 +13,11 @@ export const NavBar = styled.div`
   align-items: center;
   position: fixed;
   top: 0;
+
+  &.dark {
+    background-color: #333;
+    color: #eee;
+  }
 `;
 
 export const GradientLine = styled.div`
@@ -32,18 +37,45 @@ export const GradientLine = styled.div`
 
 export const AppName = styled.div`
   font-size: 46px;
-  margin-left: 65px;
+  margin-left: 4%;
   font-family: Palatino;
   font-weight: 700;
   letter-spacing: -0.05em;
   cursor: pointer;
+  
+  @media screen and (max-width: 600px) {
+    font-size: 38px;
+  }
 `;
 
 export const LoginButton = styled.div`
   margin-left: auto;
-  margin-right: 65px;
+  margin-right: 4%;
 `;
 
 export const StyledProfileIcon = styled(ProfileIcon)`
   cursor: pointer;
+
+  &.dark {
+    path
+    {
+      fill: #000;
+    }
+
+    rect
+    {
+      fill: #888888;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 48px !important;
+    height: 48px !important;
+  }
 `;
+
+export const DarkModeButton = styled.button`
+  
+`;
+
+

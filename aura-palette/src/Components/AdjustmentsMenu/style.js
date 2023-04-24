@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const MenuContainer = styled.div`
   width: 20%;
   //margin-top: 18px;
-  margin-left: 65px;
+  margin-left: 4%;
   margin-right: 20px;
   color: #333333;
   font-weight: medium;
@@ -13,6 +13,10 @@ export const MenuContainer = styled.div`
   border-radius: 8px;
   padding: 20px;
   height: calc(100vh - 300px);
+
+  &.dark {
+    background-color: #333;
+  }
 `;
 
 export const Container = styled.label`
@@ -29,6 +33,10 @@ export const Container = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  &.dark {
+    color: #ccc;
+  }
 
   @media only screen and (min-height: 1000px) {
     margin-bottom: 14px;
@@ -69,16 +77,25 @@ export const Checkmark = styled.span`
   background-color: #ffffff;
   border-radius: 5px;
 
+  &.dark {
+    background-color: #bbbbbb;
+  }
+
   &:after {
     content: "";
     position: absolute;
     display: none;
+    
   }
 `;
 
 export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 10px 0px;
+
+  &.dark {
+    color: #eee;
+  }
 
   @media only screen and (min-height: 1000px) {
     font-weight: 500;
@@ -89,6 +106,10 @@ export const Title = styled.h2`
 export const Subtitle = styled.h3`
   font-weight: 500;
   margin: 12px 0px 10px 0px;
+
+  &.dark {
+    color: #ccc;
+  }
 
   @media only screen and (min-height: 1000px) {
     font-weight: 500;

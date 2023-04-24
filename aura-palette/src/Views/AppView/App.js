@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { NavBar } from "../../Components/NavBar/NavBar";
+import { NavBar, DarkMode } from "../../Components/NavBar/NavBar";
 import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMenu";
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
@@ -197,21 +197,15 @@ function App() {
   }, [harmony, editedColorIndex, editedColor]);
 
   return (
-    <div
-      style={{
-        backgroundColor: "#eeeeee",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <S.AppBackground className = {DarkMode}>
       <NavBar palette={palette.palette} />
 
-      <S.GradientLine colorList={palette.palette} />
+      <S.GradientLine className = {DarkMode} colorList={palette.palette} />
 
-      <S.Content>
-        <S.Title>Find a palette for everything.</S.Title>
-          <S.SearchBar placeholder="Enter a keyword to search..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown}></S.SearchBar>
-          <S.Search>
+      <S.Content className = {DarkMode}>
+        <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
+          <S.SearchBar className = {DarkMode} placeholder="Enter a keyword to search..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+          <S.Search className = {DarkMode}>
             <SearchIcon />
           </S.Search>
         <S.TopKeywords>
@@ -248,7 +242,7 @@ function App() {
         />
         </S.PaletteContainer>
       </S.Content>
-    </div>
+    </S.AppBackground>
   );
 }
 
