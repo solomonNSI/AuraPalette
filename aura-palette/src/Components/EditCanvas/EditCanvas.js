@@ -4,8 +4,7 @@ import { hexToRgb, rgbToHex, rgbToHSL } from "../../Helpers/ColorWizard";
 
 export const CANVAS_SIZE = 140;
 
-export const EditCanvas = ({ color, setEditedColor, visible }) => {
-
+export const EditCanvas = ({ id, color, setEditedColor, visible }) => {
     function drawGradient(r, g, b, context) {
         var col = rgbToHSL(r, g, b);
         var size = CANVAS_SIZE-1;
@@ -44,6 +43,7 @@ export const EditCanvas = ({ color, setEditedColor, visible }) => {
             var hueB = imgData.data[2];
             
             updateColor(rgbToHex(hueR, hueG, hueB));
+            localStorage.setItem("currentCanvas", id);
         });
 
     }, [])

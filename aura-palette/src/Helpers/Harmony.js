@@ -269,8 +269,10 @@ export const getSquarePalette = (palette, lock) => {
 };
 
 export const getEditedPalette = (palette, index, hex, lock) => {
-    if (!lock[index]) { 
+    var currentCanvasId = localStorage.getItem("currentCanvas");
+
+    if (!lock[index] && hex && currentCanvasId == index)
         palette[index] = hex;
-    }
+        
     return palette;
 };

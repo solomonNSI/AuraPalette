@@ -180,7 +180,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock0}
                 </S.LockDisplay>
-                <EditCanvas color={palette[0]} setEditedColor={setEditedColor} visible={canvas0} />
+                <EditCanvas id={0} color={palette[0]} setEditedColor={setEditedColor} visible={canvas0} />
             </S.Color>
 
             <S.Color colorHex={palette[1]}>
@@ -203,7 +203,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock1}
                     </S.LockDisplay>
-                <EditCanvas color={palette[1]} setEditedColor={setEditedColor} visible={canvas1}/>
+                <EditCanvas id={1} color={palette[1]} setEditedColor={setEditedColor} visible={canvas1}/>
             </S.Color>
 
 
@@ -227,7 +227,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock2}
                 </S.LockDisplay>
-                <EditCanvas color={palette[2]} setEditedColor={setEditedColor} visible={canvas2}/>
+                <EditCanvas id={2} color={palette[2]} setEditedColor={setEditedColor} visible={canvas2}/>
             </S.Color>
 
             <S.Color colorHex={palette[3]}>
@@ -250,7 +250,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock3}
                 </S.LockDisplay>
-                <EditCanvas color={palette[3]} setEditedColor={setEditedColor} visible={canvas3}/>
+                <EditCanvas id={3} color={palette[3]} setEditedColor={setEditedColor} visible={canvas3}/>
             </S.Color>
 
             <S.Color colorHex={palette[4]}>
@@ -273,7 +273,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock4}
                     </S.LockDisplay>
-                <EditCanvas color={palette[4]} setEditedColor={setEditedColor} visible={canvas4}/>
+                <EditCanvas id={4} color={palette[4]} setEditedColor={setEditedColor} visible={canvas4}/>
             </S.Color>
         </S.Colors>
 

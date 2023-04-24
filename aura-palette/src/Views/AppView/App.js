@@ -14,7 +14,7 @@ import {
   getSquarePalette,
   getTriadsPalette,
   getEditedPalette,
-} from "../../Helpers/Harmony";
+} from "../../Helpers/Harmony"; 
 
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
@@ -22,7 +22,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [lock, setLock] = useState([false, false, false, false, false]);
   const [palette, setPalette] = useState({ palette: getDefaultPalette(lock) });
   const [editedColorIndex, setEditedColorIndex] = useState("");
-  const [editedColor, setEditedColor] = useState("#000000");
+  const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
 
   async function sendQuery(){
