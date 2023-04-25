@@ -295,7 +295,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
         {/* COLOR BLIND PALETTE */}
         <S.ColorBlindColors visible={colorBlindnessVisible}>
-            <S.PaletteTitle className = {DarkMode}>Color blinds of type {colorBlindness} see the palette like this:</S.PaletteTitle>
+            <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
             <S.ColorBlindPalette>
                 {renderBlindColors()}
             </S.ColorBlindPalette>
