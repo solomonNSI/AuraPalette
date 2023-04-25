@@ -17,7 +17,7 @@ export const getDefaultPalette = (lock) => {
     var randomPalette = [randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor];
 
     // pick a random harmony
-    const randomInt = Math.floor(Math.random() * harmonyCount) + 1
+    const randomInt = Math.floor(Math.random() * harmonyCount) + 1;
     switch (randomInt) {
         case (1): return getAnalogousPalette(randomPalette, lock);
         case (2): return getMonochromaticPalette(randomPalette, lock);

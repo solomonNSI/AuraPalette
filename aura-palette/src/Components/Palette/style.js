@@ -82,6 +82,12 @@ export const ColorBlindColors = styled.div`
   }
 `;
 
+
+export const MediumColors = styled(ColorBlindColors)`
+    position: relative;
+    top: -54.5%;
+`;
+
 export const ColorBlindPalette = styled.div`
   height: 10vw;
   display: flex;

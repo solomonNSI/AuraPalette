@@ -1,8 +1,7 @@
 import React from "react";
 import * as S from "./style";
-import { DarkMode } from "../../Components/NavBar/NavBar";
 
-export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, DarkMode }) => {
+export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, DarkMode }) => {
 
   return (
     <S.MenuContainer className = {DarkMode}>
@@ -63,26 +62,26 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, DarkMode }) => 
             <S.Subtitle className = {DarkMode}>Medium</S.Subtitle>
 
             <S.Container className = {DarkMode}>
-            <input className = {DarkMode} type="radio" name="medium" defaultChecked></input>
+            <input className = {DarkMode} type="radio" name="medium" defaultChecked onChange={() => setMedium("Default")}></input>
             Default
             <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
 
             <S.Container className = {DarkMode}>
-            <input className = {DarkMode} type="radio" name="medium"></input>
-            Press
+            <input className = {DarkMode} type="radio" name="medium" onChange={() => setMedium("Print")}></input>
+            Print
             <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
 
             <S.Container className = {DarkMode}>
-            <input className = {DarkMode} type="radio" name="medium"></input>
-            Video
-            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
-            </S.Container>
-
-            <S.Container className = {DarkMode}>
-            <input className = {DarkMode} type="radio" name="medium"></input>
+            <input className = {DarkMode} type="radio" name="medium" onChange={() => setMedium("Website")}></input>
             Website
+            <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
+            </S.Container>
+
+            <S.Container className = {DarkMode}>
+            <input className = {DarkMode} type="radio" name="medium" onChange={() => setMedium("Video")}></input>
+            Video
             <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
         </div>

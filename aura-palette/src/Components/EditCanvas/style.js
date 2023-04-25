@@ -7,6 +7,7 @@ export const ColorPicker = styled.div`
     background-color: white;
     height: 150px;
     width: 180px;
+    z-index: 1;
 
   ${({ visible }) => {
         return css`

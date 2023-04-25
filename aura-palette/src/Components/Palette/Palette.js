@@ -9,8 +9,9 @@ import {
 } from "../../Helpers/ColorCodes";
 import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
+import { getColorForMedium } from "../../Helpers/Medium";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, DarkMode }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode }) => {
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not locked");
     const [lock1, setLock1] = useState("Not locked");
@@ -20,6 +21,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
+    const [mediumVisible, setMediumVisible] = useState(false);
 
     const changeColorMode = () => {
         if (colorMode === "HEX") setColorMode("RGB");
@@ -97,9 +99,27 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     useEffect(() => {
-       if(colorBlindness === "None") setColorBlindnessVisible(false);
-       else setColorBlindnessVisible(true);
+        if(colorBlindness === "None") {
+            setColorBlindnessVisible(false);
+            if (medium !== "Default") setMediumVisible(true);
+        }
+        else {
+            setColorBlindnessVisible(true);
+            setMediumVisible(false);
+        }
     }, [colorBlindness, harmony, lock0, lock1, lock2, lock3, lock4]);
+
+
+    useEffect(() => {
+        if(medium === "Default") {
+            setMediumVisible(false);
+            if (colorBlindness !== "None") setColorBlindnessVisible(true);
+        }
+        else {
+            setMediumVisible(true);
+            setColorBlindnessVisible(false);
+        }
+     }, [medium, harmony, lock0, lock1, lock2, lock3, lock4]);
 
     function renderBlindColors(){
         var blindColors = [];
@@ -120,6 +140,27 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             );
         }
         return blindColors;
+    }
+
+    function renderMediumColors(){
+        var mediumColors = [];
+        for (var i = 0; i < 5; i++) {
+            mediumColors.push(
+                <S.Color colorHex={getColorForMedium(palette[i], medium)}>
+                    <S.ColorCode>
+                    {getColorForMedium(palette[i], medium)}
+                        <S.Copy
+                        onClick={() => {
+                            navigator.clipboard.writeText(displayPaletteColors(i));
+                        }}
+                        >
+                        <CopyIcon />
+                        </S.Copy>
+                    </S.ColorCode>
+                </S.Color>
+            );
+        }
+        return mediumColors;
     }
 
     return (
@@ -253,13 +294,21 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         </S.Colors>
 
         {/* COLOR BLIND PALETTE */}
-
         <S.ColorBlindColors visible={colorBlindnessVisible}>
-            <S.PaletteTitle className = {DarkMode}>Color blinds see the palette like this:</S.PaletteTitle>
+            <S.PaletteTitle className = {DarkMode}>Color blinds of type {colorBlindness} see the palette like this:</S.PaletteTitle>
             <S.ColorBlindPalette>
                 {renderBlindColors()}
             </S.ColorBlindPalette>
         </S.ColorBlindColors>
+
+        {/* MEDIUMS PALETTE */}
+        <S.MediumColors visible={mediumVisible}>
+            <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
+            <S.ColorBlindPalette>
+                {renderMediumColors()}
+            </S.ColorBlindPalette>
+        </S.MediumColors>
+
     </S.Container>
   );
 };

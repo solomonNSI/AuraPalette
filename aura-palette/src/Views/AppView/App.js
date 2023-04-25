@@ -24,6 +24,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [editedColorIndex, setEditedColorIndex] = useState("");
   const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
+  const [medium, setMedium] = useState("Default");
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -220,7 +221,7 @@ function App({ DarkMode, setIsDarkMode }) {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} DarkMode={DarkMode} />
+          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} />
           <Palette 
             palette={palette.palette} 
             lock={lock} 
@@ -230,6 +231,7 @@ function App({ DarkMode, setIsDarkMode }) {
             setEditedColorIndex={setEditedColorIndex}
             setEditedColor={setEditedColor}
             colorBlindness={colorBlindness} 
+            medium={medium}
             DarkMode={DarkMode}
         />
         </S.PaletteContainer>
