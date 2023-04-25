@@ -1,56 +1,99 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import * as S from "./style";
-import { hexToRgb, rgbToHex, rgbToHSL } from "../../Helpers/ColorWizard";
+import { rgbToHex } from "../../Helpers/ColorWizard";
 
 export const CANVAS_SIZE = 140;
 
-export const EditCanvas = ({ id, color, setEditedColor, visible }) => {
-    function drawGradient(r, g, b, context) {
-        var col = rgbToHSL(r, g, b);
-        var size = CANVAS_SIZE-1;
-        
-        var gradB = context.createLinearGradient(0, 0, 0, size);
-        gradB.addColorStop(0, "white");
-        gradB.addColorStop(1, "black");
-        var gradC = context.createLinearGradient(0, 0, size, 0);
-        gradC.addColorStop(0, `hsla(${Math.floor(col.hue)},100%,50%,0)`);
-        gradC.addColorStop(1, `hsla(${Math.floor(col.hue)},100%,50%,1)`);
-
-        context.fillStyle = gradB;
-        context.fillRect(0, 0, size, size);
-        context.fillStyle = gradC;
-        context.globalCompositeOperation = "multiply";
-        context.fillRect(0, 0, size, size);
-        context.globalCompositeOperation = "source-over";
-    }
-
-    function updateColor(hex){
-        setEditedColor(hex);
-    }
-
-    const canvasRef = useRef(null);
+export const EditCanvas = ({ id, setEditedColor, visible }) => {
+    const colorBlockRef = useRef(null);    
+    const colorStripRef = useRef(null);
     useEffect(() => {
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-        context.fillStyle = '#000000';
-        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-        drawGradient(hexToRgb(color).r, hexToRgb(color).g, hexToRgb(color).b, context);
+        var colorBlock = colorBlockRef.current;
+        var ctx1 = colorBlock.getContext('2d');
+        var width1 = colorBlock.width;
+        var height1 = colorBlock.height;
+        
+        var colorStrip = colorStripRef.current;
+        var ctx2 = colorStrip.getContext('2d');
+        var width2 = colorStrip.width;
+        var height2 = colorStrip.height;
+        
+        var x = 0;
+        var y = 0;
+        var drag = false;
+        var rgbaColor = 'rgba(255,0,0,1)';
 
-        canvas.addEventListener("click", function (e) {
-            var imgData = context.getImageData(e.layerX, e.layerY, 1, 1);
-            var hueR = imgData.data[0];
-            var hueG = imgData.data[1];
-            var hueB = imgData.data[2];
-            
-            updateColor(rgbToHex(hueR, hueG, hueB));
+        function mousedown(e) {
+            drag = true;
+            changeColor(e);
             localStorage.setItem("currentCanvas", id);
-        });
+        }
+        
+        function mousemove(e) {
+            if (drag) changeColor(e);
+        }
+        
+        function mouseup(e) {
+            drag = false;
+        }
 
-    }, [])
+        function changeColor(e) {
+            x = e.offsetX;
+            y = e.offsetY;
+            var imageData = ctx1.getImageData(x, y, 1, 1).data;
+            setEditedColor(rgbToHex(imageData[0], imageData[1], imageData[2]));
+        }
+
+        ctx1.rect(0, 0, width1, height1);
+        fillGradient();
+
+        ctx2.rect(0, 0, width2, height2);
+        var grd1 = ctx2.createLinearGradient(0, 0, 0, height1);
+        grd1.addColorStop(0, 'rgba(255, 0, 0, 1)');
+        grd1.addColorStop(0.17, 'rgba(255, 255, 0, 1)');
+        grd1.addColorStop(0.34, 'rgba(0, 255, 0, 1)');
+        grd1.addColorStop(0.51, 'rgba(0, 255, 255, 1)');
+        grd1.addColorStop(0.68, 'rgba(0, 0, 255, 1)');
+        grd1.addColorStop(0.85, 'rgba(255, 0, 255, 1)');
+        grd1.addColorStop(1, 'rgba(255, 0, 0, 1)');
+        ctx2.fillStyle = grd1;
+        ctx2.fill();
+
+        function click(e) {
+            x = e.offsetX;
+            y = e.offsetY;
+            var imageData = ctx2.getImageData(x, y, 1, 1).data;
+            rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
+            fillGradient();
+        }
+
+        function fillGradient() {
+            ctx1.fillStyle = rgbaColor;
+            ctx1.fillRect(0, 0, width1, height1);
+
+            var grdWhite = ctx2.createLinearGradient(0, 0, width1, 0);
+            grdWhite.addColorStop(0, 'rgba(255,255,255,1)');
+            grdWhite.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx1.fillStyle = grdWhite;
+            ctx1.fillRect(0, 0, width1, height1);
+
+            var grdBlack = ctx2.createLinearGradient(0, 0, 0, height1);
+            grdBlack.addColorStop(0, 'rgba(0,0,0,0)');
+            grdBlack.addColorStop(1, 'rgba(0,0,0,1)');
+            ctx1.fillStyle = grdBlack;
+            ctx1.fillRect(0, 0, width1, height1);
+        }
+
+        colorStrip.addEventListener("click", click, false);
+        colorBlock.addEventListener("mousedown", mousedown, false);
+        colorBlock.addEventListener("mouseup", mouseup, false);
+        colorBlock.addEventListener("mousemove", mousemove, false);
+    }, [id])
 
     return (
-        <S.Canvas ref={canvasRef} visible={visible} id="colorpicker" width={CANVAS_SIZE} height={CANVAS_SIZE}>
-        Oops ... your browser doesn't support the HTML5 canvas element
-        </S.Canvas>
+        <S.ColorPicker visible={visible} >
+            <canvas id="color-block" ref={colorBlockRef} height="150" width="150"></canvas>
+            <canvas id="color-strip" ref={colorStripRef} height="150" width="30"></canvas>
+        </S.ColorPicker>
   );
 };

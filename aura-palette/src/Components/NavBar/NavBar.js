@@ -6,7 +6,6 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
 
   function toggleDarkMode() {
-    console.log("here")
     if (DarkMode === "dark") setIsDarkMode("light")
     else setIsDarkMode("dark");
   }
