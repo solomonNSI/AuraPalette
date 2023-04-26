@@ -13,7 +13,12 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
     <S.NavBar className={DarkMode}>
       <S.AppName onClick={() => navigate("/")}>aura</S.AppName>
       <S.LoginButton>
-        <button onClick={() => toggleDarkMode()}>Toggle mode</button>
+        <S.StyledMoonIcon className = {DarkMode} 
+          onClick={() => toggleDarkMode()}
+        />
+        <S.StyledSunIcon className = {DarkMode} 
+          onClick={() => toggleDarkMode()}
+        />
         <S.StyledProfileIcon className = {DarkMode}
           height="50px"
           onClick={() => navigate("/profile")}

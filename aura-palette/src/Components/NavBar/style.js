@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { ProfileIcon } from "../../Icons/ProfileIcon";
+import { SunIcon } from "../../Icons/SunIcon";
+import { MoonIcon } from "../../Icons/MoonIcon";
+
+
 
 export const NAVBAR_HEIGHT = 65;
 
@@ -59,12 +63,12 @@ export const StyledProfileIcon = styled(ProfileIcon)`
   &.dark {
     path
     {
-      fill: #000;
+      fill: #aaa;
     }
 
     rect
     {
-      fill: #888888;
+      fill: #111;
     }
   }
 
@@ -74,8 +78,42 @@ export const StyledProfileIcon = styled(ProfileIcon)`
   }
 `;
 
-export const DarkModeButton = styled.button`
+export const StyledMoonIcon = styled(MoonIcon)`
+  cursor: pointer;
+  margin-right: 10px;
+
+  path
+  {
+    fill: #112366;
+  }
+
+  &.dark {
+    display:none;
+  }
   
 `;
 
+export const StyledSunIcon = styled(SunIcon)`
+  margin-right: 10px;
+  display: none;
+  
+  &.dark {
+    display: inline;
+    path
+    {
+      fill: #B79E79;
+    }
 
+    rect
+    {
+      fill: #111;
+    }
+  }
+  
+`;
+
+export const DarkModeButton =  styled.button`
+  height: 50px;
+  width: 50px;
+  background: url('Sun.png') no-repeat;
+`;
