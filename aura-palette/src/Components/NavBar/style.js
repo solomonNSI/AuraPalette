@@ -55,6 +55,8 @@ export const AppName = styled.div`
 export const LoginButton = styled.div`
   margin-left: auto;
   margin-right: 4%;
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledProfileIcon = styled(ProfileIcon)`
@@ -80,7 +82,7 @@ export const StyledProfileIcon = styled(ProfileIcon)`
 
 export const StyledMoonIcon = styled(MoonIcon)`
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 12px;
 
   path
   {
@@ -94,7 +96,7 @@ export const StyledMoonIcon = styled(MoonIcon)`
 `;
 
 export const StyledSunIcon = styled(SunIcon)`
-  margin-right: 10px;
+  margin-right: 12px;
   display: none;
   
   &.dark {
