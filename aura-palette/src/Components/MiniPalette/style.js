@@ -12,6 +12,11 @@ export const Container = styled.div`
   padding-bottom: 60px;
   margin-bottom: 10px;
   border-bottom: 1px solid #cccccc;
+
+  @media screen and (max-width: 900px) {
+    padding-bottom: 40px;
+
+  }
 `;
 
 export const Titles = styled.div`
@@ -30,6 +35,10 @@ export const PaletteTitle = styled.h3`
   margin: 10px auto 0px 0px;
   color: #333333;
 
+  @media screen and (max-width: 900px) {
+    font-size: 14px;
+  }
+
   &.dark {
     color: #eeeeee;
   }
@@ -40,6 +49,10 @@ export const Date = styled.h3`
   margin: 5px auto 20px 0px;
   color: #666666;
   font-size: 14px;
+
+  @media screen and (max-width: 900px) {
+    font-size: 12px;
+  }
 
   &.dark {
     color: #cccccc;
@@ -59,6 +72,10 @@ export const Colors = styled.div`
   flex-direction: row;
   gap: 20px;
   justify-content: space-between;
+
+  @media screen and (max-width: 900px) {
+    gap: 5px;
+  }
 `;
 
 export const Color = styled.div`
@@ -80,6 +97,16 @@ export const ColorCode = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media screen and (max-width: 900px) {
+    height: 30px;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+  }
+  
 `;
 
 export const ColorModeButton = styled.button`
@@ -93,6 +120,7 @@ border: none;
 height: 26px;
 padding: 0px 10px;
 margin-top: 3px;
+display: none;
 
 &:hover {
   cursor: pointer;

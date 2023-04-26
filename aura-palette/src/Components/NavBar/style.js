@@ -98,6 +98,7 @@ export const StyledMoonIcon = styled(MoonIcon)`
 export const StyledSunIcon = styled(SunIcon)`
   margin-right: 12px;
   display: none;
+  cursor: pointer;
   
   &.dark {
     display: inline;

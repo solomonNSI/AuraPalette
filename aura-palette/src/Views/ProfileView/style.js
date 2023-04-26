@@ -37,8 +37,8 @@ export const Settings = styled.div`
     position: absolute;
     left: calc(4% + 50px);
     width: 50%;
-    box-shadow: 2px 2px #00000033;
-    height: calc(100% - 144px);
+    border: 2px solid #aaaaaa;
+    height: calc(100% - 148px);
     z-index: 99;
     display: none;
     margin: 85px 4px 0px 0px;
@@ -145,6 +145,34 @@ export const SettingsBackground = styled.div`
 
 export const SettingsForeground = styled.div`
   overflow: scroll;
+
+  #deneme {
+    div:first-child {
+      width: 50%;
+    }
+
+    div:last-child {
+      width: 50%;
+      flex-direction: column;
+
+      button {
+        width: 100%;
+        padding-left: 6px;
+        margin: 0;
+      }
+
+      input {
+        width: calc(100% - 5px);
+        padding-left: 6px;
+        margin: 0;
+        font-size: 12px;
+
+        &::placeholder {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 `;
 
 export const Palettes = styled.div`
@@ -339,5 +367,13 @@ export const Label = styled.label`
     }
   }
  
+`;
+
+export const Texts = styled.div`
+  @media screen and (max-width: 900px) {
+    width: 70%;
+    margin-right: 20px;
+  }
+
 `;
 

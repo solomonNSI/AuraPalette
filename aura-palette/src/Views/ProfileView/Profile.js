@@ -98,11 +98,11 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       <S.SettingsForeground className = {DarkMode} style = {settingsEnabled ? {display: "block"} : {display: "none"}}>
         <S.Title className = {DarkMode}>User & App Settings</S.Title>
 
-        <S.SettingsLine className = {DarkMode}>
-          <div>
+        <S.SettingsLine id="deneme" className = {DarkMode}>
+          <S.Texts>
             <S.Subtitle className = {DarkMode}>Change E-Mail Address</S.Subtitle>
             <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
-          </div>
+          </S.Texts>
           <div className={`buttons ${DarkMode}`}>
             <input className = {DarkMode} type="email" placeholder="Enter new e-mail"></input>
             <button className = {DarkMode} >Change E-Mail</button>
@@ -110,10 +110,10 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         </S.SettingsLine>
 
         <S.CheckboxLine className = {DarkMode}>
-          <div>
+          <S.Texts>
             <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
             <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
-          </div>
+          </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>
             <span className={`slider ${DarkMode}`}></span>
@@ -121,10 +121,10 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         </S.CheckboxLine>
 
         <S.CheckboxLine className = {DarkMode}>
-          <div>
+          <S.Texts>
             <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
             <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
-          </div>
+          </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>
             <span className={`slider ${DarkMode}`}></span>
@@ -132,10 +132,10 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         </S.CheckboxLine>
 
         <S.CheckboxLine className = {DarkMode}>
-          <div>
+          <S.Texts>
             <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
             <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
-          </div>
+          </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>
             <span className={`slider ${DarkMode}`}></span>
@@ -143,10 +143,10 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         </S.CheckboxLine>
 
         <S.CheckboxLine className = {DarkMode}>
-          <div>
+          <S.Texts>
             <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
             <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
-          </div>
+          </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>
             <span className={`slider ${DarkMode}`}></span>
