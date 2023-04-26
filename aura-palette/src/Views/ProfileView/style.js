@@ -176,6 +176,7 @@ export const SettingsLine = styled.h3`
 
   &.dark {
     background-color: #111;
+    color: #fff;
 
     &::placeholder {
       color: #dddddd;
@@ -237,7 +238,7 @@ export const Label = styled.label`
     height: 0;
 
     :checked + span {
-      background-color: #333333;
+      background-color: #111111;
     }
 
     :checked + span:before {
@@ -268,7 +269,7 @@ export const Label = styled.label`
       left: 4px;
       bottom: 4px;
       border-radius: 2px;
-      background-color: #777;
+      background-color: #555;
       -webkit-transition: .4s;
       transition: .4s;
     }
