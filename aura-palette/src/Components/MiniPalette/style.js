@@ -7,10 +7,10 @@ export const Container = styled.div`
   background-color: none;
   border-radius: 8px;
   width: 100%;
-  height: 300px;
+  height: auto;
   border-radius: 0px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  padding-bottom: 60px;
+  margin-bottom: 10px;
   border-bottom: 1px solid #cccccc;
 `;
 
@@ -64,7 +64,7 @@ export const Colors = styled.div`
 export const Color = styled.div`
   background-color: red;
   width: 20%;
-  height: 180px;
+  height: 10vw;
   border-radius: 8px 8px 0px 0px;
   display: flex;
   flex-direction: column;

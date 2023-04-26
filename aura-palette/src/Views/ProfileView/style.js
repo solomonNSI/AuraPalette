@@ -20,18 +20,72 @@ export const Settings = styled.div`
   background-color: #ddd;
   border-radius: 8px;
   padding: 20px;
-  overflow: scroll;
+  overflow: scroll !important;
   display: flex;
   flex-direction: column;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 900px) {
+    display: flex !important;  
+  }
+  
+  @media screen and (max-width: 900px) {
+    position: absolute;
+    left: calc(4% + 50px);
+    width: 50%;
+    box-shadow: 2px 2px #00000033;
+    height: calc(100% - 144px);
+    z-index: 99;
+    display: none;
+    margin: 85px 4px 0px 0px;
+  }
 
   &.dark {
     background-color: #333;
   }
 `;
 
+export const SettingsClosed = styled.div`
+  display: none;
+
+  @media screen and (max-width: 900px) {
+    display: flex;
+    width: 50px;
+    height: auto;
+    margin: 85px 4px 20px 4%;
+    background-color: #dddddd;
+    border-radius: 8px;
+    overflow: scroll;
+
+    div {
+      width: 50px;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 500;
+      color: #111;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+    }
+
+    &.dark {
+      background-color: #333;
+      div {
+        color: #ddd;
+      }
+      
+    }
+  }
+  
+`;
+
 export const Button = styled.button`
-  width: 25%;
-  height: auto;
   width: 100%;
   margin: 10px 0px;
   background-color: #fff;
@@ -46,6 +100,7 @@ export const Button = styled.button`
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   text-align: left;
+  overflow: hidden;
 
   &.dark {
     background-color: #333;
@@ -73,10 +128,15 @@ export const Button = styled.button`
 export const SettingsBackground = styled.div`
   width: 75%;
   background-color: #fff;
-  margin: 85px 4% 20px 10px;
+  margin: 85px 4% 20px 4px;
   border-radius: 8px;
   padding: 20px;
   overflow: scroll;
+
+  @media screen and (max-width: 900px) {
+    width: 90%;
+    margin: 85px 4% 20px 10px;
+  }
 
   &.dark {
     background-color: #111111;
@@ -119,6 +179,10 @@ export const Explanation = styled.h3`
   margin: 5px auto 0px 0px;
   color: #666666;
   font-size: 14px;
+
+  @media screen and (max-width: 900px) {
+    font-size: 12px;
+  }
 
   &.dark {
     color: #ccc;

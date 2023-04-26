@@ -7,6 +7,8 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   const [favoritesEnabled, setFavoritesEnabled] = useState(true);
   const [historyEnabled, setHistoryEnabled] = useState(false);
   const [settingsEnabled, setSettingsEnabled] = useState(false);
+  const [buttonsEnabled, setButtonsEnabled] = useState(false);
+
 
   var defaultBackgroundColor = "#ffffff";
   var defaultSelectedColor = "#ffffff";
@@ -21,7 +23,6 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     defaultSelectedColor="#aaaaaa";
 
   }
-
 
   function showFavorites() {
     setFavoritesEnabled(true);
@@ -41,18 +42,26 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     setSettingsEnabled(true);
   }
 
+  function showButtons() {
+    if(buttonsEnabled)
+      setButtonsEnabled(false);
+    else
+      setButtonsEnabled(true);
+  }
+
   return (
     <S.AppBackground className = {DarkMode}>
  
       <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
-      <S.Settings className = {DarkMode}>
-      <S.Title className = {DarkMode}>Profile Tabs</S.Title>
-
+      <S.SettingsClosed className = {DarkMode} onClick={showButtons}> <div>Show/Hide Profile Tabs </div></S.SettingsClosed>
+      <S.Settings className = {DarkMode} style = {{display: buttonsEnabled ? "flex" : "none" }}>
+        <div>
+        <S.Title className = {DarkMode}>Profile Tabs</S.Title>
         <S.Button className = {DarkMode} style = {{backgroundColor: favoritesEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showFavorites}><span>Favorite Palettes</span><span className="text">See, share and use your favorite palettes.</span></S.Button>
         <S.Button className = {DarkMode} style = {{backgroundColor: historyEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showHistory}><span>Palette History</span><span className="text">Discover, export and manage your palette history.</span></S.Button>
         <S.Button className = {DarkMode} style = {{backgroundColor: settingsEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showSettings}><span>User & App Settings</span><span className="text">Access information and change your preferences.</span></S.Button>
         <S.Button className = {DarkMode} style={{backgroundColor: defaultBackgroundColor, color: "#f34a55"}}><span>Log Out from Aura</span><span className="text">All your data will be saved.</span></S.Button>
-
+        </div>
         
       </S.Settings>
       <S.SettingsBackground className = {DarkMode}>
