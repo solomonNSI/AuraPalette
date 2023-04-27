@@ -64,6 +64,11 @@ export const Copy = styled.button`
   margin: 4px 0px 0px 4px;
   cursor: pointer;
 
+  &:hover {
+    > svg {
+      fill: #aaaaaa;
+  }
+
   &:active {
       > svg {
         fill: #888888;
@@ -338,20 +343,33 @@ export const Rate = styled.div`
 
 export const StyledStarIcon = styled(StarIcon)`
   margin: 0 16px;
-  
+  cursor: pointer;
   &.dark {
     path
     {
       fill: #888888;
     }
   }
+  &:hover {
+    path
+    {
+      fill: #666;
+    }
+  }
 `;
 
 export const StyledExportIcon = styled(ExportIcon)`
+  cursor: pointer;
   &.dark {
     path
     {
       fill: #888888;
+    }
+  }
+  &:hover {
+    path
+    {
+      fill: #666;
     }
   }
 `;
@@ -359,10 +377,20 @@ export const StyledExportIcon = styled(ExportIcon)`
 export const StyledInfoIcon = styled(InfoIcon)`
   margin: 2px -10px 0px 0px;
   cursor: pointer;
+  path
+    {
+      fill: #333333;
+    }
   &.dark {
     path
     {
       fill: #888888;
+    }
+  }
+  &:hover {
+    path
+    {
+      fill: #666666;
     }
   }
 `;
@@ -371,10 +399,21 @@ export const StyledInfoIcon = styled(InfoIcon)`
 export const StyledRateIcon = styled(RateIcon)`
   margin: 2px auto 0px 0px;
   cursor: pointer;
+  path
+    {
+      fill: #333333;
+    }
   &.dark {
     path
     {
       fill: #888888;
+    }
+  }
+
+  &:hover {
+    path
+    {
+      fill: #666666;
     }
   }
 `;
