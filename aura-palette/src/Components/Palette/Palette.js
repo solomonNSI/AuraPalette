@@ -18,6 +18,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [lock2, setLock2] = useState("Not locked");
     const [lock3, setLock3] = useState("Not locked");
     const [lock4, setLock4] = useState("Not locked");
+    const [infoEnabled, setInfoEnabled] = useState(false);
+    const [rateEnabled, setRateEnabled] = useState(false);
+    const [sliderValue, setSliderValue] = useState(3);
+
 
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
@@ -28,6 +32,22 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         else if (colorMode === "RGB") setColorMode("HSL");
         else if (colorMode === "HSL") setColorMode("HEX");
     };
+
+    function showInfo() {
+        if(infoEnabled)
+            setInfoEnabled(false);
+        else
+            setInfoEnabled(true);
+            setRateEnabled(false);
+    }
+
+    function showRate() {
+        if(rateEnabled)
+            setRateEnabled(false);
+        else
+            setRateEnabled(true);
+            setInfoEnabled(false);
+    }
 
     function displayPaletteColors(colorNumber) {
         if (colorMode === "RGB") return hexToRgbWriter(palette[colorNumber]);
@@ -165,15 +185,32 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     return (
     <S.Container className = {DarkMode}>
+        <S.InnerContainer className = {DarkMode}>
+        <S.MainPalette className = {DarkMode}>
         <S.Header className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
+            <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
+            <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>CHATGPT'S COMMENTS AND EXPLANATIONS ABOUT WHY IT GAVE THIS PALETTE AND COLORS.</S.Info>
+            
+            <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
+            <S.Rate className = "slidecontainer" style = {{display: rateEnabled ? "flex" : "none" }}>
+                <div>
+                    <p>Rate This Palette</p>
+                    <div>
+                        <input type="range" min="1" max="5" value={sliderValue} onChange={(e) => setSliderValue(e.target.value)} className="slider" id="myRange"></input>
+                        <p>{sliderValue}</p>
+                    </div>
+
+                    <textarea placeholder="Give Feedback" rows="2"></textarea>
+                    <button>Send Feedback</button>
+                </div>
+            </S.Rate>
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
             Color Mode: {colorMode}
             </S.ColorModeButton>
             <S.StyledStarIcon className = {DarkMode} height="20px" />
             <S.StyledExportIcon className = {DarkMode} height="20px" />
         </S.Header>
-
         <S.Colors>
             <S.Color colorHex={palette[0]}>
                 <S.ColorCode>
@@ -292,23 +329,26 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 <EditCanvas id={4} color={palette[4]} setEditedColor={setEditedColor} visible={visibility[4]}/>
             </S.Color>
         </S.Colors>
+        </S.MainPalette>
 
-        {/* COLOR BLIND PALETTE */}
-        <S.ColorBlindColors visible={colorBlindnessVisible}>
-            <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
-            <S.ColorBlindPalette>
-                {renderBlindColors()}
-            </S.ColorBlindPalette>
-        </S.ColorBlindColors>
+        <S.OtherPalettes className = {DarkMode}>
+            {/* COLOR BLIND PALETTE */}
+            <S.ColorBlindColors className = {DarkMode} visible={colorBlindnessVisible}>
+                <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
+                <S.ColorBlindPalette>
+                    {renderBlindColors()}
+                </S.ColorBlindPalette>
+            </S.ColorBlindColors>
 
-        {/* MEDIUMS PALETTE */}
-        <S.MediumColors visible={mediumVisible}>
-            <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
-            <S.ColorBlindPalette>
-                {renderMediumColors()}
-            </S.ColorBlindPalette>
-        </S.MediumColors>
-
+            {/* MEDIUMS PALETTE */}
+            <S.MediumColors className = {DarkMode} visible={mediumVisible}>
+                <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
+                <S.ColorBlindPalette>
+                    {renderMediumColors()}
+                </S.ColorBlindPalette>
+            </S.MediumColors>
+        </S.OtherPalettes>
+        </S.InnerContainer>
     </S.Container>
   );
 };

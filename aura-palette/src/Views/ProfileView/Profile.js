@@ -9,9 +9,11 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   const [settingsEnabled, setSettingsEnabled] = useState(false);
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
 
-
   var defaultBackgroundColor = "#ffffff";
   var defaultSelectedColor = "#ffffff";
+
+  var height = window.innerHeight;
+  console.log(height)
 
   if(DarkMode=="dark"){
     defaultBackgroundColor="#111111";
@@ -50,7 +52,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   }
 
   return (
-    <S.AppBackground className = {DarkMode}>
+    <S.AppBackground id="background" className = {DarkMode}>
  
       <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
       <S.SettingsClosed className = {DarkMode} onClick={showButtons}> <div>Show/Hide Profile Tabs </div></S.SettingsClosed>

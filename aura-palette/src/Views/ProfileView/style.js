@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height: 100vh;
+  height 100vh;
   overflow: auto;
   display: flex;
   justify-content: center;
