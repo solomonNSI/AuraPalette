@@ -148,29 +148,41 @@ export const SettingsForeground = styled.div`
 
   #deneme {
     div:first-child {
-      width: 50%;
+      @media screen and (max-width: 900px) {
+        width: 50%;
+      }
     }
 
     div:last-child {
-      width: 50%;
-      flex-direction: column;
-
+      
       button {
-        width: 100%;
-        padding-left: 6px;
-        margin: 0;
-      }
-
-      input {
-        width: calc(100% - 5px);
-        padding-left: 6px;
-        margin: 0;
         font-size: 12px;
+      }
+      margin-left: 20px;
 
-        &::placeholder {
+      @media screen and (max-width: 1200px) {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+
+        button {
+          width: 100%;
+          padding-left: 6px;
+          margin: 0;
+        }
+  
+        input {
+          width: calc(100% - 5px);
+          padding-left: 6px;
+          margin: 0;
           font-size: 12px;
+  
+          &::placeholder {
+            font-size: 12px;
+          }
         }
       }
+      
     }
   }
 `;
@@ -310,8 +322,10 @@ export const SettingsLine = styled.h3`
   }
 
   .buttons {
+    @media screen and (max-width: 900px) {
+      flex-direction: row;
+    }
     display: flex;
-    flex-direction: row;
     justify-content: right;
     width: 35%;
   }
