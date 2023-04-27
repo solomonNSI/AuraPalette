@@ -20,7 +20,7 @@ export const Settings = styled.div`
   background-color: #ddd;
   border-radius: 8px;
   padding: 20px;
-  overflow: scroll !important;
+  overflow: auto !important;
   display: flex;
   flex-direction: column;
 
@@ -59,7 +59,7 @@ export const SettingsClosed = styled.div`
     margin: 85px 4px 20px 4%;
     background-color: #dddddd;
     border-radius: 8px;
-    overflow: scroll;
+    overflow: auto;
 
     div {
       width: 50px;
@@ -91,7 +91,7 @@ export const Button = styled.button`
   background-color: #fff;
   border-radius: 4px;
   padding: 20px;
-  overflow: scroll;
+  overflow: auto;
   border: none;
   font-size: 18px;
   font-weight: 500;
@@ -131,7 +131,7 @@ export const SettingsBackground = styled.div`
   margin: 85px 4% 20px 4px;
   border-radius: 8px;
   padding: 20px;
-  overflow: scroll;
+  overflow: auto;
 
   @media screen and (max-width: 900px) {
     width: 90%;
@@ -144,7 +144,7 @@ export const SettingsBackground = styled.div`
 `;
 
 export const SettingsForeground = styled.div`
-  overflow: scroll;
+  overflow: auto;
 
   #deneme {
     div:first-child {

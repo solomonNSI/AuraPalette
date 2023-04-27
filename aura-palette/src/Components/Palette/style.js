@@ -13,7 +13,7 @@ export const Container = styled.div`
   width: 80%;
   margin-right: 4%;
   height: calc(100vh - 260px);
-  overflow: scroll;
+  overflow: auto;
 
 `;
 

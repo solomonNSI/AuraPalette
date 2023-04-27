@@ -8,7 +8,7 @@ export const MenuContainer = styled.div`
   margin-right: 20px;
   color: #333333;
   font-weight: medium;
-  overflow: scroll;
+  overflow: auto;
   background-color: #dddddd;
   border-radius: 8px;
   padding: 20px;

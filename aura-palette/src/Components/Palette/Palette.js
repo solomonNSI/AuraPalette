@@ -21,7 +21,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [infoEnabled, setInfoEnabled] = useState(false);
     const [rateEnabled, setRateEnabled] = useState(false);
     const [sliderValue, setSliderValue] = useState(3);
-
+    const [textAreaValue, setTextAreaValue] = useState("");
 
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
@@ -32,6 +32,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         else if (colorMode === "RGB") setColorMode("HSL");
         else if (colorMode === "HSL") setColorMode("HEX");
     };
+
+    function sendFeedback() {
+        //get the variable textareavalue and slidervalue and send it to backend
+        setTextAreaValue("");
+        setSliderValue("3");
+    }
 
     function showInfo() {
         if(infoEnabled)
@@ -201,8 +207,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                         <p>{sliderValue}</p>
                     </div>
 
-                    <textarea placeholder="Give Feedback" rows="2"></textarea>
-                    <button>Send Feedback</button>
+                    <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
+                    <button onClick={sendFeedback}>Send Feedback</button>
                 </div>
             </S.Rate>
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>

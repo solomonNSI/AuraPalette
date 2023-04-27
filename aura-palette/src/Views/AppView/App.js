@@ -16,6 +16,21 @@ import {
   getEditedPalette,
 } from "../../Helpers/Harmony"; 
 
+  var titles = ["Find a palette for everything.", 
+                "Let the AI find a palette for you.",
+                "Discover your perfect palette.",
+                "Create stunning designs with our AI palettes.",
+                "Discover the power of AI for your color needs.",
+                "Experience the magic of AI color selection.",
+                "Your ultimate color companion powered by AI."];
+  var title;
+  function chooseTitle() {
+    var randomIndex = Math.floor(Math.random() * titles.length);
+    title = titles[randomIndex];
+  }
+
+  chooseTitle();
+
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
@@ -195,7 +210,15 @@ function App({ DarkMode, setIsDarkMode }) {
       <S.GradientLine className = {DarkMode} colorList={palette.palette} />
 
       <S.Content className = {DarkMode}>
-        <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
+        {/* <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
+        <S.Title className = {DarkMode}>Let the AI find a palette for you.</S.Title>
+        <S.Title className = {DarkMode}>Discover your perfect palette with AI.</S.Title>
+        <S.Title className = {DarkMode}>Effortlessly create stunning designs with our AI palettes.</S.Title>
+        <S.Title className = {DarkMode}>Your ultimate color companion powered by AI.</S.Title>
+        <S.Title className = {DarkMode}>Discover the power of AI for your color needs.</S.Title> */}
+
+          <S.Title className = {DarkMode}>{title}</S.Title>
+
           <S.SearchBar className = {DarkMode} placeholder="Enter a keyword to search..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
           <S.Search className = {DarkMode}>
             <SearchIcon />
