@@ -10,15 +10,22 @@ const Login = ({DarkMode, setIsDarkMode}) => {
 
   function sendLoginInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("POST", "https://164.92.237.219/auth/signin/");
+    //xmlhttp.open("POST", "https://164.92.237.219/auth/signin/");
+    xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signin/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse)
-      localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+      sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
     };
     xmlhttp.send(loginInfo)
+
+    if(sessionStorage.getItem('user_token') != null){
+      navigate("/")
+    }
+    
   }
 
   const navigate = useNavigate();

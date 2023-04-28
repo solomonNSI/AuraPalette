@@ -397,11 +397,11 @@ class Solver(object):
             for x in range(batch_size):
                 rgbs = []
 
-
+                # TODO: .cpu() slows the function, can it be removed?
                 for k in range(5):
-                    lab = np.array([fake_palettes.data[x][3*k],
-                                    fake_palettes.data[x][3*k+1],
-                                    fake_palettes.data[x][3*k+2]], dtype='float64')
+                    lab = np.array([fake_palettes.cpu().data[x][3*k],
+                                    fake_palettes.cpu().data[x][3*k+1],
+                                    fake_palettes.cpu().data[x][3*k+2]], dtype='float64')
                     rgb = lab2rgb_1d(lab)
                     
                     # Rescale from [0, 1] to [0, 255]
