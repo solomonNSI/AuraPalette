@@ -256,6 +256,7 @@ function App({ DarkMode, setIsDarkMode }) {
             colorBlindness={colorBlindness} 
             medium={medium}
             DarkMode={DarkMode}
+            query = {query}
         />
         </S.PaletteContainer>
       </S.Content>

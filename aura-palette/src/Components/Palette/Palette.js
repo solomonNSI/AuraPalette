@@ -11,7 +11,7 @@ import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 import { getColorForMedium } from "../../Helpers/Medium";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query }) => {
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not locked");
     const [lock1, setLock1] = useState("Not locked");
@@ -34,7 +34,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     };
 
     function sendFeedback() {
-        //get the variable textareavalue and slidervalue and send it to backend
+        // Query can be accessible with "query" keyword
+        // Palette can be accessible with "palette" array
+        // Slider rate number value can be accessible with "sliderValue" keyword
+        // Texts in text area can be accessible with "textAreaValue" keyword
+
+        // These functions reset the slider and text area when clicked the button - enabling more feedback.
         setTextAreaValue("");
         setSliderValue("3");
     }
