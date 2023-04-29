@@ -420,6 +420,7 @@ export const StyledRateIcon = styled(RateIcon)`
 
 
 export const LockDisplay = styled.div`
+  cursor: pointer;
   background-color: #333333;
   color: #eeeeee;
   height: 50px;
@@ -430,4 +431,49 @@ export const LockDisplay = styled.div`
   top: 105%;
   border-radius: 8px 8px 8px 8px;
   padding: 2px 0px;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  &:hover {
+    background-color: #444444;
+  }
+`;
+
+export const EditDisplay = styled.div`
+  cursor: pointer;
+  background-color: #eee;
+  color: #333;
+  margin-top: 10px;
+  height: 100px;
+  border: 1px dashed #aaaaaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 105%;
+  border-radius: 8px 8px 8px 8px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  font-size: 16px;
+  font-weight: 400;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  &:hover {
+    background-color: #dddddd;
+  }
+
+  &.dark {
+    border: 1px dashed grey;
+    background-color: #333333;
+    color: #eee;
+
+    &:hover {
+      background-color: #444444;
+    }
+  }
 `;
