@@ -13,11 +13,11 @@ import { getColorForMedium } from "../../Helpers/Medium";
 
 export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query }) => {
     const [colorMode, setColorMode] = useState("HEX");
-    const [lock0, setLock0] = useState("Not locked");
-    const [lock1, setLock1] = useState("Not locked");
-    const [lock2, setLock2] = useState("Not locked");
-    const [lock3, setLock3] = useState("Not locked");
-    const [lock4, setLock4] = useState("Not locked");
+    const [lock0, setLock0] = useState("Not Locked");
+    const [lock1, setLock1] = useState("Not Locked");
+    const [lock2, setLock2] = useState("Not Locked");
+    const [lock3, setLock3] = useState("Not Locked");
+    const [lock4, setLock4] = useState("Not Locked");
     const [infoEnabled, setInfoEnabled] = useState(false);
     const [rateEnabled, setRateEnabled] = useState(false);
     const [sliderValue, setSliderValue] = useState(3);
@@ -233,17 +233,17 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    
-                    <S.Lock onClick={() => { updateEditedColor(0) }}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(0); }}>
+                <S.LockDisplay onClick={() => { updateLockArray(0); }}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock0}
                 </S.LockDisplay>
+
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(0) }}>
+                    <div>Edit Color</div>
+                </S.EditDisplay>
                 <EditCanvas id={0} color={palette[0]} setEditedColor={setEditedColor} visible={visibility[0]} />
             </S.Color>
 
@@ -257,16 +257,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    <S.Lock onClick={() => { updateEditedColor(1)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(1)}}>
+                <S.LockDisplay onClick={() => { updateLockArray(1)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock1}
-                    </S.LockDisplay>
+                </S.LockDisplay>
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(1) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={1} color={palette[1]} setEditedColor={setEditedColor} visible={visibility[1]}/>
             </S.Color>
 
@@ -281,16 +281,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    <S.Lock onClick={() => { updateEditedColor(2)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(2)}}>
+                <S.LockDisplay onClick={() => {updateLockArray(2)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock2}
                 </S.LockDisplay>
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(2) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={2} color={palette[2]} setEditedColor={setEditedColor} visible={visibility[2]}/>
             </S.Color>
 
@@ -304,16 +304,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    <S.Lock onClick={() => { updateEditedColor(3)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(3)}}>
+                <S.LockDisplay onClick={() => { updateLockArray(3)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock3}
                 </S.LockDisplay>
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(3) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={3} color={palette[3]} setEditedColor={setEditedColor} visible={visibility[3]}/>
             </S.Color>
 
@@ -327,16 +327,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >  
                     <CopyIcon />
                     </S.Copy>   
-                    <S.Lock onClick={() => { updateEditedColor(4)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(4)}}>
+                <S.LockDisplay onClick={() => { updateLockArray(4)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock4}
                     </S.LockDisplay>
+                    <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(4) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={4} color={palette[4]} setEditedColor={setEditedColor} visible={visibility[4]}/>
             </S.Color>
         </S.Colors>
