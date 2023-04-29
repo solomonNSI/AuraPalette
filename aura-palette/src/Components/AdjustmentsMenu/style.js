@@ -8,16 +8,32 @@ export const MenuContainer = styled.div`
   margin-right: 20px;
   color: #333333;
   font-weight: medium;
-  overflow: auto;
+  overflow: scroll;
   background-color: #dddddd;
   border-radius: 8px;
   padding: 20px;
-  height: calc(100vh - 300px);
+  height: calc(100vh - 298px);
 
   &.dark {
     background-color: #333;
   }
+
+  @media screen and (min-width: 900px) {
+    display: unset !important;  
+  }
+  
+  @media screen and (max-width: 900px) {
+    position: absolute;
+    left: calc(4% + 50px);
+    width: 50%;
+    border: 2px solid #aaaaaa;
+    height: calc(100vh - 282px);
+    z-index: 99;
+    display: none;
+    margin: 0px 4px 0px 0px;
+  }
 `;
+
 
 export const Container = styled.label`
   display: block;

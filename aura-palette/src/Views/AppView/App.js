@@ -40,6 +40,15 @@ function App({ DarkMode, setIsDarkMode }) {
   const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
   const [medium, setMedium] = useState("Default");
+  const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
+
+
+  function showAdjustments() {
+    if(adjustmentsEnabled)
+      setAdjustmentsEnabled(false);
+    else
+      setAdjustmentsEnabled(true);
+  }
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -244,7 +253,8 @@ function App({ DarkMode, setIsDarkMode }) {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} />
+          <S.AdjustmentsClosed className = {DarkMode} onClick={showAdjustments}> <div>Show/Hide Profile Tabs </div></S.AdjustmentsClosed>
+          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} adjustmentsEnabled={adjustmentsEnabled} />
           <Palette 
             palette={palette.palette} 
             lock={lock} 

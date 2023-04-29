@@ -5,8 +5,6 @@ import { ExportIcon } from "../../Icons/ExportIcon";
 import { InfoIcon } from "../../Icons/InfoIcon";
 import { RateIcon } from "../../Icons/RateIcon";
 
-
-
 export const Container = styled.div`
   background-color: none;
   border-radius: 8px;
@@ -15,18 +13,24 @@ export const Container = styled.div`
   height: calc(100vh - 260px);
   overflow: auto;
 
+  @media screen and (max-width: 900px) {
+    width: 90%;
+    margin: 0px 4% 0px 10px;
+    height: calc(100vh - 240px);
+  }
 `;
 
 export const InnerContainer = styled.div`
-  height: 780px;
-  overflow: hidden;
+  height: calc(100vh - 230px);
+  overflow-x: hidden;
+  overflow-y: auto;
 
 `;
 
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
-  height: 480px;
+  height: 500px;
   padding: 20px;
   margin-bottom: 20px;
 
@@ -43,7 +47,10 @@ export const OtherPalettes = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
-  
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }  
 
 `;
 
@@ -96,7 +103,7 @@ export const Header = styled.div`
 `;
 
 export const Colors = styled.div`
-  height: 9vw;
+  height: 35%;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -108,11 +115,15 @@ export const ColorBlindColors = styled.div`
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    height: 200px;
+    height: 170px;
 
     &.dark {
       background-color: #000000;
     }
+
+    @media screen and (max-width: 900px) {
+      width: auto;
+    }  
 
   ${({ visible }) => {
         return css`
@@ -123,6 +134,14 @@ export const ColorBlindColors = styled.div`
   h2 {
     margin-bottom: 20px;
     font-size: 18px;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 13px;
+    }  
+
+    @media screen and (max-width: 900px) {
+      font-size: 18px;
+    }  
   }
 `;
 
@@ -134,18 +153,16 @@ export const MediumColors = styled(ColorBlindColors)`
 `;
 
 export const ColorBlindPalette = styled.div`
-  height: 5vw;
-  width: auto;
+  height: 45%;
   margin: 0px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
   justify-content: space-between;
 `;
 
 export const Color = styled.div`
   background-color: ${(props) => props.colorHex};
-  width: 20%;
+  width: 19%;
   height: 120%;
   border-radius: 8px 8px 0px 0px;
   display: flex;
@@ -431,6 +448,15 @@ export const LockDisplay = styled.div`
   top: 105%;
   border-radius: 8px 8px 8px 8px;
   padding: 2px 0px;
+  font-size: 14px;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 12px;
+  }  
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+  }  
 
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
