@@ -66,6 +66,15 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         else if (colorMode === "HEX") return palette[colorNumber].toUpperCase();
     }
 
+    function copyPaletteColors(){
+    navigator.clipboard.writeText("Query: " + query +
+                                    " | 1st Color: " + displayPaletteColors(0) + 
+                                    " | 2nd Color: " + displayPaletteColors(1) + 
+                                    " | 3rd Color: " + displayPaletteColors(2) + 
+                                    " | 4th Color: " + displayPaletteColors(3) + 
+                                    " | 5th Color: " + displayPaletteColors(4))
+    }
+
     function updateLockArray(index) {
         var newArray = lock;
         var newValue = !lock[index];
@@ -220,7 +229,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             Color Mode: {colorMode}
             </S.ColorModeButton>
             <S.StyledStarIcon className = {DarkMode} height="20px" />
-            <S.StyledExportIcon className = {DarkMode} height="20px" />
+            <S.StyledExportIcon className = {DarkMode} onClick={copyPaletteColors} height="20px" />
         </S.Header>
         <S.Colors>
             <S.Color colorHex={palette[0]}>
