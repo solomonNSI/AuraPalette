@@ -1,10 +1,10 @@
 import React from "react";
 import * as S from "./style";
 
-export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, DarkMode }) => {
+export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, DarkMode, adjustmentsEnabled }) => {
 
   return (
-    <S.MenuContainer className = {DarkMode}>
+    <S.MenuContainer style = {adjustmentsEnabled ? {display: "block"} : {display: "none"}} className = {DarkMode}>
       <S.Title className = {DarkMode}>Adjustments</S.Title>
         <div>
             <S.Subtitle className = {DarkMode}>Harmony</S.Subtitle>
@@ -143,7 +143,6 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
             <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
         </div>
-
     </S.MenuContainer>
   );
 };

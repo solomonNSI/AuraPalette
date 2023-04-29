@@ -55,7 +55,6 @@ export const SettingsClosed = styled.div`
   @media screen and (max-width: 900px) {
     display: flex;
     width: 50px;
-    height: auto;
     margin: 85px 4px 20px 4%;
     background-color: #dddddd;
     border-radius: 8px;
