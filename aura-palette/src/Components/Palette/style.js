@@ -18,6 +18,10 @@ export const Container = styled.div`
     margin: 0px 4% 0px 10px;
     height: calc(100vh - 240px);
   }
+
+  @media screen and (max-width: 600px) {
+    margin: 0px 4% 0px 2px;
+  }
 `;
 
 export const InnerContainer = styled.div`
@@ -36,6 +40,10 @@ export const MainPalette = styled.div`
 
   &.dark {
     background-color: #000000;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 220px; // Mobile edit display:none
   }
 `;
 
@@ -57,12 +65,21 @@ export const OtherPalettes = styled.div`
 
 export const PaletteTitle = styled.h2`
   font-weight: 500;
-  margin: 0px 0px 0px 0px;
+  margin: 0px;
   color: #333333;
 
   &.dark {
     color: #eeeeee;
   }
+
+  @media screen and (max-width: 900px) {
+    font-size: 22px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+
 `;
 
 export const Copy = styled.button`
@@ -86,7 +103,6 @@ export const Copy = styled.button`
 export const Lock = styled.button`
   background: none;
   border: none;
-  margin: 4px 0px 0px 4px;
   cursor: pointer;
 
   &:active {
@@ -108,6 +124,11 @@ export const Colors = styled.div`
   flex-direction: row;
   gap: 10px;
   justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    height: 25%;
+    gap: 4px;
+  }
 `;
 
 export const ColorBlindColors = styled.div`
@@ -123,6 +144,7 @@ export const ColorBlindColors = styled.div`
 
     @media screen and (max-width: 900px) {
       width: auto;
+      height: 190px;
     }  
 
   ${({ visible }) => {
@@ -158,6 +180,10 @@ export const ColorBlindPalette = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    height: 35%;
+  }
 `;
 
 export const Color = styled.div`
@@ -184,6 +210,15 @@ export const ColorCode = styled.div`
   @media only screen and (min-width: 1250px) {
     font-size: 16px;
   }
+
+  @media screen and (max-width: 900px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+    flex-direction: column;
+  }
 `;
 
 export const ColorModeButton = styled.button`
@@ -197,6 +232,12 @@ export const ColorModeButton = styled.button`
   height: 26px;
   padding: 0px 10px;
   margin-top: 3px;
+
+  @media screen and (max-width: 600px) {
+    span {
+      display: none;
+    }
+  }
 
   &:hover {
     cursor: pointer;
@@ -373,6 +414,10 @@ export const StyledStarIcon = styled(StarIcon)`
       fill: #666;
     }
   }
+
+  @media screen and (max-width: 600px) {
+    margin: 0 12px;
+  }
 `;
 
 export const StyledExportIcon = styled(ExportIcon)`
@@ -455,7 +500,9 @@ export const LockDisplay = styled.div`
   }  
 
   @media screen and (max-width: 600px) {
-    font-size: 10px;
+    font-size: 6px;
+    flex-direction: column;
+    padding: 6px;
   }  
 
   -webkit-user-select: none; /* Safari */
@@ -488,6 +535,10 @@ export const EditDisplay = styled.div`
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+
+  @media screen and (max-width: 600px) {
+    display: none; // Mobile edit display:none
+  }
 
   &:hover {
     background-color: #dddddd;

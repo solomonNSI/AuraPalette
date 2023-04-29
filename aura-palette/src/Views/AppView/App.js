@@ -253,7 +253,7 @@ function App({ DarkMode, setIsDarkMode }) {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <S.AdjustmentsClosed className = {DarkMode} onClick={showAdjustments}> <div>Show/Hide Profile Tabs </div></S.AdjustmentsClosed>
+          <S.AdjustmentsClosed className = {DarkMode} onClick={showAdjustments}> <div>Show/Hide Adjustments </div></S.AdjustmentsClosed>
           <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} adjustmentsEnabled={adjustmentsEnabled} />
           <Palette 
             palette={palette.palette} 

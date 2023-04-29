@@ -64,6 +64,11 @@ export const Title = styled.div`
   @media screen and (max-width: 900px) {
     font-size: 24px;
   }
+
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+    padding-top: 90px;
+  }
 `;
 
 export const SearchBar = styled.input`
