@@ -137,6 +137,10 @@ export const SettingsBackground = styled.div`
     margin: 85px 4% 20px 10px;
   }
 
+  @media screen and (max-width: 600px) {
+    margin: 85px 4% 20px 6px;
+  }
+
   &.dark {
     background-color: #111111;
   }

@@ -226,7 +226,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 </div>
             </S.Rate>
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
-            Color Mode: {colorMode}
+            <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
             <S.StyledStarIcon className = {DarkMode} height="20px" />
             <S.StyledExportIcon className = {DarkMode} onClick={copyPaletteColors} height="20px" />

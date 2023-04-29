@@ -57,6 +57,7 @@ export const LoginButton = styled.div`
   margin-right: 4%;
   display: flex;
   align-items: center;
+
 `;
 
 export const StyledProfileIcon = styled(ProfileIcon)`

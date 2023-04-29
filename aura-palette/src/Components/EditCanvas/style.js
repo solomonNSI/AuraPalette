@@ -3,14 +3,26 @@ import styled, { css } from "styled-components";
 
 export const ColorPicker = styled.div`
     position: relative;
-    top: 24%;   
+    top: 32%;   
     background-color: transparent;
-    height: 90%;
-    width: 80%;
-    margin: 0px 10%;
+    height: 60%;
+    margin: 0px 20%;
     z-index: 1;
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 1200px) {
+        transform: rotate(270deg);
+        height: 50%;
+        top: 40%;   
+    }
+
+    @media screen and (max-width: 900px) {
+        transform: rotate(270deg);
+        height: 40%;
+        top: 40%;   
+        margin: 0px 30%;
+    }
 
     #color-block {
         border-radius: 8px 0px 0px 8px;
