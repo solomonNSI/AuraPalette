@@ -2,24 +2,55 @@ import React from "react";
 import { StarIcon } from "../../Icons/StarIcon";
 import styled, { css } from "styled-components";
 import { ExportIcon } from "../../Icons/ExportIcon";
+import { InfoIcon } from "../../Icons/InfoIcon";
+import { RateIcon } from "../../Icons/RateIcon";
+
+
 
 export const Container = styled.div`
-  background-color: white;
+  background-color: none;
   border-radius: 8px;
   width: 80%;
-  padding: 20px;
   margin-right: 4%;
-  height: calc(100vh - 300px);
-  overflow: scroll;
+  height: calc(100vh - 260px);
+  overflow: auto;
+
+`;
+
+export const InnerContainer = styled.div`
+  height: 780px;
+  overflow: hidden;
+
+`;
+
+export const MainPalette = styled.div`  
+  border-radius: 8px;
+  background-color: white;
+  height: 480px;
+  padding: 20px;
+  margin-bottom: 20px;
 
   &.dark {
     background-color: #000000;
   }
 `;
 
+export const OtherPalettes = styled.div`
+  height: auto;
+  border-radius: 8px;
+  margin-top: 0px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  
+
+`;
+
+
 export const PaletteTitle = styled.h2`
   font-weight: 500;
-  margin: 0px auto 0px 0px;
+  margin: 0px 0px 0px 0px;
   color: #333333;
 
   &.dark {
@@ -32,6 +63,11 @@ export const Copy = styled.button`
   border: none;
   margin: 4px 0px 0px 4px;
   cursor: pointer;
+
+  &:hover {
+    > svg {
+      fill: #aaaaaa;
+  }
 
   &:active {
       > svg {
@@ -60,7 +96,7 @@ export const Header = styled.div`
 `;
 
 export const Colors = styled.div`
-  height: 10vw;
+  height: 9vw;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -68,11 +104,19 @@ export const Colors = styled.div`
 `;
 
 export const ColorBlindColors = styled.div`
-  margin-top: 150px;
+    width: calc(50% - 50px);
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    height: 200px;
+
+    &.dark {
+      background-color: #000000;
+    }
 
   ${({ visible }) => {
         return css`
-            visibility: ${visible ? 'visible' : 'hidden'};
+            visibility: ${visible ? 'visible' : 'none'};
         `;
   }}
 
@@ -84,12 +128,15 @@ export const ColorBlindColors = styled.div`
 
 
 export const MediumColors = styled(ColorBlindColors)`
-    position: relative;
-    top: -54.5%;
+  &.dark {
+    background-color: #000000;
+  }
 `;
 
 export const ColorBlindPalette = styled.div`
-  height: 10vw;
+  height: 5vw;
+  width: auto;
+  margin: 0px;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -145,22 +192,228 @@ export const ColorModeButton = styled.button`
   }
 `;
 
+export const Info = styled.div`
+  position: absolute;
+  margin-top: 160px;
+  margin-left: 90px;
+  height: 100px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #bbb;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  z-index: 10;
+
+  &.dark {
+    background-color: #444;
+    color: white;
+  }
+`;
+
+
+export const Rate = styled.div`
+  position: absolute;
+  margin-top: 300px;
+  margin-left: 125px;
+  z-index: 10;
+  height: 240px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #bbb;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+  .slidecontainer {
+    width: 100%; /* Width of the outside container */
+  }
+  
+  /* The slider itself */
+  .slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 86%; /* Full-width */
+    height: 16px; /* Specified height */
+    border-radius: 4px;
+    background: #eee; /* Grey background */
+    outline: none; /* Remove outline */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+  
+  /* Mouse-over effects */
+  // .slider:hover {
+  //   opacity: 1; /* Fully shown on mouse-over */
+  // }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 28px; /* Set a specific slider handle width */
+    height: 28px; /* Slider handle height */
+    border-radius: 4px;
+    background: #333; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 28px; /* Set a specific slider handle width */
+    border-radius: 4px;
+    height: 28px; /* Slider handle height */
+    background: #333; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+  &.dark {
+    background-color: #444;
+    color: white;
+  }
+
+  display: flex;
+  align-items: flex-start;
+
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      gap: 10px;
+      margin: 10px 0 20px 0;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin: 4px 0 10px 0;
+    }
+
+    textarea {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background-color: #eeeeee;
+      height: 80px;
+      border-radius: 4px;
+      width: 90%;
+      border: none;
+      font-size: 14px;
+      padding: 4px 0px 4px 10px;
+      margin-top: 16px;
+      resize: none;
+
+      :focus {
+        outline: 2px solid #888888;
+      } 
+    }
+
+    button {
+      margin-top: 16px;
+      width: 90%;
+      border: none;
+      border-radius: 4px;
+      background-color: #333;
+      color: #ddd;
+      font-size: 16px;
+      height: 30px;
+
+      &:hover {
+        background-color: #444444;
+        cursor: pointer;
+      }
+    }
+  }
+  
+`;
+
+
 export const StyledStarIcon = styled(StarIcon)`
   margin: 0 16px;
-  
+  cursor: pointer;
   &.dark {
     path
     {
       fill: #888888;
     }
   }
+  &:hover {
+    path
+    {
+      fill: #666;
+    }
+  }
 `;
 
 export const StyledExportIcon = styled(ExportIcon)`
+  cursor: pointer;
   &.dark {
     path
     {
       fill: #888888;
+    }
+  }
+  &:hover {
+    path
+    {
+      fill: #666;
+    }
+  }
+`;
+
+export const StyledInfoIcon = styled(InfoIcon)`
+  margin: 2px -10px 0px 0px;
+  cursor: pointer;
+  path
+    {
+      fill: #333333;
+    }
+  &.dark {
+    path
+    {
+      fill: #888888;
+    }
+  }
+  &:hover {
+    path
+    {
+      fill: #666666;
+    }
+  }
+`;
+
+
+export const StyledRateIcon = styled(RateIcon)`
+  margin: 2px auto 0px 0px;
+  cursor: pointer;
+  path
+    {
+      fill: #333333;
+    }
+  &.dark {
+    path
+    {
+      fill: #888888;
+    }
+  }
+
+  &:hover {
+    path
+    {
+      fill: #666666;
     }
   }
 `;
