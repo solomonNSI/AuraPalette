@@ -19,13 +19,12 @@ const Login = ({DarkMode, setIsDarkMode}) => {
       jsonResponse = JSON.parse(jsonResponse)
       //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
       sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+
+      if(sessionStorage.getItem('user_token') != null){
+        navigate("/")
+      }
     };
     xmlhttp.send(loginInfo)
-
-    if(sessionStorage.getItem('user_token') != null){
-      navigate("/")
-    }
-    
   }
 
   const navigate = useNavigate();

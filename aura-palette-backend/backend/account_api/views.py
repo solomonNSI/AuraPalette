@@ -18,8 +18,6 @@ def create_history(request, *args, **kwargs):
 
     info = DatabaseAPI.auth.get_account_info(token)
     uid = info['users'][0]['localId']
-    print(uid)
-
 
     new_palette = Palette()
     new_palette.query = data.get('query')
@@ -50,4 +48,25 @@ def check_token(request, *args, **kwargs):
 
     if(uid != None):
         return JsonResponse({"user_token": token})
+    
+
+@api_view(["GET"])
+def get_history(request, *args, **kwargs):
+    data=request.data
+    token = request.headers.get('Authorization')
+    token = token.partition(' ')[2]
+    token = token[1:-1]
+
+    info = DatabaseAPI.auth.get_account_info(token)
+    uid = info['users'][0]['localId']
+    palettes = DatabaseAPI.db.child("users").child(uid).child("history").get(token)
+    palettes_arr = []
+    for palette in palettes.each():
+        palettes_arr.append(palette.val())
+    palettes_json = json.dumps(palettes_arr)
+    palettes_str = '{ "history" : ' + palettes_json + '}'
+
+    palettes_fin = json.loads(palettes_str)
+
+    return JsonResponse(palettes_fin)
 

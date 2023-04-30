@@ -2,16 +2,34 @@ import * as S from "../ProfileView/style";
 import React, { useState } from "react";
 import { NavBar} from "../../Components/NavBar/NavBar";
 import { MiniPalette } from "../../Components/MiniPalette/MiniPalette";
+import { useNavigate } from "react-router-dom";
 
 const Profile = ({ DarkMode, setIsDarkMode }) => {
   const [favoritesEnabled, setFavoritesEnabled] = useState(true);
   const [historyEnabled, setHistoryEnabled] = useState(false);
   const [settingsEnabled, setSettingsEnabled] = useState(false);
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
-
+  const navigate = useNavigate();
 
   var defaultBackgroundColor = "#ffffff";
   var defaultSelectedColor = "#ffffff";
+
+  function logOut(){
+    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+    //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
+    xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signout/");
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.onload  = function() {
+      var jsonResponse = xmlhttp.response;
+      jsonResponse = JSON.parse(jsonResponse)
+      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+      sessionStorage.removeItem('user_token')
+      if(sessionStorage.getItem('user_token') ==null){
+        navigate("/")
+      }
+    };
+    xmlhttp.send()
+  }
 
   if(DarkMode=="dark"){
     defaultBackgroundColor="#111111";
@@ -36,6 +54,17 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     setSettingsEnabled(false);
   }
 
+  function historyList(){
+    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+    xmlhttp.open("GET", "http://127.0.0.1:8000/account/gethistory/");
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+    xmlhttp.onload  = function() {
+      var jsonResponse = xmlhttp.response;
+      jsonResponse = JSON.parse(jsonResponse); 
+    }
+    xmlhttp.send()
+  }
   function showSettings() {
     setFavoritesEnabled(false);
     setHistoryEnabled(false);
@@ -60,7 +89,10 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         <S.Button className = {DarkMode} style = {{backgroundColor: favoritesEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showFavorites}><span>Favorite Palettes</span><span className="text">See, share and use your favorite palettes.</span></S.Button>
         <S.Button className = {DarkMode} style = {{backgroundColor: historyEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showHistory}><span>Palette History</span><span className="text">Discover, export and manage your palette history.</span></S.Button>
         <S.Button className = {DarkMode} style = {{backgroundColor: settingsEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showSettings}><span>User & App Settings</span><span className="text">Access information and change your preferences.</span></S.Button>
-        <S.Button className = {DarkMode} style={{backgroundColor: defaultBackgroundColor, color: "#f34a55"}}><span>Log Out from Aura</span><span className="text">All your data will be saved.</span></S.Button>
+        <S.Button className = {DarkMode} onClick={logOut} style={{backgroundColor: defaultBackgroundColor, color: "#f34a55"}}>
+          <span>Log Out from Aura</span>
+          <span className="text">All your data will be saved.</span>
+        </S.Button>
         </div>
         
       </S.Settings>

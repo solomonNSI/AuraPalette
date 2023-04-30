@@ -192,7 +192,7 @@ function App({ DarkMode, setIsDarkMode }) {
           return { ...prevState, palette: getSquarePalette(palette.palette, lock) };
         });
         break;
-        case "Edit":
+      case "Edit":
         setPalette((prevState) => {
             return { ...prevState, palette: getEditedPalette(palette.palette, editedColorIndex, editedColor, lock) };
         });

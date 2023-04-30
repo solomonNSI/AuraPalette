@@ -25,19 +25,12 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse);
       token_to_check = JSON.stringify(jsonResponse['user_token']);
-      console.log(token_to_check)
-      console.log(sessionStorage.getItem('user_token'))
       if(token_to_check === sessionStorage.getItem('user_token'))
-        loggedIn = true;
+        navigate("/profile");
       else
-        loggedIn = false;
+        navigate("/login");      
     }
-    xmlhttp.send()
-
-    if(loggedIn)
-      navigate("/profile");
-    else
-      navigate("/login");
+    xmlhttp.send();
   }
   return (
     <S.NavBar className={DarkMode}>
