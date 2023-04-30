@@ -12,7 +12,7 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
 
   function sendRegisterInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
+    xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/auth/register/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var registerInfo = '{ "name" : "' + name + '", "email" : "' + email + '", "password" : "' + password + '"}';
     xmlhttp.onload  = function() {
