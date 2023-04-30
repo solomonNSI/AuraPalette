@@ -22,6 +22,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [rateEnabled, setRateEnabled] = useState(false);
     const [sliderValue, setSliderValue] = useState(3);
     const [textAreaValue, setTextAreaValue] = useState("");
+    const [feedbackButtonText, setFeedbackButtonText] = useState("Send Feedback");
 
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
@@ -42,6 +43,20 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         // These functions reset the slider and text area when clicked the button - enabling more feedback.
         setTextAreaValue("");
         setSliderValue("3");
+        setFeedbackButtonText("Feedback is submitted!")
+        document.getElementById("feedbackButton").style.backgroundColor = "#64E225";
+        document.getElementById("feedbackButton").style.color = "#333333";
+
+
+        setInterval(function(){
+            setFeedbackButtonText("Send Feedback")
+            document.getElementById("feedbackButton").style.backgroundColor = "#333333";
+            document.getElementById("feedbackButton").style.color = "#ffffff";
+
+         }, 2000);
+
+        
+
     }
 
     function showInfo() {
@@ -222,7 +237,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </div>
 
                     <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
-                    <button onClick={sendFeedback}>Send Feedback</button>
+                    <button id="feedbackButton" onClick={sendFeedback}>{feedbackButtonText}</button>
                 </div>
             </S.Rate>
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
