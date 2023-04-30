@@ -44,18 +44,15 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         setTextAreaValue("");
         setSliderValue("3");
         setFeedbackButtonText("Feedback is submitted!")
-        document.getElementById("feedbackButton").style.backgroundColor = "#64E225";
-        document.getElementById("feedbackButton").style.color = "#333333";
-
+        document.getElementById("feedbackButton").style.setProperty("background-color", "#64E225", "important")
+        document.getElementById("feedbackButton").style.setProperty("color", "#333333", "important")
 
         setInterval(function(){
             setFeedbackButtonText("Send Feedback")
             document.getElementById("feedbackButton").style.backgroundColor = "#333333";
             document.getElementById("feedbackButton").style.color = "#ffffff";
+         }, 3000);
 
-         }, 2000);
-
-        
 
     }
 
@@ -237,7 +234,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </div>
 
                     <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
-                    <button id="feedbackButton" onClick={sendFeedback}>{feedbackButtonText}</button>
+                    <button id="feedbackButton" disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
                 </div>
             </S.Rate>
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>

@@ -285,6 +285,14 @@ export const Rate = styled.div`
   font-weight: 400;
   line-height: 20px;
 
+  #feedbackButton {
+    :disabled {
+      cursor: default;
+      background-color: #888888 !important;
+      color: #aaaaaa !important;
+    }
+  }
+
   .slidecontainer {
     width: 100%; /* Width of the outside container */
   }
