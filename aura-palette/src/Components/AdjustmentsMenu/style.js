@@ -8,16 +8,32 @@ export const MenuContainer = styled.div`
   margin-right: 20px;
   color: #333333;
   font-weight: medium;
-  overflow: scroll;
+  overflow: auto;
   background-color: #dddddd;
   border-radius: 8px;
   padding: 20px;
-  height: calc(100vh - 300px);
+  height: calc(100vh - 298px);
 
   &.dark {
     background-color: #333;
   }
+
+  @media screen and (min-width: 900px) {
+    display: unset !important;  
+  }
+  
+  @media screen and (max-width: 900px) {
+    position: absolute;
+    left: calc(4% + 50px);
+    width: 40%;
+    border: 2px solid #aaaaaa;
+    height: calc(100vh - 282px);
+    z-index: 99;
+    display: none;
+    margin: 0px 4px 0px 0px;
+  }
 `;
+
 
 export const Container = styled.label`
   display: block;
@@ -33,6 +49,14 @@ export const Container = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  @media screen and (max-width: 900px) {
+    margin-bottom: 8px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
 
   &.dark {
     color: #ccc;
@@ -93,6 +117,14 @@ export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 10px 0px;
 
+  @media screen and (max-width: 900px) {
+    font-size: 22px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+
   &.dark {
     color: #eee;
   }
@@ -109,6 +141,14 @@ export const Subtitle = styled.h3`
 
   &.dark {
     color: #ccc;
+  }
+
+  @media screen and (max-width: 900px) {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 16px;
   }
 
   @media only screen and (min-height: 1000px) {

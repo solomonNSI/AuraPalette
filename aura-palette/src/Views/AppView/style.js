@@ -60,6 +60,15 @@ export const Title = styled.div`
   &.dark {
     color: #dddddd;
   }
+
+  @media screen and (max-width: 900px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+    padding-top: 90px;
+  }
 `;
 
 export const SearchBar = styled.input`
@@ -72,6 +81,10 @@ export const SearchBar = styled.input`
   border-radius: 8px;
   padding-left: 20px;
   margin: 20px 4% 0px 4%;
+
+  @media screen and (max-width: 900px) {
+    height: 40px;
+  }
 
   :focus {
     outline: 1px solid #88888888;
@@ -119,6 +132,12 @@ export const PaletteContainer = styled.div`
   display: flex;
   height: 600px;
   margin-top: 20px;
+
+  @media screen and (max-width: 900px) {
+    height: fit-content;
+  }
+
+ 
 `;
 
 export const Search = styled.button`
@@ -127,8 +146,45 @@ export const Search = styled.button`
   position: absolute;
   top: 180px;
   right: 4.5%;
+  display: none;
 
   > svg {
     fill: #666666;
   }
+`;
+
+export const AdjustmentsClosed = styled.div`
+  display: none;
+
+  @media screen and (max-width: 900px) {
+    display: flex;
+    width: 50px;
+    height: auto;
+    margin: 0px 8px 0px 4%;
+    background-color: #dddddd;
+    border-radius: 8px;
+    overflow: auto;
+
+    div {
+      width: 50px;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 500;
+      color: #111;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+    }
+
+    &.dark {
+      background-color: #333;
+      div {
+        color: #ddd;
+      }
+      
+    }
+  }
+  
 `;

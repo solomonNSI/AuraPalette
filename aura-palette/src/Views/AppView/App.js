@@ -16,6 +16,21 @@ import {
   getEditedPalette,
 } from "../../Helpers/Harmony"; 
 
+  var titles = ["Find a palette for everything.", 
+                "Let the AI find a palette for you.",
+                "Discover your perfect palette.",
+                "Create stunning designs with our AI palettes.",
+                "Discover the power of AI for your color needs.",
+                "Experience the magic of AI color selection.",
+                "Your ultimate color companion powered by AI."];
+  var title;
+  function chooseTitle() {
+    var randomIndex = Math.floor(Math.random() * titles.length);
+    title = titles[randomIndex];
+  }
+
+  chooseTitle();
+
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
@@ -25,11 +40,21 @@ function App({ DarkMode, setIsDarkMode }) {
   const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
   const [medium, setMedium] = useState("Default");
+  const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
+
+
+  function showAdjustments() {
+    if(adjustmentsEnabled)
+      setAdjustmentsEnabled(false);
+    else
+      setAdjustmentsEnabled(true);
+  }
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    // xmlhttp.open("POST", "http://164.92.237.219/model/getpalette/");
-    xmlhttp.open("POST", "http://127.0.0.1:8000/model/getpalette/");
+
+    xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/model/getpalette/");
+
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query + '"}';
     xmlhttp.onload  = function() {
@@ -209,7 +234,15 @@ function App({ DarkMode, setIsDarkMode }) {
       <S.GradientLine className = {DarkMode} colorList={palette.palette} />
 
       <S.Content className = {DarkMode}>
-        <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
+        {/* <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
+        <S.Title className = {DarkMode}>Let the AI find a palette for you.</S.Title>
+        <S.Title className = {DarkMode}>Discover your perfect palette with AI.</S.Title>
+        <S.Title className = {DarkMode}>Effortlessly create stunning designs with our AI palettes.</S.Title>
+        <S.Title className = {DarkMode}>Your ultimate color companion powered by AI.</S.Title>
+        <S.Title className = {DarkMode}>Discover the power of AI for your color needs.</S.Title> */}
+
+          <S.Title className = {DarkMode}>{title}</S.Title>
+
           <S.SearchBar className = {DarkMode} placeholder="Enter a keyword to search..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
           <S.Search className = {DarkMode}>
             <SearchIcon />
@@ -235,7 +268,8 @@ function App({ DarkMode, setIsDarkMode }) {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} />
+          <S.AdjustmentsClosed className = {DarkMode} onClick={showAdjustments}> <div>Show/Hide Adjustments </div></S.AdjustmentsClosed>
+          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} adjustmentsEnabled={adjustmentsEnabled} />
           <Palette 
             palette={palette.palette} 
             lock={lock} 
@@ -247,6 +281,7 @@ function App({ DarkMode, setIsDarkMode }) {
             colorBlindness={colorBlindness} 
             medium={medium}
             DarkMode={DarkMode}
+            query = {query}
         />
         </S.PaletteContainer>
       </S.Content>

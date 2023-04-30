@@ -10,8 +10,9 @@ const Login = ({DarkMode, setIsDarkMode}) => {
 
   function sendLoginInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    //xmlhttp.open("POST", "https://164.92.237.219/auth/signin/");
-    xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signin/");
+
+    xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/auth/signin/");
+    
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
     xmlhttp.onload  = function() {

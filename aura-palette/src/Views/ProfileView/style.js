@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height: 100vh;
+  height 100vh;
   overflow: auto;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@ export const Settings = styled.div`
   background-color: #ddd;
   border-radius: 8px;
   padding: 20px;
-  overflow: scroll !important;
+  overflow: auto !important;
   display: flex;
   flex-direction: column;
 
@@ -55,11 +55,10 @@ export const SettingsClosed = styled.div`
   @media screen and (max-width: 900px) {
     display: flex;
     width: 50px;
-    height: auto;
     margin: 85px 4px 20px 4%;
     background-color: #dddddd;
     border-radius: 8px;
-    overflow: scroll;
+    overflow: auto;
 
     div {
       width: 50px;
@@ -91,7 +90,7 @@ export const Button = styled.button`
   background-color: #fff;
   border-radius: 4px;
   padding: 20px;
-  overflow: scroll;
+  overflow: auto;
   border: none;
   font-size: 18px;
   font-weight: 500;
@@ -131,11 +130,15 @@ export const SettingsBackground = styled.div`
   margin: 85px 4% 20px 4px;
   border-radius: 8px;
   padding: 20px;
-  overflow: scroll;
+  overflow: auto;
 
   @media screen and (max-width: 900px) {
     width: 90%;
     margin: 85px 4% 20px 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 85px 4% 20px 6px;
   }
 
   &.dark {
@@ -144,33 +147,45 @@ export const SettingsBackground = styled.div`
 `;
 
 export const SettingsForeground = styled.div`
-  overflow: scroll;
+  overflow: auto;
 
   #deneme {
     div:first-child {
-      width: 50%;
+      @media screen and (max-width: 900px) {
+        width: 50%;
+      }
     }
 
     div:last-child {
-      width: 50%;
-      flex-direction: column;
-
+      
       button {
-        width: 100%;
-        padding-left: 6px;
-        margin: 0;
-      }
-
-      input {
-        width: calc(100% - 5px);
-        padding-left: 6px;
-        margin: 0;
         font-size: 12px;
+      }
+      margin-left: 20px;
 
-        &::placeholder {
+      @media screen and (max-width: 1200px) {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+
+        button {
+          width: 100%;
+          padding-left: 6px;
+          margin: 0;
+        }
+  
+        input {
+          width: calc(100% - 5px);
+          padding-left: 6px;
+          margin: 0;
           font-size: 12px;
+  
+          &::placeholder {
+            font-size: 12px;
+          }
         }
       }
+      
     }
   }
 `;
@@ -310,8 +325,10 @@ export const SettingsLine = styled.h3`
   }
 
   .buttons {
+    @media screen and (max-width: 900px) {
+      flex-direction: row;
+    }
     display: flex;
-    flex-direction: row;
     justify-content: right;
     width: 35%;
   }

@@ -11,13 +11,18 @@ import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 import { getColorForMedium } from "../../Helpers/Medium";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query }) => {
     const [colorMode, setColorMode] = useState("HEX");
-    const [lock0, setLock0] = useState("Not locked");
-    const [lock1, setLock1] = useState("Not locked");
-    const [lock2, setLock2] = useState("Not locked");
-    const [lock3, setLock3] = useState("Not locked");
-    const [lock4, setLock4] = useState("Not locked");
+    const [lock0, setLock0] = useState("Not Locked");
+    const [lock1, setLock1] = useState("Not Locked");
+    const [lock2, setLock2] = useState("Not Locked");
+    const [lock3, setLock3] = useState("Not Locked");
+    const [lock4, setLock4] = useState("Not Locked");
+    const [infoEnabled, setInfoEnabled] = useState(false);
+    const [rateEnabled, setRateEnabled] = useState(false);
+    const [sliderValue, setSliderValue] = useState(3);
+    const [textAreaValue, setTextAreaValue] = useState("");
+    const [feedbackButtonText, setFeedbackButtonText] = useState("Send Feedback");
 
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
@@ -29,10 +34,60 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         else if (colorMode === "HSL") setColorMode("HEX");
     };
 
+    function sendFeedback() {
+        // Query can be accessible with "query" keyword
+        // Palette can be accessible with "palette" array
+        // Slider rate number value can be accessible with "sliderValue" keyword
+        // Texts in text area can be accessible with "textAreaValue" keyword
+
+        // These functions reset the slider and text area when clicked the button - enabling more feedback.
+        setTextAreaValue("");
+        setSliderValue("3");
+        setFeedbackButtonText("Feedback is submitted!")
+        document.getElementById("feedbackButton").style.backgroundColor = "#64E225";
+        document.getElementById("feedbackButton").style.color = "#333333";
+
+
+        setInterval(function(){
+            setFeedbackButtonText("Send Feedback")
+            document.getElementById("feedbackButton").style.backgroundColor = "#333333";
+            document.getElementById("feedbackButton").style.color = "#ffffff";
+
+         }, 2000);
+
+        
+
+    }
+
+    function showInfo() {
+        if(infoEnabled)
+            setInfoEnabled(false);
+        else
+            setInfoEnabled(true);
+            setRateEnabled(false);
+    }
+
+    function showRate() {
+        if(rateEnabled)
+            setRateEnabled(false);
+        else
+            setRateEnabled(true);
+            setInfoEnabled(false);
+    }
+
     function displayPaletteColors(colorNumber) {
         if (colorMode === "RGB") return hexToRgbWriter(palette[colorNumber]);
         else if (colorMode === "HSL") return hexToHSLWriter(palette[colorNumber]);
         else if (colorMode === "HEX") return palette[colorNumber].toUpperCase();
+    }
+
+    function copyPaletteColors(){
+    navigator.clipboard.writeText("Query: " + query +
+                                    " | 1st Color: " + displayPaletteColors(0) + 
+                                    " | 2nd Color: " + displayPaletteColors(1) + 
+                                    " | 3rd Color: " + displayPaletteColors(2) + 
+                                    " | 4th Color: " + displayPaletteColors(3) + 
+                                    " | 5th Color: " + displayPaletteColors(4))
     }
 
     function updateLockArray(index) {
@@ -165,15 +220,32 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     return (
     <S.Container className = {DarkMode}>
+        <S.InnerContainer className = {DarkMode}>
+        <S.MainPalette className = {DarkMode}>
         <S.Header className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
+            <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
+            <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>CHATGPT'S COMMENTS AND EXPLANATIONS ABOUT WHY IT GAVE THIS PALETTE AND COLORS.</S.Info>
+            
+            <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
+            <S.Rate className = "slidecontainer" style = {{display: rateEnabled ? "flex" : "none" }}>
+                <div>
+                    <p>Rate This Palette</p>
+                    <div>
+                        <input type="range" min="1" max="5" value={sliderValue} onChange={(e) => setSliderValue(e.target.value)} className="slider" id="myRange"></input>
+                        <p>{sliderValue}</p>
+                    </div>
+
+                    <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
+                    <button id="feedbackButton" onClick={sendFeedback}>{feedbackButtonText}</button>
+                </div>
+            </S.Rate>
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
-            Color Mode: {colorMode}
+            <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
             <S.StyledStarIcon className = {DarkMode} height="20px" />
-            <S.StyledExportIcon className = {DarkMode} height="20px" />
+            <S.StyledExportIcon className = {DarkMode} onClick={copyPaletteColors} height="20px" />
         </S.Header>
-
         <S.Colors>
             <S.Color colorHex={palette[0]}>
                 <S.ColorCode>
@@ -185,17 +257,17 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    
-                    <S.Lock onClick={() => { updateEditedColor(0) }}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(0); }}>
+                <S.LockDisplay onClick={() => { updateLockArray(0); }}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock0}
                 </S.LockDisplay>
+
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(0) }}>
+                    <div>Edit Color</div>
+                </S.EditDisplay>
                 <EditCanvas id={0} color={palette[0]} setEditedColor={setEditedColor} visible={visibility[0]} />
             </S.Color>
 
@@ -209,16 +281,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    <S.Lock onClick={() => { updateEditedColor(1)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(1)}}>
+                <S.LockDisplay onClick={() => { updateLockArray(1)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock1}
-                    </S.LockDisplay>
+                </S.LockDisplay>
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(1) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={1} color={palette[1]} setEditedColor={setEditedColor} visible={visibility[1]}/>
             </S.Color>
 
@@ -233,16 +305,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    <S.Lock onClick={() => { updateEditedColor(2)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(2)}}>
+                <S.LockDisplay onClick={() => {updateLockArray(2)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock2}
                 </S.LockDisplay>
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(2) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={2} color={palette[2]} setEditedColor={setEditedColor} visible={visibility[2]}/>
             </S.Color>
 
@@ -256,16 +328,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >
                     <CopyIcon />
                     </S.Copy>
-                    <S.Lock onClick={() => { updateEditedColor(3)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(3)}}>
+                <S.LockDisplay onClick={() => { updateLockArray(3)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock3}
                 </S.LockDisplay>
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(3) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={3} color={palette[3]} setEditedColor={setEditedColor} visible={visibility[3]}/>
             </S.Color>
 
@@ -279,36 +351,39 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     >  
                     <CopyIcon />
                     </S.Copy>   
-                    <S.Lock onClick={() => { updateEditedColor(4)}}>
-                        <EditIcon height="18px" />
-                    </S.Lock>
                 </S.ColorCode>
-                <S.LockDisplay>
-                    <S.Lock onClick={() => { updateLockArray(4)}}>
+                <S.LockDisplay onClick={() => { updateLockArray(4)}}>
+                    <S.Lock>
                         <LockIcon height="18px" />
                     </S.Lock>
                     {lock4}
                     </S.LockDisplay>
+                    <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(4) }}>
+                    <span>Edit Color</span>
+                </S.EditDisplay>
                 <EditCanvas id={4} color={palette[4]} setEditedColor={setEditedColor} visible={visibility[4]}/>
             </S.Color>
         </S.Colors>
+        </S.MainPalette>
 
-        {/* COLOR BLIND PALETTE */}
-        <S.ColorBlindColors visible={colorBlindnessVisible}>
-            <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
-            <S.ColorBlindPalette>
-                {renderBlindColors()}
-            </S.ColorBlindPalette>
-        </S.ColorBlindColors>
+        <S.OtherPalettes className = {DarkMode}>
+            {/* COLOR BLIND PALETTE */}
+            <S.ColorBlindColors className = {DarkMode} visible={colorBlindnessVisible}>
+                <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
+                <S.ColorBlindPalette>
+                    {renderBlindColors()}
+                </S.ColorBlindPalette>
+            </S.ColorBlindColors>
 
-        {/* MEDIUMS PALETTE */}
-        <S.MediumColors visible={mediumVisible}>
-            <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
-            <S.ColorBlindPalette>
-                {renderMediumColors()}
-            </S.ColorBlindPalette>
-        </S.MediumColors>
-
+            {/* MEDIUMS PALETTE */}
+            <S.MediumColors className = {DarkMode} visible={mediumVisible}>
+                <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
+                <S.ColorBlindPalette>
+                    {renderMediumColors()}
+                </S.ColorBlindPalette>
+            </S.MediumColors>
+        </S.OtherPalettes>
+        </S.InnerContainer>
     </S.Container>
   );
 };

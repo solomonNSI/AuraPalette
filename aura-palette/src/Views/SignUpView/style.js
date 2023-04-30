@@ -23,7 +23,7 @@ export const Background = styled.div`
   background-color: #dddddd;
   margin: 100px 0px 35px;
   height: auto;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
 
   &.dark {

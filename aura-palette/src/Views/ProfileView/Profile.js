@@ -9,7 +9,9 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   const [historyEnabled, setHistoryEnabled] = useState(false);
   const [settingsEnabled, setSettingsEnabled] = useState(false);
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
+
   const navigate = useNavigate();
+
 
   var defaultBackgroundColor = "#ffffff";
   var defaultSelectedColor = "#ffffff";
@@ -79,9 +81,8 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   }
 
   return (
-    <S.AppBackground className = {DarkMode}>
- 
-      <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
+    <S.AppBackground id="background" className = {DarkMode}>
+      <NavBar className="navbar" DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
       <S.SettingsClosed className = {DarkMode} onClick={showButtons}> <div>Show/Hide Profile Tabs </div></S.SettingsClosed>
       <S.Settings className = {DarkMode} style = {{display: buttonsEnabled ? "flex" : "none" }}>
         <div>

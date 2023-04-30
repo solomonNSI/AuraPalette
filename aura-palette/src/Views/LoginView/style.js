@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const AppBackground = styled.div`
   background-color: #eeeeee;
   height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
   overflow: auto;
   display: flex;
   justify-content: center;
