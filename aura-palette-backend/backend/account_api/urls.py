@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    #path('history/<token>', views.history),
-    #path('signin/', views.signin),
+    path('addhistory/', views.create_history),
+    path('gethistory/', views.get_history),
+    path('checktoken/', views.check_token)
 ]

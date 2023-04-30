@@ -10,13 +10,20 @@ const Login = ({DarkMode, setIsDarkMode}) => {
 
   function sendLoginInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+
     xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/auth/signin/");
+    
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse)
-      localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+      sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+
+      if(sessionStorage.getItem('user_token') != null){
+        navigate("/")
+      }
     };
     xmlhttp.send(loginInfo)
   }

@@ -12,14 +12,20 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
 
   function sendRegisterInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+
     xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/auth/register/");
+
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var registerInfo = '{ "name" : "' + name + '", "email" : "' + email + '", "password" : "' + password + '"}';
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse)
-      localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
-      console.log(localStorage.getItem('session'))
+      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+      sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+      console.log(sessionStorage.getItem('user_token'))
+      if(sessionStorage.getItem('user_token') != null){
+        navigate("/")
+      }
     };
     xmlhttp.send(registerInfo)
   }

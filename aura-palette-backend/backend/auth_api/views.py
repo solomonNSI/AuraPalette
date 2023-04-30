@@ -41,3 +41,10 @@ def signin(request, *args, **kwargs):
     user_token = user['idToken']
 
     return JsonResponse({"user_token": user_token})
+
+@api_view(["POST"])
+def signout(request, *args, **kwargs):
+    print(DatabaseAPI.auth.current_user)
+    DatabaseAPI.auth.current_user = None
+    print(DatabaseAPI.auth.current_user)
+    return JsonResponse({"user_token": None})

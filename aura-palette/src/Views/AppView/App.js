@@ -52,7 +52,9 @@ function App({ DarkMode, setIsDarkMode }) {
 
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+
     xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/model/getpalette/");
+
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query + '"}';
     xmlhttp.onload  = function() {
@@ -67,6 +69,18 @@ function App({ DarkMode, setIsDarkMode }) {
         if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
       }
       updatePalette(pal);
+
+      // if logged in add the palette to history
+      if(sessionStorage.getItem('user_token') != null){
+        var xmlhttp2 = new XMLHttpRequest();
+        xmlhttp2.open("POST", "http://127.0.0.1:8000/account/addhistory/");
+        xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+        var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
+          + pal[1] + '", "color3": "' + pal[2] + '", "color4": "' + pal[3] + '", "color5": "' + pal[4] + '"}'
+        console.log(palInfo)
+        xmlhttp2.send(palInfo)
+      }
     };
     xmlhttp.send(qInfo)
 
@@ -81,11 +95,12 @@ function App({ DarkMode, setIsDarkMode }) {
     // })
   }
 
+  //TODO => WHEN NEW QUERY IS ENTERED SWITCH HARMONY TO NONE
   function updatePalette(pal){
     switch (harmony) {
         case "None":
             setPalette((prevState) => {
-            return { ...prevState, palette: getDefaultPalette() };
+            return { ...prevState, palette: pal };
             });
             break;
         case "Analogous":
@@ -202,7 +217,7 @@ function App({ DarkMode, setIsDarkMode }) {
           return { ...prevState, palette: getSquarePalette(palette.palette, lock) };
         });
         break;
-        case "Edit":
+      case "Edit":
         setPalette((prevState) => {
             return { ...prevState, palette: getEditedPalette(palette.palette, editedColorIndex, editedColor, lock) };
         });

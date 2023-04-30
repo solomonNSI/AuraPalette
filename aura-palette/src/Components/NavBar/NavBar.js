@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 import * as S from "./style";
 
 export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
@@ -8,6 +9,28 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
   function toggleDarkMode() {
     if (DarkMode === "dark") setIsDarkMode("light")
     else setIsDarkMode("dark");
+  }
+
+  function checkLoggedIn(){
+    if(sessionStorage.getItem('user_token') == null)
+      navigate("/login");
+
+    var xmlhttp = new XMLHttpRequest();
+    var token_to_check;
+    var loggedIn = false;
+    xmlhttp.open("GET", "http://127.0.0.1:8000/account/checktoken/");
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+    xmlhttp.onload  = function() {
+      var jsonResponse = xmlhttp.response;
+      jsonResponse = JSON.parse(jsonResponse);
+      token_to_check = JSON.stringify(jsonResponse['user_token']);
+      if(token_to_check === sessionStorage.getItem('user_token'))
+        navigate("/profile");
+      else
+        navigate("/login");      
+    }
+    xmlhttp.send();
   }
   return (
     <S.NavBar className={DarkMode}>
@@ -18,11 +41,10 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
         />
         <S.StyledSunIcon className = {DarkMode} 
           onClick={() => toggleDarkMode()}
-        />
-        <S.StyledProfileIcon className = {DarkMode}
+        /> <S.StyledProfileIcon className = {DarkMode}
           height="50px"
-          onClick={() => navigate("/profile")}
-        />
+          onClick={() => checkLoggedIn()}
+          />
       </S.LoginButton >
       {/*<S.GradientLine colorList={palette}/>*/}
     </S.NavBar>
