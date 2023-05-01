@@ -53,7 +53,20 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             document.getElementById("feedbackButton").style.color = "#ffffff";
          }, 3000);
 
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/feedback/sendfeedback/");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        var qInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
+        + palette[1] + '", "color3": "' + palette[2] + '", "color4": "' + palette[3] + '", "color5": "' + palette[4] + '", "rate": "' + sliderValue + '", "comment": "' + textAreaValue + '"}'
+    
+        xmlhttp.onload  = function() {
+            var jsonResponse = xmlhttp.response;
+            console.log(jsonResponse);
+            console.log(qInfo);
 
+          };
+        xmlhttp.send(qInfo)
+        
     }
 
     function showInfo() {
