@@ -59,6 +59,11 @@ export const Title = styled.div`
 
   &.dark {
     color: #dddddd;
+
+    ::selection {
+      background: #eee;
+      color: #333;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -68,6 +73,11 @@ export const Title = styled.div`
   @media screen and (max-width: 600px) {
     font-size: 20px;
     padding-top: 90px;
+  }
+
+  ::selection {
+    background: #333333;
+    color: #eeeeee;
   }
 `;
 

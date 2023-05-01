@@ -34,7 +34,7 @@ export const InnerContainer = styled.div`
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
-  height: 500px;
+  height: 440px;
   padding: 20px;
   margin-bottom: 20px;
 
@@ -70,6 +70,11 @@ export const PaletteTitle = styled.h2`
 
   &.dark {
     color: #eeeeee;
+
+    ::selection {
+      background: #333333;
+      color: #eeeeee;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -78,6 +83,11 @@ export const PaletteTitle = styled.h2`
 
   @media screen and (max-width: 600px) {
     font-size: 20px;
+  }
+
+  ::selection {
+    background: #333333;
+    color: #eeeeee;
   }
 
 `;
@@ -189,7 +199,7 @@ export const ColorBlindPalette = styled.div`
 export const Color = styled.div`
   background-color: ${(props) => props.colorHex};
   width: 19%;
-  height: 120%;
+  height: 100%;
   border-radius: 8px 8px 0px 0px;
   display: flex;
   flex-direction: column;

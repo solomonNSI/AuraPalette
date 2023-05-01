@@ -127,11 +127,21 @@ export const Title = styled.h2`
 
   &.dark {
     color: #eee;
+
+    ::selection {
+      background: #111;
+      color: #eeeeee;
+    }
   }
 
   @media only screen and (min-height: 1000px) {
     font-weight: 500;
     margin: 0px 0px 14px 0px;
+  }
+
+  ::selection {
+    background: #333333;
+    color: #eeeeee;
   }
 `;
 
