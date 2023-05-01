@@ -290,6 +290,13 @@ export const Rate = styled.div`
       cursor: default;
       background-color: #888888 !important;
       color: #aaaaaa !important;
+      &:hover {
+        background-color: #888888 !important;
+      }
+    }
+
+    &:hover {
+      background-color: #555555 !important;
     }
   }
 
