@@ -151,26 +151,14 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     useEffect(() => {
-        if(colorBlindness === "None") {
-            setColorBlindnessVisible(false);
-            if (medium !== "Default") setMediumVisible(true);
-        }
-        else {
-            setColorBlindnessVisible(true);
-            setMediumVisible(false);
-        }
+        if(colorBlindness === "None") setColorBlindnessVisible(false);
+        else setColorBlindnessVisible(true);
     }, [colorBlindness, harmony, lock0, lock1, lock2, lock3, lock4]);
 
 
     useEffect(() => {
-        if(medium === "Default") {
-            setMediumVisible(false);
-            if (colorBlindness !== "None") setColorBlindnessVisible(true);
-        }
-        else {
-            setMediumVisible(true);
-            setColorBlindnessVisible(false);
-        }
+        if(medium === "Default") setMediumVisible(false);
+        else setMediumVisible(true);
      }, [medium, harmony, lock0, lock1, lock2, lock3, lock4]);
 
     function renderBlindColors(){
