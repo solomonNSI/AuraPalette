@@ -140,7 +140,7 @@ export const ColorBlindColors = styled.div`
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    height: 140px;
+    height: 145px;
 
     &.dark {
       background-color: #000000;
