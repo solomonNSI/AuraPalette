@@ -24,13 +24,6 @@ export const Container = styled.div`
   }
 `;
 
-export const InnerContainer = styled.div`
-  height: calc(100vh - 230px);
-  overflow-x: hidden;
-  overflow-y: auto;
-
-`;
-
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
