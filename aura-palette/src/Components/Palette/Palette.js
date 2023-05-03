@@ -249,7 +249,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 </S.LockDisplay>
 
                 <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(0) }} visible={visibility[0]}>
-                    <S.EditColorText>Edit Color</S.EditColorText>
+                    <span>Edit Color</span>
                 </S.EditDisplay>
                 <EditCanvas id={0} color={palette[0]} setEditedColor={setEditedColor} visible={visibility[0]} />
             </S.Color>

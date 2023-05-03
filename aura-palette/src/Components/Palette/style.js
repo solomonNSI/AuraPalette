@@ -577,13 +577,3 @@ export const EditDisplay = styled.div`
     }
   }
 `;
-
-
-export const EditColorText = styled.div`
-    ${({ visible }) => {
-        return css`
-            /* visibility: ${visible ? 'visible' : 'none'};
-            display: ${visible ? '' : 'none'}; */
-        `;
-    }}
-`;
