@@ -49,7 +49,6 @@ export const Container = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  zoom: 0.9;
 
   @media screen and (max-width: 900px) {
     margin-bottom: 8px;

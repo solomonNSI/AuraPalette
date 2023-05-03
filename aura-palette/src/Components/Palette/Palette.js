@@ -217,7 +217,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     return (
     <S.Container className = {DarkMode}>
-        <S.InnerContainer className = {DarkMode}>
         <S.MainPalette className = {DarkMode}>
         <S.Header className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
@@ -380,7 +379,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 </S.ColorBlindPalette>
             </S.MediumColors>
         </S.OtherPalettes>
-        </S.InnerContainer>
     </S.Container>
   );
 };
