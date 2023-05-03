@@ -37,6 +37,7 @@ export const MainPalette = styled.div`
   height: 440px;
   padding: 20px;
   margin-bottom: 20px;
+  overflow: hidden;
 
   &.dark {
     background-color: #000000;
