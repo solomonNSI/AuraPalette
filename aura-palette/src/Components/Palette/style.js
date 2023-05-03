@@ -161,6 +161,7 @@ export const ColorBlindColors = styled.div`
   ${({ visible }) => {
         return css`
             visibility: ${visible ? 'visible' : 'none'};
+            display: ${visible ? '' : 'none'};
         `;
   }}
 
