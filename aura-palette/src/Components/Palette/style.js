@@ -537,20 +537,23 @@ export const LockDisplay = styled.div`
 export const EditDisplay = styled.div`
   cursor: pointer;
   background-color: #eee;
-  color: #333;
   margin-top: 10px;
-  height: 100px;
   border: 1px dashed #aaaaaa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   top: 105%;
   border-radius: 8px 8px 8px 8px;
-  padding-top: 70px;
-  padding-bottom: 70px;
   font-size: 16px;
   font-weight: 400;
+  display: flex;
+  justify-content: center;
+
+  ${({ visible }) => {
+        return css`
+            align-items: ${visible ? '' : 'center'}; 
+            padding-top: ${visible ? '8px' : ''}; 
+             min-height: ${visible ? '142px' : '150px'};;
+        `;
+    }}
 
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -573,4 +576,14 @@ export const EditDisplay = styled.div`
       background-color: #444444;
     }
   }
+`;
+
+
+export const EditColorText = styled.div`
+    ${({ visible }) => {
+        return css`
+            /* visibility: ${visible ? 'visible' : 'none'};
+            display: ${visible ? '' : 'none'}; */
+        `;
+    }}
 `;
