@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CopyIcon } from "../../Icons/CopyIcon";
 import { LockIcon } from "../../Icons/LockIcon";
-import { EditIcon } from "../../Icons/EditIcon";
 import * as S from "./style";
 import {
   hexToHSLWriter,
@@ -352,6 +351,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
         <S.OtherPalettes className = {DarkMode}>
             {/* COLOR BLIND PALETTE */}
+            <S.ColorBlindColors className = {DarkMode} visible={!colorBlindnessVisible}>
+                <S.PaletteTitle className = {DarkMode}>Please select a color blindness from the adjustments menu</S.PaletteTitle>
+            </S.ColorBlindColors>
             <S.ColorBlindColors className = {DarkMode} visible={colorBlindnessVisible}>
                 <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
                 <S.ColorBlindPalette>
@@ -360,6 +362,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             </S.ColorBlindColors>
 
             {/* MEDIUMS PALETTE */}
+            <S.MediumColors className = {DarkMode} visible={!mediumVisible}>
+                <S.PaletteTitle className = {DarkMode}>Please select a medium from the adjustments menu</S.PaletteTitle>
+            </S.MediumColors>
             <S.MediumColors className = {DarkMode} visible={mediumVisible}>
                 <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
                 <S.ColorBlindPalette>
