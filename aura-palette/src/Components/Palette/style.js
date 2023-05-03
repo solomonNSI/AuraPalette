@@ -28,7 +28,6 @@ export const InnerContainer = styled.div`
   height: calc(100vh - 230px);
   overflow-x: hidden;
   overflow-y: auto;
-
 `;
 
 export const MainPalette = styled.div`  
@@ -38,6 +37,7 @@ export const MainPalette = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;
+  zoom: 0.9;
 
   &.dark {
     background-color: #000000;
@@ -56,6 +56,8 @@ export const OtherPalettes = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+
+  zoom: 0.8;
 
   @media screen and (max-width: 900px) {
     flex-direction: column;
