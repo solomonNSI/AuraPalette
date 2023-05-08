@@ -21,7 +21,8 @@ class Solver(object):
     def prepare_dict(self):
         input_dict = Dictionary()
         print( os.getcwd())
-        src_path = os.path.join('C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/all_names.pkl')
+        base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
+        src_path = os.path.join(base_path, 'data/hexcolor_vf/all_names.pkl')
         with open(src_path, 'rb') as f:
             text_data = pickle.load(f)
             f.close()
@@ -59,7 +60,8 @@ class Solver(object):
             self.train_loader, _ = t2p_loader(self.args.batch_size, self.input_dict)
 
             # Load pre-trained GloVe embeddings.
-            emb_file = os.path.join('C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
+            base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
+            emb_file = os.path.join(base_path, 'data', 'Color-Hex-vf.pth')
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:
@@ -96,7 +98,8 @@ class Solver(object):
             self.input_dict = self.prepare_dict()
 
             # Load pre-trained GloVe embeddings.
-            emb_file = os.path.join('C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
+            base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
+            emb_file = os.path.join(base_path, 'data', 'Color-Hex-vf.pth')
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:

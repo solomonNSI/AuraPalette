@@ -11,7 +11,7 @@ const Login = ({DarkMode, setIsDarkMode}) => {
   function sendLoginInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/auth/signin/");
+    xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/signin/");
     
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
