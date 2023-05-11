@@ -82,6 +82,13 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                                     " | 3rd Color: " + displayPaletteColors(2) + 
                                     " | 4th Color: " + displayPaletteColors(3) + 
                                     " | 5th Color: " + displayPaletteColors(4));
+
+        document.getElementById("paletteCopy").style.setProperty("fill", "#64E225", "important")
+
+        setInterval(function(){
+            document.getElementById("paletteCopy").style.fill = "#333333";
+         }, 2000);
+
     }
 
     function updateLockArray(index) {
@@ -219,7 +226,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
             <S.StyledStarIcon className = {DarkMode} height="20px" />
-            <S.StyledExportIcon className = {DarkMode} height="20px" onClick={copyPaletteColors} />
+            <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
             <S.Color colorHex={palette[0]}>

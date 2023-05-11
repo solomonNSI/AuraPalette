@@ -1,6 +1,7 @@
 import React from "react";
 import { StarIcon } from "../../Icons/StarIcon";
 import styled, { css } from "styled-components";
+import { PaletteCopyIcon } from "../../Icons/PaletteCopyIcon";
 import { ExportIcon } from "../../Icons/ExportIcon";
 import { InfoIcon } from "../../Icons/InfoIcon";
 import { RateIcon } from "../../Icons/RateIcon";
@@ -530,6 +531,20 @@ export const StyledExportIcon = styled(ExportIcon)`
     }
   }
 `;
+
+export const StyledPaletteCopyIcon = styled(PaletteCopyIcon)`
+  cursor: pointer;
+  fill: #333333;
+  margin-top: 2px;
+
+  &.dark {
+    fill: #888888;
+  }
+  &:hover {
+      fill: #666;
+  }
+`;
+
 
 export const StyledInfoIcon = styled(InfoIcon)`
   margin: 2px -10px 0px 0px;
