@@ -155,8 +155,8 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
         <S.CheckboxLine className = {DarkMode}>
           <S.Texts>
-            <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
-            <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
+            <S.Subtitle className = {DarkMode}>Incognito Mode</S.Subtitle>
+            <S.Explanation className = {DarkMode}>When enabled, the palette history will not be saved anymore.</S.Explanation>
           </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>
@@ -166,8 +166,8 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
         <S.CheckboxLine className = {DarkMode}>
           <S.Texts>
-            <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
-            <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
+            <S.Subtitle className = {DarkMode}>Always Use Dark Mode</S.Subtitle>
+            <S.Explanation className = {DarkMode}>Change the default theme to dark from light.</S.Explanation>
           </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>
