@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./style";
 
 export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, DarkMode, adjustmentsEnabled }) => {
+  const [colorBlindEnabled, setColorBlindEnabled] = useState(false);
+  const [mediumEnabled, setMediumEnabled] = useState(false);
+
+  function toggleColorBlind() {
+    if(colorBlindEnabled)
+      setColorBlindEnabled(false);
+    else
+      setColorBlindEnabled(true);
+  }
+  
+  function toggleMedium() {
+    if(mediumEnabled)
+      setMediumEnabled(false);
+    else
+      setMediumEnabled(true);
+  }
+
 
   return (
     <S.MenuContainer style = {adjustmentsEnabled ? {display: "block"} : {display: "none"}} className = {DarkMode}>
@@ -59,8 +76,11 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
         </div>
 
         <div>
-            <S.Subtitle className = {DarkMode}>Medium</S.Subtitle>
-
+            <S.Subtitle className = {DarkMode} onClick={toggleMedium}>Medium
+            <span className= "arrow" style={{display: mediumEnabled ? "none" : "inline" }}>&#9660;</span>
+            <span className= "arrow" style={{display: mediumEnabled ? "inline" : "none" }}>&#9650;</span>
+            </S.Subtitle>
+            <div style = {{display: mediumEnabled ? "block" : "none" }}>
             <S.Container className = {DarkMode}>
             <input className = {DarkMode} type="radio" name="medium" defaultChecked onChange={() => setMedium("Default")}></input>
             Default
@@ -84,11 +104,15 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
             Video
             <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
+            </div>
         </div>
 
         <div>
-            <S.Subtitle className = {DarkMode}>Color Blindness</S.Subtitle>
-
+            <S.Subtitle className = {DarkMode} onClick={toggleColorBlind}>Color Blindness   
+              <span className= "arrow" style={{display: colorBlindEnabled ? "none" : "inline" }}>&#9660;</span>
+              <span className= "arrow" style={{display: colorBlindEnabled ? "inline" : "none" }}>&#9650;</span>
+            </S.Subtitle>
+            <div style = {{display: colorBlindEnabled ? "block" : "none" }}>
             <S.Container className = {DarkMode}>
             <input className = {DarkMode} type="radio" name="colorblind" defaultChecked onChange={() => setColorBlindness("None")} />
             None
@@ -142,6 +166,7 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
             Achromatomaly
             <S.Checkmark className={`checkmark ${DarkMode}`}></S.Checkmark>
             </S.Container>
+            </div>
         </div>
     </S.MenuContainer>
   );
