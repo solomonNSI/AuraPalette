@@ -4,7 +4,7 @@ import { NAVBAR_HEIGHT } from "../../Components/NavBar/style";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height: 100vh;
+  height: 100svh;
   overflow: hidden;
 
   &.dark {
@@ -17,6 +17,7 @@ export const Content = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   width: calc(100%-130px);
 
   &.dark {
@@ -52,6 +53,10 @@ export const Title = styled.div`
     }
   }
 
+  @media screen and (max-width: 1200px) {
+    font-size: 28px;
+  }
+
   @media screen and (max-width: 900px) {
     font-size: 24px;
   }
@@ -80,7 +85,7 @@ export const SearchBar = styled.input`
 
   @media screen and (max-width: 900px) {
     height: 40px;
-    font-size: 14px;
+    font-size: 1px;
 
   }
 
