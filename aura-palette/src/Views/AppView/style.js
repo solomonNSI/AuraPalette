@@ -152,6 +152,8 @@ export const Search = styled.button`
 export const AdjustmentsClosed = styled.div`
   display: none;
 
+  
+
   @media screen and (max-width: 900px) {
     display: flex;
     width: 50px;
@@ -172,6 +174,9 @@ export const AdjustmentsClosed = styled.div`
       writing-mode: vertical-rl;
       text-orientation: mixed;
       transform: rotate(180deg);
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
     }
 
     &.dark {

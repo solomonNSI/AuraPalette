@@ -31,13 +31,19 @@ export const MainPalette = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;
+  zoom: 0.9;
 
   &.dark {
     background-color: #000000;
   }
 
   @media screen and (max-width: 600px) {
-    height: 220px; // Mobile edit display:none
+    height: 260px; // Mobile edit display:none
+    zoom: 0.7;
+  }
+
+  @media screen and (max-width: 400px) {
+    height: 310px; // Mobile edit display:none
   }
 `;
 
@@ -45,7 +51,7 @@ export const OtherPalettes = styled.div`
   height: auto;
   border-radius: 8px;
   margin-top: 0px;
-
+  zoom: 0.9;
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -53,6 +59,10 @@ export const OtherPalettes = styled.div`
   @media screen and (max-width: 900px) {
     flex-direction: column;
   }  
+
+  @media screen and (max-width: 600px) {
+    zoom: 0.7;
+  }
 
 `;
 
@@ -140,7 +150,7 @@ export const ColorBlindColors = styled.div`
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    height: 145px;
+    height: 120px;
 
     &.choose {
       border: 1px dashed grey;
@@ -164,7 +174,7 @@ export const ColorBlindColors = styled.div`
 
     @media screen and (max-width: 900px) {
       width: auto;
-      height: 190px;
+      height: 100px;
     }  
 
   ${({ visible }) => {
@@ -183,7 +193,8 @@ export const ColorBlindColors = styled.div`
     }  
 
     @media screen and (max-width: 900px) {
-      font-size: 18px;
+      font-size: 16px;
+      font-weight: 400;
     }  
   }
 `;
@@ -193,6 +204,11 @@ export const MediumColors = styled(ColorBlindColors)`
   &.dark {
     background-color: #000000;
   }
+
+  @media screen and (max-width: 900px) {
+    width: auto;
+    height: 100px;
+  }  
 `;
 
 export const ColorBlindPalette = styled.div`
@@ -214,6 +230,11 @@ export const Color = styled.div`
   border-radius: 8px 8px 0px 0px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 900px) {
+    height: 150%;
+
+  }
 `;
 
 export const ColorCode = styled.div`
@@ -227,13 +248,16 @@ export const ColorCode = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 14px;
-
-  @media only screen and (min-width: 1250px) {
-    font-size: 16px;
-  }
+  text-align: center;
 
   @media screen and (max-width: 900px) {
     font-size: 12px;
+
+    p {
+      max-width: 10px;
+    }
+    
+
   }
 
   @media screen and (max-width: 600px) {
