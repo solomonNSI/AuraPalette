@@ -211,7 +211,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>CHATGPT'S COMMENTS AND EXPLANATIONS ABOUT WHY IT GAVE THIS PALETTE AND COLORS.</S.Info>
             
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
-            <S.Rate className = "slidecontainer" style = {{display: rateEnabled ? "flex" : "none" }}>
+            <S.Rate className = {`slidecontainer ${DarkMode}`} style = {{display: rateEnabled ? "flex" : "none" }}>
                 <div>
                     <p>Rate This Palette</p>
                     <div>

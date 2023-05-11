@@ -286,7 +286,7 @@ export const Info = styled.div`
   z-index: 10;
 
   &.dark {
-    background-color: #444;
+    background-color: #666;
     color: white;
   }
 `;
@@ -305,6 +305,14 @@ export const Rate = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+
+  &.dark {
+    background-color: #666;
+
+    p {
+      color: white;
+    }
+  }
 
   #feedbackButton {
     :disabled {
@@ -360,11 +368,6 @@ export const Rate = styled.div`
     height: 28px; /* Slider handle height */
     background: #333; /* Green background */
     cursor: pointer; /* Cursor on hover */
-  }
-
-  &.dark {
-    background-color: #444;
-    color: white;
   }
 
   display: flex;
