@@ -59,6 +59,20 @@ export const AppName = styled.div`
   font-weight: 700;
   letter-spacing: -0.05em;
   cursor: pointer;
+
+  &:hover {
+    color: black;
+    animation: colorAnimation 2s ease-in infinite;
+  }
+
+  @keyframes colorAnimation {
+    0% { color: #F31F1F; }
+    20% { color: #F38A27; }
+    40% { color: #DDBF24; }
+    60% { color: #52D635; }
+    80% { color: #3AA5CF; }
+    100% { color: #9C5FEF; }
+  }
   
   @media screen and (max-width: 600px) {
     font-size: 38px;
