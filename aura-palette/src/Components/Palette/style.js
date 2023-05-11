@@ -10,7 +10,7 @@ export const Container = styled.div`
   border-radius: 8px;
   width: 80%;
   margin-right: 4%;
-  height: calc(100vh - 260px);
+  height: calc(100svh - 260px);
   overflow: auto;
 
   @media screen and (max-width: 900px) {
@@ -27,7 +27,7 @@ export const Container = styled.div`
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
-  height: calc(100svh - 240px);
+  height: 440px;
   padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;
@@ -249,6 +249,8 @@ export const ColorCode = styled.div`
   justify-content: center;
   font-size: 14px;
   text-align: center;
+  user-select: text;
+
 
   @media screen and (max-width: 900px) {
     font-size: 12px;
