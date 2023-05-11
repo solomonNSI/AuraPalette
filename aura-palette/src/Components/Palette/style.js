@@ -27,7 +27,7 @@ export const Container = styled.div`
   }
 
   @media screen and (max-height: 400px) {
-    height: calc(100svh - 150px);
+    height: calc(100svh - 130px);
   }
 `;
 

@@ -45,6 +45,11 @@ export const Settings = styled.div`
     margin: 85px 4px 0px 0px;
   }
 
+  @media screen and (max-height: 400px) {
+    margin: 70px 4px 0px 0px;
+    height: calc(100% - 132px);
+  }
+
   &.dark {
     background-color: #333;
   }
@@ -80,6 +85,10 @@ export const SettingsClosed = styled.div`
         color: #ddd;
       }
       
+    }
+
+    @media screen and (max-height: 400px) {
+      margin: 70px 4px 20px 4%;
     }
   }
   
@@ -140,6 +149,10 @@ export const SettingsBackground = styled.div`
 
   @media screen and (max-width: 600px) {
     margin: 85px 4% 20px 6px;
+  }
+
+  @media screen and (max-height: 400px) {
+    margin: 70px 4% 20px 6px;
   }
 
   &.dark {

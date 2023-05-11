@@ -24,6 +24,7 @@ export const Background = styled.div`
   background-color: #dddddd;
   margin: 100px 0px 35px;
   height: auto;
+  zoom: 0.8;
 
   &.dark {
     background-color: #333333;
@@ -154,6 +155,7 @@ export const Title = styled.div`
 `;
 
 export const BackButton = styled.button`
+    display: none; // until we decide
     position: fixed;
     right: 91%;
     bottom: 80%;

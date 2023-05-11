@@ -40,10 +40,10 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  padding-top: ${NAVBAR_HEIGHT + 30}px;
+  padding-top: ${NAVBAR_HEIGHT + 20}px;
   text-align: center;
   margin: 10px 65px 0px 65px;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 300;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 
@@ -99,7 +99,7 @@ export const SearchBar = styled.input`
   }
 
   @media screen and (max-height: 400px) {
-    margin-top: 85px;
+    margin-top: 70px;
   }
 
   :focus {
@@ -192,7 +192,7 @@ export const AdjustmentsClosed = styled.div`
     height: calc(100svh - 240px);
 
     @media screen and (max-height: 400px) {
-      height: calc(100svh - 150px);
+      height: calc(100svh - 130px);
     }
 
     div {

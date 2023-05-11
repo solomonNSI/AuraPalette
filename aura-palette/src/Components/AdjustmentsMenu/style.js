@@ -34,7 +34,7 @@ export const MenuContainer = styled.div`
   }
   
   @media screen and (max-height: 400px) {
-    height: calc(100svh - 190px) !important;
+    height: calc(100svh - 170px) !important;
   }
 `;
 
