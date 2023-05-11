@@ -6,7 +6,7 @@ import { MoonIcon } from "../../Icons/MoonIcon";
 
 
 
-export const NAVBAR_HEIGHT = 55;
+export const NAVBAR_HEIGHT = 65;
 
 export const NavBar = styled.div`
   background-color: #dddddd;

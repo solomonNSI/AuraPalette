@@ -4,8 +4,9 @@ import { NAVBAR_HEIGHT } from "../../Components/NavBar/style";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height: 100svh;
   overflow: hidden;
+  height: 100svh;
+  max-height: -webkit-fill-available;
 
   &.dark {
     background-color: #222222;
@@ -18,8 +19,6 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  width: calc(100%-130px);
-
   &.dark {
     background-color: #222222;
   }
