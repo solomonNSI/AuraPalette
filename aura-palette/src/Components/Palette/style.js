@@ -27,7 +27,7 @@ export const Container = styled.div`
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
-  height: 440px;
+  height: calc(100svh - 240px);
   padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;

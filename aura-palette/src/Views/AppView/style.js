@@ -163,8 +163,6 @@ export const Search = styled.button`
 export const AdjustmentsClosed = styled.div`
   display: none;
 
-  
-
   @media screen and (max-width: 900px) {
     display: flex;
     width: 50px;
@@ -173,6 +171,7 @@ export const AdjustmentsClosed = styled.div`
     background-color: #dddddd;
     border-radius: 8px;
     overflow: auto;
+    height: calc(100svh - 240px);
 
     div {
       width: 50px;

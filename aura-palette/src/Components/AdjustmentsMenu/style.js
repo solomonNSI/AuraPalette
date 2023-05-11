@@ -12,7 +12,7 @@ export const MenuContainer = styled.div`
   background-color: #dddddd;
   border-radius: 8px;
   padding: 20px;
-  height: calc(100vh - 298px);
+  height: calc(100svh - 298px);
 
   &.dark {
     background-color: #333;
@@ -27,7 +27,7 @@ export const MenuContainer = styled.div`
     left: calc(4% + 50px);
     width: 40%;
     border: 2px solid #aaaaaa;
-    height: calc(100vh - 282px);
+    height: calc(100svh - 282px);
     z-index: 99;
     display: none;
     margin: 0px 4px 0px 0px;
@@ -150,8 +150,11 @@ export const Title = styled.h2`
 export const Subtitle = styled.h3`
   font-weight: 500;
   margin: 12px 0px 10px 0px;
-  cursor: pointer;
   zoom: 0.9;
+
+  &.pointer {
+    cursor: pointer;
+  }
 
   .arrow {
     margin-left: 8px;

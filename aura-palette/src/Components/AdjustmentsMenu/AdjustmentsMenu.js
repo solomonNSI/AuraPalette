@@ -76,7 +76,7 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
         </div>
 
         <div>
-            <S.Subtitle className = {DarkMode} onClick={toggleMedium}>Medium
+            <S.Subtitle className = {`pointer ${DarkMode}`} onClick={toggleMedium}>Medium
             <span className= "arrow" style={{display: mediumEnabled ? "none" : "inline" }}>&#9660;</span>
             <span className= "arrow" style={{display: mediumEnabled ? "inline" : "none" }}>&#9650;</span>
             </S.Subtitle>
@@ -108,7 +108,7 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
         </div>
 
         <div>
-            <S.Subtitle className = {DarkMode} onClick={toggleColorBlind}>Color Blindness   
+            <S.Subtitle className = {`pointer ${DarkMode}`} onClick={toggleColorBlind}>Color Blindness   
               <span className= "arrow" style={{display: colorBlindEnabled ? "none" : "inline" }}>&#9660;</span>
               <span className= "arrow" style={{display: colorBlindEnabled ? "inline" : "none" }}>&#9650;</span>
             </S.Subtitle>
