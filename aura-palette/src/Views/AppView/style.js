@@ -14,7 +14,7 @@ export const AppBackground = styled.div`
 
 export const Content = styled.div`
   background-color: #eeeeee;
-  font-family: Helvetica Neue;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   display: flex;
   flex-direction: column;
   width: calc(100%-130px);
@@ -55,7 +55,8 @@ export const Title = styled.div`
   margin: 10px 65px 0px 65px;
   font-size: 36px;
   font-weight: 300;
-  font-family: Helvetica;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+
 
   &.dark {
     color: #dddddd;
@@ -131,7 +132,7 @@ export const TopKeywords = styled.div`
 
 export const TopSearch = styled.div`
   font-size: 14px;
-  font-family: Helvetica Neue;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   margin: 0 16px;
   font-weight: 300;
   display: flex;

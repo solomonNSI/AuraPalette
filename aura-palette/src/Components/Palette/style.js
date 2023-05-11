@@ -142,6 +142,22 @@ export const ColorBlindColors = styled.div`
     padding: 20px;
     height: 145px;
 
+    &.choose {
+      border: 1px dashed grey;
+      background-color: #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .chooseText {
+        color: #555555;
+        font-weight: 400;
+        text-align: center;
+        max-width: 300px;
+        margin: 0;
+      }
+    }
+
     &.dark {
       background-color: #000000;
     }
@@ -383,7 +399,7 @@ export const Rate = styled.div`
     }
 
     textarea {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
       background-color: #eeeeee;
       height: 80px;
       border-radius: 4px;
