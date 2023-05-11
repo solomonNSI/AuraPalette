@@ -11,9 +11,12 @@ import json
 @api_view(["POST"])
 def give_feedback(request, *args, **kwargs):
     data=request.data
+    token = request.headers.get('Authorization')
+    token = token.partition(' ')[2]
+    token = token[1:-1]
 
     new_feedback = PaletteFeedback()
-    new_feedback.query = data.get('color1')
+    new_feedback.query = data.get('query')
     new_feedback.color1 = data.get('color1')
     new_feedback.color2 = data.get('color2')
     new_feedback.color3 = data.get('color3')
@@ -26,7 +29,7 @@ def give_feedback(request, *args, **kwargs):
     json_feedback = json_feedback[0]
     json_feedback_info = json_feedback['fields']
 
-    DatabaseAPI.db.child("palette_feedbacks").set(json_feedback_info)
+    DatabaseAPI.db.child("palette_feedbacks").set(json_feedback_info, token)
 
     return Response({'message': 'Palette feedback saved to Firebase'})
 

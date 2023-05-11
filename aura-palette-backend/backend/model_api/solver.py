@@ -21,7 +21,7 @@ class Solver(object):
     def prepare_dict(self):
         input_dict = Dictionary()
         print( os.getcwd())
-        src_path = os.path.join('C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/all_names.pkl')
+        src_path = os.path.join('D:/GitHub Repositories/CS491-492/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/all_names.pkl')
         with open(src_path, 'rb') as f:
             text_data = pickle.load(f)
             f.close()
@@ -59,7 +59,7 @@ class Solver(object):
             self.train_loader, _ = t2p_loader(self.args.batch_size, self.input_dict)
 
             # Load pre-trained GloVe embeddings.
-            emb_file = os.path.join('C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
+            emb_file = os.path.join('D:/GitHub Repositories/CS491-492/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:
@@ -96,12 +96,12 @@ class Solver(object):
             self.input_dict = self.prepare_dict()
 
             # Load pre-trained GloVe embeddings.
-            emb_file = os.path.join('C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
+            emb_file = os.path.join('D:/GitHub Repositories/CS491-492/AuraPalette/aura-palette-backend/backend/model_api/data', 'Color-Hex-vf.pth')
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:
                 W_emb = load_pretrained_embedding(self.input_dict.word2index,
-                                                  'C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/glove.840B.300d.txt',
+                                                  'D:/GitHub Repositories/CS491-492/AuraPalette/aura-palette-backend/backend/model_api/data/glove.840B.300d.txt',
                                                   300)
                 W_emb = torch.from_numpy(W_emb)
                 torch.save(W_emb, emb_file)

@@ -53,8 +53,8 @@ function App({ DarkMode, setIsDarkMode }) {
   async function sendQuery(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/model/getpalette/");
-
+    //xmlhttp.open("POST", "https://arm-vhxzdlegrq-ew.a.run.app/model/getpalette/");
+    xmlhttp.open("POST", "http://127.0.0.1:8000/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query + '"}';
     xmlhttp.onload  = function() {

@@ -175,9 +175,9 @@ def test_loader(dataset, batch_size, input_dict):
 
     if dataset == 'bird256':
 
-        txt_path = 'C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/test_names.pkl'
-        pal_path = 'C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/test_palettes_rgb.pkl'
-        img_path = 'C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/bird256/test_palette/test_images_origin.txt'
+        txt_path = 'D:/GitHub Repositories/CS491-492/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/test_names.pkl'
+        pal_path = 'D:/GitHub Repositories/CS491-492/AuraPalette/aura-palette-backend/backend/model_api/data/hexcolor_vf/test_palettes_rgb.pkl'
+        img_path = 'D:/GitHub Repositories/CS491-492/AuraPalette/aura-palette-backend/backend/model_api/data/bird256/test_palette/test_images_origin.txt'
 
         test_dataset = Test_Dataset(input_dict, txt_path, pal_path, img_path)
         test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
