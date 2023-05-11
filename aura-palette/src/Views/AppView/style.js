@@ -8,6 +8,11 @@ export const AppBackground = styled.div`
   height: 100svh;
   max-height: -webkit-fill-available;
 
+  @supports (height: 100dvh) {
+      max-height: calc(100svh);
+      max-height: -webkit-fill-available;
+  }
+
   &.dark {
     background-color: #222222;
   }
