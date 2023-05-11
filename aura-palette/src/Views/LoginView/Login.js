@@ -35,6 +35,7 @@ const Login = ({DarkMode, setIsDarkMode}) => {
       <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
 
       <S.Background className = {DarkMode}>
+        <S.BackButton onClick={() => navigate("/")}>go back</S.BackButton>
         <S.LoginInside>
           <S.Title className = {DarkMode}>Login to Aura.</S.Title>
 

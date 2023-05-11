@@ -51,8 +51,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             document.getElementById("feedbackButton").style.backgroundColor = "#333333";
             document.getElementById("feedbackButton").style.color = "#ffffff";
          }, 3000);
-
-
     }
 
     function showInfo() {
@@ -78,12 +76,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     function copyPaletteColors(){
-    navigator.clipboard.writeText("Query: " + query +
+        navigator.clipboard.writeText("Query: " + query +
                                     " | 1st Color: " + displayPaletteColors(0) + 
                                     " | 2nd Color: " + displayPaletteColors(1) + 
                                     " | 3rd Color: " + displayPaletteColors(2) + 
                                     " | 4th Color: " + displayPaletteColors(3) + 
-                                    " | 5th Color: " + displayPaletteColors(4))
+                                    " | 5th Color: " + displayPaletteColors(4));
     }
 
     function updateLockArray(index) {
@@ -154,26 +152,22 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         else setColorBlindnessVisible(true);
     }, [colorBlindness, harmony, lock0, lock1, lock2, lock3, lock4]);
 
-
+    // TODO: When you change color blindness mode, colors in “medium” part also changes (not the type, color itself)
     useEffect(() => {
-        if(medium === "Default") setMediumVisible(false);
+        if(medium === "Default") setMediumVisible(false); // changing this false to true fixes the issue? but it's not the behaviour we want
         else setMediumVisible(true);
-     }, [medium, harmony, lock0, lock1, lock2, lock3, lock4]);
+     }, [medium, lock0, lock1, lock2, lock3, lock4]);
 
     function renderBlindColors(){
         var blindColors = [];
         for (var i = 0; i < 5; i++) {
             blindColors.push(
-                <S.Color colorHex={getColorBlindSimulation(palette[i], colorBlindness)}>
+                <S.Color key={i} colorHex={getColorBlindSimulation(palette[i], colorBlindness)}>
                     <S.ColorCode>
-                    {getColorBlindSimulation(palette[i], colorBlindness)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(i));
-                        }}
-                        >
-                        <CopyIcon />
-                        </S.Copy>
+                        {getColorBlindSimulation(palette[i], colorBlindness)}
+                        {/* <S.Copy onClick={() => { navigator.clipboard.writeText(getColorBlindSimulation(palette[i], colorBlindness))}} >
+                            <CopyIcon />
+                        </S.Copy> */}
                     </S.ColorCode>
                 </S.Color>
             );
@@ -188,13 +182,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 <S.Color colorHex={getColorForMedium(palette[i], medium)}>
                     <S.ColorCode>
                     {getColorForMedium(palette[i], medium)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(i));
-                        }}
-                        >
+                        {/* <S.Copy onClick={() => { navigator.clipboard.writeText(displayPaletteColors(i)); }}  >
                         <CopyIcon />
-                        </S.Copy>
+                        </S.Copy> */}
                     </S.ColorCode>
                 </S.Color>
             );
@@ -208,26 +198,28 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.Header className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
-            <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>CHATGPT'S COMMENTS AND EXPLANATIONS ABOUT WHY IT GAVE THIS PALETTE AND COLORS.</S.Info>
+            <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>Comments of ChatGPT</S.Info>
             
+
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
-            <S.Rate className = "slidecontainer" style = {{display: rateEnabled ? "flex" : "none" }}>
+            <S.Rate className = {`slidecontainer ${DarkMode}`} style = {{display: rateEnabled ? "flex" : "none" }}>
                 <div>
                     <p>Rate This Palette</p>
                     <div>
                         <input type="range" min="1" max="5" value={sliderValue} onChange={(e) => setSliderValue(e.target.value)} className="slider" id="myRange"></input>
                         <p>{sliderValue}</p>
                     </div>
-
                     <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
                     <button id="feedbackButton" disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
                 </div>
             </S.Rate>
+
+
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
-            <span>Color Mode: </span> {colorMode}
+                <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
             <S.StyledStarIcon className = {DarkMode} height="20px" />
-            <S.StyledExportIcon className = {DarkMode} onClick={copyPaletteColors} height="20px" />
+            <S.StyledExportIcon className = {DarkMode} height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
             <S.Color colorHex={palette[0]}>
@@ -248,8 +240,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     {lock0}
                 </S.LockDisplay>
 
-                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(0) }}>
-                    <div>Edit Color</div>
+                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(0) }} visible={visibility[0]}>
+                    <span>Edit Color</span>
                 </S.EditDisplay>
                 <EditCanvas id={0} color={palette[0]} setEditedColor={setEditedColor} visible={visibility[0]} />
             </S.Color>
@@ -271,7 +263,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock1}
                 </S.LockDisplay>
-                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(1) }}>
+                <S.EditDisplay className = {DarkMode} visible={visibility[1]} onClick={() => { updateEditedColor(1) }}>
                     <span>Edit Color</span>
                 </S.EditDisplay>
                 <EditCanvas id={1} color={palette[1]} setEditedColor={setEditedColor} visible={visibility[1]}/>
@@ -295,7 +287,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock2}
                 </S.LockDisplay>
-                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(2) }}>
+                <S.EditDisplay className = {DarkMode} visible={visibility[2]} onClick={() => { updateEditedColor(2) }}>
                     <span>Edit Color</span>
                 </S.EditDisplay>
                 <EditCanvas id={2} color={palette[2]} setEditedColor={setEditedColor} visible={visibility[2]}/>
@@ -318,7 +310,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock3}
                 </S.LockDisplay>
-                <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(3) }}>
+                <S.EditDisplay className = {DarkMode} visible={visibility[3]} onClick={() => { updateEditedColor(3) }}>
                     <span>Edit Color</span>
                 </S.EditDisplay>
                 <EditCanvas id={3} color={palette[3]} setEditedColor={setEditedColor} visible={visibility[3]}/>
@@ -341,7 +333,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     </S.Lock>
                     {lock4}
                     </S.LockDisplay>
-                    <S.EditDisplay className = {DarkMode} onClick={() => { updateEditedColor(4) }}>
+                    <S.EditDisplay className = {DarkMode} visible={visibility[4]} onClick={() => { updateEditedColor(4) }}>
                     <span>Edit Color</span>
                 </S.EditDisplay>
                 <EditCanvas id={4} color={palette[4]} setEditedColor={setEditedColor} visible={visibility[4]}/>
@@ -351,8 +343,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
         <S.OtherPalettes className = {DarkMode}>
             {/* COLOR BLIND PALETTE */}
-            <S.ColorBlindColors className = {DarkMode} visible={!colorBlindnessVisible}>
-                <S.PaletteTitle className = {DarkMode}>Please select a color blindness from the adjustments menu</S.PaletteTitle>
+            <S.ColorBlindColors className={`choose ${DarkMode}`}  style = {{display: colorBlindnessVisible ? "none" : "flex" }}>
+                <S.PaletteTitle className={`chooseText ${DarkMode}`} >Please select a color blindness from the adjustments menu</S.PaletteTitle>
             </S.ColorBlindColors>
             <S.ColorBlindColors className = {DarkMode} visible={colorBlindnessVisible}>
                 <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
@@ -362,8 +354,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             </S.ColorBlindColors>
 
             {/* MEDIUMS PALETTE */}
-            <S.MediumColors className = {DarkMode} visible={!mediumVisible}>
-                <S.PaletteTitle className = {DarkMode}>Please select a medium from the adjustments menu</S.PaletteTitle>
+            <S.MediumColors className={`choose ${DarkMode}`} style = {{display: mediumVisible ? "none" : "flex" }}>
+                <S.PaletteTitle className={`chooseText ${DarkMode}`}>Please select a medium from the adjustments menu</S.PaletteTitle>
             </S.MediumColors>
             <S.MediumColors className = {DarkMode} visible={mediumVisible}>
                 <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>

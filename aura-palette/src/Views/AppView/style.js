@@ -14,7 +14,7 @@ export const AppBackground = styled.div`
 
 export const Content = styled.div`
   background-color: #eeeeee;
-  font-family: Helvetica Neue;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   display: flex;
   flex-direction: column;
   width: calc(100%-130px);
@@ -34,28 +34,14 @@ export const Container = styled.div`
   }
 `;
 
-export const GradientLine = styled.div`
-  background: linear-gradient(
-    90deg,
-    ${(props) => props.colorList[0]} 0%,
-    ${(props) => props.colorList[1]} 20.31%,
-    ${(props) => props.colorList[2]} 45.83%,
-    ${(props) => props.colorList[3]} 74.9%,
-    ${(props) => props.colorList[4]} 100%
-  );
-  height: 5px;
-  width: 100%;
-  position: fixed;
-  top: ${NAVBAR_HEIGHT}px; ;
-`;
-
 export const Title = styled.div`
   padding-top: ${NAVBAR_HEIGHT + 30}px;
   text-align: center;
   margin: 10px 65px 0px 65px;
   font-size: 36px;
   font-weight: 300;
-  font-family: Helvetica;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+
 
   &.dark {
     color: #dddddd;
@@ -94,6 +80,8 @@ export const SearchBar = styled.input`
 
   @media screen and (max-width: 900px) {
     height: 40px;
+    font-size: 14px;
+
   }
 
   :focus {
@@ -131,7 +119,7 @@ export const TopKeywords = styled.div`
 
 export const TopSearch = styled.div`
   font-size: 14px;
-  font-family: Helvetica Neue;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   margin: 0 16px;
   font-weight: 300;
   display: flex;
@@ -166,6 +154,8 @@ export const Search = styled.button`
 export const AdjustmentsClosed = styled.div`
   display: none;
 
+  
+
   @media screen and (max-width: 900px) {
     display: flex;
     width: 50px;
@@ -186,6 +176,9 @@ export const AdjustmentsClosed = styled.div`
       writing-mode: vertical-rl;
       text-orientation: mixed;
       transform: rotate(180deg);
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
     }
 
     &.dark {

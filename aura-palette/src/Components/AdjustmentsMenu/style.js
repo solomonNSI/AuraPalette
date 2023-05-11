@@ -49,6 +49,7 @@ export const Container = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  zoom: 0.9;
 
   @media screen and (max-width: 900px) {
     margin-bottom: 8px;
@@ -116,6 +117,7 @@ export const Checkmark = styled.span`
 export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 10px 0px;
+  zoom: 0.9;
 
   @media screen and (max-width: 900px) {
     font-size: 22px;
@@ -148,6 +150,13 @@ export const Title = styled.h2`
 export const Subtitle = styled.h3`
   font-weight: 500;
   margin: 12px 0px 10px 0px;
+  cursor: pointer;
+  zoom: 0.9;
+
+  .arrow {
+    margin-left: 8px;
+    font-size: 16px;
+  }
 
   &.dark {
     color: #ccc;

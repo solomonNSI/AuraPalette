@@ -152,3 +152,11 @@ export const Title = styled.div`
     margin-bottom: 10px;
   }
 `;
+
+export const BackButton = styled.button`
+    position: fixed;
+    right: 91%;
+    bottom: 80%;
+    height: 50px;
+    width: 50px;
+`;

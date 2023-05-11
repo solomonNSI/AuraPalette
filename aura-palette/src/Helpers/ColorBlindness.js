@@ -13,27 +13,46 @@ function multiply(vector, matrix) {
 
 //In RGB space 
 // Below matrices are taken from https://dev.to/ndesmic/exploring-color-math-through-color-blindness-2m2h
-const protanopiaRgb = [ // works
-    [0.1121, 0.8853, -0.0005, 0],
-    [0.1127, 0.8897, -0.0001, 0],
-    [0.0045, 0.0000, 1.0019, 0],
-    [0, 0, 0, 1]
-];
-const deuteranopiaRgb = [ // works
-    [0.2920, 0.7054, -0.0003, 0],
-    [0.2934, 0.7089, 0.0000, 0],
-    [-0.02098, 0.02559, 1.0019, 0],
-    [0, 0, 0, 1, 0]
-];
-const achromatopsia = [ // works
-    [ 0.21, 0.72, 0.07, 0],
-    [0.21, 0.72, 0.07, 0],
-    [0.21, 0.72, 0.07, 0],
-    [0, 0, 0, 1]
-];
+// const protanopiaRgb = [ // works
+//     [0.1121, 0.8853, -0.0005, 0],
+//     [0.1127, 0.8897, -0.0001, 0],
+//     [0.0045, 0.0000, 1.0019, 0],
+//     [0, 0, 0, 1]
+// ];
+// const deuteranopiaRgb = [ // works
+//     [0.2920, 0.7054, -0.0003, 0],
+//     [0.2934, 0.7089, 0.0000, 0],
+//     [-0.02098, 0.02559, 1.0019, 0],
+//     [0, 0, 0, 1, 0]
+// ];
+// const achromatopsia = [ // works
+//     [ 0.21, 0.72, 0.07, 0],
+//     [0.21, 0.72, 0.07, 0],
+//     [0.21, 0.72, 0.07, 0],
+//     [0, 0, 0, 1]
+// ];
 
 // Below are from https://gist.github.com/Lokno/df7c3bfdc9ad32558bb7
 // It also has matrices for protanopia, deuteranopia, achromatopsia (debatable which one is more accurate)
+const protanopiaRgb = [ 
+    [0.567,0.433,0.000, 0],
+    [0.558,0.442,0.000, 0],
+    [0.000,0.242,0.758, 0], 
+    [0, 0, 0, 1]
+];
+const deuteranopiaRgb = [ 
+    [0.625,0.375,0.000, 0],
+    [0.700,0.300,0.000, 0],
+    [0.000,0.300,0.700, 0],
+    [0, 0, 0, 1, 0]
+];
+const achromatopsia = [ 
+    [0.299,0.587,0.114, 0],
+    [0.299,0.587,0.114, 0],
+    [0.299,0.587,0.114, 0],
+    [0, 0, 0, 1]
+];
+
 const protanomaly = [
     [0.817,0.183,0.000, 0],
     [0.333,0.667,0.000, 0],
