@@ -19,7 +19,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   function logOut(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
-    xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/signout/");
+    xmlhttp.open("POST", "https://may11-vhxzdlegrq-uc.a.run.app/auth/signout/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
@@ -58,7 +58,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
   function historyList(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("GET", "https://model-vhxzdlegrq-uc.a.run.app/account/gethistory/");
+    xmlhttp.open("GET", "https://may11-vhxzdlegrq-uc.a.run.app/account/gethistory/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
     xmlhttp.onload  = function() {
