@@ -166,7 +166,7 @@ export const SettingsForeground = styled.div`
 
     div:last-child {
       button {
-        font-size: 12px;
+        font-size: 14px;
       }
       margin-left: 20px;
 
