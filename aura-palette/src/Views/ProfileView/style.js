@@ -97,7 +97,7 @@ export const Button = styled.button`
   color: #333333;
   display: flex;
   flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   text-align: left;
   overflow: hidden;
 
