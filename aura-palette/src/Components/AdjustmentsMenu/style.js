@@ -32,6 +32,10 @@ export const MenuContainer = styled.div`
     display: none;
     margin: 0px 4px 0px 0px;
   }
+  
+  @media screen and (max-height: 400px) {
+    height: calc(100svh - 190px) !important;
+  }
 `;
 
 
@@ -50,6 +54,11 @@ export const Container = styled.label`
   -ms-user-select: none;
   user-select: none;
   zoom: 0.9;
+
+  @media screen and (max-height: 400px) {
+    zoom: 0.8;
+  }
+
 
   @media screen and (max-width: 900px) {
     margin-bottom: 8px;
@@ -118,6 +127,7 @@ export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 10px 0px;
   zoom: 0.9;
+
 
   @media screen and (max-width: 900px) {
     font-size: 22px;

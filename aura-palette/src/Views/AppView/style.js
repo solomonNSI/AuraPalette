@@ -57,6 +57,10 @@ export const Title = styled.div`
     }
   }
 
+  @media screen and (max-height: 400px) {
+    display: none;
+  }
+
   @media screen and (max-width: 1200px) {
     font-size: 28px;
   }
@@ -87,10 +91,15 @@ export const SearchBar = styled.input`
   padding-left: 20px;
   margin: 20px 4% 0px 4%;
 
+  
+
   @media screen and (max-width: 900px) {
     height: 40px;
     font-size: 12px;
+  }
 
+  @media screen and (max-height: 400px) {
+    margin-top: 85px;
   }
 
   :focus {
@@ -110,6 +119,11 @@ export const SearchBar = styled.input`
   &::placeholder {
     font-weight: 400;
     color: #33333388;
+
+    @media screen and (max-height: 400px) {
+      color: black;
+      font-size: 16px;
+    }
   }
 `;
 
@@ -139,6 +153,10 @@ export const PaletteContainer = styled.div`
   display: flex;
   height: 600px;
   margin-top: 20px;
+
+  @media screen and (max-height: 400px) {
+    margin-top: 10px;
+  }
 
   @media screen and (max-width: 900px) {
     height: fit-content;
@@ -173,6 +191,10 @@ export const AdjustmentsClosed = styled.div`
     overflow: auto;
     height: calc(100svh - 240px);
 
+    @media screen and (max-height: 400px) {
+      height: calc(100svh - 150px);
+    }
+
     div {
       width: 50px;
       display: flex;
@@ -186,6 +208,9 @@ export const AdjustmentsClosed = styled.div`
       transform: rotate(180deg);
       @media screen and (max-width: 600px) {
         font-size: 16px;
+      }
+      @media screen and (max-height: 400px) {
+        font-size: 14px;
       }
     }
 

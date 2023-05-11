@@ -13,6 +13,8 @@ export const Container = styled.div`
   height: calc(100svh - 260px);
   overflow: auto;
 
+  
+
   @media screen and (max-width: 900px) {
     width: 90%;
     margin: 0px 4% 0px 10px;
@@ -21,6 +23,10 @@ export const Container = styled.div`
 
   @media screen and (max-width: 600px) {
     margin: 0px 4% 0px 2px;
+  }
+
+  @media screen and (max-height: 400px) {
+    height: calc(100svh - 150px);
   }
 `;
 
@@ -33,6 +39,10 @@ export const MainPalette = styled.div`
   overflow: hidden;
   zoom: 0.9;
 
+  @media screen and (max-height: 400px) {
+    zoom: 0.7;
+  }
+
   &.dark {
     background-color: #000000;
   }
@@ -40,6 +50,7 @@ export const MainPalette = styled.div`
   @media screen and (max-width: 600px) {
     height: 260px; // Mobile edit display:none
     zoom: 0.7;
+  
   }
 
   @media screen and (max-width: 400px) {
@@ -63,6 +74,10 @@ export const OtherPalettes = styled.div`
   @media screen and (max-width: 600px) {
     zoom: 0.7;
   }
+
+  @media screen and (max-height: 400px) {
+    zoom: 0.7;
+  } 
 
 `;
 
@@ -139,7 +154,7 @@ export const Colors = styled.div`
   gap: 10px;
   justify-content: space-between;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     height: 25%;
     gap: 4px;
   }
@@ -174,7 +189,7 @@ export const ColorBlindColors = styled.div`
 
     @media screen and (max-width: 900px) {
       width: auto;
-      height: 100px;
+      height: 150px;
     }  
 
   ${({ visible }) => {
@@ -207,8 +222,9 @@ export const MediumColors = styled(ColorBlindColors)`
 
   @media screen and (max-width: 900px) {
     width: auto;
-    height: 100px;
+    height: 150px;
   }  
+
 `;
 
 export const ColorBlindPalette = styled.div`
@@ -217,6 +233,10 @@ export const ColorBlindPalette = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 900px) {
+      height: 40%;
+  }  
 
   @media screen and (max-width: 600px) {
     height: 35%;
