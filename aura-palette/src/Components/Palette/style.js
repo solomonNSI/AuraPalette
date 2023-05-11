@@ -383,7 +383,7 @@ export const Rate = styled.div`
     }
 
     textarea {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
       background-color: #eeeeee;
       height: 80px;
       border-radius: 4px;
