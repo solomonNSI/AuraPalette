@@ -78,12 +78,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     function copyPaletteColors(){
-    navigator.clipboard.writeText("Query: " + query +
+        navigator.clipboard.writeText("Query: " + query +
                                     " | 1st Color: " + displayPaletteColors(0) + 
                                     " | 2nd Color: " + displayPaletteColors(1) + 
                                     " | 3rd Color: " + displayPaletteColors(2) + 
                                     " | 4th Color: " + displayPaletteColors(3) + 
-                                    " | 5th Color: " + displayPaletteColors(4))
+                                    " | 5th Color: " + displayPaletteColors(4));
     }
 
     function updateLockArray(index) {
@@ -154,26 +154,22 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         else setColorBlindnessVisible(true);
     }, [colorBlindness, harmony, lock0, lock1, lock2, lock3, lock4]);
 
-
+    // TODO: When you change color blindness mode, colors in “medium” part also changes (not the type, color itself)
     useEffect(() => {
-        if(medium === "Default") setMediumVisible(false);
+        if(medium === "Default") setMediumVisible(false); // changing this false to true fixes the issue? but it's not the behaviour we want
         else setMediumVisible(true);
-     }, [medium, harmony, lock0, lock1, lock2, lock3, lock4]);
+     }, [medium, lock0, lock1, lock2, lock3, lock4]);
 
     function renderBlindColors(){
         var blindColors = [];
         for (var i = 0; i < 5; i++) {
             blindColors.push(
-                <S.Color colorHex={getColorBlindSimulation(palette[i], colorBlindness)}>
+                <S.Color key={i} colorHex={getColorBlindSimulation(palette[i], colorBlindness)}>
                     <S.ColorCode>
-                    {getColorBlindSimulation(palette[i], colorBlindness)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(i));
-                        }}
-                        >
-                        <CopyIcon />
-                        </S.Copy>
+                        {getColorBlindSimulation(palette[i], colorBlindness)}
+                        {/* <S.Copy onClick={() => { navigator.clipboard.writeText(getColorBlindSimulation(palette[i], colorBlindness))}} >
+                            <CopyIcon />
+                        </S.Copy> */}
                     </S.ColorCode>
                 </S.Color>
             );
@@ -188,13 +184,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 <S.Color colorHex={getColorForMedium(palette[i], medium)}>
                     <S.ColorCode>
                     {getColorForMedium(palette[i], medium)}
-                        <S.Copy
-                        onClick={() => {
-                            navigator.clipboard.writeText(displayPaletteColors(i));
-                        }}
-                        >
+                        {/* <S.Copy onClick={() => { navigator.clipboard.writeText(displayPaletteColors(i)); }}  >
                         <CopyIcon />
-                        </S.Copy>
+                        </S.Copy> */}
                     </S.ColorCode>
                 </S.Color>
             );
@@ -208,8 +200,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.Header className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
-            <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>CHATGPT'S COMMENTS AND EXPLANATIONS ABOUT WHY IT GAVE THIS PALETTE AND COLORS.</S.Info>
+            <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>Comments of ChatGPT</S.Info>
             
+
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
             <S.Rate className = "slidecontainer" style = {{display: rateEnabled ? "flex" : "none" }}>
                 <div>
@@ -218,16 +211,17 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                         <input type="range" min="1" max="5" value={sliderValue} onChange={(e) => setSliderValue(e.target.value)} className="slider" id="myRange"></input>
                         <p>{sliderValue}</p>
                     </div>
-
                     <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
                     <button id="feedbackButton" disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
                 </div>
             </S.Rate>
+
+
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
-            <span>Color Mode: </span> {colorMode}
+                <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
             <S.StyledStarIcon className = {DarkMode} height="20px" />
-            <S.StyledExportIcon className = {DarkMode} onClick={copyPaletteColors} height="20px" />
+            <S.StyledExportIcon className = {DarkMode} height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
             <S.Color colorHex={palette[0]}>
