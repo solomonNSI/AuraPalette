@@ -201,6 +201,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     return (
     <S.Container className = {DarkMode}>
+        <S.Loader></S.Loader>
+
         <S.MainPalette className = {DarkMode}>
         <S.Header className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>

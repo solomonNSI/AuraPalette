@@ -31,6 +31,26 @@ export const Container = styled.div`
   }
 `;
 
+export const Loader = styled.div`
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 45%;
+  z-index: 99;
+  border: 12px solid #888888; 
+  border-top: 12px solid #3498db00;
+  border-radius: 50%;
+  width: 10vw;
+  height: 10vw;
+  animation: spin 2s linear infinite;
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+`;
+
+
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
@@ -535,7 +555,7 @@ export const StyledExportIcon = styled(ExportIcon)`
 export const StyledPaletteCopyIcon = styled(PaletteCopyIcon)`
   cursor: pointer;
   fill: #333333;
-  margin-top: 2px;
+  margin-right: 4px;
 
   &.dark {
     fill: #888888;
