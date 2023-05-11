@@ -148,6 +148,12 @@ export const Title = styled.h2`
 export const Subtitle = styled.h3`
   font-weight: 500;
   margin: 12px 0px 10px 0px;
+  cursor: pointer;
+
+  .arrow {
+    margin-left: 8px;
+    font-size: 16px;
+  }
 
   &.dark {
     color: #ccc;
