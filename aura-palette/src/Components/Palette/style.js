@@ -309,6 +309,11 @@ export const Info = styled.div`
   line-height: 20px;
   z-index: 10;
 
+  @media screen and (max-width: 900px) {
+    margin-left: 10px;
+    zoom: 0.8;
+  }
+
   &.dark {
     background-color: #666;
     color: white;
@@ -329,6 +334,11 @@ export const Rate = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+
+  @media screen and (max-width: 900px) {
+    margin-left: 10px;
+    zoom: 0.8;
+  }
 
   &.dark {
     background-color: #666;

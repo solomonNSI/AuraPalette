@@ -80,6 +80,8 @@ export const SearchBar = styled.input`
 
   @media screen and (max-width: 900px) {
     height: 40px;
+    font-size: 14px;
+
   }
 
   :focus {
