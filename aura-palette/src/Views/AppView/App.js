@@ -247,8 +247,6 @@ function App({ DarkMode, setIsDarkMode }) {
     <S.AppBackground className = {DarkMode}>
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
-      <S.GradientLine className = {DarkMode} colorList={palette.palette} />
-
       <S.Content className = {DarkMode}>
         {/* <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
         <S.Title className = {DarkMode}>Let the AI find a palette for you.</S.Title>

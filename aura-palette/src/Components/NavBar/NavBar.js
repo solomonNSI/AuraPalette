@@ -46,7 +46,8 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
           onClick={() => checkLoggedIn()}
           />
       </S.LoginButton >
-      {/*<S.GradientLine colorList={palette}/>*/}
+      {palette && <S.GradientLine colorList={palette}/>}
+      {!palette && <S.GradientLineDefault />}
     </S.NavBar>
   );
 };

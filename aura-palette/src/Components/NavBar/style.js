@@ -39,6 +39,14 @@ export const GradientLine = styled.div`
   top: ${NAVBAR_HEIGHT}px; ;
 `;
 
+export const GradientLineDefault = styled.div`
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.7) 7.81%, rgba(255, 153, 0, 0.7) 14.58%, rgba(255, 212, 0, 0.7) 31.27%, rgba(86, 196, 0, 0.7) 64.95%, rgba(0, 148, 255, 0.7) 87.36%, rgba(112, 0, 255, 0.7) 97.55%);
+  height: 5px;
+  width: 100%;
+  position: fixed;
+  top: ${NAVBAR_HEIGHT}px; ;
+`;
+
 export const AppName = styled.div`
   font-size: 46px;
   margin-left: 4%;
