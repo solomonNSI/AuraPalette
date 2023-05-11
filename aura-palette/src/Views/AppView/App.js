@@ -16,20 +16,23 @@ import {
   getEditedPalette,
 } from "../../Helpers/Harmony"; 
 
-  var titles = ["Find a palette for everything.", 
-                "Let the AI find a palette for you.",
-                "Discover your perfect palette.",
-                "Create stunning designs with our AI palettes.",
-                "Discover the power of AI for your color needs.",
-                "Experience the magic of AI color selection.",
-                "Your ultimate color companion powered by AI."];
-  var title;
-  function chooseTitle() {
+var title;
+var titles = ["Find a palette for everything.", 
+            "Let the AI find a palette for you.",
+            "Discover your perfect palette.",
+            "Create stunning designs with our AI palettes.",
+            "Discover the power of AI for your color needs.",
+            "Experience the magic of AI color selection.",
+            "Your ultimate color companion powered by AI."];
+
+function chooseTitle() {
     var randomIndex = Math.floor(Math.random() * titles.length);
     title = titles[randomIndex];
-  }
+} 
+chooseTitle();
 
-  chooseTitle();
+var predefined_count = 9;
+var predefinedColors = ["orange", "yellow", "red", "blue", "pink", "purple", "green", "white", "black"];
 
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
@@ -57,6 +60,7 @@ function App({ DarkMode, setIsDarkMode }) {
 
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query + '"}';
+
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       console.log(jsonResponse);
@@ -97,6 +101,9 @@ function App({ DarkMode, setIsDarkMode }) {
 
   //TODO => WHEN NEW QUERY IS ENTERED SWITCH HARMONY TO NONE
   function updatePalette(pal){
+    for (var i = 0; i < predefined_count; i++) {
+        if (query === predefinedColors[i]) console.log(query)
+    }
     switch (harmony) {
         case "None":
             setPalette((prevState) => {

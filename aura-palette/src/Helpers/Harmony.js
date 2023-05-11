@@ -3,18 +3,22 @@ import { hexToHSL, hslToHex } from "./ColorWizard";
 
 const harmonyCount = 6;
 
-export const getDefaultPalette = (lock) => {
-    // pick a random base color
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    var randomBaseColor;
-    if (!lock[2]) { // if not locked
-        for (var i = 0; i < 6; i++) 
-            color += letters[Math.floor(Math.random() * 16)];
-        randomBaseColor = color;
+export const getDefaultPalette = (lock, baseColor) => {
+    var randomPalette;
+    if (!baseColor) {
+        // pick a random base color
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        var randomBaseColor;
+        if (!lock[2]) { // if not locked
+            for (var i = 0; i < 6; i++) 
+                color += letters[Math.floor(Math.random() * 16)];
+            randomBaseColor = color;
+        }
+        else randomBaseColor = localStorage.getItem("baseColor");
+        randomPalette = [randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor];
     }
-    else randomBaseColor = localStorage.getItem("baseColor");
-    var randomPalette = [randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor];
+    else randomPalette = [baseColor, baseColor, baseColor, baseColor, baseColor];
 
     // pick a random harmony
     const randomInt = Math.floor(Math.random() * harmonyCount) + 1;
