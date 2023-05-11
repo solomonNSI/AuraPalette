@@ -35,7 +35,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
   const [lock, setLock] = useState([false, false, false, false, false]);
-  const [palette, setPalette] = useState({ palette: getDefaultPalette(lock) });
+  const [palette,  setPalette] = useState({ palette: getDefaultPalette(lock) });
   const [editedColorIndex, setEditedColorIndex] = useState("");
   const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
@@ -68,7 +68,7 @@ function App({ DarkMode, setIsDarkMode }) {
       for ( var i = 0; i < 5; i++) {
         if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
       }
-      updatePalette(pal);
+      updatePalette(pal, lock);
 
       // if logged in add the palette to history
       if(sessionStorage.getItem('user_token') != null){
@@ -96,7 +96,7 @@ function App({ DarkMode, setIsDarkMode }) {
   }
 
   //TODO => WHEN NEW QUERY IS ENTERED SWITCH HARMONY TO NONE
-  function updatePalette(pal){
+  function updatePalette(pal, lock){
     switch (harmony) {
         case "None":
             setPalette((prevState) => {
@@ -107,7 +107,7 @@ function App({ DarkMode, setIsDarkMode }) {
             setPalette((prevState) => {
             return {
                 ...prevState,
-                palette: getAnalogousPalette(pal),
+                palette: getAnalogousPalette(pal, lock),
             };
             });
             break;
@@ -116,7 +116,7 @@ function App({ DarkMode, setIsDarkMode }) {
             setPalette((prevState) => {
             return {
                 ...prevState,
-                palette: getMonochromaticPalette(pal),
+                palette: getMonochromaticPalette(pal, lock),
             };
             });
             break;
@@ -124,31 +124,31 @@ function App({ DarkMode, setIsDarkMode }) {
             setPalette((prevState) => {
             return {
                 ...prevState,
-                palette: getComplementaryPalette(pal),
+                palette: getComplementaryPalette(pal, lock),
             };
             });
             break;
         case "Triads":
             setPalette((prevState) => {
-            return { ...prevState, palette: getTriadsPalette(pal) };
+            return { ...prevState, palette: getTriadsPalette(pal, lock) };
             });
             break;
         case "Split Complementary":
             setPalette((prevState) => {
             return {
                 ...prevState,
-                palette: getSplitComplementaryPalette(pal),
+                palette: getSplitComplementaryPalette(pal, lock),
             };
             });
             break;
         case "Square":
             setPalette((prevState) => {
-                return { ...prevState, palette: getSquarePalette(pal) };
+                return { ...prevState, palette: getSquarePalette(pal, lock) };
             });
             break;
         case "Edit":
             setPalette((prevState) => {
-                return { ...prevState, palette: getEditedPalette(pal, editedColorIndex, editedColor) };
+                return { ...prevState, palette: getEditedPalette(pal, editedColorIndex, editedColor, lock) };
             });
             break;
         default:
@@ -174,7 +174,7 @@ function App({ DarkMode, setIsDarkMode }) {
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
-          return { ...prevState, palette: getDefaultPalette(lock) };
+          return { ...prevState, palette: palette.palette };
         });
         break;
       case "Analogous":
