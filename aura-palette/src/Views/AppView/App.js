@@ -257,7 +257,7 @@ function App({ DarkMode, setIsDarkMode }) {
 
           <S.Title className = {DarkMode}>{title}</S.Title>
 
-          <S.SearchBar className = {DarkMode} placeholder="Enter a keyword to search..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+          <S.SearchBar className = {DarkMode} placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
           <S.Search className = {DarkMode}>
             <SearchIcon />
           </S.Search>
