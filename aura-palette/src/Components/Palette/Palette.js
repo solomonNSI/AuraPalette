@@ -202,7 +202,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             
 
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
-            <S.Rate className = "slidecontainer" style = {{display: rateEnabled ? "flex" : "none" }}>
+            <S.Rate className = {`slidecontainer ${DarkMode}`} style = {{display: rateEnabled ? "flex" : "none" }}>
                 <div>
                     <p>Rate This Palette</p>
                     <div>
