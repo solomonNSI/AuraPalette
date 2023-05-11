@@ -1,7 +1,10 @@
 import React from "react";
-import { hexToHSL, hslToHex } from "./ColorWizard";
+import { colorNameToHex, hexToHSL, hslToHex } from "./ColorWizard";
 
 const harmonyCount = 6;
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 export const getDefaultPalette = (lock, baseColor) => {
     var randomPalette;
@@ -18,7 +21,18 @@ export const getDefaultPalette = (lock, baseColor) => {
         else randomBaseColor = localStorage.getItem("baseColor");
         randomPalette = [randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor];
     }
-    else randomPalette = [baseColor, baseColor, baseColor, baseColor, baseColor];
+    else {
+        var temp = colorNameToHex(baseColor);
+        var color_hsl = hexToHSL(temp);
+        var randomH = color_hsl[0] + randomIntFromInterval(-15, 15);
+        var randomS = randomIntFromInterval(15, 100);
+        var randomL = randomIntFromInterval(20, 85);
+        color_hsl[0] = randomH;
+        color_hsl[1] = randomS;
+        color_hsl[2] = randomL;
+        temp = hslToHex(color_hsl[0], color_hsl[1], color_hsl[2]);
+        randomPalette = [temp, temp, temp, temp, temp];
+    }
 
     // pick a random harmony
     const randomInt = Math.floor(Math.random() * harmonyCount) + 1;

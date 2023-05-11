@@ -51,8 +51,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             document.getElementById("feedbackButton").style.backgroundColor = "#333333";
             document.getElementById("feedbackButton").style.color = "#ffffff";
          }, 3000);
-
-
     }
 
     function showInfo() {

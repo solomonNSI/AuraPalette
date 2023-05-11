@@ -32,7 +32,7 @@ function chooseTitle() {
 chooseTitle();
 
 var predefined_count = 9;
-var predefinedColors = ["orange", "yellow", "red", "blue", "pink", "purple", "green", "white", "black"];
+var predefinedColors = ["orange", "yellow", "red", "blue", "pink", "purple", "green"];
 
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
@@ -101,65 +101,74 @@ function App({ DarkMode, setIsDarkMode }) {
 
   //TODO => WHEN NEW QUERY IS ENTERED SWITCH HARMONY TO NONE
   function updatePalette(pal){
+    var isPredefined = false;
     for (var i = 0; i < predefined_count; i++) {
-        if (query === predefinedColors[i]) console.log(query)
+        if (query === predefinedColors[i]) isPredefined = true;
     }
-    switch (harmony) {
-        case "None":
-            setPalette((prevState) => {
-            return { ...prevState, palette: pal };
-            });
-            break;
-        case "Analogous":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getAnalogousPalette(pal, lock),
-            };
-            });
-            break;
-        case "Shades":
-        case "Monochromatic":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getMonochromaticPalette(pal, lock),
-            };
-            });
-            break;
-        case "Complementary":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getComplementaryPalette(pal, lock),
-            };
-            });
-            break;
-        case "Triads":
-            setPalette((prevState) => {
-            return { ...prevState, palette: getTriadsPalette(pal, lock) };
-            });
-            break;
-        case "Split Complementary":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getSplitComplementaryPalette(pal, lock),
-            };
-            });
-            break;
-        case "Square":
-            setPalette((prevState) => {
-                return { ...prevState, palette: getSquarePalette(pal, lock) };
-            });
-            break;
-        case "Edit":
-            setPalette((prevState) => {
-                return { ...prevState, palette: getEditedPalette(pal, editedColorIndex, editedColor, lock) };
-            });
-            break;
-        default:
-            break;
+
+    if (!isPredefined) {
+        switch (harmony) {
+            case "None":
+                setPalette((prevState) => {
+                return { ...prevState, palette: pal };
+                });
+                break;
+            case "Analogous":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getAnalogousPalette(pal, lock),
+                };
+                });
+                break;
+            case "Shades":
+            case "Monochromatic":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getMonochromaticPalette(pal, lock),
+                };
+                });
+                break;
+            case "Complementary":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getComplementaryPalette(pal, lock),
+                };
+                });
+                break;
+            case "Triads":
+                setPalette((prevState) => {
+                return { ...prevState, palette: getTriadsPalette(pal, lock) };
+                });
+                break;
+            case "Split Complementary":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getSplitComplementaryPalette(pal, lock),
+                };
+                });
+                break;
+            case "Square":
+                setPalette((prevState) => {
+                    return { ...prevState, palette: getSquarePalette(pal, lock) };
+                });
+                break;
+            case "Edit":
+                setPalette((prevState) => {
+                    return { ...prevState, palette: getEditedPalette(pal, editedColorIndex, editedColor, lock) };
+                });
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        setPalette((prevState) => {
+            return { ...prevState, palette: getDefaultPalette(lock, query) };
+        });
     }
   }
 
