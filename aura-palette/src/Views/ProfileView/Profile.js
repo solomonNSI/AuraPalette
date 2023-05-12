@@ -58,6 +58,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     function historyList(){
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
+        //xmlhttp.open("GET", "http://127.0.0.1:8000/account/gethistory/");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
         xmlhttp.onload  = function() {
@@ -85,15 +86,29 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
     function renderHistory(){
         var palettes = [];
+        var palettes2 = [];
+        console.log(history);
+
         if (!history || history.length === 0) {
             return (<p>There are no palettes in your history</p>);
         }
-        for (var i = 0; i < history.length; i++) {
-            palettes.push(
-                <MiniPalette palette={history[i]} />
-            );
+        var p_list = history['history']
+        //console.log(p_list);
+        for (var i = 0; i < p_list.length; i++) {
+          var palette = []
+          palette.push(p_list[i]['color1'])
+          palette.push(p_list[i]['color2'])
+          palette.push(p_list[i]['color3'])
+          palette.push(p_list[i]['color4'])
+          palette.push(p_list[i]['color5'])
+          palettes.push(palette)
         }
-        return palettes;
+        for (var i = 0; i < palettes.length; i++) {
+          palettes2.push(
+              <MiniPalette palette={palettes[i]} />
+          );
+        }
+        return palettes2;
     }
 
   return (
