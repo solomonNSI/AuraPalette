@@ -15,16 +15,33 @@ const SpinnerStyled = styled.div`
   width: 120px;
   height: 120px;
   animation: ${spin} 2s linear infinite;
-  position: fixed;  // Adjust as needed
-  top: 50%;  // Adjust as needed
-  left: 50%;  // Adjust as needed
-  margin-top: -60px;  // Adjust as needed
-  margin-left: -60px;  // Adjust as needed
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -60px;
+  z-index: 1001;
 `;
 
-// Define Spinner component
-const Spinner = () => {
-  return <SpinnerStyled />;
+// Define styles for Overlay
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+`;
+
+// Define SpinnerOverlay component
+const SpinnerOverlay = () => {
+  return (
+    <>
+      <SpinnerStyled />
+      <Overlay />
+    </>
+  );
 };
 
-export default Spinner;
+export default SpinnerOverlay;

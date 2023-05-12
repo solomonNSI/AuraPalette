@@ -15,7 +15,7 @@ import {
   getTriadsPalette,
   getEditedPalette,
 } from "../../Helpers/Harmony"; 
-import Spinner from "../../Components/Styler";
+import SpinnerOverlay from "../../Components/Styler";
 
 var title;
 var titles = ["Find a palette for everything.", 
@@ -254,7 +254,7 @@ function App({ DarkMode, setIsDarkMode }) {
 
   return (
     <S.AppBackground className = {DarkMode}>
-      {loading && <Spinner />}
+      {loading && <SpinnerOverlay />}
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
       <S.Content className = {DarkMode}>
