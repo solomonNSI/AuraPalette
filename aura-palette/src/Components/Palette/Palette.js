@@ -221,7 +221,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     return (
     <S.Container className = {DarkMode}>
-        <S.Loader style = {{display: queryChanged ? "flex" : "none" }}></S.Loader>
 
         <S.MainPalette className = {DarkMode}>
         <S.Header className = {DarkMode}>
