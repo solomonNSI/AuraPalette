@@ -9,25 +9,38 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const[name,setName] = useState("");
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
+  const[passwordConfirmation,setPasswordConfirmation] = useState("");
 
   function sendRegisterInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
     xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/register/");
+    //xmlhttp.open("POST", "http://127.0.0.1:8000/auth/register/");
 
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var registerInfo = '{ "name" : "' + name + '", "email" : "' + email + '", "password" : "' + password + '"}';
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse)
-      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
-      sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
-      console.log(sessionStorage.getItem('user_token'))
-      if(sessionStorage.getItem('user_token') != null){
-        navigate("/")
+      if(jsonResponse['code'] == null){
+        sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+
+        if(sessionStorage.getItem('user_token') != null){
+          navigate("/")
+        }
+      }
+      else{
+        console.log(jsonResponse)
       }
     };
-    xmlhttp.send(registerInfo)
+    if(password.length >= 8){
+      if(password === passwordConfirmation)
+        xmlhttp.send(registerInfo)
+      else
+        console.log("Passwords must match")
+    }
+    else
+      console.log("Password must have at least 6 characters")
   }
 
 
@@ -41,7 +54,7 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
           <input id="name" type="text" className = {DarkMode} placeholder="Name" onChange={(e) => setName(e.target.value)}></input>
           <input id="email" type="email" className = {DarkMode} placeholder="E-Mail" onChange={(e) => setEmail(e.target.value)}></input>
           <input id="password" type="password" className = {DarkMode} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
-          <input type="password" className = {DarkMode} placeholder="Confirm Password"></input>
+          <input type="password" className = {DarkMode} placeholder="Confirm Password" onChange={(e) => setPasswordConfirmation(e.target.value)}></input>
 
           <button className={`signUpButton ${DarkMode}`} onClick={() => sendRegisterInfo()}>Sign Up</button>
           <button className={`loginButton ${DarkMode}`} onClick={() => navigate("/login")}>

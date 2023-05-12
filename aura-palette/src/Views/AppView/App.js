@@ -54,6 +54,7 @@ function App({ DarkMode, setIsDarkMode }) {
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
     xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/model/getpalette/");
+    //xmlhttp.open("POST", "http://127.0.0.1:8000/model/getpalette/");
 
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query + '"}';
@@ -61,26 +62,33 @@ function App({ DarkMode, setIsDarkMode }) {
       var jsonResponse = xmlhttp.response;
       console.log(jsonResponse);
       jsonResponse = JSON.parse(jsonResponse);
-      var colorResponse = jsonResponse['samples'];
+      if(jsonResponse['code'] == null){
+        var colorResponse = jsonResponse['samples'];
 
-      var no = Math.floor(Math.random() * 5);
-      var pal = colorResponse[no];
-      for ( var i = 0; i < 5; i++) {
-        if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
-      }
-      updatePalette(pal);
+        var no = Math.floor(Math.random() * 5);
+        var pal = colorResponse[no];
+        for ( var i = 0; i < 5; i++) {
+          if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
+        }
+        updatePalette(pal);
 
-      // if logged in add the palette to history
-      if(sessionStorage.getItem('user_token') != null){
-        var xmlhttp2 = new XMLHttpRequest();
-        xmlhttp2.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/account/addhistory/");
-        xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-        var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
+        // if logged in add the palette to history
+        if(sessionStorage.getItem('user_token') != null){
+          var xmlhttp2 = new XMLHttpRequest();
+          xmlhttp2.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/account/addhistory/");
+          //xmlhttp2.open("POST", "http://127.0.0.1:8000/account/addhistory/");
+          xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+          var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
           + pal[1] + '", "color3": "' + pal[2] + '", "color4": "' + pal[3] + '", "color5": "' + pal[4] + '"}'
-        console.log(palInfo)
-        xmlhttp2.send(palInfo)
+          console.log(palInfo)
+          xmlhttp2.send(palInfo)
+        }
       }
+      else
+      //if(jsonResponse['err_msg'] == INVALID)
+      //show error popup display
+        console.log(jsonResponse)
     };
     xmlhttp.send(qInfo)
 

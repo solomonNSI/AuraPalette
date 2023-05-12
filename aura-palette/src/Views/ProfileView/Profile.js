@@ -19,6 +19,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   function logOut(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
+    //xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signout/");
     xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/signout/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onload  = function() {

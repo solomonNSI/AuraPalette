@@ -11,7 +11,8 @@ const Login = ({DarkMode, setIsDarkMode}) => {
   function sendLoginInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/signin/");
+    //xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/signin/");
+    xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signin/");
     
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
@@ -19,10 +20,16 @@ const Login = ({DarkMode, setIsDarkMode}) => {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse)
       //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
-      sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+      if(jsonResponse['code'] == null){
+        sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
 
-      if(sessionStorage.getItem('user_token') != null){
-        navigate("/")
+        if(sessionStorage.getItem('user_token') != null){
+          navigate("/")
+        }
+      }
+      else{
+        // ERROR WAS RAISED
+        console.log(jsonResponse)
       }
     };
     xmlhttp.send(loginInfo)

@@ -59,6 +59,10 @@ def get_palette(request, *args, **kwargs):
     solver = Solver(args)
 
     formated_query = [query, query]
-    print(solver.sample_TPN(formated_query))
-    
-    return JsonResponse(solver.sample_TPN(formated_query))
+    #print(solver.sample_TPN(formated_query))
+    try:
+        returned_palette = solver.sample_TPN(formated_query)
+    except BaseException as e:
+        return JsonResponse({"code": 1000, "err_msg": "INVALID_QUERY"})
+    else:
+        return JsonResponse(returned_palette)
