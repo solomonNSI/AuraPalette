@@ -1,5 +1,6 @@
 from rest_framework.decorators import api_view
 import json
+import os
 from .models import Query
 from django.http import JsonResponse
 import argparse
@@ -39,6 +40,7 @@ def get_palette(request, *args, **kwargs):
     parser.add_argument('--lambda_GAN', type=float, default=0.1)
 
     # Directories.
+
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     parser.add_argument('--text2pal_dir', type=str, default=os.path.join(current_dir, 'models/TPN'))

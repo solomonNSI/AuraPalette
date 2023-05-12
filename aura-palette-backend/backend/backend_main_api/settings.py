@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'model_api',
     'environ',
     'account_api',
-    'auth_api'
+    'auth_api',
+    'feedback_api'
 ]
 
 MIDDLEWARE = [

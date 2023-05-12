@@ -103,8 +103,10 @@ class Solver(object):
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:
+                base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
+                else_file = os.path.join(base_path, 'data', 'glove.840B.300d.txt')
                 W_emb = load_pretrained_embedding(self.input_dict.word2index,
-                                                  'C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/glove.840B.300d.txt',
+                                                  else_file,
                                                   300)
                 W_emb = torch.from_numpy(W_emb)
                 torch.save(W_emb, emb_file)
