@@ -351,17 +351,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         </S.MainPalette>
 
         <S.OtherPalettes className = {DarkMode}>
-            {/* COLOR BLIND PALETTE */}
-            <S.ColorBlindColors className={`choose ${DarkMode}`}  style = {{display: colorBlindnessVisible ? "none" : "flex" }}>
-                <S.PaletteTitle className={`chooseText ${DarkMode}`} >Please select a color blindness from the adjustments menu</S.PaletteTitle>
-            </S.ColorBlindColors>
-            <S.ColorBlindColors className = {DarkMode} visible={colorBlindnessVisible}>
-                <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
-                <S.ColorBlindPalette>
-                    {renderBlindColors()}
-                </S.ColorBlindPalette>
-            </S.ColorBlindColors>
-
             {/* MEDIUMS PALETTE */}
             <S.MediumColors className={`choose ${DarkMode}`} style = {{display: mediumVisible ? "none" : "flex" }}>
                 <S.PaletteTitle className={`chooseText ${DarkMode}`}>Please select a medium from the adjustments menu</S.PaletteTitle>
@@ -372,6 +361,17 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                     {renderMediumColors()}
                 </S.ColorBlindPalette>
             </S.MediumColors>
+
+            {/* COLOR BLIND PALETTE */}
+            <S.ColorBlindColors className={`choose ${DarkMode}`}  style = {{display: colorBlindnessVisible ? "none" : "flex" }}>
+                <S.PaletteTitle className={`chooseText ${DarkMode}`} >Please select a color blindness from the adjustments menu</S.PaletteTitle>
+            </S.ColorBlindColors>
+            <S.ColorBlindColors className = {DarkMode} visible={colorBlindnessVisible}>
+                <S.PaletteTitle className = {DarkMode}> People with {colorBlindness} see the palette like this:</S.PaletteTitle>
+                <S.ColorBlindPalette>
+                    {renderBlindColors()}
+                </S.ColorBlindPalette>
+            </S.ColorBlindColors>
         </S.OtherPalettes>
     </S.Container>
   );
