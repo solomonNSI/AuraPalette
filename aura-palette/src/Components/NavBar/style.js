@@ -71,7 +71,8 @@ export const AppName = styled.div`
     40% { color: #DDBF24; }
     60% { color: #52D635; }
     80% { color: #3AA5CF; }
-    100% { color: #9C5FEF; }
+    90% { color: #9C5FEF; }
+    100% { color: #C21FBB; }
   }
   
   @media screen and (max-width: 600px) {
