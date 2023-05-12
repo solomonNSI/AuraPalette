@@ -1,13 +1,30 @@
 import React, { useState } from "react";
 import * as S from "./style";
 
-export const MiniPalette = ({ DarkMode }) => {
-  const [colorMode, setColorMode] = useState("RGB");
+export const MiniPalette = ({ DarkMode, palette }) => {
+    // just a default palette
+    if (!palette) (
+        palette = ["#92ADE4", "#92C2E4", "#92D7E4", "#92E4DD", "#92ADE4"]
+    )
+    const [colorMode, setColorMode] = useState("RGB");
 
-  const changeColorMode = () => {
-    if (colorMode === "RGB") setColorMode("HSB");
-    else setColorMode("RGB");
-  };
+    const changeColorMode = () => {
+        if (colorMode === "RGB") setColorMode("HSB");
+        else setColorMode("RGB");
+    };
+
+
+    function renderPalette(){
+        var colors = [];
+        for (var i = 0; i < 5; i++) {
+            colors.push(
+                <S.Color colorHex={palette[i]}>
+                    <S.ColorCode>{palette[i]}</S.ColorCode>
+                </S.Color>
+            );
+        }
+        return colors;
+    }
 
   return (
     <S.Container className = {DarkMode}>
@@ -27,25 +44,7 @@ export const MiniPalette = ({ DarkMode }) => {
       </S.Header>
 
       <S.Colors>
-        <S.Color>
-          <S.ColorCode>#333333</S.ColorCode>
-        </S.Color>
-
-        <S.Color>
-          <S.ColorCode>#333333</S.ColorCode>
-        </S.Color>
-
-        <S.Color>
-          <S.ColorCode>#333333</S.ColorCode>
-        </S.Color>
-
-        <S.Color>
-          <S.ColorCode>#333333</S.ColorCode>
-        </S.Color>
-
-        <S.Color>
-          <S.ColorCode>#333333</S.ColorCode>
-        </S.Color>
+        {renderPalette()}
       </S.Colors>
     </S.Container>
   );

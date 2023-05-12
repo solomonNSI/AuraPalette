@@ -5,80 +5,96 @@ import { MiniPalette } from "../../Components/MiniPalette/MiniPalette";
 import { useNavigate } from "react-router-dom";
 
 const Profile = ({ DarkMode, setIsDarkMode }) => {
-  const [favoritesEnabled, setFavoritesEnabled] = useState(true);
-  const [historyEnabled, setHistoryEnabled] = useState(false);
-  const [settingsEnabled, setSettingsEnabled] = useState(false);
-  const [buttonsEnabled, setButtonsEnabled] = useState(false);
+    const [favoritesEnabled, setFavoritesEnabled] = useState(true);
+    const [historyEnabled, setHistoryEnabled] = useState(false);
+    const [settingsEnabled, setSettingsEnabled] = useState(false);
+    const [buttonsEnabled, setButtonsEnabled] = useState(false);
+    const [history, setHistory] = useState();
+    const navigate = useNavigate();
 
-  const navigate = useNavigate();
+    var defaultBackgroundColor = "#ffffff";
+    var defaultSelectedColor = "#ffffff";
 
-
-  var defaultBackgroundColor = "#ffffff";
-  var defaultSelectedColor = "#ffffff";
-
-  function logOut(){
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
-    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/signout/");
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.onload  = function() {
-      var jsonResponse = xmlhttp.response;
-      jsonResponse = JSON.parse(jsonResponse)
-      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
-      sessionStorage.removeItem('user_token')
-      if(sessionStorage.getItem('user_token') ==null){
-        navigate("/")
-      }
-    };
-    xmlhttp.send()
-  }
-
-  if(DarkMode=="dark"){
-    defaultBackgroundColor="#111111";
-    defaultSelectedColor="#444444";
-
-  }
-  else {
-    defaultBackgroundColor="#ffffff";
-    defaultSelectedColor="#aaaaaa";
-
-  }
-
-  function showFavorites() {
-    setFavoritesEnabled(true);
-    setHistoryEnabled(false);
-    setSettingsEnabled(false);
-  }
-  
-  function showHistory() {
-    setFavoritesEnabled(false);
-    setHistoryEnabled(true);
-    setSettingsEnabled(false);
-  }
-
-  function historyList(){
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-    xmlhttp.onload  = function() {
-      var jsonResponse = xmlhttp.response;
-      jsonResponse = JSON.parse(jsonResponse); 
+    function logOut(){
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
+        xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/signout/");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.onload  = function() {
+        var jsonResponse = xmlhttp.response;
+        jsonResponse = JSON.parse(jsonResponse)
+        //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+        sessionStorage.removeItem('user_token')
+        if(!sessionStorage.getItem('user_token')){
+            navigate("/")
+        }
+        };
+        xmlhttp.send()
     }
-    xmlhttp.send()
-  }
-  function showSettings() {
-    setFavoritesEnabled(false);
-    setHistoryEnabled(false);
-    setSettingsEnabled(true);
-  }
 
-  function showButtons() {
-    if(buttonsEnabled)
-      setButtonsEnabled(false);
-    else
-      setButtonsEnabled(true);
-  }
+    if(DarkMode=="dark"){
+        defaultBackgroundColor="#111111";
+        defaultSelectedColor="#444444";
+
+    }
+    else {
+        defaultBackgroundColor="#ffffff";
+        defaultSelectedColor="#aaaaaa";
+
+    }
+
+    function showFavorites() {
+        setFavoritesEnabled(true);
+        setHistoryEnabled(false);
+        setSettingsEnabled(false);
+    }
+    
+    function showHistory() {
+        setFavoritesEnabled(false);
+        setHistoryEnabled(true);
+        setSettingsEnabled(false);
+    }
+
+    function historyList(){
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+        xmlhttp.onload  = function() {
+        var jsonResponse = xmlhttp.response;
+        jsonResponse = JSON.parse(jsonResponse);
+        setHistory(jsonResponse)
+        }
+        xmlhttp.send()
+    }
+
+    function showSettings() {
+        setFavoritesEnabled(false);
+        setHistoryEnabled(false);
+        setSettingsEnabled(true);
+    }
+
+    function showButtons() {
+        if(buttonsEnabled)
+        setButtonsEnabled(false);
+        else
+        setButtonsEnabled(true);
+    }
+
+    historyList();
+
+    function renderHistory(){
+        var palettes = [];
+        if (!history || history.length === 0) {
+            return (<p>There are no palettes in your history</p>);
+        }
+        for (var i = 0; i < history.length; i++) {
+            palettes.push(
+                <MiniPalette palette={history[i]} />
+            );
+        }
+        return palettes;
+    }
 
   return (
     <S.AppBackground id="background" className = {DarkMode}>
@@ -116,15 +132,16 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       <S.SettingsForeground className = {DarkMode} style = {historyEnabled ? {display: "block"} : {display: "none"}}>
         <S.Title className = {DarkMode}>History</S.Title>
         <S.Palettes>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
+            {renderHistory()}
+            {/* <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/>
+            <MiniPalette DarkMode={DarkMode}/> */}
         </S.Palettes>
       </S.SettingsForeground>
 

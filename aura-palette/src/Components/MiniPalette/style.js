@@ -79,7 +79,7 @@ export const Colors = styled.div`
 `;
 
 export const Color = styled.div`
-  background-color: red;
+  background-color: ${(props) => props.colorHex};
   width: 20%;
   height: 10vw;
   border-radius: 8px 8px 0px 0px;
