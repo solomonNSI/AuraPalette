@@ -4,8 +4,14 @@ import { NAVBAR_HEIGHT } from "../../Components/NavBar/style";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height: 100vh;
   overflow: hidden;
+  height: 100svh;
+  max-height: -webkit-fill-available;
+
+  @supports (height: 100dvh) {
+      max-height: calc(100svh);
+      max-height: -webkit-fill-available;
+  }
 
   &.dark {
     background-color: #222222;
@@ -14,11 +20,10 @@ export const AppBackground = styled.div`
 
 export const Content = styled.div`
   background-color: #eeeeee;
-  font-family: Helvetica Neue;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  width: calc(100%-130px);
-
+  overflow: hidden;
   &.dark {
     background-color: #222222;
   }
@@ -34,31 +39,30 @@ export const Container = styled.div`
   }
 `;
 
-export const GradientLine = styled.div`
-  background: linear-gradient(
-    90deg,
-    ${(props) => props.colorList[0]} 0%,
-    ${(props) => props.colorList[1]} 20.31%,
-    ${(props) => props.colorList[2]} 45.83%,
-    ${(props) => props.colorList[3]} 74.9%,
-    ${(props) => props.colorList[4]} 100%
-  );
-  height: 5px;
-  width: 100%;
-  position: fixed;
-  top: ${NAVBAR_HEIGHT}px; ;
-`;
-
 export const Title = styled.div`
-  padding-top: ${NAVBAR_HEIGHT + 30}px;
+  padding-top: ${NAVBAR_HEIGHT + 20}px;
   text-align: center;
   margin: 10px 65px 0px 65px;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 300;
-  font-family: Helvetica;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+
 
   &.dark {
     color: #dddddd;
+
+    ::selection {
+      background: #eee;
+      color: #333;
+    }
+  }
+
+  @media screen and (max-height: 400px) {
+    display: none;
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 28px;
   }
 
   @media screen and (max-width: 900px) {
@@ -68,6 +72,11 @@ export const Title = styled.div`
   @media screen and (max-width: 600px) {
     font-size: 20px;
     padding-top: 90px;
+  }
+
+  ::selection {
+    background: #333333;
+    color: #eeeeee;
   }
 `;
 
@@ -82,8 +91,15 @@ export const SearchBar = styled.input`
   padding-left: 20px;
   margin: 20px 4% 0px 4%;
 
+  
+
   @media screen and (max-width: 900px) {
     height: 40px;
+    font-size: 12px;
+  }
+
+  @media screen and (max-height: 400px) {
+    margin-top: 70px;
   }
 
   :focus {
@@ -103,6 +119,11 @@ export const SearchBar = styled.input`
   &::placeholder {
     font-weight: 400;
     color: #33333388;
+
+    @media screen and (max-height: 400px) {
+      color: black;
+      font-size: 16px;
+    }
   }
 `;
 
@@ -121,7 +142,7 @@ export const TopKeywords = styled.div`
 
 export const TopSearch = styled.div`
   font-size: 14px;
-  font-family: Helvetica Neue;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   margin: 0 16px;
   font-weight: 300;
   display: flex;
@@ -132,6 +153,10 @@ export const PaletteContainer = styled.div`
   display: flex;
   height: 600px;
   margin-top: 20px;
+
+  @media screen and (max-height: 400px) {
+    margin-top: 10px;
+  }
 
   @media screen and (max-width: 900px) {
     height: fit-content;
@@ -164,6 +189,11 @@ export const AdjustmentsClosed = styled.div`
     background-color: #dddddd;
     border-radius: 8px;
     overflow: auto;
+    height: calc(100svh - 240px);
+
+    @media screen and (max-height: 400px) {
+      height: calc(100svh - 130px);
+    }
 
     div {
       width: 50px;
@@ -176,6 +206,12 @@ export const AdjustmentsClosed = styled.div`
       writing-mode: vertical-rl;
       text-orientation: mixed;
       transform: rotate(180deg);
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+      @media screen and (max-height: 400px) {
+        font-size: 14px;
+      }
     }
 
     &.dark {

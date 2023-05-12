@@ -1,6 +1,7 @@
 import React from "react";
 import { StarIcon } from "../../Icons/StarIcon";
 import styled, { css } from "styled-components";
+import { PaletteCopyIcon } from "../../Icons/PaletteCopyIcon";
 import { ExportIcon } from "../../Icons/ExportIcon";
 import { InfoIcon } from "../../Icons/InfoIcon";
 import { RateIcon } from "../../Icons/RateIcon";
@@ -10,40 +11,71 @@ export const Container = styled.div`
   border-radius: 8px;
   width: 80%;
   margin-right: 4%;
-  height: calc(100vh - 260px);
+  height: calc(100svh - 260px);
   overflow: auto;
+
+  
 
   @media screen and (max-width: 900px) {
     width: 90%;
     margin: 0px 4% 0px 10px;
-    height: calc(100vh - 240px);
+    height: calc(100svh - 240px);
   }
 
   @media screen and (max-width: 600px) {
     margin: 0px 4% 0px 2px;
   }
+
+  @media screen and (max-height: 400px) {
+    height: calc(100svh - 130px);
+  }
 `;
 
-export const InnerContainer = styled.div`
-  height: calc(100vh - 230px);
-  overflow-x: hidden;
-  overflow-y: auto;
+export const Loader = styled.div`
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 45%;
+  z-index: 99;
+  border: 12px solid #888888; 
+  border-top: 12px solid #3498db00;
+  border-radius: 50%;
+  width: 10vw;
+  height: 10vw;
+  animation: spin 2s linear infinite;
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 `;
+
 
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
-  height: 500px;
+  height: 440px;
   padding: 20px;
   margin-bottom: 20px;
+  overflow: hidden;
+  zoom: 0.9;
+
+  @media screen and (max-height: 400px) {
+    zoom: 0.7;
+  }
 
   &.dark {
     background-color: #000000;
   }
 
   @media screen and (max-width: 600px) {
-    height: 220px; // Mobile edit display:none
+    height: 260px; // Mobile edit display:none
+    zoom: 0.7;
+  
+  }
+
+  @media screen and (max-width: 400px) {
+    height: 310px; // Mobile edit display:none
   }
 `;
 
@@ -51,7 +83,7 @@ export const OtherPalettes = styled.div`
   height: auto;
   border-radius: 8px;
   margin-top: 0px;
-
+  zoom: 0.9;
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -59,6 +91,14 @@ export const OtherPalettes = styled.div`
   @media screen and (max-width: 900px) {
     flex-direction: column;
   }  
+
+  @media screen and (max-width: 600px) {
+    zoom: 0.7;
+  }
+
+  @media screen and (max-height: 400px) {
+    zoom: 0.7;
+  } 
 
 `;
 
@@ -70,6 +110,11 @@ export const PaletteTitle = styled.h2`
 
   &.dark {
     color: #eeeeee;
+
+    ::selection {
+      background: #333333;
+      color: #eeeeee;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -78,6 +123,11 @@ export const PaletteTitle = styled.h2`
 
   @media screen and (max-width: 600px) {
     font-size: 20px;
+  }
+
+  ::selection {
+    background: #333333;
+    color: #eeeeee;
   }
 
 `;
@@ -125,7 +175,7 @@ export const Colors = styled.div`
   gap: 10px;
   justify-content: space-between;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     height: 25%;
     gap: 4px;
   }
@@ -136,7 +186,23 @@ export const ColorBlindColors = styled.div`
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    height: 170px;
+    height: 120px;
+
+    &.choose {
+      border: 1px dashed grey;
+      background-color: #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .chooseText {
+        color: #555555;
+        font-weight: 400;
+        text-align: center;
+        max-width: 300px;
+        margin: 0;
+      }
+    }
 
     &.dark {
       background-color: #000000;
@@ -144,12 +210,13 @@ export const ColorBlindColors = styled.div`
 
     @media screen and (max-width: 900px) {
       width: auto;
-      height: 190px;
+      height: 150px;
     }  
 
   ${({ visible }) => {
         return css`
             visibility: ${visible ? 'visible' : 'none'};
+            display: ${visible ? '' : 'none'};
         `;
   }}
 
@@ -162,7 +229,8 @@ export const ColorBlindColors = styled.div`
     }  
 
     @media screen and (max-width: 900px) {
-      font-size: 18px;
+      font-size: 16px;
+      font-weight: 400;
     }  
   }
 `;
@@ -172,6 +240,12 @@ export const MediumColors = styled(ColorBlindColors)`
   &.dark {
     background-color: #000000;
   }
+
+  @media screen and (max-width: 900px) {
+    width: auto;
+    height: 150px;
+  }  
+
 `;
 
 export const ColorBlindPalette = styled.div`
@@ -181,6 +255,10 @@ export const ColorBlindPalette = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
+  @media screen and (max-width: 900px) {
+      height: 40%;
+  }  
+
   @media screen and (max-width: 600px) {
     height: 35%;
   }
@@ -189,10 +267,15 @@ export const ColorBlindPalette = styled.div`
 export const Color = styled.div`
   background-color: ${(props) => props.colorHex};
   width: 19%;
-  height: 120%;
+  height: 100%;
   border-radius: 8px 8px 0px 0px;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 900px) {
+    height: 150%;
+
+  }
 `;
 
 export const ColorCode = styled.div`
@@ -206,13 +289,18 @@ export const ColorCode = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 14px;
+  text-align: center;
+  user-select: text;
 
-  @media only screen and (min-width: 1250px) {
-    font-size: 16px;
-  }
 
   @media screen and (max-width: 900px) {
     font-size: 12px;
+
+    p {
+      max-width: 10px;
+    }
+    
+
   }
 
   @media screen and (max-width: 600px) {
@@ -264,8 +352,13 @@ export const Info = styled.div`
   line-height: 20px;
   z-index: 10;
 
+  @media screen and (max-width: 900px) {
+    margin-left: 10px;
+    zoom: 0.8;
+  }
+
   &.dark {
-    background-color: #444;
+    background-color: #666;
     color: white;
   }
 `;
@@ -285,11 +378,31 @@ export const Rate = styled.div`
   font-weight: 400;
   line-height: 20px;
 
+  @media screen and (max-width: 900px) {
+    margin-left: 10px;
+    zoom: 0.8;
+  }
+
+  &.dark {
+    background-color: #666;
+
+    p {
+      color: white;
+    }
+  }
+
   #feedbackButton {
     :disabled {
       cursor: default;
       background-color: #888888 !important;
       color: #aaaaaa !important;
+      &:hover {
+        background-color: #888888 !important;
+      }
+    }
+
+    &:hover {
+      background-color: #555555 !important;
     }
   }
 
@@ -334,11 +447,6 @@ export const Rate = styled.div`
     cursor: pointer; /* Cursor on hover */
   }
 
-  &.dark {
-    background-color: #444;
-    color: white;
-  }
-
   display: flex;
   align-items: flex-start;
 
@@ -371,7 +479,7 @@ export const Rate = styled.div`
     }
 
     textarea {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
       background-color: #eeeeee;
       height: 80px;
       border-radius: 4px;
@@ -443,6 +551,20 @@ export const StyledExportIcon = styled(ExportIcon)`
     }
   }
 `;
+
+export const StyledPaletteCopyIcon = styled(PaletteCopyIcon)`
+  cursor: pointer;
+  fill: #333333;
+  margin-right: 4px;
+
+  &.dark {
+    fill: #888888;
+  }
+  &:hover {
+      fill: #666;
+  }
+`;
+
 
 export const StyledInfoIcon = styled(InfoIcon)`
   margin: 2px -10px 0px 0px;
@@ -525,20 +647,23 @@ export const LockDisplay = styled.div`
 export const EditDisplay = styled.div`
   cursor: pointer;
   background-color: #eee;
-  color: #333;
   margin-top: 10px;
-  height: 100px;
   border: 1px dashed #aaaaaa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   top: 105%;
   border-radius: 8px 8px 8px 8px;
-  padding-top: 70px;
-  padding-bottom: 70px;
   font-size: 16px;
   font-weight: 400;
+  display: flex;
+  justify-content: center;
+
+  ${({ visible }) => {
+        return css`
+            align-items: ${visible ? '' : 'center'}; 
+            padding-top: ${visible ? '8px' : ''}; 
+             min-height: ${visible ? '142px' : '150px'};;
+        `;
+    }}
 
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */

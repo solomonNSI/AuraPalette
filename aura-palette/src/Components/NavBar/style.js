@@ -17,6 +17,11 @@ export const NavBar = styled.div`
   align-items: center;
   position: fixed;
   top: 0;
+  zoom: 0.9;
+
+  @media screen and (max-height: 400px) {
+    zoom: 0.8;
+  }
 
   &.dark {
     background-color: #333;
@@ -39,6 +44,14 @@ export const GradientLine = styled.div`
   top: ${NAVBAR_HEIGHT}px; ;
 `;
 
+export const GradientLineDefault = styled.div`
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.7) 7.81%, rgba(255, 153, 0, 0.7) 14.58%, rgba(255, 212, 0, 0.7) 31.27%, rgba(86, 196, 0, 0.7) 64.95%, rgba(0, 148, 255, 0.7) 87.36%, rgba(112, 0, 255, 0.7) 97.55%);
+  height: 5px;
+  width: 100%;
+  position: fixed;
+  top: ${NAVBAR_HEIGHT}px; ;
+`;
+
 export const AppName = styled.div`
   font-size: 46px;
   margin-left: 4%;
@@ -46,6 +59,20 @@ export const AppName = styled.div`
   font-weight: 700;
   letter-spacing: -0.05em;
   cursor: pointer;
+
+  &:hover {
+    color: black;
+    animation: colorAnimation 2s ease-in infinite;
+  }
+
+  @keyframes colorAnimation {
+    0% { color: #F31F1F; }
+    20% { color: #F38A27; }
+    40% { color: #DDBF24; }
+    60% { color: #52D635; }
+    80% { color: #3AA5CF; }
+    100% { color: #9C5FEF; }
+  }
   
   @media screen and (max-width: 600px) {
     font-size: 38px;

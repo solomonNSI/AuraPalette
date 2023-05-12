@@ -180,6 +180,7 @@ def test_loader(dataset, batch_size, input_dict):
         pal_path = os.path.join(base_path, 'data/hexcolor_vf/test_palettes_rgb.pkl')
         img_path = os.path.join(base_path, 'data/bird256/test_palette/test_images_origin.txt')
 
+
         test_dataset = Test_Dataset(input_dict, txt_path, pal_path, img_path)
         test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                                   batch_size=batch_size,

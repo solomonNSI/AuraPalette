@@ -92,8 +92,8 @@ export const EditCanvas = ({ id, setEditedColor, visible }) => {
 
     return (
         <S.ColorPicker visible={visible} >
-            <canvas id="color-block" ref={colorBlockRef} height="150" width="150"></canvas>
-            <canvas id="color-strip" ref={colorStripRef} height="150" width="30"></canvas>
+            <canvas id="color-block" ref={colorBlockRef} height="115" width="115"></canvas>
+            <canvas id="color-strip" ref={colorStripRef} height="115" width="20"></canvas>
         </S.ColorPicker>
   );
 };

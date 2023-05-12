@@ -387,26 +387,24 @@ class Solver(object):
 
             # Generate color palette.
             for i in range(5):
-
-                # palette: [batch_size, 3]
-                # decoder_hidden: [batch_size, hidden_size=150]
                 palette, _, decoder_hidden, _ = self.G_TPN(palette,
-                                                                decoder_hidden.squeeze(0),
-                                                                encoder_outputs,
-                                                                each_input_size,
-                                                                i)
-
+                                                        decoder_hidden.squeeze(0),
+                                                        encoder_outputs,
+                                                        each_input_size,
+                                                        i)
                 fake_palettes[:, 3 * i:3 * (i + 1)] = palette
+
+            # Move tensor to CPU after all computations
+            fake_palettes = fake_palettes.detach().cpu().data
 
             # Extract color palettes.
             for x in range(batch_size):
                 rgbs = []
 
-                # TODO: .cpu() slows the function, can it be removed?
                 for k in range(5):
-                    lab = np.array([fake_palettes.cpu().data[x][3*k],
-                                    fake_palettes.cpu().data[x][3*k+1],
-                                    fake_palettes.cpu().data[x][3*k+2]], dtype='float64')
+                    lab = np.array([fake_palettes[x][3*k],
+                                    fake_palettes[x][3*k+1],
+                                    fake_palettes[x][3*k+2]], dtype='float64')
                     rgb = lab2rgb_1d(lab)
                     
                     # Rescale from [0, 1] to [0, 255]

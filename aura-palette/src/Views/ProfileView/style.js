@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height 100vh;
+  height 100svh;
   overflow: auto;
   display: flex;
   justify-content: center;
@@ -27,6 +27,7 @@ export const Settings = styled.div`
   div {
     display: flex;
     flex-direction: column;
+    zoom: 0.9;
   }
 
   @media screen and (min-width: 900px) {
@@ -42,6 +43,11 @@ export const Settings = styled.div`
     z-index: 99;
     display: none;
     margin: 85px 4px 0px 0px;
+  }
+
+  @media screen and (max-height: 400px) {
+    margin: 70px 4px 0px 0px;
+    height: calc(100% - 132px);
   }
 
   &.dark {
@@ -80,6 +86,10 @@ export const SettingsClosed = styled.div`
       }
       
     }
+
+    @media screen and (max-height: 400px) {
+      margin: 70px 4px 20px 4%;
+    }
   }
   
 `;
@@ -89,7 +99,7 @@ export const Button = styled.button`
   margin: 10px 0px;
   background-color: #fff;
   border-radius: 4px;
-  padding: 20px;
+  padding: 16px 12px;
   overflow: auto;
   border: none;
   font-size: 18px;
@@ -97,7 +107,7 @@ export const Button = styled.button`
   color: #333333;
   display: flex;
   flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   text-align: left;
   overflow: hidden;
 
@@ -141,6 +151,10 @@ export const SettingsBackground = styled.div`
     margin: 85px 4% 20px 6px;
   }
 
+  @media screen and (max-height: 400px) {
+    margin: 70px 4% 20px 6px;
+  }
+
   &.dark {
     background-color: #111111;
   }
@@ -148,6 +162,13 @@ export const SettingsBackground = styled.div`
 
 export const SettingsForeground = styled.div`
   overflow: auto;
+  zoom: 0.9;
+
+
+  @media screen and (max-width: 900px) {
+    zoom: 0.8;
+  }
+
 
   #deneme {
     div:first-child {
@@ -157,13 +178,12 @@ export const SettingsForeground = styled.div`
     }
 
     div:last-child {
-      
       button {
-        font-size: 12px;
+        font-size: 14px;
       }
       margin-left: 20px;
 
-      @media screen and (max-width: 1200px) {
+      @media screen and (max-width: 900px) {
         width: 50%;
         display: flex;
         flex-direction: column;
@@ -200,6 +220,7 @@ export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 15px 0px;
   color: #333333;
+
 
   &.dark {
     color: #eeeeee;
@@ -240,9 +261,10 @@ export const CheckboxLine = styled.h3`
   padding: 0px 20px;
   justify-content: space-between;
   margin: 25px 0px 0px;
-  padding: 18px;
+  padding: 16px 12px;
   background-color: #eee;
   border-radius: 4px;
+
 
   &.dark {
     background-color: #333;
@@ -258,7 +280,7 @@ export const SettingsLine = styled.h3`
   padding: 0px 20px;
   justify-content: space-between;
   margin: 25px 0px 0px;
-  padding: 18px;
+  padding: 16px 12px;
   background-color: #eee;
   border-radius: 4px;
 
@@ -390,6 +412,11 @@ export const Texts = styled.div`
   @media screen and (max-width: 900px) {
     width: 70%;
     margin-right: 20px;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 60%;
+
   }
 
 `;

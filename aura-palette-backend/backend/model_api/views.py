@@ -5,6 +5,7 @@ from .models import Query
 from django.http import JsonResponse
 import argparse
 from .solver import Solver
+import os
 
 # Create your views here.
 @api_view(["POST"])
@@ -38,7 +39,8 @@ def get_palette(request, *args, **kwargs):
     parser.add_argument('--lambda_KL', type=float, default=0.5, help='weight for KL loss')
     parser.add_argument('--lambda_GAN', type=float, default=0.1)
 
-        # Directories.
+    # Directories.
+
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     parser.add_argument('--text2pal_dir', type=str, default=os.path.join(current_dir, 'models/TPN'))

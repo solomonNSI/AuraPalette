@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
@@ -8,7 +8,10 @@ import Profile from "./Views/ProfileView/Profile";
 import SignUp from "./Views/SignUpView/SignUp";
 
 export default function Root() {
-  const [DarkMode, setIsDarkMode] = useState("light");
+
+  const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [DarkMode, setIsDarkMode] = useState(prefersDarkMode ? "dark" : "light");
+  
 
   return (
     <BrowserRouter>
