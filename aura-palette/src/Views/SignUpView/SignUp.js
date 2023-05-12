@@ -10,6 +10,16 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
   const[passwordConfirmation,setPasswordConfirmation] = useState("");
+  const[shortPasswordAlert, setShortPasswordAlert] = useState(true);
+  const[samePasswordAlert, setSamePasswordAlert] = useState(true);
+
+  const handleKeyDownShortPassword = (event) => {
+    setShortPasswordAlert(false)
+  };
+
+  const handleKeyDownSamePassword = (event) => {
+    setSamePasswordAlert(false)
+  };
 
   function sendRegisterInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -33,14 +43,15 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
         console.log(jsonResponse)
       }
     };
-    if(password.length >= 8){
+    if(password.length >= 6){
       if(password === passwordConfirmation)
         xmlhttp.send(registerInfo)
       else
-        console.log("Passwords must match")
+        setSamePasswordAlert(true)
+        
     }
     else
-      console.log("Password must have at least 6 characters")
+      setShortPasswordAlert(true)
   }
 
 
@@ -53,8 +64,10 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
           <S.Title className = {DarkMode}>Sign Up to Aura.</S.Title>
           <input id="name" type="text" className = {DarkMode} placeholder="Name" onChange={(e) => setName(e.target.value)}></input>
           <input id="email" type="email" className = {DarkMode} placeholder="E-Mail" onChange={(e) => setEmail(e.target.value)}></input>
-          <input id="password" type="password" className = {DarkMode} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
-          <input type="password" className = {DarkMode} placeholder="Confirm Password" onChange={(e) => setPasswordConfirmation(e.target.value)}></input>
+          <input id="password" type="password" className = {DarkMode} placeholder="Password" onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyDownShortPassword}></input>
+          <p className="errmsg" style = {{display: shortPasswordAlert ? "flex" : "none" }}>Password must have at least 6 characters.</p>
+          <input type="password" className = {DarkMode} placeholder="Confirm Password" onChange={(e) => setPasswordConfirmation(e.target.value)} onKeyDown={handleKeyDownSamePassword}></input>
+          <p className="errmsg" style = {{display: samePasswordAlert ? "flex" : "none" }}>Passwords must match.</p>
 
           <button className={`signUpButton ${DarkMode}`} onClick={() => sendRegisterInfo()}>Sign Up</button>
           <button className={`loginButton ${DarkMode}`} onClick={() => navigate("/login")}>

@@ -7,7 +7,18 @@ import { useState } from 'react';
 const Login = ({DarkMode, setIsDarkMode}) => {
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
+  const[passwordAlert, setPasswordAlert] = useState(false);
+  const[emailAlert, setEmailAlert] = useState(false);
 
+  const handleKeyDownEmail = (event) => {
+    setEmailAlert(false)
+  };
+
+  const handleKeyDownPassword = (event) => {
+    setPasswordAlert(false)
+  };
+
+  
   function sendLoginInfo(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
@@ -28,6 +39,13 @@ const Login = ({DarkMode, setIsDarkMode}) => {
         }
       }
       else{
+        if(jsonResponse['err_msg'] == "INVALID_PASSWORD"){
+          setPasswordAlert(true);
+        }
+
+        if(jsonResponse['err_msg'] == "EMAIL_NOT_FOUND"){
+          setEmailAlert(true);
+        }
         // ERROR WAS RAISED
         console.log(jsonResponse)
       }
@@ -45,9 +63,10 @@ const Login = ({DarkMode, setIsDarkMode}) => {
         <S.LoginInside>
           <S.Title className = {DarkMode}>Login to Aura.</S.Title>
 
-          <input type="email" placeholder="E-Mail" className = {DarkMode} onChange={(e) => setEmail(e.target.value)}></input>
-          <input type="password" placeholder="Password" className = {DarkMode} onChange={(e) => setPassword(e.target.value)}></input>
-
+          <input type="email" placeholder="E-Mail" className = {DarkMode} onChange={(e) => setEmail(e.target.value)} onKeyDown={handleKeyDownEmail}></input>
+          <p className="errmsg" style = {{display: emailAlert ? "flex" : "none" }}>E-mail address not found.</p>
+          <input type="password" placeholder="Password" className = {DarkMode} onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyDownPassword}></input>
+          <p  className="errmsg" style = {{display: passwordAlert ? "flex" : "none" }}>Incorrect password, try again.</p>
           <button className={`loginButton ${DarkMode}`} onClick={() => sendLoginInfo()}>Login</button>
           <button className={`signUpButton ${DarkMode}`} onClick={() => navigate("/signup")}>
             Don't have an account? <strong>Sign Up {">"}</strong>

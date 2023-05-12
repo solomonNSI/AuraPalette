@@ -15,6 +15,7 @@ import {
   getTriadsPalette,
   getEditedPalette,
 } from "../../Helpers/Harmony"; 
+import { json } from "react-router-dom";
 
   var titles = ["Find a palette for everything.", 
                 "Let the AI find a palette for you.",
@@ -41,7 +42,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [colorBlindness, setColorBlindness] = useState("None");
   const [medium, setMedium] = useState("Default");
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
-
+  const[invalidQueryAlert, setInvalidQueryAlert] = useState(true);
 
   function showAdjustments() {
     if(adjustmentsEnabled)
@@ -86,9 +87,12 @@ function App({ DarkMode, setIsDarkMode }) {
         }
       }
       else
-      //if(jsonResponse['err_msg'] == INVALID)
-      //show error popup display
+      if(jsonResponse['err_msg'] == "INVALID_QUERY")
+      {
+        setInvalidQueryAlert(true)
         console.log(jsonResponse)
+      }
+        
     };
     xmlhttp.send(qInfo)
 
@@ -173,6 +177,7 @@ function App({ DarkMode, setIsDarkMode }) {
   }
 
   const handleKeyDown = (event) => {
+    setInvalidQueryAlert(false)
     if (event.key === 'Enter') {
       sendQuery();
     }
@@ -255,6 +260,8 @@ function App({ DarkMode, setIsDarkMode }) {
           <S.Search className = {DarkMode}>
             <SearchIcon />
           </S.Search>
+
+          <p className="errmsg" style = {{display: invalidQueryAlert ? "flex" : "none" }}>AI couldn't find a matching palette for these keywords. Please try another.</p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
           <S.TopSearch>water</S.TopSearch>
