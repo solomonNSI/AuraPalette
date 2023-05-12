@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import * as S from "./style";
 
-export const MiniPalette = ({ DarkMode, palette }) => {
-    // just a default palette
-    if (!palette) (
-        palette = ["#92ADE4", "#92C2E4", "#92D7E4", "#92E4DD", "#92ADE4"]
-    )
+export const MiniPalette = ({ DarkMode, palette, query }) => {
     const [colorMode, setColorMode] = useState("RGB");
+    if (!query) query = "None"
 
     const changeColorMode = () => {
         if (colorMode === "RGB") setColorMode("HSB");
@@ -17,8 +14,8 @@ export const MiniPalette = ({ DarkMode, palette }) => {
     <S.Container className = {DarkMode}>
       <S.Header className = {DarkMode}>
         <S.Titles className = {DarkMode}>
-          <S.PaletteTitle className = {DarkMode}>Enter Palette Title Here</S.PaletteTitle>
-          <S.Date className = {DarkMode}>Enter Creation Date Here</S.Date>
+          <S.PaletteTitle className = {DarkMode}>Query: {query}</S.PaletteTitle>
+          {/* <S.Date className = {DarkMode}>Enter Creation Date Here</S.Date> */}
         </S.Titles>
 
         <S.PaletteSettings className = {DarkMode}>

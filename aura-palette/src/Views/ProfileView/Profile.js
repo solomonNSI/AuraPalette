@@ -101,13 +101,13 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     function renderHistory(){
         var palettes = [];
         var palettes2 = [];
-        console.log(history);
+        var queries = [];
 
         if (!history || history.length === 0) {
             return (<p>There are no palettes in your history</p>);
         }
         var p_list = history['history']
-        //console.log(p_list);
+
         for (var i = 0; i < p_list.length; i++) {
           var palette = []
           palette.push(p_list[i]['color1'])
@@ -116,10 +116,13 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
           palette.push(p_list[i]['color4'])
           palette.push(p_list[i]['color5'])
           palettes.push(palette)
+
+          var query = (p_list[i]['query']);
+          queries.push(query);
         }
         for (var i = 0; i < palettes.length; i++) {
           palettes2.push(
-              <MiniPalette DarkMode={DarkMode} palette={palettes[i]} />
+              <MiniPalette DarkMode={DarkMode} palette={palettes[i]} query={queries[i]}/>
           );
         }
         return palettes2;
