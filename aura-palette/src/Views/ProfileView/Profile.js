@@ -10,7 +10,10 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     const [settingsEnabled, setSettingsEnabled] = useState(false);
     const [buttonsEnabled, setButtonsEnabled] = useState(false);
     const [history, setHistory] = useState();
+    const [favorites, setFavorites] = useState();
     const navigate = useNavigate();
+
+    historyList();
 
     var defaultBackgroundColor = "#ffffff";
     var defaultSelectedColor = "#ffffff";
@@ -81,7 +84,18 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         setButtonsEnabled(true);
     }
 
-    historyList();
+    function renderFavorites(){
+        var palettes = [];
+        if (!favorites || favorites.length === 0) {
+            return (<p>There are no palettes in your favorites</p>);
+        }
+        for (var i = 0; i < favorites.length; i++) {
+            palettes.push(
+                <MiniPalette DarkMode={DarkMode} palette={favorites[i]} />
+            );
+        }
+        return palettes;
+    }
 
     function renderHistory(){
         var palettes = [];
@@ -90,7 +104,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         }
         for (var i = 0; i < history.length; i++) {
             palettes.push(
-                <MiniPalette palette={history[i]} />
+                <MiniPalette DarkMode={DarkMode} palette={history[i]} />
             );
         }
         return palettes;
@@ -117,15 +131,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       <S.SettingsForeground className = {DarkMode} style = {favoritesEnabled ? {display: "block"} : {display: "none"}}>
         <S.Title className = {DarkMode}>Favorites</S.Title>
         <S.Palettes className = {DarkMode}>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
+          {renderFavorites()}
         </S.Palettes>
       </S.SettingsForeground>
 
@@ -133,15 +139,6 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         <S.Title className = {DarkMode}>History</S.Title>
         <S.Palettes>
             {renderHistory()}
-            {/* <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/>
-            <MiniPalette DarkMode={DarkMode}/> */}
         </S.Palettes>
       </S.SettingsForeground>
 
