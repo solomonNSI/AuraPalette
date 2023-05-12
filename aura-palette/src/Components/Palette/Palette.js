@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { CopyIcon } from "../../Icons/CopyIcon";
 import { LockIcon } from "../../Icons/LockIcon";
 import * as S from "./style";
@@ -11,6 +11,9 @@ import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 import { getColorForMedium } from "../../Helpers/Medium";
 
 export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged }) => {
+    const infoRef = useRef(null);
+    const rateRef = useRef(null);
+
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not Locked");
     const [lock1, setLock1] = useState("Not Locked");
@@ -219,6 +222,24 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         return mediumColors;
     }
 
+    const handleClickOutside = (event) => {
+        if (infoRef.current && !infoRef.current.contains(event.target)) {
+          setInfoEnabled(false);
+        }
+        if (rateRef.current && !rateRef.current.contains(event.target)) {
+          setRateEnabled(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+    
+    
+
     return (
     <S.Container className = {DarkMode}>
 
@@ -226,11 +247,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.Header className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
-            <S.Info className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong></S.Info>
+            <S.Info ref={infoRef} className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong></S.Info>
             
-
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
-            <S.Rate className = {`slidecontainer ${DarkMode}`} style = {{display: rateEnabled ? "flex" : "none" }}>
+            <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} style = {{display: rateEnabled ? "flex" : "none" }}>
                 <div>
                     <p>Rate This Palette</p>
                     <div>

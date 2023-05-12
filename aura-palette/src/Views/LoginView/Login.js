@@ -24,7 +24,7 @@ const Login = ({DarkMode, setIsDarkMode}) => {
       sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
 
       if(sessionStorage.getItem('user_token') != null){
-        setIsLoading(false);  // Add this line
+        setIsLoading(false);
         navigate("/");
       }
     };
