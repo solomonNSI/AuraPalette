@@ -42,7 +42,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [colorBlindness, setColorBlindness] = useState("None");
   const [medium, setMedium] = useState("Default");
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
-  const[invalidQueryAlert, setInvalidQueryAlert] = useState(true);
+  const[invalidQueryAlert, setInvalidQueryAlert] = useState(false);
 
   function showAdjustments() {
     if(adjustmentsEnabled)
