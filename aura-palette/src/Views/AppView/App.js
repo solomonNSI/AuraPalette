@@ -62,7 +62,7 @@ function App({ DarkMode, setIsDarkMode }) {
 
     xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    var qInfo = '{"query" : "' + query + '"}';
+    var qInfo = '{"query" : "' + query.toLowerCase() + '"}';
 
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
