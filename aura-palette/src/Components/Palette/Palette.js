@@ -10,7 +10,7 @@ import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 import { getColorForMedium } from "../../Helpers/Medium";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged }) => {
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not Locked");
     const [lock1, setLock1] = useState("Not Locked");
@@ -22,6 +22,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [sliderValue, setSliderValue] = useState(3);
     const [textAreaValue, setTextAreaValue] = useState("");
     const [feedbackButtonText, setFeedbackButtonText] = useState("Send Feedback");
+    const [isQueryChanged, setIsQueryChanged] = useState(false);
 
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
@@ -220,7 +221,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     return (
     <S.Container className = {DarkMode}>
-        <S.Loader></S.Loader>
+        <S.Loader style = {{display: queryChanged ? "flex" : "none" }}></S.Loader>
 
         <S.MainPalette className = {DarkMode}>
         <S.Header className = {DarkMode}>

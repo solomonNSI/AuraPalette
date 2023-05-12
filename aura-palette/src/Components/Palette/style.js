@@ -35,14 +35,33 @@ export const Loader = styled.div`
   position: absolute;
   display: none;
   top: 50%;
-  left: 45%;
+  left: 55%;
   z-index: 99;
-  border: 12px solid #888888; 
+  border: 12px solid #aaa; 
   border-top: 12px solid #3498db00;
   border-radius: 50%;
   width: 10vw;
   height: 10vw;
   animation: spin 2s linear infinite;
+
+  @media screen and (max-width: 900px) {
+    border: 10px solid #aaa; 
+    border-top: 10px solid #3498db00;
+    top: 35%;
+    left: 48%;
+  }
+
+  @media screen and (max-width: 600px) {
+    border: 8px solid #aaa; 
+    border-top: 8px solid #3498db00;
+    top: 45%;
+    left: 50%;
+  }
+
+  @media screen and (max-height: 400px) {
+    top: 45%;
+    left: 55%;
+  }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }

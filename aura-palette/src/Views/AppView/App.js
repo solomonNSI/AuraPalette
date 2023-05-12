@@ -37,6 +37,7 @@ var predefinedColors = ["orange", "yellow", "red", "blue", "pink", "purple", "gr
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
+  const [queryChanged, setQueryChanged] = useState(false);
   const [lock, setLock] = useState([false, false, false, false, false]);
   const [palette,  setPalette] = useState({ palette: getDefaultPalette(lock) });
   const [editedColorIndex, setEditedColorIndex] = useState("");
@@ -182,6 +183,12 @@ function App({ DarkMode, setIsDarkMode }) {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
+      setQueryChanged(true);
+
+      setTimeout(() => {
+        setQueryChanged(false);
+      }, 9000);
+
       sendQuery();
     }
   };
@@ -296,6 +303,7 @@ function App({ DarkMode, setIsDarkMode }) {
             medium={medium}
             DarkMode={DarkMode}
             query = {query}
+            queryChanged = {queryChanged}
         />
         </S.PaletteContainer>
       </S.Content>
