@@ -2,13 +2,15 @@ import * as S from "../LoginView/style";
 import { NavBar } from "../../Components/NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
-
+import SpinnerOverlay from '../../Components/Styler';
 
 const Login = ({DarkMode, setIsDarkMode}) => {
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
+  const[isLoading, setIsLoading] = useState(false);
 
   function sendLoginInfo(){
+    setIsLoading(true); 
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
     xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/signin/");
@@ -22,7 +24,8 @@ const Login = ({DarkMode, setIsDarkMode}) => {
       sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
 
       if(sessionStorage.getItem('user_token') != null){
-        navigate("/")
+        setIsLoading(false);  // Add this line
+        navigate("/");
       }
     };
     xmlhttp.send(loginInfo)
@@ -31,6 +34,7 @@ const Login = ({DarkMode, setIsDarkMode}) => {
   const navigate = useNavigate();
   return (
     <S.AppBackground className = {DarkMode}>
+      {isLoading && <SpinnerOverlay />}
     
       <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
 

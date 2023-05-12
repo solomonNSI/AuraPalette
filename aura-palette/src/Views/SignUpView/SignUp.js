@@ -2,6 +2,7 @@ import * as S from "../SignUpView/style";
 import { NavBar } from "../../Components/NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import SpinnerOverlay from '../../Components/Styler';
 
 const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
@@ -9,8 +10,10 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const[name,setName] = useState("");
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
+  const[isLoading, setIsLoading] = useState(false);
 
   function sendRegisterInfo(){
+    setIsLoading(true); 
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
     xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/register/");
@@ -24,7 +27,8 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
       sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
       console.log(sessionStorage.getItem('user_token'))
       if(sessionStorage.getItem('user_token') != null){
-        navigate("/")
+        setIsLoading(false);
+        navigate("/");
       }
     };
     xmlhttp.send(registerInfo)
@@ -32,9 +36,9 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
 
 
   return (
-      <S.AppBackground className = {DarkMode}>
+    <S.AppBackground className = {DarkMode}>
+      {isLoading && <SpinnerOverlay />}
       <NavBar  DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
-
       <S.Background className = {DarkMode}>
         <S.SignUpInside className = {DarkMode}>
           <S.Title className = {DarkMode}>Sign Up to Aura.</S.Title>
