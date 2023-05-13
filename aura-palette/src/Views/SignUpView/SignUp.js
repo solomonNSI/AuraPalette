@@ -24,44 +24,44 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const[isLoading, setIsLoading] = useState(false);
 
   function sendRegisterInfo(){
-    setIsLoading(true); 
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        setIsLoading(true); 
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/register/");
+        xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/register/");
 
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    var registerInfo = '{ "name" : "' + name + '", "email" : "' + email + '", "password" : "' + password + '"}';
-    xmlhttp.onload  = function() {
-      var jsonResponse = xmlhttp.response;
-      jsonResponse = JSON.parse(jsonResponse)
-      if(jsonResponse['code'] == null){
-        sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        var registerInfo = '{ "name" : "' + name + '", "email" : "' + email + '", "password" : "' + password + '"}';
+        xmlhttp.onload  = function() {
+        var jsonResponse = xmlhttp.response;
+        jsonResponse = JSON.parse(jsonResponse)
+        if(jsonResponse['code'] == null){
+            sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
 
-        if(sessionStorage.getItem('user_token') != null){
-          navigate("/")
+            if(sessionStorage.getItem('user_token') != null){
+            navigate("/")
+            }
         }
-      }
-      else{
-        console.log(jsonResponse)
-      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
-      sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
-      console.log(sessionStorage.getItem('user_token'))
-      if(sessionStorage.getItem('user_token') != null){
-        setIsLoading(false);
-        navigate("/");
-      }
-    };
-    if(password.length >= 6){
-      if(password === passwordConfirmation)
-        xmlhttp.send(registerInfo)
-      else
-        setSamePasswordAlert(true)
-        
+        else{
+            console.log(jsonResponse)
+        //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+        sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+        console.log(sessionStorage.getItem('user_token'))
+        if(sessionStorage.getItem('user_token') != null){
+            setIsLoading(false);
+            navigate("/");
+        }
+        };
+        if(password.length >= 6){
+        if(password === passwordConfirmation)
+            xmlhttp.send(registerInfo)
+        else
+            setSamePasswordAlert(true)
+            
+        }
+        else
+        setShortPasswordAlert(true)
     }
-    else
-      setShortPasswordAlert(true)
   }
-
 
   return (
     <S.AppBackground className = {DarkMode}>
