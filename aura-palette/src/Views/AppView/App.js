@@ -50,6 +50,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [isError, setIsError] = useState(false);
 
 
+
   function showAdjustments() {
     if(adjustmentsEnabled)
       setAdjustmentsEnabled(false);
@@ -68,38 +69,36 @@ function App({ DarkMode, setIsDarkMode }) {
 
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
-      console.log(jsonResponse);
+      jsonResponse = JSON.parse(jsonResponse);
       if(jsonResponse['code'] == null){
         var colorResponse = jsonResponse['samples'];
-      try {
-        jsonResponse = JSON.parse(jsonResponse);
-      } catch (error) {
-        console.log("Error parsing JSON response:", error);
-        setIsError(true);
-        return setLoading(false);
-      }
-      var colorResponse = jsonResponse['samples'];
 
-      var no = Math.floor(Math.random() * 5);
-      var pal = colorResponse[no];
-      for ( var i = 0; i < 5; i++) {
-        if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
-      }
-      updatePalette(pal, lock);
-      setLoading(false);
-      // if logged in add the palette to history
-      if(sessionStorage.getItem('user_token') != null){
-        var xmlhttp2 = new XMLHttpRequest();
-        xmlhttp2.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addhistory/");
-        xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-        var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
+        var no = Math.floor(Math.random() * 5);
+        var pal = colorResponse[no];
+        for ( var i = 0; i < 5; i++) {
+          if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
+        }
+        updatePalette(pal);
+        setLoading(false);
+        // if logged in add the palette to history
+        if(sessionStorage.getItem('user_token') != null){
+          var xmlhttp2 = new XMLHttpRequest();
+          xmlhttp2.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addhistory/");
+          xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+          var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
           + pal[1] + '", "color3": "' + pal[2] + '", "color4": "' + pal[3] + '", "color5": "' + pal[4] + '"}'
           console.log(palInfo)
           xmlhttp2.send(palInfo)
         }
       }
-        
+      else{
+        if(jsonResponse['err_msg'] == "INVALID_QUERY")
+        {
+          setIsError(true)
+          setLoading(false)
+        }
+      }
     };
     xmlhttp.send(qInfo)
 

@@ -28,36 +28,40 @@ const Login = ({DarkMode, setIsDarkMode}) => {
         
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
-        
         xmlhttp.onload  = function() {
-        var jsonResponse = xmlhttp.response;
-        jsonResponse = JSON.parse(jsonResponse)
-        //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
-        if(jsonResponse['code'] == null){
+          var jsonResponse = xmlhttp.response;
+          jsonResponse = JSON.parse(jsonResponse)
+          //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+          if(jsonResponse['code'] == null){
             sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
 
             if(sessionStorage.getItem('user_token') != null){
-            navigate("/")
+              setIsLoading(false);
+              navigate("/")
             }
-        }
-        else{
+          }
+          else{
+            setIsLoading(false);
             if(jsonResponse['err_msg'] == "INVALID_PASSWORD"){
-            setPasswordAlert(true);
+              setIsLoading(false);
+              setPasswordAlert(true);
             }
 
             if(jsonResponse['err_msg'] == "EMAIL_NOT_FOUND"){
-            setEmailAlert(true);
+              setIsLoading(false);
+              setEmailAlert(true);
             }
             // ERROR WAS RAISED
             console.log(jsonResponse)
-        if(sessionStorage.getItem('user_token') != null){
-            setIsLoading(false);
+          }
+          if(sessionStorage.getItem('user_token') != null){
+          setIsLoading(false);
             navigate("/");
-        }
+          }
         };
         xmlhttp.send(loginInfo)
     }   
-    }
+
 
   const navigate = useNavigate();
   return (
