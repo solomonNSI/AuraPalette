@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height: 100vh;
+  height: 100lvh;
   padding-bottom: env(safe-area-inset-bottom);
   overflow: auto;
   display: flex;
@@ -24,6 +24,7 @@ export const Background = styled.div`
   background-color: #dddddd;
   margin: 100px 0px 35px;
   height: auto;
+  zoom: 0.8;
 
   &.dark {
     background-color: #333333;
@@ -159,4 +160,13 @@ export const Title = styled.div`
     font-size: 28px;
     margin-bottom: 10px;
   }
+`;
+
+export const BackButton = styled.button`
+    display: none; // until we decide
+    position: fixed;
+    right: 91%;
+    bottom: 80%;
+    height: 50px;
+    width: 50px;
 `;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const AppBackground = styled.div`
   background-color: #eeeeee;
-  height: 100vh;
+  height: 100lvh;
   overflow: auto;
   display: flex;
   justify-content: center;
@@ -25,6 +25,7 @@ export const Background = styled.div`
   height: auto;
   overflow: auto;
   overflow-x: hidden;
+  zoom: 0.8;
 
   &.dark {
     background-color: #333333;
@@ -39,7 +40,7 @@ export const SignUpInside = styled.div`
   width: auto;
   height: auto;
   border-radius: 8px;
-  padding: 80px 0px;
+  padding: 60px 0px;
 
   .errmsg {
     margin-bottom: 0;

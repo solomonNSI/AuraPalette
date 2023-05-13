@@ -103,8 +103,10 @@ class Solver(object):
             if os.path.isfile(emb_file):
                 W_emb = torch.load(emb_file)
             else:
+                base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
+                else_file = os.path.join(base_path, 'data', 'glove.840B.300d.txt')
                 W_emb = load_pretrained_embedding(self.input_dict.word2index,
-                                                  'C:/Users/zeyze/Documents/Bilkent/22-23 FALL/CS491/AuraPalette/aura-palette-backend/backend/model_api/data/glove.840B.300d.txt',
+                                                  else_file,
                                                   300)
                 W_emb = torch.from_numpy(W_emb)
                 torch.save(W_emb, emb_file)
@@ -385,26 +387,24 @@ class Solver(object):
 
             # Generate color palette.
             for i in range(5):
-
-                # palette: [batch_size, 3]
-                # decoder_hidden: [batch_size, hidden_size=150]
                 palette, _, decoder_hidden, _ = self.G_TPN(palette,
-                                                                decoder_hidden.squeeze(0),
-                                                                encoder_outputs,
-                                                                each_input_size,
-                                                                i)
-
+                                                        decoder_hidden.squeeze(0),
+                                                        encoder_outputs,
+                                                        each_input_size,
+                                                        i)
                 fake_palettes[:, 3 * i:3 * (i + 1)] = palette
+
+            # Move tensor to CPU after all computations
+            fake_palettes = fake_palettes.detach().cpu().data
 
             # Extract color palettes.
             for x in range(batch_size):
                 rgbs = []
 
-                # TODO: .cpu() slows the function, can it be removed?
                 for k in range(5):
-                    lab = np.array([fake_palettes.cpu().data[x][3*k],
-                                    fake_palettes.cpu().data[x][3*k+1],
-                                    fake_palettes.cpu().data[x][3*k+2]], dtype='float64')
+                    lab = np.array([fake_palettes[x][3*k],
+                                    fake_palettes[x][3*k+1],
+                                    fake_palettes[x][3*k+2]], dtype='float64')
                     rgb = lab2rgb_1d(lab)
                     
                     # Rescale from [0, 1] to [0, 255]

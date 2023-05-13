@@ -3,9 +3,8 @@ import styled, { css } from "styled-components";
 
 export const ColorPicker = styled.div`
     position: relative;
-    top: 32%;   
+    top: 27%;   
     background-color: transparent;
-    height: 60%;
     margin: 0px 20%;
     z-index: 1;
     display: flex;

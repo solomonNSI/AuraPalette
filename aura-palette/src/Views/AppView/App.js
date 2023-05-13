@@ -15,34 +15,40 @@ import {
   getTriadsPalette,
   getEditedPalette,
 } from "../../Helpers/Harmony"; 
-import { json } from "react-router-dom";
+import SpinnerOverlay from "../../Components/Styler";
 
-  var titles = ["Find a palette for everything.", 
-                "Let the AI find a palette for you.",
-                "Discover your perfect palette.",
-                "Create stunning designs with our AI palettes.",
-                "Discover the power of AI for your color needs.",
-                "Experience the magic of AI color selection.",
-                "Your ultimate color companion powered by AI."];
-  var title;
-  function chooseTitle() {
+var title;
+var titles = ["Find a palette for everything.", 
+            "Let the AI find a palette for you.",
+            "Discover your perfect palette.",
+            "Create stunning designs with our AI palettes.",
+            "Discover the power of AI for your color needs.",
+            "Experience the magic of AI color selection.",
+            "Your ultimate color companion powered by AI."];
+
+function chooseTitle() {
     var randomIndex = Math.floor(Math.random() * titles.length);
     title = titles[randomIndex];
-  }
+} 
+chooseTitle();
 
-  chooseTitle();
+var predefined_count = 9;
+var predefinedColors = ["orange", "yellow", "red", "blue", "pink", "purple", "green"];
 
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
   const [query, setQuery] = useState("");
+  const [queryChanged, setQueryChanged] = useState(false);
   const [lock, setLock] = useState([false, false, false, false, false]);
-  const [palette, setPalette] = useState({ palette: getDefaultPalette(lock) });
+  const [palette,  setPalette] = useState({ palette: getDefaultPalette(lock) });
   const [editedColorIndex, setEditedColorIndex] = useState("");
   const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
   const [medium, setMedium] = useState("Default");
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
   const[invalidQueryAlert, setInvalidQueryAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   function showAdjustments() {
     if(adjustmentsEnabled)
@@ -52,13 +58,13 @@ function App({ DarkMode, setIsDarkMode }) {
   }
 
   async function sendQuery(){
+    setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/model/getpalette/");
-    //xmlhttp.open("POST", "http://127.0.0.1:8000/model/getpalette/");
-
+    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    var qInfo = '{"query" : "' + query + '"}';
+    var qInfo = '{"query" : "' + query.toLowerCase() + '"}';
+
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       console.log(jsonResponse);
@@ -66,21 +72,20 @@ function App({ DarkMode, setIsDarkMode }) {
       if(jsonResponse['code'] == null){
         var colorResponse = jsonResponse['samples'];
 
-        var no = Math.floor(Math.random() * 5);
-        var pal = colorResponse[no];
-        for ( var i = 0; i < 5; i++) {
-          if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
-        }
-        updatePalette(pal);
-
-        // if logged in add the palette to history
-        if(sessionStorage.getItem('user_token') != null){
-          var xmlhttp2 = new XMLHttpRequest();
-          xmlhttp2.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/account/addhistory/");
-          //xmlhttp2.open("POST", "http://127.0.0.1:8000/account/addhistory/");
-          xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-          xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-          var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
+      var no = Math.floor(Math.random() * 5);
+      var pal = colorResponse[no];
+      for ( var i = 0; i < 5; i++) {
+        if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
+      }
+      updatePalette(pal, lock);
+      setLoading(false);
+      // if logged in add the palette to history
+      if(sessionStorage.getItem('user_token') != null){
+        var xmlhttp2 = new XMLHttpRequest();
+        xmlhttp2.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addhistory/");
+        xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+        var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
           + pal[1] + '", "color3": "' + pal[2] + '", "color4": "' + pal[3] + '", "color5": "' + pal[4] + '"}'
           console.log(palInfo)
           xmlhttp2.send(palInfo)
@@ -109,62 +114,74 @@ function App({ DarkMode, setIsDarkMode }) {
 
   //TODO => WHEN NEW QUERY IS ENTERED SWITCH HARMONY TO NONE
   function updatePalette(pal){
-    switch (harmony) {
-        case "None":
-            setPalette((prevState) => {
-            return { ...prevState, palette: pal };
-            });
-            break;
-        case "Analogous":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getAnalogousPalette(pal),
-            };
-            });
-            break;
-        case "Shades":
-        case "Monochromatic":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getMonochromaticPalette(pal),
-            };
-            });
-            break;
-        case "Complementary":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getComplementaryPalette(pal),
-            };
-            });
-            break;
-        case "Triads":
-            setPalette((prevState) => {
-            return { ...prevState, palette: getTriadsPalette(pal) };
-            });
-            break;
-        case "Split Complementary":
-            setPalette((prevState) => {
-            return {
-                ...prevState,
-                palette: getSplitComplementaryPalette(pal),
-            };
-            });
-            break;
-        case "Square":
-            setPalette((prevState) => {
-                return { ...prevState, palette: getSquarePalette(pal) };
-            });
-            break;
-        case "Edit":
-            setPalette((prevState) => {
-                return { ...prevState, palette: getEditedPalette(pal, editedColorIndex, editedColor) };
-            });
-            break;
-        default:
-            break;
+    var isPredefined = false;
+    for (var i = 0; i < predefined_count; i++) {
+        if (query === predefinedColors[i]) isPredefined = true;
+    }
+
+    if (!isPredefined) {
+        switch (harmony) {
+            case "None":
+                setPalette((prevState) => {
+                return { ...prevState, palette: pal };
+                });
+                break;
+            case "Analogous":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getAnalogousPalette(pal, lock),
+                };
+                });
+                break;
+            case "Shades":
+            case "Monochromatic":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getMonochromaticPalette(pal, lock),
+                };
+                });
+                break;
+            case "Complementary":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getComplementaryPalette(pal, lock),
+                };
+                });
+                break;
+            case "Triads":
+                setPalette((prevState) => {
+                return { ...prevState, palette: getTriadsPalette(pal, lock) };
+                });
+                break;
+            case "Split Complementary":
+                setPalette((prevState) => {
+                return {
+                    ...prevState,
+                    palette: getSplitComplementaryPalette(pal, lock),
+                };
+                });
+                break;
+            case "Square":
+                setPalette((prevState) => {
+                    return { ...prevState, palette: getSquarePalette(pal, lock) };
+                });
+                break;
+            case "Edit":
+                setPalette((prevState) => {
+                    return { ...prevState, palette: getEditedPalette(pal, editedColorIndex, editedColor, lock) };
+                });
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        setPalette((prevState) => {
+            return { ...prevState, palette: getDefaultPalette(lock, query) };
+        });
     }
   }
 
@@ -179,6 +196,12 @@ function App({ DarkMode, setIsDarkMode }) {
   const handleKeyDown = (event) => {
     setInvalidQueryAlert(false)
     if (event.key === 'Enter') {
+      setQueryChanged(true);
+
+      setTimeout(() => {
+        setQueryChanged(false);
+      }, 9000);
+
       sendQuery();
     }
   };
@@ -187,7 +210,7 @@ function App({ DarkMode, setIsDarkMode }) {
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
-          return { ...prevState, palette: getDefaultPalette(lock) };
+          return { ...prevState, palette: palette.palette };
         });
         break;
       case "Analogous":
@@ -242,9 +265,8 @@ function App({ DarkMode, setIsDarkMode }) {
 
   return (
     <S.AppBackground className = {DarkMode}>
+      {loading && <SpinnerOverlay />}
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
-
-      <S.GradientLine className = {DarkMode} colorList={palette.palette} />
 
       <S.Content className = {DarkMode}>
         {/* <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
@@ -256,7 +278,7 @@ function App({ DarkMode, setIsDarkMode }) {
 
           <S.Title className = {DarkMode}>{title}</S.Title>
 
-          <S.SearchBar className = {DarkMode} placeholder="Enter a keyword to search..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+          <S.SearchBar className = {DarkMode} placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
           <S.Search className = {DarkMode}>
             <SearchIcon />
           </S.Search>
@@ -297,6 +319,7 @@ function App({ DarkMode, setIsDarkMode }) {
             medium={medium}
             DarkMode={DarkMode}
             query = {query}
+            queryChanged = {queryChanged}
         />
         </S.PaletteContainer>
       </S.Content>

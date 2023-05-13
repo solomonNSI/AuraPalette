@@ -2,13 +2,14 @@ import * as S from "../LoginView/style";
 import { NavBar } from "../../Components/NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
-
+import SpinnerOverlay from '../../Components/Styler';
 
 const Login = ({DarkMode, setIsDarkMode}) => {
   const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
   const[passwordAlert, setPasswordAlert] = useState(false);
   const[emailAlert, setEmailAlert] = useState(false);
+  const[isLoading, setIsLoading] = useState(false);
 
   const handleKeyDownEmail = (event) => {
     setEmailAlert(false)
@@ -20,10 +21,10 @@ const Login = ({DarkMode, setIsDarkMode}) => {
 
   
   function sendLoginInfo(){
+    setIsLoading(true); 
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    //xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/signin/");
-    xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signin/");
+    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/signin/");
     
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var loginInfo = '{"email" : "' + email + '", "password" : "' + password + '"}';
@@ -48,6 +49,9 @@ const Login = ({DarkMode, setIsDarkMode}) => {
         }
         // ERROR WAS RAISED
         console.log(jsonResponse)
+      if(sessionStorage.getItem('user_token') != null){
+        setIsLoading(false);
+        navigate("/");
       }
     };
     xmlhttp.send(loginInfo)
@@ -56,10 +60,12 @@ const Login = ({DarkMode, setIsDarkMode}) => {
   const navigate = useNavigate();
   return (
     <S.AppBackground className = {DarkMode}>
+      {isLoading && <SpinnerOverlay />}
     
       <NavBar DarkMode={DarkMode} setIsDarkMode={setIsDarkMode} />
 
       <S.Background className = {DarkMode}>
+        <S.BackButton onClick={() => navigate("/")}>go back</S.BackButton>
         <S.LoginInside>
           <S.Title className = {DarkMode}>Login to Aura.</S.Title>
 

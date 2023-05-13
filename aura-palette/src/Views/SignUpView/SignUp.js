@@ -2,6 +2,7 @@ import * as S from "../SignUpView/style";
 import { NavBar } from "../../Components/NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import SpinnerOverlay from '../../Components/Styler';
 
 const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
@@ -20,12 +21,13 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
   const handleKeyDownSamePassword = (event) => {
     setSamePasswordAlert(false)
   };
+  const[isLoading, setIsLoading] = useState(false);
 
   function sendRegisterInfo(){
+    setIsLoading(true); 
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/register/");
-    //xmlhttp.open("POST", "http://127.0.0.1:8000/auth/register/");
+    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/register/");
 
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var registerInfo = '{ "name" : "' + name + '", "email" : "' + email + '", "password" : "' + password + '"}';
@@ -41,6 +43,12 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
       }
       else{
         console.log(jsonResponse)
+      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+      sessionStorage.setItem('user_token',JSON.stringify(jsonResponse['user_token']))
+      console.log(sessionStorage.getItem('user_token'))
+      if(sessionStorage.getItem('user_token') != null){
+        setIsLoading(false);
+        navigate("/");
       }
     };
     if(password.length >= 6){
@@ -56,9 +64,9 @@ const SignUp = ({ DarkMode, setIsDarkMode }) => {
 
 
   return (
-      <S.AppBackground className = {DarkMode}>
+    <S.AppBackground className = {DarkMode}>
+      {isLoading && <SpinnerOverlay />}
       <NavBar  DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
-
       <S.Background className = {DarkMode}>
         <S.SignUpInside className = {DarkMode}>
           <S.Title className = {DarkMode}>Sign Up to Aura.</S.Title>

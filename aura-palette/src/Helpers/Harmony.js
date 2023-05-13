@@ -1,20 +1,38 @@
 import React from "react";
-import { hexToHSL, hslToHex } from "./ColorWizard";
+import { colorNameToHex, hexToHSL, hslToHex } from "./ColorWizard";
 
 const harmonyCount = 6;
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
-export const getDefaultPalette = (lock) => {
-    // pick a random base color
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    var randomBaseColor;
-    if (!lock[2]) { // if not locked
-        for (var i = 0; i < 6; i++) 
-            color += letters[Math.floor(Math.random() * 16)];
-        randomBaseColor = color;
+export const getDefaultPalette = (lock, baseColor) => {
+    var randomPalette;
+    if (!baseColor) {
+        // pick a random base color
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        var randomBaseColor;
+        if (!lock[2]) { // if not locked
+            for (var i = 0; i < 6; i++) 
+                color += letters[Math.floor(Math.random() * 16)];
+            randomBaseColor = color;
+        }
+        else randomBaseColor = localStorage.getItem("baseColor");
+        randomPalette = [randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor];
     }
-    else randomBaseColor = localStorage.getItem("baseColor");
-    var randomPalette = [randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor, randomBaseColor];
+    else {
+        var temp = colorNameToHex(baseColor);
+        var color_hsl = hexToHSL(temp);
+        var randomH = color_hsl[0] + randomIntFromInterval(-15, 15);
+        var randomS = randomIntFromInterval(15, 100);
+        var randomL = randomIntFromInterval(20, 85);
+        color_hsl[0] = randomH;
+        color_hsl[1] = randomS;
+        color_hsl[2] = randomL;
+        temp = hslToHex(color_hsl[0], color_hsl[1], color_hsl[2]);
+        randomPalette = [temp, temp, temp, temp, temp];
+    }
 
     // pick a random harmony
     const randomInt = Math.floor(Math.random() * harmonyCount) + 1;

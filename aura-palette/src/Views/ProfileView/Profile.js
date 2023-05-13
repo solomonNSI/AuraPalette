@@ -19,8 +19,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
   function logOut(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
-    //xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signout/");
-    xmlhttp.open("POST", "https://model-vhxzdlegrq-uc.a.run.app/auth/signout/");
+    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/signout/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
@@ -59,7 +58,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
   function historyList(){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("GET", "https://model-vhxzdlegrq-uc.a.run.app/account/gethistory/");
+    xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
     xmlhttp.onload  = function() {
@@ -135,18 +134,29 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         <S.SettingsLine id="deneme" className = {DarkMode}>
           <S.Texts>
             <S.Subtitle className = {DarkMode}>Change E-Mail Address</S.Subtitle>
-            <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
+            <S.Explanation className = {DarkMode}>You can change your e-mail address by entering a new one.</S.Explanation>
           </S.Texts>
           <div className={`buttons ${DarkMode}`}>
             <input className = {DarkMode} type="email" placeholder="Enter new e-mail"></input>
-            <button className = {DarkMode} >Change E-Mail</button>
+            <button className = {DarkMode} >Change</button>
+          </div>
+        </S.SettingsLine>
+
+        <S.SettingsLine id="deneme" className = {DarkMode}>
+          <S.Texts>
+            <S.Subtitle className = {DarkMode}>Change Account Password</S.Subtitle>
+            <S.Explanation className = {DarkMode}>You can change your account password by entering a new one.</S.Explanation>
+          </S.Texts>
+          <div className={`buttons ${DarkMode}`}>
+            <input className = {DarkMode} type="password" placeholder="Enter new password"></input>
+            <button className = {DarkMode} >Change</button>
           </div>
         </S.SettingsLine>
 
         <S.CheckboxLine className = {DarkMode}>
           <S.Texts>
-            <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
-            <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
+            <S.Subtitle className = {DarkMode}>Incognito Mode</S.Subtitle>
+            <S.Explanation className = {DarkMode}>When enabled, the palette history will not be saved anymore.</S.Explanation>
           </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>
@@ -156,8 +166,8 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
         <S.CheckboxLine className = {DarkMode}>
           <S.Texts>
-            <S.Subtitle className = {DarkMode}>Enable Some Mode or Another Setting</S.Subtitle>
-            <S.Explanation className = {DarkMode}>Explanation of the user setting, what it does when clicked the switch.</S.Explanation>
+            <S.Subtitle className = {DarkMode}>Always Use Dark Mode</S.Subtitle>
+            <S.Explanation className = {DarkMode}>Change the default theme to dark from light.</S.Explanation>
           </S.Texts>
           <S.Label className = {DarkMode}>
             <input type="checkbox"></input>

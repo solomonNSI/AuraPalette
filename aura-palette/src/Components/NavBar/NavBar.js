@@ -18,8 +18,7 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
     var xmlhttp = new XMLHttpRequest();
     var token_to_check;
     var loggedIn = false;
-    //xmlhttp.open("GET", "https://model-vhxzdlegrq-uc.a.run.app/account/checktoken/");
-    xmlhttp.open("GET", "http://127.0.0.1:8000/account/checktoken/");
+    xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/checktoken/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
     xmlhttp.onload  = function() {
@@ -47,7 +46,8 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
           onClick={() => checkLoggedIn()}
           />
       </S.LoginButton >
-      {/*<S.GradientLine colorList={palette}/>*/}
+      {palette && <S.GradientLine colorList={palette}/>}
+      {!palette && <S.GradientLineDefault />}
     </S.NavBar>
   );
 };
