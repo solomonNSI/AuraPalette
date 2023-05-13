@@ -41,6 +41,14 @@ export const LoginInside = styled.div`
   border-radius: 8px;
   padding: 60px 0px;
 
+  .errmsg {
+    margin-bottom: 0;
+    margin-left: 10px;
+    width: 100%;
+    font-size: 16px;
+    color: red;
+  }
+
   input {
     background-color: #ffffff;
     height: 55px;
