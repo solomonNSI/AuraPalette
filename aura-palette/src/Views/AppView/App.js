@@ -46,8 +46,8 @@ function App({ DarkMode, setIsDarkMode }) {
   const [colorBlindness, setColorBlindness] = useState("None");
   const [medium, setMedium] = useState("Default");
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
-  const[invalidQueryAlert, setInvalidQueryAlert] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
 
   function showAdjustments() {
@@ -58,6 +58,7 @@ function App({ DarkMode, setIsDarkMode }) {
   }
 
   async function sendQuery(){
+    setIsError(false);
     setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
@@ -68,9 +69,16 @@ function App({ DarkMode, setIsDarkMode }) {
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       console.log(jsonResponse);
-      jsonResponse = JSON.parse(jsonResponse);
       if(jsonResponse['code'] == null){
         var colorResponse = jsonResponse['samples'];
+      try {
+        jsonResponse = JSON.parse(jsonResponse);
+      } catch (error) {
+        console.log("Error parsing JSON response:", error);
+        setIsError(true);
+        return setLoading(false);
+      }
+      var colorResponse = jsonResponse['samples'];
 
       var no = Math.floor(Math.random() * 5);
       var pal = colorResponse[no];
@@ -90,12 +98,6 @@ function App({ DarkMode, setIsDarkMode }) {
           console.log(palInfo)
           xmlhttp2.send(palInfo)
         }
-      }
-      else
-      if(jsonResponse['err_msg'] == "INVALID_QUERY")
-      {
-        setInvalidQueryAlert(true)
-        console.log(jsonResponse)
       }
         
     };
@@ -194,7 +196,6 @@ function App({ DarkMode, setIsDarkMode }) {
   }
 
   const handleKeyDown = (event) => {
-    setInvalidQueryAlert(false)
     if (event.key === 'Enter') {
       setQueryChanged(true);
 
@@ -269,21 +270,13 @@ function App({ DarkMode, setIsDarkMode }) {
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
       <S.Content className = {DarkMode}>
-        {/* <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
-        <S.Title className = {DarkMode}>Let the AI find a palette for you.</S.Title>
-        <S.Title className = {DarkMode}>Discover your perfect palette with AI.</S.Title>
-        <S.Title className = {DarkMode}>Effortlessly create stunning designs with our AI palettes.</S.Title>
-        <S.Title className = {DarkMode}>Your ultimate color companion powered by AI.</S.Title>
-        <S.Title className = {DarkMode}>Discover the power of AI for your color needs.</S.Title> */}
-
           <S.Title className = {DarkMode}>{title}</S.Title>
-
           <S.SearchBar className = {DarkMode} placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
           <S.Search className = {DarkMode}>
             <SearchIcon />
           </S.Search>
 
-          <p className="errmsg" style = {{display: invalidQueryAlert ? "flex" : "none" }}>AI couldn't find a matching palette for these keywords. Please try another.</p>
+          <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>AI couldn't find a matching palette for these keywords. Please try another.</p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
           <S.TopSearch>water</S.TopSearch>
