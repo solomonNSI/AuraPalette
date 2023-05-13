@@ -47,6 +47,8 @@ function App({ DarkMode, setIsDarkMode }) {
   const [medium, setMedium] = useState("Default");
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
 
 
   function showAdjustments() {
@@ -57,6 +59,7 @@ function App({ DarkMode, setIsDarkMode }) {
   }
 
   async function sendQuery(){
+    setIsError(false);
     setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
@@ -66,27 +69,35 @@ function App({ DarkMode, setIsDarkMode }) {
 
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
-      console.log(jsonResponse);
       jsonResponse = JSON.parse(jsonResponse);
-      var colorResponse = jsonResponse['samples'];
+      if(jsonResponse['code'] == null){
+        var colorResponse = jsonResponse['samples'];
 
-      var no = Math.floor(Math.random() * 5);
-      var pal = colorResponse[no];
-      for ( var i = 0; i < 5; i++) {
-        if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
-      }
-      updatePalette(pal, lock);
-      setLoading(false);
-      // if logged in add the palette to history
-      if(sessionStorage.getItem('user_token') != null){
-        var xmlhttp2 = new XMLHttpRequest();
-        xmlhttp2.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addhistory/");
-        xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-        var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
+        var no = Math.floor(Math.random() * 5);
+        var pal = colorResponse[no];
+        for ( var i = 0; i < 5; i++) {
+          if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
+        }
+        updatePalette(pal);
+        setLoading(false);
+        // if logged in add the palette to history
+        if(sessionStorage.getItem('user_token') != null){
+          var xmlhttp2 = new XMLHttpRequest();
+          xmlhttp2.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addhistory/");
+          xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+          var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
           + pal[1] + '", "color3": "' + pal[2] + '", "color4": "' + pal[3] + '", "color5": "' + pal[4] + '"}'
-        console.log(palInfo)
-        xmlhttp2.send(palInfo)
+          console.log(palInfo)
+          xmlhttp2.send(palInfo)
+        }
+      }
+      else{
+        if(jsonResponse['err_msg'] == "INVALID_QUERY")
+        {
+          setIsError(true)
+          setLoading(false)
+        }
       }
     };
     xmlhttp.send(qInfo)
@@ -258,19 +269,13 @@ function App({ DarkMode, setIsDarkMode }) {
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
       <S.Content className = {DarkMode}>
-        {/* <S.Title className = {DarkMode}>Find a palette for everything.</S.Title>
-        <S.Title className = {DarkMode}>Let the AI find a palette for you.</S.Title>
-        <S.Title className = {DarkMode}>Discover your perfect palette with AI.</S.Title>
-        <S.Title className = {DarkMode}>Effortlessly create stunning designs with our AI palettes.</S.Title>
-        <S.Title className = {DarkMode}>Your ultimate color companion powered by AI.</S.Title>
-        <S.Title className = {DarkMode}>Discover the power of AI for your color needs.</S.Title> */}
-
           <S.Title className = {DarkMode}>{title}</S.Title>
-
           <S.SearchBar className = {DarkMode} placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
           <S.Search className = {DarkMode}>
             <SearchIcon />
           </S.Search>
+
+          <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>AI couldn't find a matching palette for these keywords. Please try another.</p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
           <S.TopSearch>water</S.TopSearch>

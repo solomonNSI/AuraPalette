@@ -23,6 +23,20 @@ export const Content = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  width: calc(100%-130px);
+
+  .errmsg {
+    margin: 10px 4% 0 4%;
+    width: 92%;
+    font-size: 14px;
+    color: red;
+
+    @media screen and (max-width: 900px) {
+      font-size: 10px;
+    }
+
+  }
+
   overflow: hidden;
   &.dark {
     background-color: #222222;
@@ -66,11 +80,11 @@ export const Title = styled.div`
   }
 
   @media screen and (max-width: 900px) {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   @media screen and (max-width: 600px) {
-    font-size: 20px;
+    font-size: 18px;
     padding-top: 90px;
   }
 
@@ -84,7 +98,7 @@ export const SearchBar = styled.input`
   position: relative;
   top: 0px;
   left: 0px;
-  height: 50px;
+  height: 45px;
   font-size: 16px;
   border: none;
   border-radius: 8px;
@@ -152,7 +166,7 @@ export const TopSearch = styled.div`
 export const PaletteContainer = styled.div`
   display: flex;
   height: 600px;
-  margin-top: 20px;
+  margin-top: 10px;
 
   @media screen and (max-height: 400px) {
     margin-top: 10px;
