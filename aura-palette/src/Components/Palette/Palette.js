@@ -59,7 +59,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
         if(sessionStorage.getItem('user_token') != null){
             var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-            xmlhttp.open("POST", "http://127.0.0.1:8000/feedback/sendfeedback/");
+            xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app//feedback/sendfeedback/");
             xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
             var qInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -78,8 +78,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function addToFavorites(){
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
-          xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
-          //xmlhttp.open("POST", "http://127.0.0.1:8000/account/addfavorite/");
+          xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app//account/addfavorite/");
+          //xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app//account/addfavorite/");
           xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'

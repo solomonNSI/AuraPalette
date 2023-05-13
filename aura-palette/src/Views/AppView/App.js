@@ -63,7 +63,7 @@ function App({ DarkMode, setIsDarkMode }) {
     setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/model/getpalette/");
+    xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app//model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query.toLowerCase() + '"}';
 
@@ -83,7 +83,7 @@ function App({ DarkMode, setIsDarkMode }) {
         // if logged in add the palette to history
         if(sessionStorage.getItem('user_token') != null){
           var xmlhttp2 = new XMLHttpRequest();
-          xmlhttp2.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addhistory/");
+          xmlhttp2.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app//account/addhistory/");
           xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
