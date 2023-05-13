@@ -28,24 +28,24 @@ export const MiniPalette = ({ DarkMode, palette, query }) => {
       </S.Header>
 
         <S.Colors>
-            <S.Color colorHex={palette.color1}>
-                <S.ColorCode>{palette.color1}</S.ColorCode>
+            <S.Color colorHex={palette[0]}>
+                <S.ColorCode>{palette[0]}</S.ColorCode>
             </S.Color>
 
-            <S.Color colorHex={palette.color2}>
-                <S.ColorCode>{palette.color2}</S.ColorCode>
+            <S.Color colorHex={palette[1]}>
+                <S.ColorCode>{palette[1]}</S.ColorCode>
             </S.Color>
 
-            <S.Color colorHex={palette.color3}>
-                <S.ColorCode>{palette.color3}</S.ColorCode>
+            <S.Color colorHex={palette[2]}>
+                <S.ColorCode>{palette[2]}</S.ColorCode>
             </S.Color>
 
-            <S.Color colorHex={palette.color4}>
-                <S.ColorCode>{palette.color4}</S.ColorCode>
+            <S.Color colorHex={palette[3]}>
+                <S.ColorCode>{palette[3]}</S.ColorCode>
             </S.Color>
 
-            <S.Color colorHex={palette.color5}>
-                <S.ColorCode>{palette.color5}</S.ColorCode>
+            <S.Color colorHex={palette[4]}>
+                <S.ColorCode>{palette[4]}</S.ColorCode>
             </S.Color>
          </S.Colors>
     </S.Container>

@@ -113,7 +113,6 @@ function App({ DarkMode, setIsDarkMode }) {
     // })
   }
 
-  //TODO => WHEN NEW QUERY IS ENTERED SWITCH HARMONY TO NONE
   function updatePalette(pal){
     var isPredefined = false;
     for (var i = 0; i < predefined_count; i++) {

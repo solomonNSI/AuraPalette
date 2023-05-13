@@ -14,6 +14,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     const navigate = useNavigate();
 
     historyList();
+    favoriteList();
 
     var defaultBackgroundColor = "#ffffff";
     var defaultSelectedColor = "#ffffff";
@@ -65,12 +66,26 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
         xmlhttp.onload  = function() {
-        var jsonResponse = xmlhttp.response;
-        jsonResponse = JSON.parse(jsonResponse);
-        setHistory(jsonResponse)
+          var jsonResponse = xmlhttp.response;
+          jsonResponse = JSON.parse(jsonResponse);
+          setHistory(jsonResponse)
         }
         xmlhttp.send()
     }
+
+    function favoriteList(){
+      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+      xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
+      //xmlhttp.open("GET", "http://127.0.0.1:8000/account/getfavorites/");
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+      xmlhttp.onload  = function() {
+        var jsonResponse = xmlhttp.response;
+        jsonResponse = JSON.parse(jsonResponse);
+        setFavorites(jsonResponse)
+      }
+      xmlhttp.send()
+  }
 
     function showSettings() {
         setFavoritesEnabled(false);
@@ -86,16 +101,32 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     }
 
     function renderFavorites(){
-        var palettes = [];
-        if (!favorites || favorites.length === 0) {
-            return (<p>There are no palettes in your favorites</p>);
-        }
-        for (var i = 0; i < favorites.length; i++) {
-            palettes.push(
-                <MiniPalette DarkMode={DarkMode} palette={favorites[i]} />
-            );
-        }
-        return palettes;
+      var palettes = [];
+      var palettes2 = [];
+      var queries = [];
+      if (!favorites || favorites.length === 0) {
+        return (<p>There are no palettes in your favorites</p>);
+      }
+      var p_list = favorites['favorites']
+
+      for (var i = 0; i < p_list.length; i++) {
+        var palette = []
+        palette.push(p_list[i]['color1'])
+        palette.push(p_list[i]['color2'])
+        palette.push(p_list[i]['color3'])
+        palette.push(p_list[i]['color4'])
+        palette.push(p_list[i]['color5'])
+        palettes.push(palette)
+
+        var query = (p_list[i]['query']);
+        queries.push(query);
+      }
+      for (var i = 0; i < palettes.length; i++) {
+        palettes2.push(
+            <MiniPalette DarkMode={DarkMode} palette={palettes[i]} query={queries[i]}/>
+        );
+      }
+      return palettes2;
     }
 
     function renderHistory(){
@@ -106,6 +137,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         if (!history || history.length === 0) {
             return (<p>There are no palettes in your history</p>);
         }
+        
         var p_list = history['history']
 
         for (var i = 0; i < p_list.length; i++) {
