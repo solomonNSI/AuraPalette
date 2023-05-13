@@ -5,80 +5,160 @@ import { MiniPalette } from "../../Components/MiniPalette/MiniPalette";
 import { useNavigate } from "react-router-dom";
 
 const Profile = ({ DarkMode, setIsDarkMode }) => {
-  const [favoritesEnabled, setFavoritesEnabled] = useState(true);
-  const [historyEnabled, setHistoryEnabled] = useState(false);
-  const [settingsEnabled, setSettingsEnabled] = useState(false);
-  const [buttonsEnabled, setButtonsEnabled] = useState(false);
+    const [favoritesEnabled, setFavoritesEnabled] = useState(true);
+    const [historyEnabled, setHistoryEnabled] = useState(false);
+    const [settingsEnabled, setSettingsEnabled] = useState(false);
+    const [buttonsEnabled, setButtonsEnabled] = useState(false);
+    const [history, setHistory] = useState();
+    const [favorites, setFavorites] = useState();
+    const navigate = useNavigate();
 
-  const navigate = useNavigate();
+    historyList();
+    favoriteList();
 
+    var defaultBackgroundColor = "#ffffff";
+    var defaultSelectedColor = "#ffffff";
 
-  var defaultBackgroundColor = "#ffffff";
-  var defaultSelectedColor = "#ffffff";
-
-  function logOut(){
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
-    xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/signout/");
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.onload  = function() {
-      var jsonResponse = xmlhttp.response;
-      jsonResponse = JSON.parse(jsonResponse)
-      //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
-      sessionStorage.removeItem('user_token')
-      if(sessionStorage.getItem('user_token') ==null){
-        navigate("/")
-      }
-    };
-    xmlhttp.send()
-  }
-
-  if(DarkMode=="dark"){
-    defaultBackgroundColor="#111111";
-    defaultSelectedColor="#444444";
-
-  }
-  else {
-    defaultBackgroundColor="#ffffff";
-    defaultSelectedColor="#aaaaaa";
-
-  }
-
-  function showFavorites() {
-    setFavoritesEnabled(true);
-    setHistoryEnabled(false);
-    setSettingsEnabled(false);
-  }
-  
-  function showHistory() {
-    setFavoritesEnabled(false);
-    setHistoryEnabled(true);
-    setSettingsEnabled(false);
-  }
-
-  function historyList(){
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-    xmlhttp.onload  = function() {
-      var jsonResponse = xmlhttp.response;
-      jsonResponse = JSON.parse(jsonResponse); 
+    function logOut(){
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
+        xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/auth/signout/");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.onload  = function() {
+        var jsonResponse = xmlhttp.response;
+        jsonResponse = JSON.parse(jsonResponse)
+        //localStorage.setItem('session',JSON.stringify(jsonResponse['user_token']))
+        sessionStorage.removeItem('user_token')
+        if(!sessionStorage.getItem('user_token')){
+            navigate("/")
+        }
+        };
+        xmlhttp.send()
     }
-    xmlhttp.send()
-  }
-  function showSettings() {
-    setFavoritesEnabled(false);
-    setHistoryEnabled(false);
-    setSettingsEnabled(true);
+
+    if(DarkMode=="dark"){
+        defaultBackgroundColor="#111111";
+        defaultSelectedColor="#444444";
+
+    }
+    else {
+        defaultBackgroundColor="#ffffff";
+        defaultSelectedColor="#aaaaaa";
+
+    }
+
+    function showFavorites() {
+        setFavoritesEnabled(true);
+        setHistoryEnabled(false);
+        setSettingsEnabled(false);
+    }
+    
+    function showHistory() {
+        setFavoritesEnabled(false);
+        setHistoryEnabled(true);
+        setSettingsEnabled(false);
+    }
+
+    function historyList(){
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
+        //xmlhttp.open("GET", "http://127.0.0.1:8000/account/gethistory/");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+        xmlhttp.onload  = function() {
+          var jsonResponse = xmlhttp.response;
+          jsonResponse = JSON.parse(jsonResponse);
+          setHistory(jsonResponse)
+        }
+        xmlhttp.send()
+    }
+
+    function favoriteList(){
+      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+      xmlhttp.open("GET", "https://may11-vhxzdlegrq-ew.a.run.app/account/gethistory/");
+      //xmlhttp.open("GET", "http://127.0.0.1:8000/account/getfavorites/");
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+      xmlhttp.onload  = function() {
+        var jsonResponse = xmlhttp.response;
+        jsonResponse = JSON.parse(jsonResponse);
+        setFavorites(jsonResponse)
+      }
+      xmlhttp.send()
   }
 
-  function showButtons() {
-    if(buttonsEnabled)
-      setButtonsEnabled(false);
-    else
-      setButtonsEnabled(true);
-  }
+    function showSettings() {
+        setFavoritesEnabled(false);
+        setHistoryEnabled(false);
+        setSettingsEnabled(true);
+    }
+
+    function showButtons() {
+        if(buttonsEnabled)
+        setButtonsEnabled(false);
+        else
+        setButtonsEnabled(true);
+    }
+
+    function renderFavorites(){
+      var palettes = [];
+      var palettes2 = [];
+      var queries = [];
+      if (!favorites || favorites.length === 0) {
+        return (<p>There are no palettes in your favorites</p>);
+      }
+      var p_list = favorites['favorites']
+
+      for (var i = 0; i < p_list.length; i++) {
+        var palette = []
+        palette.push(p_list[i]['color1'])
+        palette.push(p_list[i]['color2'])
+        palette.push(p_list[i]['color3'])
+        palette.push(p_list[i]['color4'])
+        palette.push(p_list[i]['color5'])
+        palettes.push(palette)
+
+        var query = (p_list[i]['query']);
+        queries.push(query);
+      }
+      for (var i = 0; i < palettes.length; i++) {
+        palettes2.push(
+            <MiniPalette DarkMode={DarkMode} palette={palettes[i]} query={queries[i]}/>
+        );
+      }
+      return palettes2;
+    }
+
+    function renderHistory(){
+        var palettes = [];
+        var palettes2 = [];
+        var queries = [];
+
+        if (!history || history.length === 0) {
+            return (<p>There are no palettes in your history</p>);
+        }
+        
+        var p_list = history['history']
+
+        for (var i = 0; i < p_list.length; i++) {
+          var palette = []
+          palette.push(p_list[i]['color1'])
+          palette.push(p_list[i]['color2'])
+          palette.push(p_list[i]['color3'])
+          palette.push(p_list[i]['color4'])
+          palette.push(p_list[i]['color5'])
+          palettes.push(palette)
+
+          var query = (p_list[i]['query']);
+          queries.push(query);
+        }
+        for (var i = 0; i < palettes.length; i++) {
+          palettes2.push(
+              <MiniPalette DarkMode={DarkMode} palette={palettes[i]} query={queries[i]}/>
+          );
+        }
+        return palettes2;
+    }
 
   return (
     <S.AppBackground id="background" className = {DarkMode}>
@@ -101,30 +181,14 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       <S.SettingsForeground className = {DarkMode} style = {favoritesEnabled ? {display: "block"} : {display: "none"}}>
         <S.Title className = {DarkMode}>Favorites</S.Title>
         <S.Palettes className = {DarkMode}>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
+          {renderFavorites()}
         </S.Palettes>
       </S.SettingsForeground>
 
       <S.SettingsForeground className = {DarkMode} style = {historyEnabled ? {display: "block"} : {display: "none"}}>
         <S.Title className = {DarkMode}>History</S.Title>
         <S.Palettes>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
-          <MiniPalette DarkMode={DarkMode}/>
+            {renderHistory()}
         </S.Palettes>
       </S.SettingsForeground>
 

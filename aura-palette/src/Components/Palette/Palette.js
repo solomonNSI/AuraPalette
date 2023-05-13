@@ -75,6 +75,18 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         }
         
     }
+    function addToFavorites(){
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        if(sessionStorage.getItem('user_token') != null){
+          xmlhttp.open("POST", "https://may11-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
+          //xmlhttp.open("POST", "http://127.0.0.1:8000/account/addfavorite/");
+          xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+          var palInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
+          + palette[1] + '", "color3": "' + palette[2] + '", "color4": "' + palette[3] + '", "color5": "' + palette[4] + '"}'
+          xmlhttp.send(palInfo)
+        }
+    }
 
     function showInfo() {
         if(infoEnabled)
@@ -266,7 +278,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
                 <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
-            <S.StyledStarIcon className = {DarkMode} height="20px" />
+            <S.StyledStarIcon className = {DarkMode} height="20px" onClick={addToFavorites} />
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
