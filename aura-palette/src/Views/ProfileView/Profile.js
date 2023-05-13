@@ -75,7 +75,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
     function favoriteList(){
       var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-      xmlhttp.open("GET", "https://may13-vhxzdlegrq-lz.a.run.app/account/gethistory/");
+      xmlhttp.open("GET", "https://may13-vhxzdlegrq-lz.a.run.app/account/getfavorites/");
       //xmlhttp.open("GET", "https://may13-vhxzdlegrq-lz.a.run.app/account/getfavorites/");
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
