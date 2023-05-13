@@ -3,14 +3,16 @@
 aura-palette-model/samples
 
 /aura-palette-model/data
-/aura-palette-backend/backend/backend_main_api/__pycache__/
-/aura-palette-backend/backend/backend_main_api/migrations/__pycache__/
-/aura-palette-backend/backend/auth_api/__pycache__/
-/aura-palette-backend/backend/auth_api/migrations/__pycache__/
-/aura-palette-backend/backend/account_api/migrations/__pycache__/
-/aura-palette-backend/backend/account_api/__pycache__/
-/aura-palette-backend/backend/model_api/migrations/__pycache__/
-/aura-palette-backend/backend/model_api/__pycache__/
-/aura-palette-backend/backend/model_api/model/__pycache__/
+
 /aura-palette-backend/venv
 /aura-palette-model/venv
+
+aura-palette-backend/backend/account_api/__pycache__
+aura-palette-backend/backend/account_api/migrations/__pycache__
+aura-palette-backend/backend/auth_api/__pycache__
+aura-palette-backend/backend/backend_main_api/__pycache__
+aura-palette-backend/backend/feedback_api/__pycache__
+aura-palette-backend/backend/model_api/__pycache__
+aura-palette-backend/backend/model_api/model/__pycache__
+
+aura-palette-backend/backend/model_api/__pycache__/views.cpython-310.pyc

@@ -274,7 +274,7 @@ function App({ DarkMode, setIsDarkMode }) {
             <SearchIcon />
           </S.Search>
 
-          <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>AI couldn't find a matching palette for these keywords. Please try another.</p>
+          <p className="errmsg" style = {{display: isError ? "flex" : "none" }}> Our model is a work in progress. Please try a synonym or describe it in a different way</p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
           <S.TopSearch>water</S.TopSearch>
