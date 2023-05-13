@@ -1,5 +1,6 @@
 import React from "react";
 import { StarIcon } from "../../Icons/StarIcon";
+import { FullStarIcon } from "../../Icons/FullStarIcon";
 import styled, { css } from "styled-components";
 import { PaletteCopyIcon } from "../../Icons/PaletteCopyIcon";
 import { ExportIcon } from "../../Icons/ExportIcon";
@@ -12,9 +13,7 @@ export const Container = styled.div`
   width: 80%;
   margin-right: 4%;
   height: calc(100svh - 260px);
-  overflow: auto;
-
-  
+  overflow: auto;  
 
   @media screen and (max-width: 900px) {
     width: 90%;
@@ -535,6 +534,27 @@ export const Rate = styled.div`
 
 
 export const StyledStarIcon = styled(StarIcon)`
+  margin: 0 16px;
+  cursor: pointer;
+  &.dark {
+    path
+    {
+      fill: #888888;
+    }
+  }
+  &:hover {
+    path
+    {
+      fill: #666;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 0 12px;
+  }
+`;
+
+export const StyledFullStarIcon = styled(FullStarIcon)`
   margin: 0 16px;
   cursor: pointer;
   &.dark {

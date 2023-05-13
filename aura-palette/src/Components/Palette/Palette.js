@@ -25,7 +25,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [sliderValue, setSliderValue] = useState(3);
     const [textAreaValue, setTextAreaValue] = useState("");
     const [feedbackButtonText, setFeedbackButtonText] = useState("Send Feedback");
-    const [isQueryChanged, setIsQueryChanged] = useState(false);
+    const [clickedFavorite, setClickedFavorite] = useState(false);
 
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
@@ -76,6 +76,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         
     }
     function addToFavorites(){
+        setClickedFavorite(true);
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
           xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app/account/addfavorite/");
@@ -86,6 +87,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
           + palette[1] + '", "color3": "' + palette[2] + '", "color4": "' + palette[3] + '", "color5": "' + palette[4] + '"}'
           xmlhttp.send(palInfo)
         }
+    }
+
+    function removeFromFavorites(){
+        setClickedFavorite(false);
     }
 
     function showInfo() {
@@ -224,9 +229,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 <S.Color colorHex={getColorForMedium(palette[i], medium)}>
                     <S.ColorCode>
                     {getColorForMedium(palette[i], medium)}
-                        {/* <S.Copy onClick={() => { navigator.clipboard.writeText(displayPaletteColors(i)); }}  >
-                        <CopyIcon />
-                        </S.Copy> */}
                     </S.ColorCode>
                 </S.Color>
             );
@@ -278,7 +280,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
                 <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
-            <S.StyledStarIcon className = {DarkMode} height="20px" onClick={addToFavorites} />
+            {clickedFavorite ? 
+                <S.StyledFullStarIcon className = {DarkMode} height="26px" onClick={removeFromFavorites} /> : 
+                <S.StyledStarIcon className = {DarkMode} height="22px" onClick={addToFavorites} />
+            }
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
