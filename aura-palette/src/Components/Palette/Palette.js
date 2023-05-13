@@ -281,8 +281,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
             {clickedFavorite ? 
-                <S.StyledFullStarIcon className = {DarkMode} height="26px" onClick={removeFromFavorites} /> : 
-                <S.StyledStarIcon className = {DarkMode} height="22px" onClick={addToFavorites} />
+                <S.StyledFullStarIcon className = {DarkMode} width="26px" onClick={removeFromFavorites} /> : 
+                <S.StyledStarIcon className = {DarkMode} width="22px" onClick={addToFavorites} />
             }
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>

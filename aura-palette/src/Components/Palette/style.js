@@ -555,7 +555,7 @@ export const StyledStarIcon = styled(StarIcon)`
 `;
 
 export const StyledFullStarIcon = styled(FullStarIcon)`
-  margin: 0 16px;
+  margin: 0 14px;
   cursor: pointer;
   &.dark {
     path
