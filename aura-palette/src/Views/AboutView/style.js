@@ -77,7 +77,7 @@ export const About = styled.div`
 
   p {
     text-align: center;
-    font-weight: 500;
+    font-weight: 400;
     margin: 20px 0px 0px;
     color: rgb(51, 51, 51);
     font-size: 16px;
