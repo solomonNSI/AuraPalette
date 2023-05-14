@@ -6,6 +6,8 @@ import App from "./Views/AppView/App";
 import Login from "./Views/LoginView/Login";
 import Profile from "./Views/ProfileView/Profile";
 import SignUp from "./Views/SignUpView/SignUp";
+import About from "./Views/AboutView/About";
+
 
 export default function Root() {
 
@@ -20,6 +22,7 @@ export default function Root() {
         <Route path="profile" element={<Profile DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>} />
         <Route path="signup" element={<SignUp DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>} />
         <Route path="login" element={<Login DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>} />
+        <Route path="about" element={<About DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>} />
       </Routes>
     </BrowserRouter>
   );

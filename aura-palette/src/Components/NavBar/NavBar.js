@@ -36,23 +36,22 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
     <S.NavBar className={DarkMode}>
       <S.AppName onClick={() => navigate("/")}>aura</S.AppName>
       <S.LoginButton>
-        <S.FeedbackButton>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfrrO3gpWsqkGCAAutELIS9OHyKI8_sT9lM84KRmbJueOL6Dw/viewform"
-            className="feedback-button-link"
-          >
-            Feedback
-          </a>
-        </S.FeedbackButton>
-        <S.StyledMoonIcon className={DarkMode} onClick={() => toggleDarkMode()} />
-        <S.StyledSunIcon className={DarkMode} onClick={() => toggleDarkMode()} />
-        <S.StyledProfileIcon
-          className={DarkMode}
+        <S.StyledMoonIcon className = {DarkMode} 
+          onClick={() => toggleDarkMode()}
+        />
+        <S.StyledSunIcon className = {DarkMode} 
+          onClick={() => toggleDarkMode()}
+        />
+        <S.StyledFeedbackIcon className = {DarkMode}
+          onClick={() => navigate("/about")}
+          height="50px"
+        />
+        <S.StyledProfileIcon className = {DarkMode}
           height="50px"
           onClick={() => checkLoggedIn()}
         />
-      </S.LoginButton>
-      {palette && <S.GradientLine colorList={palette} />}
+      </S.LoginButton >
+      {palette && <S.GradientLine colorList={palette}/>}
       {!palette && <S.GradientLineDefault />}
     </S.NavBar>
   );
