@@ -51,7 +51,7 @@ export const GradientLineDefault = styled.div`
 `;
 
 export const AppName = styled.div`
-  font-size: 46px;
+  font-size: 40px;
   margin-left: 4%;
   font-family: Palatino;
   font-weight: 700;
@@ -83,7 +83,7 @@ export const LoginButton = styled.div`
   margin-right: 4%;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 
 `;
 

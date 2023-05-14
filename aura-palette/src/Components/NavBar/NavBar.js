@@ -44,10 +44,10 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
         />
         <S.StyledFeedbackIcon className = {DarkMode}
           onClick={() => navigate("/about")}
-          height="50px"
+          height="46px"
         />
         <S.StyledProfileIcon className = {DarkMode}
-          height="50px"
+          height="46px"
           onClick={() => checkLoggedIn()}
         />
       </S.LoginButton >
