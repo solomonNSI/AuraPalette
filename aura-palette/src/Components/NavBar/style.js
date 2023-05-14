@@ -122,7 +122,16 @@ export const StyledProfileIcon = styled(ProfileIcon)`
   }
 `;
 
-export const StyledFeedbackIcon = styled(FeedbackIcon)`
+export const StyledFeedbackIcon = styled.div`
+  height: 46px;
+  border-radius: 3px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #bbb;
+  margin: auto;
   cursor: pointer;
 
   &:hover {
@@ -133,6 +142,7 @@ export const StyledFeedbackIcon = styled(FeedbackIcon)`
   }
   
   &.dark {
+    background-color: #111;
     path
     {
       fill: #aaa;
