@@ -41,10 +41,15 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
         />
         <S.StyledSunIcon className = {DarkMode} 
           onClick={() => toggleDarkMode()}
-        /> <S.StyledProfileIcon className = {DarkMode}
+        />
+        <S.StyledFeedbackIcon className = {DarkMode}
+          onClick={() => navigate("/about")}
+          height="50px"
+        />
+        <S.StyledProfileIcon className = {DarkMode}
           height="50px"
           onClick={() => checkLoggedIn()}
-          />
+        />
       </S.LoginButton >
       {palette && <S.GradientLine colorList={palette}/>}
       {!palette && <S.GradientLineDefault />}
