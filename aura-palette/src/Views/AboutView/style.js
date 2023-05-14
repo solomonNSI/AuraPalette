@@ -42,6 +42,10 @@ export const About = styled.div`
   align-items: center;
   justify-content: start;
 
+  p {
+    font-weight: 400;
+  }
+
   @media screen and (max-width: 900px) {
     width: 92%;
     margin: 20px 4% 0px 4%;
