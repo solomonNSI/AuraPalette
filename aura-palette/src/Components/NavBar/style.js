@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ProfileIcon } from "../../Icons/ProfileIcon";
 import { SunIcon } from "../../Icons/SunIcon";
 import { MoonIcon } from "../../Icons/MoonIcon";
-
+import { FeedbackIcon } from "../../Icons/FeedbackIcon";
 
 
 export const NAVBAR_HEIGHT = 65;
@@ -85,11 +85,19 @@ export const LoginButton = styled.div`
   margin-right: 4%;
   display: flex;
   align-items: center;
+  gap: 12px;
 
 `;
 
 export const StyledProfileIcon = styled(ProfileIcon)`
   cursor: pointer;
+
+  &:hover {
+    rect
+    {
+      fill: #999;
+    }
+  }
 
   &.dark {
     path
@@ -101,6 +109,48 @@ export const StyledProfileIcon = styled(ProfileIcon)`
     {
       fill: #111;
     }
+
+    &:hover {
+      rect
+      {
+        fill: #222;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 48px !important;
+    height: 48px !important;
+  }
+`;
+
+export const StyledFeedbackIcon = styled(FeedbackIcon)`
+  cursor: pointer;
+
+  &:hover {
+    rect
+    {
+      fill: #999;
+    }
+  }
+  
+  &.dark {
+    path
+    {
+      fill: #aaa;
+    }
+
+    rect
+    {
+      fill: #111;
+    }
+
+    &:hover {
+      rect
+      {
+        fill: #222;
+      }
+    }
   }
 
   @media screen and (max-width: 600px) {
@@ -111,7 +161,13 @@ export const StyledProfileIcon = styled(ProfileIcon)`
 
 export const StyledMoonIcon = styled(MoonIcon)`
   cursor: pointer;
-  margin-right: 12px;
+
+  &:hover {
+    rect
+    {
+      fill: #999;
+    }
+  }
 
   path
   {
@@ -120,14 +176,27 @@ export const StyledMoonIcon = styled(MoonIcon)`
 
   &.dark {
     display:none;
+
+    &:hover {
+      rect
+      {
+        fill: #222;
+      }
+    }
   }
   
 `;
 
 export const StyledSunIcon = styled(SunIcon)`
-  margin-right: 12px;
   display: none;
   cursor: pointer;
+
+  &:hover {
+    rect
+    {
+      fill: #999;
+    }
+  }
   
   &.dark {
     display: inline;
@@ -139,6 +208,13 @@ export const StyledSunIcon = styled(SunIcon)`
     rect
     {
       fill: #111;
+    }
+
+    &:hover {
+      rect
+      {
+        fill: #222;
+      }
     }
   }
   
