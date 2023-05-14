@@ -149,3 +149,24 @@ export const DarkModeButton =  styled.button`
   width: 50px;
   background: url('Sun.png') no-repeat;
 `;
+
+export const FeedbackButton = styled.div`
+  display: flex;
+  align-items: center;
+
+  .feedback-button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #42a5f5;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .feedback-button-link:hover {
+    background-color: #1e88e5;
+  }
+`;
+
