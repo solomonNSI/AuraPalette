@@ -35,7 +35,7 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
   return (
     <S.NavBar className={DarkMode}>
       <S.AppName onClick={() => navigate("/")}>aura</S.AppName>
-      <S.LoginButton>
+      <S.LoginButton id="navbar">
         <S.StyledMoonIcon className = {DarkMode} 
           onClick={() => toggleDarkMode()}
         />

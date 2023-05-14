@@ -21,9 +21,9 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
 
 
   return (
-    <S.MenuContainer style = {adjustmentsEnabled ? {display: "block"} : {display: "none"}} className = {DarkMode}>
+    <S.MenuContainer id="adjustments-menu" style = {adjustmentsEnabled ? {display: "block"} : {display: "none"}} className = {DarkMode}>
       <S.Title className = {DarkMode}>Adjustments</S.Title>
-        <div>
+        <div >
             <S.Subtitle className = {DarkMode}>Harmony</S.Subtitle>
 
             <S.Container className = {DarkMode}>

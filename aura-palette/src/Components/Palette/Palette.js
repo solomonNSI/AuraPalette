@@ -256,9 +256,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
     return (
     <S.Container className = {DarkMode}>
-
-        <S.MainPalette className = {DarkMode}>
-        <S.Header className = {DarkMode}>
+        <S.MainPalette id="palette-container"  className = {DarkMode}>
+        <S.Header id="palette-header"  className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
             <S.Info ref={infoRef} className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong></S.Info>
@@ -272,7 +271,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                         <p>{sliderValue}</p>
                     </div>
                     <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
-                    <button id="feedbackButton" disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
+                    <button disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
                 </div>
             </S.Rate>
 

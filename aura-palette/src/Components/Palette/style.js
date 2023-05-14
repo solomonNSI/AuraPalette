@@ -72,11 +72,10 @@ export const Loader = styled.div`
 export const MainPalette = styled.div`  
   border-radius: 8px;
   background-color: white;
-  height: 440px;
+  height: 410px;
   padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;
-  zoom: 0.9;
 
   @media screen and (max-height: 400px) {
     zoom: 0.7;
@@ -89,7 +88,6 @@ export const MainPalette = styled.div`
   @media screen and (max-width: 600px) {
     height: 260px; // Mobile edit display:none
     zoom: 0.7;
-  
   }
 
   @media screen and (max-width: 400px) {
@@ -192,6 +190,7 @@ export const Colors = styled.div`
   flex-direction: row;
   gap: 10px;
   justify-content: space-between;
+  zoom: 0.9;
 
   @media screen and (max-width: 900px) {
     height: 25%;

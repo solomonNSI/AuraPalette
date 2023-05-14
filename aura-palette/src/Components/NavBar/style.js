@@ -4,9 +4,7 @@ import { ProfileIcon } from "../../Icons/ProfileIcon";
 import { SunIcon } from "../../Icons/SunIcon";
 import { MoonIcon } from "../../Icons/MoonIcon";
 
-
-
-export const NAVBAR_HEIGHT = 65;
+export const NAVBAR_HEIGHT = 60;
 
 export const NavBar = styled.div`
   background-color: #dddddd;
@@ -17,10 +15,9 @@ export const NavBar = styled.div`
   align-items: center;
   position: fixed;
   top: 0;
-  zoom: 0.9;
 
   @media screen and (max-height: 400px) {
-    zoom: 0.8;
+    height: 52px;
   }
 
   &.dark {

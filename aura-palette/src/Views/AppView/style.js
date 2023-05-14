@@ -105,8 +105,6 @@ export const SearchBar = styled.input`
   padding-left: 20px;
   margin: 20px 4% 0px 4%;
 
-  
-
   @media screen and (max-width: 900px) {
     height: 40px;
     font-size: 12px;

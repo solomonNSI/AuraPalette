@@ -4,6 +4,7 @@ import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMen
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
 import { SearchIcon } from "../../Icons/SearchIcon";
+import Joyride from 'react-joyride';
 
 import {
   getAnalogousPalette,
@@ -48,8 +49,35 @@ function App({ DarkMode, setIsDarkMode }) {
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-
-
+  const [run, setRun] = useState(true);
+  const [steps, setSteps] = useState([
+      {
+        content: <h2>Welcome to The Aura Palette where words radiate with colors!</h2>,
+        locale: { skip: <strong aria-label="skip">SKIP</strong> },
+        placement: 'center',
+        target: 'body',
+      },
+      {
+        content: <p>You can type words here to generate awesome color palettes</p>,
+        target: '#search-bar',
+      },
+      {
+        content: <p>Your palette will appear here, you can lock and edit individual colors</p>,
+        target: '#palette-container',
+      },
+      {
+        content: <p>You can rate, favorite and copy the palette</p>,
+        target: '#palette-header',
+      },
+      {
+        content: <p>You can adjust the color harmony and medium, and also simulate different types of color blindness</p>,
+        target: '#adjustments-menu',
+      },
+      {
+        content: <p>Check out our dark mode and sign up for more features!</p>,
+        target: '#navbar',
+      },
+    ],);
 
   function showAdjustments() {
     if(adjustmentsEnabled)
@@ -263,13 +291,27 @@ function App({ DarkMode, setIsDarkMode }) {
   }, [harmony, editedColorIndex, editedColor, lock]);
 
   return (
-    <S.AppBackground className = {DarkMode}>
+    <S.AppBackground className={DarkMode}>
       {loading && <SpinnerOverlay />}
+        <Joyride
+            continuous
+            hideCloseButton
+            run={run}
+            scrollToFirstStep
+            showProgress
+            showSkipButton
+            steps={steps}
+            styles={{
+                options: {
+                zIndex: 10000,
+                },
+            }}
+        />
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
       <S.Content className = {DarkMode}>
           <S.Title className = {DarkMode}>{title}</S.Title>
-          <S.SearchBar className = {DarkMode} placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+          <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
           <S.Search className = {DarkMode}>
             <SearchIcon />
           </S.Search>
@@ -296,24 +338,26 @@ function App({ DarkMode, setIsDarkMode }) {
         </S.TopKeywords>
 
         <S.PaletteContainer>
-          <S.AdjustmentsClosed className = {DarkMode} onClick={showAdjustments}> <div>Show/Hide Adjustments </div></S.AdjustmentsClosed>
-          <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} adjustmentsEnabled={adjustmentsEnabled} />
-          <Palette 
-            palette={palette.palette} 
-            lock={lock} 
-            setLock={setLock}
-            setHarmony={setHarmony} 
-            harmony={harmony} 
-            setEditedColorIndex={setEditedColorIndex}
-            setEditedColor={setEditedColor}
-            colorBlindness={colorBlindness} 
-            medium={medium}
-            DarkMode={DarkMode}
-            query = {query}
-            queryChanged = {queryChanged}
-        />
-        </S.PaletteContainer>
-      </S.Content>
+            <S.AdjustmentsClosed className={DarkMode} onClick={showAdjustments}> 
+                <div>Show/Hide Adjustments</div>
+            </S.AdjustmentsClosed>
+            <AdjustmentsMenu setHarmony={setHarmony} setColorBlindness={setColorBlindness} setMedium={setMedium} DarkMode={DarkMode} adjustmentsEnabled={adjustmentsEnabled} />
+            <Palette 
+                palette={palette.palette} 
+                lock={lock} 
+                setLock={setLock}
+                setHarmony={setHarmony} 
+                harmony={harmony} 
+                setEditedColorIndex={setEditedColorIndex}
+                setEditedColor={setEditedColor}
+                colorBlindness={colorBlindness} 
+                medium={medium}
+                DarkMode={DarkMode}
+                query = {query}
+                queryChanged = {queryChanged}
+            />
+            </S.PaletteContainer>
+        </S.Content>
     </S.AppBackground>
   );
 }
