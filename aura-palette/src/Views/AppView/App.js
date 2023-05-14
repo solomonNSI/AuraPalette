@@ -4,7 +4,7 @@ import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMen
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
 import { SearchIcon } from "../../Icons/SearchIcon";
-import Joyride from 'react-joyride';
+import Joyride, { STATUS } from 'react-joyride';
 
 import {
   getAnalogousPalette,
@@ -52,30 +52,35 @@ function App({ DarkMode, setIsDarkMode }) {
   const [run, setRun] = useState(true);
   const [steps, setSteps] = useState([
       {
-        content: <h2>Welcome to The Aura Palette where words radiate with colors!</h2>,
+        content: <h2>Welcome to The Aura Palette where words radiate with colors! 🌈</h2>,
         locale: { skip: <strong aria-label="skip">SKIP</strong> },
         placement: 'center',
         target: 'body',
       },
       {
-        content: <p>You can type words here to generate awesome color palettes</p>,
+        content: <p>Type your words here to generate stunning color palettes. ✍️</p>,
         target: '#search-bar',
       },
       {
-        content: <p>Your palette will appear here, you can lock and edit individual colors</p>,
+        content: <p>Your unique palette will appear in this section. Feel free to lock and customize individual colors. 🎨</p>,
         target: '#palette-container',
       },
       {
-        content: <p>You can rate, favorite and copy the palette</p>,
+        content: <p>Rate, favorite, and copy your favorite palettes for easy access. ❤️</p>,
         target: '#palette-header',
       },
       {
-        content: <p>You can adjust the color harmony and medium, and also simulate different types of color blindness</p>,
+        content: <p>Adjust the color harmony and medium to create the perfect combination. You can even simulate different types of color blindness. 👓</p>,
         target: '#adjustments-menu',
       },
       {
-        content: <p>Check out our dark mode and sign up for more features!</p>,
+        content: <p>Don't forget to check out our dark mode and sign up to unlock additional features! We'd love to hear your feedback as well. 😊</p>,
         target: '#navbar',
+      },
+      {
+        content: <p>Feel free to explore and have fun with The Aura Palette! Enjoy your colorful journey!</p>,
+        target: 'body',
+        placement: 'center',
       },
     ],);
 
@@ -290,6 +295,11 @@ function App({ DarkMode, setIsDarkMode }) {
     }
   }, [harmony, editedColorIndex, editedColor, lock]);
 
+  useEffect(() => {
+    function runFunc(prop) { setRun(prop) }
+    if (localStorage.getItem('tutorialPassed')) runFunc(false);
+  }, []);
+
   return (
     <S.AppBackground className={DarkMode}>
       {loading && <SpinnerOverlay />}
@@ -305,6 +315,10 @@ function App({ DarkMode, setIsDarkMode }) {
                 options: {
                 zIndex: 10000,
                 },
+            }}
+            callback={({ status }) => {
+                if (([STATUS.FINISHED, STATUS.SKIPPED]).includes(status))
+                    localStorage.setItem('tutorialPassed', true);
             }}
         />
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
