@@ -125,11 +125,12 @@ function App({ DarkMode, setIsDarkMode }) {
           xmlhttp2.send(palInfo)
         }
       }
-      else{
-        if(jsonResponse['err_msg'] == "INVALID_QUERY")
+      else {
+        if (jsonResponse['err_msg'] == "INVALID_QUERY")
         {
-          setIsError(true)
-          setLoading(false)
+            updatePalette(getDefaultPalette(lock));
+            setIsError(true)
+            setLoading(false)
         }
       }
     };
@@ -324,13 +325,15 @@ function App({ DarkMode, setIsDarkMode }) {
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
 
       <S.Content className = {DarkMode}>
-          <S.Title className = {DarkMode}>{title}</S.Title>
-          <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
-          <S.Search className = {DarkMode}>
-            <SearchIcon />
-          </S.Search>
+            <S.Title className = {DarkMode}>{title}</S.Title>
+            <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+            <S.Search className = {DarkMode}>
+                <SearchIcon />
+            </S.Search>
 
-          <p className="errmsg" style = {{display: isError ? "flex" : "none" }}> Our model is a work in progress. Please try a synonym or describe it in a different way</p>
+            <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>
+                The generated palette may not fully represent the meaning of this text. Please try another word for more accurate results.
+            </p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
           <S.TopSearch>water</S.TopSearch>
