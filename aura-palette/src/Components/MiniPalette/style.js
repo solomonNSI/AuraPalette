@@ -97,6 +97,7 @@ export const ColorCode = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: text;
   
   @media screen and (max-width: 900px) {
     height: 30px;
