@@ -360,7 +360,7 @@ function App({ DarkMode, setIsDarkMode }) {
         />
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
       <S.CookieAlert className = {DarkMode} style = {{display: cookieAccepted ? "none" : "flex" }}>
-        <span>We only use cookies for dark mode preference.</span>
+        <span>We respect your privacy! We only use cookies to remember your dark mode preference.</span>
         <button onClick={acceptCookies}>Done</button>
       </S.CookieAlert>
 
