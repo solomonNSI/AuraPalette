@@ -99,7 +99,7 @@ export const Button = styled.button`
   margin: 10px 0px;
   background-color: #fff;
   border-radius: 4px;
-  padding: 16px 12px;
+  padding: 20px 12px;
   overflow: auto;
   border: none;
   font-size: 18px;
@@ -231,7 +231,6 @@ export const Title = styled.h2`
   font-weight: 500;
   margin: 0px 0px 15px 0px;
   color: #333333;
-
 
   &.dark {
     color: #eeeeee;

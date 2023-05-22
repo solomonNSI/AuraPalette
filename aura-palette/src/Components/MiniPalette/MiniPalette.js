@@ -23,7 +23,7 @@ export const MiniPalette = ({ DarkMode, palette, query }) => {
           Color Mode: {colorMode}
         </S.ColorModeButton>
           <S.StyledStarIcon className = {DarkMode} height="20px" />
-          <S.StyledExportIcon className = {DarkMode} height="20px"/>
+          {/* <S.StyledExportIcon className = {DarkMode} height="20px"/> */}
         </S.PaletteSettings>
       </S.Header>
 
