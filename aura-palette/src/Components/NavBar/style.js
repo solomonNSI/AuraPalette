@@ -162,7 +162,6 @@ export const StyledFeedbackIcon = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    width: 48px !important;
     height: 48px !important;
   }
 `;
