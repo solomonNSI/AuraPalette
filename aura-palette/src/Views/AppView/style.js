@@ -94,7 +94,7 @@ export const Content = styled.div`
   width: calc(100%-130px);
 
   .errmsg {
-    margin: 10px 4% 0 4%;
+    margin: 4px 4% 0 4%;
     width: 92%;
     font-size: 14px;
     color: red;

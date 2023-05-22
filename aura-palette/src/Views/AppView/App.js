@@ -3,9 +3,7 @@ import { NavBar } from "../../Components/NavBar/NavBar";
 import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMenu";
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
-import { SearchIcon } from "../../Icons/SearchIcon";
 import Joyride, { STATUS } from 'react-joyride';
-
 import {
   getAnalogousPalette,
   getComplementaryPalette,
@@ -18,7 +16,6 @@ import {
   getLockedPalette,
 } from "../../Helpers/Harmony"; 
 import SpinnerOverlay from "../../Components/Styler";
-import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 
 var title;
 var titles = ["Find a palette for everything.", 
@@ -51,6 +48,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
   const [cookieAccepted, setCookieAccepted] = useState(getCookie("cookies"));
   const [run, setRun] = useState(true);
   const [steps, setSteps] = useState([
@@ -121,6 +119,11 @@ function App({ DarkMode, setIsDarkMode }) {
     setIsError(false);
     setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+    if (!query) {
+        setLoading(false);
+        return setIsEmpty(true);
+    }
+    setIsEmpty(false);
 
     xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -369,6 +372,9 @@ function App({ DarkMode, setIsDarkMode }) {
 
             <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>
                 The generated palette may not fully represent the meaning of this text. Please try another word for more accurate results.
+            </p>
+            <p className="errmsg" style = {{display: isEmpty ? "flex" : "none" }}>
+                Please enter a word.
             </p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
