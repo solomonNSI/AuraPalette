@@ -136,12 +136,22 @@ display: none;
 
 export const StyledStarIcon = styled(StarIcon)`
   margin-right: 4px;
-
+  cursor: pointer;
   &.dark {
     path
     {
       fill: #888888;
     }
+  }
+  &:hover {
+    path
+    {
+      fill: #666;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 0 12px;
   }
 `;
 
