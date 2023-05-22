@@ -386,10 +386,10 @@ export const Info = styled.div`
 
 export const LogInNotify = styled.div`
   right: 0;
-  max-width: 135px;
+  max-width: 160px;
   margin-right: 60px;
   position: absolute;
-  margin-top: 120px;
+  margin-top: 160px;
   padding: 10px;
   border-radius: 8px;
   background-color: #ddd;

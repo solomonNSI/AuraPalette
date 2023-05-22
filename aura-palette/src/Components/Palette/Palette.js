@@ -333,7 +333,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                 <S.StyledFullStarIcon className = {DarkMode} width="26px" onClick={removeFromFavorites} /> : 
                 <S.StyledStarIcon className = {`${DarkMode} info-icon`} width="22px" onClick={checkLoggedInForFav1} />
             }
-            <S.LogInNotify ref={logNotifyRef} className = {DarkMode} infoEnabled={(clickedFavorite && !loggedIn)}>If you like this palette and want to use it in your future project, please log in to save it.</S.LogInNotify>
+            <S.LogInNotify ref={logNotifyRef} className = {DarkMode} infoEnabled={(clickedFavorite && !loggedIn)}>If you like this palette and want to use it in your future projects, you can log in to save it.</S.LogInNotify>
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
