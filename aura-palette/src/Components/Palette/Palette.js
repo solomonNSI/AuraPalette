@@ -77,6 +77,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         }
         
     }
+
     function addToFavorites(){
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
@@ -90,9 +91,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         }
     }
 
+    useEffect(() => {
+        console.log("clickedFavorite has changed:", clickedFavorite);
+    }, [clickedFavorite]);
+
     function checkLoggedInForFav1(){
-        if (!clickedFavorite) setClickedFavorite(true);
-        else setClickedFavorite(false);
+        setClickedFavorite(prevClickedFavorite => !prevClickedFavorite);
         var xmlhttp = new XMLHttpRequest();
         var token_to_check;
         var loggedIn = false;
@@ -284,7 +288,11 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             {
             setRateEnabled(false);
         }
-        if (logNotifyRef.current && !logNotifyRef.current.contains(event.target)) {
+        if ((
+            logNotifyRef.current && 
+            !logNotifyRef.current.contains(event.target) &&
+            !event.target.classList.contains("info-icon") 
+        )) {
           setClickedFavorite(false);
         }
     };
@@ -323,9 +331,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             </S.ColorModeButton>
             {(clickedFavorite && loggedIn) ? 
                 <S.StyledFullStarIcon className = {DarkMode} width="26px" onClick={removeFromFavorites} /> : 
-                <S.StyledStarIcon className = {DarkMode} width="22px" onClick={checkLoggedInForFav1} />
+                <S.StyledStarIcon className = {`${DarkMode} info-icon`} width="22px" onClick={checkLoggedInForFav1} />
             }
-            <S.LogInNotify ref={logNotifyRef} className = {DarkMode} infoEnabled={(clickedFavorite && !loggedIn)}>To favorite a palette, please log in to your account.</S.LogInNotify>
+            <S.LogInNotify ref={logNotifyRef} className = {DarkMode} infoEnabled={(clickedFavorite && !loggedIn)}>If you like this palette and want to use it in your future project, please log in to save it.</S.LogInNotify>
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
