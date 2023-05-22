@@ -89,6 +89,31 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         }
     }
 
+    function checkLoggedInForFav1(){
+
+        var xmlhttp = new XMLHttpRequest();
+        var token_to_check;
+        var loggedIn = false;
+        //xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/checktoken/");
+        xmlhttp.open("GET", "http://127.0.0.1:8000/account/checktoken/");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+        xmlhttp.onload  = function() {
+          var jsonResponse = xmlhttp.response;
+          jsonResponse = JSON.parse(jsonResponse);
+          token_to_check = JSON.stringify(jsonResponse['user_token']);
+          if(token_to_check === sessionStorage.getItem('user_token')){
+            // user is logged in
+            addToFavorites();
+          }
+          else{
+            // REPLACE THIS
+            console.log("not logged in")
+          }   
+        }
+        xmlhttp.send();
+      }
+
     function removeFromFavorites(){
         setClickedFavorite(false);
     }
@@ -282,7 +307,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             </S.ColorModeButton>
             {clickedFavorite ? 
                 <S.StyledFullStarIcon className = {DarkMode} width="26px" onClick={removeFromFavorites} /> : 
-                <S.StyledStarIcon className = {DarkMode} width="22px" onClick={addToFavorites} />
+                <S.StyledStarIcon className = {DarkMode} width="22px" onClick={checkLoggedInForFav1} />
             }
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
