@@ -16,7 +16,6 @@ export const NavBar = styled.div`
   align-items: center;
   position: fixed;
   top: 0;
-  zoom: 0.9;
 
   @media screen and (max-height: 400px) {
     zoom: 0.8;

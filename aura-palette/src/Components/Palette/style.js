@@ -76,7 +76,6 @@ export const MainPalette = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;
-  zoom: 0.9;
 
   @media screen and (max-height: 400px) {
     zoom: 0.7;
@@ -357,6 +356,7 @@ export const ColorModeButton = styled.button`
 `;
 
 export const Info = styled.div`
+  
   position: absolute;
   margin-top: 160px;
   margin-left: 90px;
@@ -364,12 +364,16 @@ export const Info = styled.div`
   width: 300px;
   padding: 10px;
   border-radius: 8px;
-  background-color: #bbb;
+  background-color: #ddd;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
   z-index: 10;
 
+  transition: opacity 0.25s;
+  display: flex;
+  opacity: ${({ infoEnabled }) => (infoEnabled ? '1' : '0')};
+  
   @media screen and (max-width: 900px) {
     margin-left: 10px;
     zoom: 0.8;
@@ -381,7 +385,6 @@ export const Info = styled.div`
   }
 `;
 
-
 export const Rate = styled.div`
   position: absolute;
   margin-top: 300px;
@@ -389,12 +392,16 @@ export const Rate = styled.div`
   z-index: 10;
   height: 240px;
   width: 300px;
-  padding: 10px;
+  padding: 10px; 
   border-radius: 8px;
-  background-color: #bbb;
+  background-color: #ddd;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+
+  transition: opacity 0.25s;
+  display: flex;
+  opacity: ${({ rateEnabled }) => (rateEnabled ? '1' : '0')};
 
   @media screen and (max-width: 900px) {
     margin-left: 10px;
@@ -435,7 +442,7 @@ export const Rate = styled.div`
     width: 86%; /* Full-width */
     height: 16px; /* Specified height */
     border-radius: 4px;
-    background: #eee; /* Grey background */
+    background: #fff; /* Grey background */
     outline: none; /* Remove outline */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
@@ -498,7 +505,7 @@ export const Rate = styled.div`
 
     textarea {
       font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-      background-color: #eeeeee;
+      background-color: #fff;
       height: 80px;
       border-radius: 4px;
       width: 90%;
@@ -524,7 +531,7 @@ export const Rate = styled.div`
       height: 30px;
 
       &:hover {
-        background-color: #444444;
+        background-color: #444;
         cursor: pointer;
       }
     }

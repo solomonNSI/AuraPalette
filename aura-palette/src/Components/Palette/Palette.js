@@ -261,10 +261,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.Header id="palette-header"  className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
-            <S.Info ref={infoRef} className = {DarkMode} style = {{display: infoEnabled ? "flex" : "none" }}>Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong></S.Info>
+            <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}>Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong></S.Info>
             
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
-            <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} style = {{display: rateEnabled ? "flex" : "none" }}>
+            <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} rateEnabled={rateEnabled}>
                 <div>
                     <p>Rate This Palette</p>
                     <div>
