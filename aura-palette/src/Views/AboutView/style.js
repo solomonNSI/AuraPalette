@@ -113,7 +113,6 @@ export const Feedback = styled.div`
 
   iframe {
     height: 100%;
-    overflow: scroll;
     padding: 0;
     width: calc(100%);
   }
