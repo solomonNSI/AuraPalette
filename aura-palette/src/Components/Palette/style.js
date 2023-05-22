@@ -408,6 +408,10 @@ export const Rate = styled.div`
     zoom: 0.8;
   }
 
+  @media screen and (max-height: 500px) {
+    zoom: 0.8;
+  }
+
   &.dark {
     background-color: #666;
 
