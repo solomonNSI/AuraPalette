@@ -171,7 +171,7 @@ class Test_Dataset(data.Dataset):
         return text, palette, image
 
 
-def test_loader(dataset, batch_size, input_dict):
+def test_loader(dataset, batch_size, input_dict, custom_input = ''):
 
     if dataset == 'bird256':
 
@@ -187,5 +187,27 @@ def test_loader(dataset, batch_size, input_dict):
                                                   shuffle=False,
                                                   num_workers=2)
         imsize = 256
+    
+    # if dataset == 'custom':
+    #         # Create temporary test files
+    #     temp_dir = 'temp_test_files'
+    #     os.makedirs(temp_dir, exist_ok=True)
 
+    #     # Write the input string to the temporary text file
+    #     text_file_path = os.path.join(temp_dir, 'test_text.txt')
+    #     with open(text_file_path, 'w') as f:
+    #         f.write(input_str)
+
+    #     base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
+    #     txt_path = text_file_path
+    #     pal_path = os.path.join(base_path, 'data/hexcolor_vf/test_palettes_rgb.pkl')
+    #     img_path = os.path.join(base_path, 'data/bird256/test_palette/test_images_origin.txt')
+
+    #     test_dataset = Test_Dataset(input_dict, txt_path, pal_path, img_path)
+    #     test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+    #                                               batch_size=batch_size,
+    #                                               shuffle=False,
+    #                                               num_workers=2)
+    #     imsize = 256
+        
     return test_loader, imsize

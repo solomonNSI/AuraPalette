@@ -44,16 +44,7 @@ def get_palette(request, *args, **kwargs):
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     parser.add_argument('--text2pal_dir', type=str, default=os.path.join(current_dir, 'models/TPN'))
-    parser.add_argument('--train_sample_dir', type=str, default='./samples/train')
-    parser.add_argument('--test_sample_dir', type=str, default='./samples/test')
 
-        # Step size.
-    parser.add_argument('--log_interval', type=int, default=1,
-                            help='how many steps to wait before logging training status')
-    parser.add_argument('--sample_interval', type=int, default=20,
-                            help='how many steps to wait before saving the training output')
-    parser.add_argument('--save_interval', type=int, default=50,
-                            help='how many steps to wait before saving the trained models')
     args, unknown = parser.parse_known_args()
     print(args)
         
@@ -61,9 +52,14 @@ def get_palette(request, *args, **kwargs):
     solver = Solver(args)
 
     formated_query = [query, query]
+    print("what [{}]".format(query))
+    # solver.test_custom_input(query)
     #print(solver.sample_TPN(formated_query))
     try:
-        returned_palette = solver.sample_TPN(formated_query)
+        returned_palette = solver.sample_TPN(query)
+        print("yo \n")
+        print(returned_palette)
+        return JsonResponse({"code": 200, "response": returned_palette})
     except BaseException as e:
         return JsonResponse({"code": 1000, "err_msg": "INVALID_QUERY"})
     else:

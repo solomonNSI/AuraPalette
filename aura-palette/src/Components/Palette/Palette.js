@@ -59,7 +59,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
         if(sessionStorage.getItem('user_token') != null){
             var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-            xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app/feedback/sendfeedback/");
+            xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/feedback/sendfeedback/");
             xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
             var qInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -79,8 +79,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         setClickedFavorite(true);
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
-          xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app/account/addfavorite/");
-          //xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app/account/addfavorite/");
+          xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
+          //xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
           xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -112,7 +112,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function displayPaletteColors(colorNumber) {
         if (colorMode === "RGB") return hexToRgbWriter(palette[colorNumber]);
         else if (colorMode === "HSL") return hexToHSLWriter(palette[colorNumber]);
-        else if (colorMode === "HEX") return palette[colorNumber].toUpperCase();
+        else if (colorMode === "HEX") {
+            console.log("trial", palette[colorNumber]);
+            return palette[colorNumber];
+        } 
     }
 
     function copyPaletteColors(){
