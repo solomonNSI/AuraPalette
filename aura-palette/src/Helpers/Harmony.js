@@ -293,3 +293,12 @@ export const getEditedPalette = (palette, index, hex, lock) => {
         
     return palette;
 };
+
+export const getLockedPalette = (prevState, pal, lock) => {
+    var original = prevState.palette;
+    for (var i = 0; i < 5; i++) {
+        if (!lock[i])
+            original[i] = pal[i];
+    }
+    return original;
+}

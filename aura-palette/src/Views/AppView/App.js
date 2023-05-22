@@ -15,6 +15,7 @@ import {
   getSquarePalette,
   getTriadsPalette,
   getEditedPalette,
+  getLockedPalette,
 } from "../../Helpers/Harmony"; 
 import SpinnerOverlay from "../../Components/Styler";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
@@ -182,7 +183,7 @@ function App({ DarkMode, setIsDarkMode }) {
         switch (harmony) {
             case "None":
                 setPalette((prevState) => {
-                return { ...prevState, palette: pal };
+                return { ...prevState, palette: getLockedPalette(prevState, pal, lock), };
                 });
                 break;
             case "Analogous":
