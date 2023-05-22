@@ -105,7 +105,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       var palettes2 = [];
       var queries = [];
       if (!favorites || favorites.length === 0) {
-        return (<p>There are no palettes in your favorites</p>);
+        return (<p id="noWarning">There are no palettes in your favorites.</p>);
       }
       var p_list = favorites['favorites']
 
@@ -135,7 +135,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         var queries = [];
 
         if (!history || history.length === 0) {
-            return (<p>There are no palettes in your history</p>);
+            return (<p id="noWarning" className = {DarkMode}>There are no palettes in your history.</p>);
         }
         
         var p_list = history['history']

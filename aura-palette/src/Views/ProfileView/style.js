@@ -142,6 +142,13 @@ export const SettingsBackground = styled.div`
   padding: 20px;
   overflow: auto;
 
+  #noWarning {
+    color: #d5051c;
+    font-size: 18px;
+    font-weight: 500;
+
+  }
+
   @media screen and (max-width: 900px) {
     width: 90%;
     margin: 85px 4% 20px 10px;
