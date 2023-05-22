@@ -272,7 +272,8 @@ function App({ DarkMode, setIsDarkMode }) {
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
-          return { ...prevState, palette: palette.palette };
+          console.log(prevState.palette)
+          return { ...prevState, palette: prevState.palette };
         });
         break;
       case "Analogous":
@@ -374,7 +375,7 @@ function App({ DarkMode, setIsDarkMode }) {
                 The generated palette may not fully represent the meaning of this text. Please try another word for more accurate results.
             </p>
             <p className="errmsg" style = {{display: isEmpty ? "flex" : "none" }}>
-                Please enter a word.
+                Ready to add some color? Enter your text to create a stunning palette!
             </p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>

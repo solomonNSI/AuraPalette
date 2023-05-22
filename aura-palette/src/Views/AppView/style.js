@@ -94,10 +94,12 @@ export const Content = styled.div`
   width: calc(100%-130px);
 
   .errmsg {
-    margin: 4px 4% 0 4%;
+    margin: 2px 4% 0 4%;
     width: 92%;
     font-size: 14px;
-    color: red;
+    /* color: red; */
+    /* color: #6495ED; */
+    color: #3690FF;
 
     @media screen and (max-width: 900px) {
       font-size: 10px;
