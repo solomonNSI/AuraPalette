@@ -29,7 +29,7 @@ export const Content = styled.div`
 `;
 
 export const About = styled.div`
-  margin: 20px 10px 0px 4%;
+  margin: 20px 4% 0px 10px;
   padding: 20px;
   width: 50%;
   height: auto;
@@ -94,7 +94,7 @@ export const About = styled.div`
 `;
 
 export const Feedback = styled.div`
-  margin: 20px 4% 0px 10px;
+  margin: 20px 10px 0px 4%;
   width: 50%;
   height: auto;
   border-radius: 8px;
