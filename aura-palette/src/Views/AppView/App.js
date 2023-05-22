@@ -338,9 +338,15 @@ function App({ DarkMode, setIsDarkMode }) {
             showSkipButton
             steps={steps}
             styles={{
-                options: {
-                zIndex: 10000,
-                },
+              options: {
+                arrowColor: '#333',
+                backgroundColor: '#ccc',
+                primaryColor: '#000',
+                textColor: '#333333',
+                borderRadius: '20%',
+                fontWeight: '300',
+                zIndex: 1000,
+              }
             }}
             callback={({ status }) => {
                 if (([STATUS.FINISHED, STATUS.SKIPPED]).includes(status))
@@ -351,7 +357,7 @@ function App({ DarkMode, setIsDarkMode }) {
       <S.CookieAlert className = {DarkMode} style = {{display: cookieAccepted ? "none" : "flex" }}>
         <span>We only use cookies for dark mode preference.</span>
         <button onClick={acceptCookies}>Done</button>
-        </S.CookieAlert>
+      </S.CookieAlert>
 
       <S.Content className = {DarkMode}>
             <S.Title className = {DarkMode}>{title}</S.Title>
