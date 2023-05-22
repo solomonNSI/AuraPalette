@@ -6,9 +6,24 @@ import * as S from "./style";
 export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
   const navigate = useNavigate();
 
+  function setCookie(name, value, days) {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + expirationDate.toUTCString();
+    document.cookie = name + "=" + value + "; " + expires + "; path=/";
+  }
+
   function toggleDarkMode() {
-    if (DarkMode === "dark") setIsDarkMode("light")
-    else setIsDarkMode("dark");
+    if (DarkMode === "dark")
+    {
+      setIsDarkMode("light")
+      setCookie("darkmode", "light", 1);
+    }
+    else 
+    {
+      setIsDarkMode("dark");
+      setCookie("darkmode", "dark", 1);
+    }
   }
 
   function checkLoggedIn(){

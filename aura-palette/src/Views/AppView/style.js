@@ -18,6 +18,74 @@ export const AppBackground = styled.div`
   }
 `;
 
+export const CookieAlert = styled.div`
+  position: absolute;
+  bottom: 20px;
+  height: 40px;
+  width: 90%;
+  background-color: #333333;
+  left: 5%; 
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 999;
+  text-align: center;
+
+  &.dark {
+    background-color: #bbb;
+    span {
+      color: black;
+    }
+    
+  }
+
+  @media screen and (max-width: 900px) {
+    font-size: 12px;
+    button {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    span {
+      margin: 0px 20px;
+      font-size: 10px;
+    }
+    button {
+      margin: 0px 20px;
+      font-size: 11px;
+    }
+  }
+
+  span {
+    color: white;
+    font-weight: 500;
+    
+  }
+
+  button {
+    border: none;
+    font-weight: 500;
+    background: none;
+    color: #017aff;
+    font-size: 17px;
+    margin-left: 10px;
+    cursor: pointer;
+
+    &:hover {
+      color:#23A8C9;
+    }
+
+    &:active {
+      color:#2B98B3;
+    }
+  }
+
+`;
+
 export const Content = styled.div`
   background-color: #eeeeee;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
