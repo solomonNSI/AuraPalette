@@ -162,24 +162,82 @@ export const Title = styled.div`
   }
 `;
 
-export const SearchBar = styled.input`
-  position: relative;
-  top: 0px;
-  left: 0px;
+export const Search = styled.div`
+  height: auto;
+  width: 92%;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 4% 8px;
   height: 45px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  padding-left: 20px;
-  margin: 20px 4% 0px 4%;
+
+  @media screen and (max-height: 400px) {
+    margin-top: 70px;
+  }
 
   @media screen and (max-width: 900px) {
     height: 40px;
     font-size: 12px;
   }
 
-  @media screen and (max-height: 400px) {
-    margin-top: 70px;
+`;
+
+export const GenerateButton = styled.button`
+  height: 45px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  width: 20%;
+  margin-left: 4px;
+  background-color: #bbb; 
+  cursor: pointer;
+
+  &:hover {
+    background-color: #aaa; 
+  }
+
+  &:active {
+    background-color: #999; 
+  }
+
+  @media screen and (max-width: 900px) {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  &.dark {
+    background-color: #333;
+    color: #fff;
+
+    &:hover {
+      background-color: #444; 
+    }
+  
+    &:active {
+      background-color: #555; 
+    }
+  }
+`;
+
+export const SearchBar = styled.input`
+  height: 45px;
+  width: 80%;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  margin-right: 4px;
+  padding: 0;
+  padding-left: 20px;
+
+
+  @media screen and (max-width: 900px) {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
   }
 
   :focus {
@@ -243,19 +301,6 @@ export const PaletteContainer = styled.div`
   }
 
  
-`;
-
-export const Search = styled.button`
-  border: none;
-  background: none;
-  position: absolute;
-  top: 180px;
-  right: 4.5%;
-  display: none;
-
-  > svg {
-    fill: #666666;
-  }
 `;
 
 export const AdjustmentsClosed = styled.div`

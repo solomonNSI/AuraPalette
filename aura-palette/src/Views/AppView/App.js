@@ -362,9 +362,9 @@ function App({ DarkMode, setIsDarkMode }) {
 
       <S.Content className = {DarkMode}>
             <S.Title className = {DarkMode}>{title}</S.Title>
-            <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
             <S.Search className = {DarkMode}>
-                <SearchIcon />
+              <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+              <S.GenerateButton className = {DarkMode} onClick={sendQuery}>Generate</S.GenerateButton>
             </S.Search>
 
             <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>
