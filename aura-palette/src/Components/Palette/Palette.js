@@ -272,7 +272,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                         <p>{sliderValue}</p>
                     </div>
                     <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
-                    <button disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
+                    <button id="feedbackButton" disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
                 </div>
             </S.Rate>
 
