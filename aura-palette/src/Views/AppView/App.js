@@ -17,6 +17,7 @@ import {
   getEditedPalette,
 } from "../../Helpers/Harmony"; 
 import SpinnerOverlay from "../../Components/Styler";
+import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 
 var title;
 var titles = ["Find a palette for everything.", 
@@ -49,6 +50,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [cookieAccepted, setCookieAccepted] = useState(getCookie("cookies"));
   const [run, setRun] = useState(true);
   const [steps, setSteps] = useState([
       {
@@ -89,6 +91,29 @@ function App({ DarkMode, setIsDarkMode }) {
       setAdjustmentsEnabled(false);
     else
       setAdjustmentsEnabled(true);
+  }
+
+  function setCookie(name, value, days) {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + expirationDate.toUTCString();
+    document.cookie = name + "=" + value + "; " + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(name + '=')) {
+        return cookie.substring(name.length + 1);
+      }
+    }
+    return null;
+  }
+
+  function acceptCookies() {
+    setCookie("cookies", true, 1);
+    setCookieAccepted(true)
   }
 
   async function sendQuery(){
@@ -323,6 +348,10 @@ function App({ DarkMode, setIsDarkMode }) {
             }}
         />
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
+      <S.CookieAlert className = {DarkMode} style = {{display: cookieAccepted ? "none" : "flex" }}>
+        <span>We only use cookies for dark mode preference.</span>
+        <button onClick={acceptCookies}>Done</button>
+        </S.CookieAlert>
 
       <S.Content className = {DarkMode}>
             <S.Title className = {DarkMode}>{title}</S.Title>
