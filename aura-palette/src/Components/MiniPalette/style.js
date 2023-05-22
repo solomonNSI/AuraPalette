@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ExportIcon } from "../../Icons/ExportIcon";
 import { StarIcon } from "../../Icons/StarIcon";
+import { FullStarIcon } from "../../Icons/FullStarIcon";
 
 export const Container = styled.div`
   background-color: none;
@@ -134,7 +135,7 @@ display: none;
 }
 `;
 
-export const StyledStarIcon = styled(StarIcon)`
+export const StyledStarIcon = styled(FullStarIcon)`
   margin-right: 4px;
   cursor: pointer;
   &.dark {

@@ -190,7 +190,7 @@ export const GenerateButton = styled.button`
   margin: 0;
   padding: 0 15px;
   margin-left: 4px;
-  background-color: #ddd; 
+  background-color: #ccc; 
   cursor: pointer;
 
   &:hover {
