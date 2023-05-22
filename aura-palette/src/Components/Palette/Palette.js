@@ -13,6 +13,7 @@ import { getColorForMedium } from "../../Helpers/Medium";
 export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged }) => {
     const infoRef = useRef(null);
     const rateRef = useRef(null);
+    const logNotifyRef = useRef(null);
 
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not Locked");
@@ -22,6 +23,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [lock4, setLock4] = useState("Not Locked");
     const [infoEnabled, setInfoEnabled] = useState(false);
     const [rateEnabled, setRateEnabled] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [sliderValue, setSliderValue] = useState(3);
     const [textAreaValue, setTextAreaValue] = useState("");
     const [feedbackButtonText, setFeedbackButtonText] = useState("Send Feedback");
@@ -76,7 +78,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         
     }
     function addToFavorites(){
-        setClickedFavorite(true);
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
           xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
@@ -90,7 +91,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     function checkLoggedInForFav1(){
-
+        if (!clickedFavorite) setClickedFavorite(true);
+        else setClickedFavorite(false);
         var xmlhttp = new XMLHttpRequest();
         var token_to_check;
         var loggedIn = false;
@@ -105,10 +107,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
           if(token_to_check === sessionStorage.getItem('user_token')){
             // user is logged in
             addToFavorites();
+            setLoggedIn(true);
           }
           else{
             // REPLACE THIS
             console.log("not logged in")
+            setLoggedIn(false);
           }   
         }
         xmlhttp.send();
@@ -138,7 +142,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         if (colorMode === "RGB") return hexToRgbWriter(palette[colorNumber]);
         else if (colorMode === "HSL") return hexToHSLWriter(palette[colorNumber]);
         else if (colorMode === "HEX") {
-            console.log("trial", palette[colorNumber]);
             return palette[colorNumber];
         } 
     }
@@ -271,6 +274,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         if (rateRef.current && !rateRef.current.contains(event.target)) {
           setRateEnabled(false);
         }
+        if (logNotifyRef.current && !logNotifyRef.current.contains(event.target)) {
+          setClickedFavorite(false);
+        }
     };
 
     useEffect(() => {
@@ -279,7 +285,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
           document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-    
+
     return (
     <S.Container className = {DarkMode}>
         <S.MainPalette id="palette-container"  className = {DarkMode}>
@@ -305,10 +311,11 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
                 <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
-            {clickedFavorite ? 
+            {(clickedFavorite && loggedIn) ? 
                 <S.StyledFullStarIcon className = {DarkMode} width="26px" onClick={removeFromFavorites} /> : 
                 <S.StyledStarIcon className = {DarkMode} width="22px" onClick={checkLoggedInForFav1} />
             }
+            <S.LogInNotify ref={logNotifyRef} className = {DarkMode} infoEnabled={(clickedFavorite && !loggedIn)}>To favorite a palette, please log in to your account.</S.LogInNotify>
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
