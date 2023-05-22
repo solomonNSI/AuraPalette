@@ -149,8 +149,8 @@ function App({ DarkMode, setIsDarkMode }) {
           xmlhttp2.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addhistory/");
           xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-          var palInfo = '{"query":"' +  query + '", "color1": "' + colorResponse[0]+ '", "color2": "'
-          + colorResponse[1] + '", "color3": "' + colorResponse[2] + '", "color4": "' + colorResponse[3] + '", "color5": "' + colorResponse[4] + '"}'
+          var palInfo = '{"query":"' +  query + '", "color1": "' + colorResponse[0][0]+ '", "color2": "'
+          + colorResponse[0][1] + '", "color3": "' + colorResponse[0][2] + '", "color4": "' + colorResponse[0][3] + '", "color5": "' + colorResponse[0][4] + '"}'
           console.log(palInfo)
           xmlhttp2.send(palInfo)
         }

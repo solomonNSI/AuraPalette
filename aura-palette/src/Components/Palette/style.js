@@ -356,12 +356,40 @@ export const ColorModeButton = styled.button`
 `;
 
 export const Info = styled.div`
-  
   position: absolute;
   margin-top: 160px;
   margin-left: 90px;
   height: 100px;
   width: 300px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #ddd;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  z-index: 10;
+
+  transition: opacity 0.25s;
+  display: flex;
+  opacity: ${({ infoEnabled }) => (infoEnabled ? '1' : '0')};
+  
+  @media screen and (max-width: 900px) {
+    margin-left: 10px;
+    zoom: 0.8;
+  }
+
+  &.dark {
+    background-color: #666;
+    color: white;
+  }
+`;
+
+export const LogInNotify = styled.div`
+  right: 0;
+  max-width: 135px;
+  margin-right: 60px;
+  position: absolute;
+  margin-top: 120px;
   padding: 10px;
   border-radius: 8px;
   background-color: #ddd;
