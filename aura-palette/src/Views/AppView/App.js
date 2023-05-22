@@ -96,31 +96,32 @@ function App({ DarkMode, setIsDarkMode }) {
     setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
 
-    xmlhttp.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app/model/getpalette/");
+    xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query.toLowerCase() + '"}';
 
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse);
-      if(jsonResponse['code'] == null){
-        var colorResponse = jsonResponse['samples'];
-
-        var no = Math.floor(Math.random() * 5);
-        var pal = colorResponse[no];
-        for ( var i = 0; i < 5; i++) {
-          if (!lock[i]) pal[i] = rgbToHex(pal[i][0],pal[i][1],pal[i][2]);
-        }
-        updatePalette(pal);
+      console.log('response', jsonResponse);
+      if(jsonResponse['code'] == 200){
+        console.log('response', jsonResponse['response']);
+        var response = jsonResponse['response'];
+        var colorResponse = response['samples'];
+        console.log("color response", colorResponse[0]);
+        // for ( var i = 0; i < 5; i++) {
+        //   if (!lock[i]) colorResponse[i] = rgbToHex(colorResponse[0],colorResponse[i][1],colorResponse[i][2]);
+        // }
+        updatePalette(colorResponse[0]);
         setLoading(false);
         // if logged in add the palette to history
         if(sessionStorage.getItem('user_token') != null){
           var xmlhttp2 = new XMLHttpRequest();
-          xmlhttp2.open("POST", "https://may13-vhxzdlegrq-lz.a.run.app/account/addhistory/");
+          xmlhttp2.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addhistory/");
           xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-          var palInfo = '{"query":"' +  query + '", "color1": "' + pal[0]+ '", "color2": "'
-          + pal[1] + '", "color3": "' + pal[2] + '", "color4": "' + pal[3] + '", "color5": "' + pal[4] + '"}'
+          var palInfo = '{"query":"' +  query + '", "color1": "' + colorResponse[0]+ '", "color2": "'
+          + colorResponse[1] + '", "color3": "' + colorResponse[2] + '", "color4": "' + colorResponse[3] + '", "color5": "' + colorResponse[4] + '"}'
           console.log(palInfo)
           xmlhttp2.send(palInfo)
         }

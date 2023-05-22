@@ -3,6 +3,7 @@ import torch.nn as nn
 import os
 import time
 import numpy as np
+import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 plt.switch_backend('agg')
 from skimage.color import lab2rgb
@@ -11,12 +12,42 @@ from .model import TPN
 from .data_loader import *
 from .util import *
 
+from gensim.scripts.glove2word2vec import glove2word2vec
+from gensim.models import KeyedVectors
+
 class Solver(object):
     def __init__(self, args):
         self.args = args
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         # Build the model.
         self.build_model(args.mode)
+        self.model = None  # initializing the model attribute
+
+    def initialize_embeddings(self):
+        base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
+        glove_file = os.path.join(base_path, 'data/glove.6B.300d.txt')
+
+        # convert glove to word2vec format
+        word2vec_output_file = glove_file + '.word2vec'
+        glove2word2vec(glove_file, word2vec_output_file)
+
+        # load the Stanford GloVe model
+        self.model = KeyedVectors.load_word2vec_format(word2vec_output_file, binary=False)
+
+    def preprocess_text(self, input_text):
+        # split the input_text into words
+        words = input_text.split()
+
+        # for each word, retrieve the GloVe embedding
+        embeddings = []
+        for word in words:
+            if word in self.model:
+                embeddings.append(self.model[word])
+            else:  # if the word is not in the GloVe vocabulary, initialize it randomly
+                embeddings.append(np.random.normal(size=(300,)))
+
+        # return the array of embeddings
+        return np.array(embeddings)
 
     def prepare_dict(self):
         input_dict = Dictionary()
@@ -51,9 +82,7 @@ class Solver(object):
         global_hint = (global_hint).expand(-1, -1, imsize, imsize).to(self.device)
         return inputs, labels, global_hint
 
-
     def build_model(self, mode):
-
         if mode == 'train_TPN':
             # Data loader.
             self.input_dict = self.prepare_dict()
@@ -91,7 +120,6 @@ class Solver(object):
             self.d_optimizer = torch.optim.Adam(self.D.parameters(),
                                                 lr=self.args.lr, betas=(self.args.beta1, self.args.beta2))
 
-
         elif mode == 'test_TPN' or 'test_text2colors' or 'sample_TPN':
             
             # Data loader.
@@ -101,6 +129,7 @@ class Solver(object):
             base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
             emb_file = os.path.join(base_path, 'data', 'Color-Hex-vf.pth')
             if os.path.isfile(emb_file):
+                print("i am here in w_emb")
                 W_emb = torch.load(emb_file)
             else:
                 base_path = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current file
@@ -120,33 +149,12 @@ class Solver(object):
                                           self.args.n_layers, self.args.dropout_p, W_emb).to(self.device)
             self.G_TPN = TPN.AttnDecoderRNN(self.input_dict, self.args.hidden_size,
                                         self.args.n_layers, self.args.dropout_p).to(self.device)
+            # print("self.G_TPN {}".format(self.G_TPN) )
             # self.G_PCN = PCN.UNet(self.imsize, self.args.add_L).to(self.device)
 
             # Load model.
             if self.args.resume_epoch:
                 self.load_model(self.args.mode, self.args.resume_epoch)
-
-    def load_model(self, mode, resume_epoch):
-        print('Loading the trained model from epoch {}...'.format(resume_epoch))
-        if mode == 'train_TPN':
-            encoder_path = os.path.join(self.args.text2pal_dir, '{}_G_encoder.ckpt'.format(resume_epoch))
-            G_path = os.path.join(self.args.text2pal_dir, '{}_G_decoder.ckpt'.format(resume_epoch))
-            D_path = os.path.join(self.args.text2pal_dir, '{}_D.ckpt'.format(resume_epoch))
-            self.encoder.load_state_dict(torch.load(encoder_path, map_location=lambda storage, loc: storage))
-            self.G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
-            self.D.load_state_dict(torch.load(D_path, map_location=lambda storage, loc: storage))
-
-        elif mode == 'train_PCN':
-            G_path = os.path.join(self.args.pal2color_dir, '{}_G.ckpt'.format(resume_epoch))
-            D_path = os.path.join(self.args.pal2color_dir, '{}_D.ckpt'.format(resume_epoch))
-            self.G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
-            self.D.load_state_dict(torch.load(D_path, map_location=lambda storage, loc: storage))
-
-        elif mode == 'test_TPN' or 'sample_TPN':
-            encoder_path = os.path.join(self.args.text2pal_dir, '{}_G_encoder.ckpt'.format(resume_epoch))
-            G_TPN_path = os.path.join(self.args.text2pal_dir, '{}_G_decoder.ckpt'.format(resume_epoch))
-            self.encoder.load_state_dict(torch.load(encoder_path, map_location=lambda storage, loc: storage))
-            self.G_TPN.load_state_dict(torch.load(G_TPN_path, map_location=lambda storage, loc: storage))
 
     def train_TPN(self):
         # Loss function.
@@ -277,7 +285,6 @@ class Solver(object):
                 print('Saved model checkpoints...')
 
     def test_TPN(self):
-
         print('Start testing...')
         for batch_idx, (txt_embeddings, real_palettes, _) in enumerate(self.test_loader):
             if txt_embeddings.size(0) != self.args.batch_size:
@@ -303,7 +310,7 @@ class Solver(object):
                 # Condition for the generator.
                 encoder_hidden = self.encoder.init_hidden(batch_size).to(self.device)
                 encoder_outputs, decoder_hidden, mu, logvar = self.encoder(txt_embeddings, encoder_hidden)
-
+                print("encoder_outputs: [{}], decoder_hidden [{}], mu [{}], logvar [{}]".format(encoder_outputs, decoder_hidden, mu, logvar))
                 # Generate color palette.
                 for i in range(5):
                     palette, decoder_context, decoder_hidden, _ = self.G_TPN(palette,
@@ -346,53 +353,74 @@ class Solver(object):
                     print('Saved data [{}], input text [{}], test sample [{}]'.format(
                           self.args.batch_size*batch_idx+x+1, input_text, num_gen+1))
 
-    def sample_TPN(self, queryStrings, numPalettesPerQuery=1):
-        print("loasdf", queryStrings)
-        # ==================== Preprocessing src_seqs ====================#
+    def load_model(self, mode, resume_epoch):
+        print('Loading the trained model from epoch {}...'.format(resume_epoch))
+        if mode == 'train_TPN':
+            encoder_path = os.path.join(self.args.text2pal_dir, '{}_G_encoder.ckpt'.format(resume_epoch))
+            G_path = os.path.join(self.args.text2pal_dir, '{}_G_decoder.ckpt'.format(resume_epoch))
+            D_path = os.path.join(self.args.text2pal_dir, '{}_D.ckpt'.format(resume_epoch))
+            self.encoder.load_state_dict(torch.load(encoder_path, map_location=lambda storage, loc: storage))
+            self.G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
+            self.D.load_state_dict(torch.load(D_path, map_location=lambda storage, loc: storage))
+
+        elif mode == 'train_PCN':
+            G_path = os.path.join(self.args.pal2color_dir, '{}_G.ckpt'.format(resume_epoch))
+            D_path = os.path.join(self.args.pal2color_dir, '{}_D.ckpt'.format(resume_epoch))
+            self.G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
+            self.D.load_state_dict(torch.load(D_path, map_location=lambda storage, loc: storage))
+
+        elif mode == 'test_TPN' or 'sample_TPN':
+            encoder_path = os.path.join(self.args.text2pal_dir, '{}_G_encoder.ckpt'.format(resume_epoch))
+            G_TPN_path = os.path.join(self.args.text2pal_dir, '{}_G_decoder.ckpt'.format(resume_epoch))
+            self.encoder.load_state_dict(torch.load(encoder_path, map_location=lambda storage, loc: storage))
+            self.G_TPN.load_state_dict(torch.load(G_TPN_path, map_location=lambda storage, loc: storage))
+
+    def sample_TPN(self, queryString, numPalettesPerQuery=1):
+        # print("self.G_TPN {}".format(self.G_TPN) )
+        print('queryString: [{}]'.format( queryString))
+        # ==================== Preprocessing src_seqs ==================== #
         # Return a list of indexes, one for each word in the sentence.
-        txt_embeddings = []
-        for index, queryString in enumerate(queryStrings):
-            # Set list size to the longest palette name.
-            temp = [0] * self.input_dict.max_len
-            print("queryString", queryString)
-            for i, word in enumerate(queryString.split(' ')):
-              print("word", word)  
-              temp[i] = self.input_dict.word2index[word]
-            txt_embeddings.append(temp)
+        words_index = []
+        txt_embedding = [0] * self.input_dict.max_len
+        for i, word in enumerate(queryString.split(' ')):
+            print('word: [{}] and index [{}]'.format(word, self.input_dict.word2index[word]))
+            txt_embedding[i] = self.input_dict.word2index[word]
+        words_index.append(txt_embedding)
 
-        # Convert to tensor
-        txt_embeddings = torch.LongTensor(txt_embeddings).to(self.device)
+        print("Convert to tensor") 
+        txt_embeddings = torch.LongTensor(words_index).to(self.device)
 
-        # ==== END ====#
-
-        # Compute text input size (without zero padding).
+        print("Compute text input size (without zero padding).")
         batch_size = txt_embeddings.size(0)
         nonzero_indices = list(torch.nonzero(txt_embeddings)[:, 0])
         each_input_size = [nonzero_indices.count(j) for j in range(batch_size)]
 
-        # Placeholder for final palettes
-        palettes = [{'queryString': q, 'samples': []} for q in queryStrings]
+        print("Placeholder for final palettes")
+        palettes = [{'queryString': queryString, 'samples': []} ]
 
         # Generate multiple palettes from same text input.
-        for num_gen in range(5):
-
+        for num_gen in range(1):
+            print("Generate multiple palettes from same text input")
             # Prepare input and output variables.
             palette = torch.FloatTensor(batch_size, 3).zero_().to(self.device)
             fake_palettes = torch.FloatTensor(batch_size, 15).zero_().to(self.device)
 
             # ============================== Text-to-Palette ==============================#
-            # Condition for the generator.
+            print("Condition for the generator.")
             encoder_hidden = self.encoder.init_hidden(batch_size).to(self.device)
             encoder_outputs, decoder_hidden, mu, logvar = self.encoder(txt_embeddings, encoder_hidden)
-
-            # Generate color palette.
+            # print("encoder_outputs: [{}], decoder_hidden [{}], mu [{}], logvar [{}]".format(encoder_outputs, decoder_hidden, mu, logvar))
+            print("Generate color palette.")
             for i in range(5):
-                palette, _, decoder_hidden, _ = self.G_TPN(palette,
-                                                        decoder_hidden.squeeze(0),
-                                                        encoder_outputs,
-                                                        each_input_size,
-                                                        i)
+                palette, decoder_context, _, _ = self.G_TPN(palette,
+                                                                        decoder_hidden.squeeze(0),
+                                                                        encoder_outputs,
+                                                                        each_input_size,
+                                                                        i)
+                print('color no: [{}]'.format(i))
                 fake_palettes[:, 3 * i:3 * (i + 1)] = palette
+                # print('fake palettes [{}]'.format(fake_palettes))
+
 
             # Move tensor to CPU after all computations
             fake_palettes = fake_palettes.detach().cpu().data
@@ -412,6 +440,14 @@ class Solver(object):
 
                     rgbs.append(rgb.tolist())
                     
-                palettes[x]['samples'].append(rgbs)
+                   # Convert RGB values to hexadecimal format
+                hex_colors = []
+                for rgb in rgbs:
+                    r, g, b = rgb
+                    hex_color = mcolors.rgb2hex([r/255, g/255, b/255])
+                    hex_colors.append(hex_color)
+
+                palettes[x]['samples'].append(hex_colors)
+        print('ayo {} \n \n'.format(palettes[0]))
 
         return palettes[0]

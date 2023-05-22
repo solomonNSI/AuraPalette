@@ -65,20 +65,21 @@ class AttnDecoderRNN(nn.Module):
         self.n_layers = n_layers
         self.dropout_p = dropout_p
         self.palette_dim = 3
-
+        print("or here")
         self.gru = nn.GRUCell(self.hidden_size + self.palette_dim, hidden_size)
-
+        
         self.out = nn.Sequential(
                         nn.Linear(hidden_size, hidden_size),
                         nn.ReLU(inplace=True),
                         nn.BatchNorm1d(hidden_size),
                         nn.Linear(hidden_size,self.palette_dim)
                    )
-
+    
     def forward(self, last_palette, last_decoder_hidden, encoder_outputs, each_input_size, i):
 
         # Compute context vector.
         if i == 0:
+            self.eval()
             context = torch.mean(encoder_outputs, dim=0, keepdim=True)
             # Compute gru output.
             gru_input = torch.cat((last_palette, context.squeeze(0)), 1)
@@ -87,10 +88,10 @@ class AttnDecoderRNN(nn.Module):
             # Generate palette color.
             #palette = self.out(gru_hidden.squeeze(0))
             palette = self.out(gru_hidden.squeeze(1))
+            print("here is the problem")
             return palette, context.unsqueeze(0), gru_hidden, None
 
         else:
-            
             # Calculate alpha (Equation 9 and 10 in paper)
             attn_weights = self.attn(last_decoder_hidden.squeeze(0), encoder_outputs, each_input_size)
             
@@ -99,13 +100,13 @@ class AttnDecoderRNN(nn.Module):
 
             # Compute gru output.
             gru_input = torch.cat((last_palette, context.squeeze(1)), 1)
+            # print("gru input {}, last decoder hidden {}".format(gru_input, last_decoder_hidden))
             gru_hidden = self.gru(gru_input, last_decoder_hidden)
 
             # Generate palette color.
             #palette = self.out(gru_hidden.squeeze(0))
             palette = self.out(gru_hidden.squeeze(1))
             return palette, context.unsqueeze(0), gru_hidden, attn_weights
-
 
 class Attn(nn.Module):
     def __init__(self, hidden_size, max_length):
@@ -134,7 +135,6 @@ class Attn(nn.Module):
         energy = self.attn_energy(self.sigmoid(encoder_ + hidden_))
 
         return energy
-
 
 class Discriminator(nn.Module):
     def __init__(self, color_size=15, hidden_dim=150):
