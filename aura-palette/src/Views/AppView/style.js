@@ -187,7 +187,7 @@ export const GenerateButton = styled.button`
   border: none;
   border-radius: 8px;
   margin: 0;
-  width: 20%;
+  width: 25%;
   margin-left: 4px;
   background-color: #bbb; 
   cursor: pointer;
@@ -221,7 +221,7 @@ export const GenerateButton = styled.button`
 
 export const SearchBar = styled.input`
   height: 45px;
-  width: 80%;
+  width: 75%;
   font-size: 16px;
   border: none;
   border-radius: 8px;
