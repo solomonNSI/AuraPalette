@@ -93,20 +93,20 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         setClickedFavorite(false);
     }
 
+    useEffect(() => {
+        console.log("infoEnabled has changed:", infoEnabled);
+    }, [infoEnabled]);
+
+    useEffect(() => {
+        console.log("rateEnabled has changed:", rateEnabled);
+    }, [rateEnabled]);
+    
     function showInfo() {
-        if(infoEnabled)
-            setInfoEnabled(false);
-        else
-            setInfoEnabled(true);
-            setRateEnabled(false);
+        setInfoEnabled(prevInfoEnabled => !prevInfoEnabled);
     }
 
     function showRate() {
-        if(rateEnabled)
-            setRateEnabled(false);
-        else
-            setRateEnabled(true);
-            setInfoEnabled(false);
+        setRateEnabled(prevRateEnabled => !prevRateEnabled);
     }
 
     function displayPaletteColors(colorNumber) {
@@ -240,11 +240,21 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     const handleClickOutside = (event) => {
-        if (infoRef.current && !infoRef.current.contains(event.target)) {
-          setInfoEnabled(false);
+        if ((
+            infoRef.current &&
+            !infoRef.current.contains(event.target) &&
+            !event.target.classList.contains("info-icon") 
+        )) {
+            console.log("handleClickOutside");
+            setInfoEnabled(false);
         }
-        if (rateRef.current && !rateRef.current.contains(event.target)) {
-          setRateEnabled(false);
+        if ((
+            rateRef.current && 
+            !rateRef.current.contains(event.target) && 
+            !event.target.classList.contains("info-icon") 
+        ))
+            {
+            setRateEnabled(false);
         }
     };
 
@@ -260,10 +270,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.MainPalette id="palette-container"  className = {DarkMode}>
         <S.Header id="palette-header"  className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
-            <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
+            <S.StyledInfoIcon className={`${DarkMode} info-icon`} onClick={showInfo}/>
             <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}>Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong></S.Info>
             
-            <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
+            <S.StyledRateIcon className={`${DarkMode} info-icon`} onClick={showRate} />
             <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} rateEnabled={rateEnabled}>
                 <div>
                     <p>Rate This Palette</p>
