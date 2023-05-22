@@ -36,7 +36,7 @@ export const GradientLine = styled.div`
     ${(props) => props.colorList[3]} 74.9%,
     ${(props) => props.colorList[4]} 100%
   );
-  height: 5px;
+  height: 6px;
   width: 100%;
   position: fixed;
   top: ${NAVBAR_HEIGHT}px;
@@ -44,7 +44,7 @@ export const GradientLine = styled.div`
 
 export const GradientLineDefault = styled.div`
   background: linear-gradient(90deg, rgba(255, 0, 0, 0.7) 7.81%, rgba(255, 153, 0, 0.7) 14.58%, rgba(255, 212, 0, 0.7) 31.27%, rgba(86, 196, 0, 0.7) 64.95%, rgba(0, 148, 255, 0.7) 87.36%, rgba(112, 0, 255, 0.7) 97.55%);
-  height: 5px;
+  height: 6px;
   width: 100%;
   position: fixed;
   top: ${NAVBAR_HEIGHT}px;

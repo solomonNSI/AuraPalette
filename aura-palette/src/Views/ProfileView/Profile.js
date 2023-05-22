@@ -169,7 +169,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         <S.Title className = {DarkMode}>Profile Tabs</S.Title>
         <S.Button className = {DarkMode} style = {{backgroundColor: favoritesEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showFavorites}><span>Favorite Palettes</span><span className="text">See, share and use your favorite palettes.</span></S.Button>
         <S.Button className = {DarkMode} style = {{backgroundColor: historyEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showHistory}><span>Palette History</span><span className="text">Discover, export and manage your palette history.</span></S.Button>
-        <S.Button className = {DarkMode} style = {{backgroundColor: settingsEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showSettings}><span>User & App Settings</span><span className="text">Access information and change your preferences.</span></S.Button>
+        {/* <S.Button className = {DarkMode} style = "display: none" onClick={showSettings}><span>User & App Settings</span><span className="text">Access information and change your preferences.</span></S.Button> */}
         <S.Button className = {DarkMode} onClick={logOut} style={{backgroundColor: defaultBackgroundColor, color: "#f34a55"}}>
           <span>Log Out from Aura</span>
           <span className="text">All your data will be saved.</span>
