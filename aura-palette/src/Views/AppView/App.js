@@ -346,7 +346,6 @@ function App({ DarkMode, setIsDarkMode }) {
             styles={{
               options: {
                 arrowColor: '#333',
-                backgroundColor: '#ccc',
                 primaryColor: '#000',
                 textColor: '#333333',
                 borderRadius: '20%',
