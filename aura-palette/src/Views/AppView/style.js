@@ -166,7 +166,6 @@ export const Title = styled.div`
 
 export const Search = styled.div`
   height: auto;
-  width: 92%;
   display: flex;
   flex-direction: row;
   margin: 20px 4% 8px;
@@ -189,9 +188,9 @@ export const GenerateButton = styled.button`
   border: none;
   border-radius: 8px;
   margin: 0;
-  width: 25%;
+  padding: 0 15px;
   margin-left: 4px;
-  background-color: #bbb; 
+  background-color: #ddd; 
   cursor: pointer;
 
   &:hover {
@@ -223,7 +222,7 @@ export const GenerateButton = styled.button`
 
 export const SearchBar = styled.input`
   height: 45px;
-  width: 75%;
+  width: 100%;
   font-size: 16px;
   border: none;
   border-radius: 8px;
