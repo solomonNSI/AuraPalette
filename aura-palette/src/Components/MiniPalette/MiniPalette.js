@@ -14,7 +14,7 @@ export const MiniPalette = ({ DarkMode, palette, query }) => {
     <S.Container className = {DarkMode}>
       <S.Header className = {DarkMode}>
         <S.Titles className = {DarkMode}>
-          <S.PaletteTitle className = {DarkMode}>Query: {query}</S.PaletteTitle>
+          <S.PaletteTitle className = {DarkMode}>Query: "{query}"</S.PaletteTitle>
           {/* <S.Date className = {DarkMode}>Enter Creation Date Here</S.Date> */}
         </S.Titles>
 
