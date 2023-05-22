@@ -190,15 +190,19 @@ export const SettingsForeground = styled.div`
       }
       margin-left: 20px;
 
-      @media screen and (max-width: 900px) {
+      @media screen and (max-width: 1000px) {
         width: 50%;
         display: flex;
         flex-direction: column;
 
         button {
           width: 100%;
-          padding-left: 6px;
           margin: 0;
+          margin-right: -3px;
+          padding: 0;
+          margin-top: 8px;
+          width: 50%;
+          align-self: flex-end;
         }
   
         input {
@@ -300,9 +304,9 @@ export const SettingsLine = styled.h3`
   top: 0px;
   left: 0px;
   height: 40px;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   padding-left: 12px;
   width: 65%;
 
@@ -311,7 +315,7 @@ export const SettingsLine = styled.h3`
   }   
 
   &.dark {
-    background-color: #111;
+    background-color: #666;
     color: #fff;
 
     &::placeholder {
