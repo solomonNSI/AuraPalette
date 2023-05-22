@@ -229,6 +229,7 @@ export const SearchBar = styled.input`
   margin-right: 4px;
   padding: 0;
   padding-left: 20px;
+  border: 1px solid #ccc;
 
 
   @media screen and (max-width: 900px) {
@@ -245,8 +246,10 @@ export const SearchBar = styled.input`
   }     
 
   &.dark {
-    background-color: #111;
+    background-color: #000;
     color: #fff;
+    border: 1px solid #444;
+
     
     ::placeholder {
       color: #666;
