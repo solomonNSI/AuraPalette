@@ -18,6 +18,74 @@ export const AppBackground = styled.div`
   }
 `;
 
+export const CookieAlert = styled.div`
+  position: absolute;
+  bottom: 20px;
+  height: 40px;
+  width: 90%;
+  background-color: #333333;
+  left: 5%; 
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 999;
+  text-align: center;
+
+  &.dark {
+    background-color: #bbb;
+    span {
+      color: black;
+    }
+    
+  }
+
+  @media screen and (max-width: 900px) {
+    font-size: 12px;
+    button {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    span {
+      margin: 0px 20px;
+      font-size: 10px;
+    }
+    button {
+      margin: 0px 20px;
+      font-size: 11px;
+    }
+  }
+
+  span {
+    color: white;
+    font-weight: 500;
+    
+  }
+
+  button {
+    border: none;
+    font-weight: 500;
+    background: none;
+    color: #017aff;
+    font-size: 17px;
+    margin-left: 10px;
+    cursor: pointer;
+
+    &:hover {
+      color:#23A8C9;
+    }
+
+    &:active {
+      color:#2B98B3;
+    }
+  }
+
+`;
+
 export const Content = styled.div`
   background-color: #eeeeee;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -26,10 +94,12 @@ export const Content = styled.div`
   width: calc(100%-130px);
 
   .errmsg {
-    margin: 10px 4% 0 4%;
+    margin: 2px 4% 0 4%;
     width: 92%;
     font-size: 14px;
-    color: red;
+    /* color: red; */
+    /* color: #6495ED; */
+    color: #3690FF;
 
     @media screen and (max-width: 900px) {
       font-size: 10px;
@@ -94,24 +164,83 @@ export const Title = styled.div`
   }
 `;
 
-export const SearchBar = styled.input`
-  position: relative;
-  top: 0px;
-  left: 0px;
+export const Search = styled.div`
+  height: auto;
+  width: 92%;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 4% 8px;
   height: 45px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  padding-left: 20px;
-  margin: 20px 4% 0px 4%;
+
+  @media screen and (max-height: 400px) {
+    margin-top: 70px;
+  }
 
   @media screen and (max-width: 900px) {
     height: 40px;
     font-size: 12px;
   }
 
-  @media screen and (max-height: 400px) {
-    margin-top: 70px;
+`;
+
+export const GenerateButton = styled.button`
+  height: 45px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  width: 25%;
+  margin-left: 4px;
+  background-color: #bbb; 
+  cursor: pointer;
+
+  &:hover {
+    background-color: #aaa; 
+  }
+
+  &:active {
+    background-color: #999; 
+  }
+
+  @media screen and (max-width: 900px) {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  &.dark {
+    background-color: #333;
+    color: #fff;
+
+    &:hover {
+      background-color: #444; 
+    }
+  
+    &:active {
+      background-color: #555; 
+    }
+  }
+`;
+
+export const SearchBar = styled.input`
+  height: 45px;
+  width: 75%;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  margin-right: 4px;
+  padding: 0;
+  padding-left: 20px;
+  border: 1px solid #ccc;
+
+
+  @media screen and (max-width: 900px) {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
   }
 
   :focus {
@@ -119,8 +248,10 @@ export const SearchBar = styled.input`
   }     
 
   &.dark {
-    background-color: #111;
+    background-color: #000;
     color: #fff;
+    border: 1px solid #444;
+
     
     ::placeholder {
       color: #666;
@@ -175,19 +306,6 @@ export const PaletteContainer = styled.div`
   }
 
  
-`;
-
-export const Search = styled.button`
-  border: none;
-  background: none;
-  position: absolute;
-  top: 180px;
-  right: 4.5%;
-  display: none;
-
-  > svg {
-    fill: #666666;
-  }
 `;
 
 export const AdjustmentsClosed = styled.div`

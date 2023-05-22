@@ -3,9 +3,7 @@ import { NavBar } from "../../Components/NavBar/NavBar";
 import { AdjustmentsMenu } from "../../Components/AdjustmentsMenu/AdjustmentsMenu";
 import { Palette } from "../../Components/Palette/Palette";
 import { useState, useEffect } from "react";
-import { SearchIcon } from "../../Icons/SearchIcon";
 import Joyride, { STATUS } from 'react-joyride';
-
 import {
   getAnalogousPalette,
   getComplementaryPalette,
@@ -15,6 +13,7 @@ import {
   getSquarePalette,
   getTriadsPalette,
   getEditedPalette,
+  getLockedPalette,
 } from "../../Helpers/Harmony"; 
 import SpinnerOverlay from "../../Components/Styler";
 
@@ -49,6 +48,8 @@ function App({ DarkMode, setIsDarkMode }) {
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [cookieAccepted, setCookieAccepted] = useState(getCookie("cookies"));
   const [run, setRun] = useState(true);
   const [steps, setSteps] = useState([
       {
@@ -91,10 +92,38 @@ function App({ DarkMode, setIsDarkMode }) {
       setAdjustmentsEnabled(true);
   }
 
+  function setCookie(name, value, days) {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + expirationDate.toUTCString();
+    document.cookie = name + "=" + value + "; " + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(name + '=')) {
+        return cookie.substring(name.length + 1);
+      }
+    }
+    return null;
+  }
+
+  function acceptCookies() {
+    setCookie("cookies", true, 1);
+    setCookieAccepted(true)
+  }
+
   async function sendQuery(){
     setIsError(false);
     setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+    if (!query) {
+        setLoading(false);
+        return setIsEmpty(true);
+    }
+    setIsEmpty(false);
 
     xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -158,7 +187,7 @@ function App({ DarkMode, setIsDarkMode }) {
         switch (harmony) {
             case "None":
                 setPalette((prevState) => {
-                return { ...prevState, palette: pal };
+                return { ...prevState, palette: getLockedPalette(prevState, pal, lock), };
                 });
                 break;
             case "Analogous":
@@ -244,7 +273,8 @@ function App({ DarkMode, setIsDarkMode }) {
     switch (harmony) {
       case "None":
         setPalette((prevState) => {
-          return { ...prevState, palette: palette.palette };
+          console.log(prevState.palette)
+          return { ...prevState, palette: prevState.palette };
         });
         break;
       case "Analogous":
@@ -314,9 +344,15 @@ function App({ DarkMode, setIsDarkMode }) {
             showSkipButton
             steps={steps}
             styles={{
-                options: {
-                zIndex: 10000,
-                },
+              options: {
+                arrowColor: '#333',
+                backgroundColor: '#ccc',
+                primaryColor: '#000',
+                textColor: '#333333',
+                borderRadius: '20%',
+                fontWeight: '300',
+                zIndex: 1000,
+              }
             }}
             callback={({ status }) => {
                 if (([STATUS.FINISHED, STATUS.SKIPPED]).includes(status))
@@ -324,16 +360,23 @@ function App({ DarkMode, setIsDarkMode }) {
             }}
         />
       <NavBar palette={palette.palette} DarkMode={DarkMode} setIsDarkMode={setIsDarkMode}/>
+      <S.CookieAlert className = {DarkMode} style = {{display: cookieAccepted ? "none" : "flex" }}>
+        <span>We only use cookies for dark mode preference.</span>
+        <button onClick={acceptCookies}>Done</button>
+      </S.CookieAlert>
 
       <S.Content className = {DarkMode}>
             <S.Title className = {DarkMode}>{title}</S.Title>
-            <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
             <S.Search className = {DarkMode}>
-                <SearchIcon />
+              <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+              <S.GenerateButton className = {DarkMode} onClick={sendQuery}>Generate</S.GenerateButton>
             </S.Search>
 
             <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>
                 The generated palette may not fully represent the meaning of this text. Please try another word for more accurate results.
+            </p>
+            <p className="errmsg" style = {{display: isEmpty ? "flex" : "none" }}>
+                Ready to add some color? Enter your text to create a stunning palette!
             </p>
         <S.TopKeywords>
           <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>

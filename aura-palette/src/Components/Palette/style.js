@@ -76,6 +76,7 @@ export const MainPalette = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   overflow: hidden;
+  zoom: 0.9;
 
   @media screen and (max-height: 400px) {
     zoom: 0.7;

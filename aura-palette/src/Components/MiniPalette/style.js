@@ -32,7 +32,7 @@ export const PaletteSettings = styled.div`
 
 export const PaletteTitle = styled.h3`
   font-weight: 500;
-  margin: 10px auto 0px 0px;
+  margin: 10px auto 10px 0px;
   color: #333333;
 
   @media screen and (max-width: 900px) {
@@ -97,6 +97,7 @@ export const ColorCode = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: text;
   
   @media screen and (max-width: 900px) {
     height: 30px;
@@ -134,13 +135,23 @@ display: none;
 `;
 
 export const StyledStarIcon = styled(StarIcon)`
-  margin: 0 12px;
-
+  margin-right: 4px;
+  cursor: pointer;
   &.dark {
     path
     {
       fill: #888888;
     }
+  }
+  &:hover {
+    path
+    {
+      fill: #666;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 0 12px;
   }
 `;
 

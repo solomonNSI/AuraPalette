@@ -16,9 +16,10 @@ export const NavBar = styled.div`
   align-items: center;
   position: fixed;
   top: 0;
+  zoom: 0.9;
 
   @media screen and (max-height: 400px) {
-    height: 52px;
+    zoom: 0.8;
   }
 
   &.dark {
@@ -39,7 +40,7 @@ export const GradientLine = styled.div`
   height: 5px;
   width: 100%;
   position: fixed;
-  top: ${NAVBAR_HEIGHT}px; ;
+  top: ${NAVBAR_HEIGHT}px;
 `;
 
 export const GradientLineDefault = styled.div`
@@ -47,7 +48,8 @@ export const GradientLineDefault = styled.div`
   height: 5px;
   width: 100%;
   position: fixed;
-  top: ${NAVBAR_HEIGHT}px; ;
+  top: ${NAVBAR_HEIGHT}px;
+
 `;
 
 export const AppName = styled.div`
@@ -162,7 +164,6 @@ export const StyledFeedbackIcon = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    width: 48px !important;
     height: 48px !important;
   }
 `;

@@ -105,7 +105,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       var palettes2 = [];
       var queries = [];
       if (!favorites || favorites.length === 0) {
-        return (<p>There are no palettes in your favorites</p>);
+        return (<p id="noWarning">There are no palettes in your favorites.</p>);
       }
       var p_list = favorites['favorites']
 
@@ -135,12 +135,12 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         var queries = [];
 
         if (!history || history.length === 0) {
-            return (<p>There are no palettes in your history</p>);
+            return (<p id="noWarning" className = {DarkMode}>There are no palettes in your history.</p>);
         }
         
         var p_list = history['history']
 
-        for (var i = 0; i < p_list.length; i++) {
+        for (var i = p_list.length-1; i >= 0; i--) {
           var palette = []
           palette.push(p_list[i]['color1'])
           palette.push(p_list[i]['color2'])
