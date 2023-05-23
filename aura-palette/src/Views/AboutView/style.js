@@ -42,6 +42,10 @@ export const About = styled.div`
   align-items: center;
   justify-content: start;
 
+  #secondTitle{
+    margin-top: 20px;
+  }
+
   p {
     font-weight: 400;
   }
