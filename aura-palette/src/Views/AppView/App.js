@@ -33,7 +33,7 @@ function chooseTitle() {
 chooseTitle();
 
 var predefined_count = 9;
-var predefinedColors = ["orange", "yellow", "red", "blue", "pink", "purple", "green"];
+var predefinedColors = [];
 
 function App({ DarkMode, setIsDarkMode }) {
   const [harmony, setHarmony] = useState("None");
@@ -45,6 +45,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
   const [medium, setMedium] = useState("Default");
+  const [previousQuery, setPreviousQuery] = useState("");
   const [adjustmentsEnabled, setAdjustmentsEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
