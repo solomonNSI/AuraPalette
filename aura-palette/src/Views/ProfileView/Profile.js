@@ -109,7 +109,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       }
       var p_list = favorites['favorites']
 
-      for (var i = 0; i < p_list.length; i++) {
+      for (var i = p_list.length-1; i >= 0; i--) {
         var palette = []
         palette.push(p_list[i]['color1'])
         palette.push(p_list[i]['color2'])
