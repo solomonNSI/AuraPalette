@@ -109,8 +109,8 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
           token_to_check = JSON.stringify(jsonResponse['user_token']);
           if(token_to_check === sessionStorage.getItem('user_token')){
             // user is logged in
-            addToFavorites();
             setLoggedIn(true);
+            addToFavorites();
           }
           else{
             // REPLACE THIS
