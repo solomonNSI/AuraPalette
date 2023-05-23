@@ -235,11 +235,16 @@ export const SearchBar = styled.input`
 
   @media screen and (max-width: 900px) {
     height: 40px;
-    font-size: 12px;
+    font-size: 14px;
+    ::placeholder {
+      font-size: 12px;
+    }
   }
 
   @media screen and (max-width: 600px) {
-    font-size: 10px;
+    ::placeholder {
+      font-size: 10px;
+    }
   }
 
   :focus {
