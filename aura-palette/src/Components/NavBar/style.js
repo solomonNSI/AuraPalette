@@ -125,45 +125,33 @@ export const StyledProfileIcon = styled(ProfileIcon)`
 
 export const StyledFeedbackIcon = styled.div`
   height: 46px;
-  border-radius: 3px;
+  border-radius: 4px;
   font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 8px;
   background-color: #bbb;
   margin: auto;
   cursor: pointer;
+  font-size: 14px;
 
   &:hover {
-    rect
-    {
-      fill: #999;
-    }
+    background-color: #999;
   }
   
   &.dark {
     background-color: #111;
-    path
-    {
-      fill: #aaa;
-    }
-
-    rect
-    {
-      fill: #111;
-    }
+    color: #ddd;
 
     &:hover {
-      rect
-      {
-        fill: #222;
-      }
+      background-color: #222;
     }
   }
 
   @media screen and (max-width: 600px) {
     height: 48px !important;
+    font-size: 12px;
   }
 `;
 
