@@ -259,12 +259,23 @@ function App({ DarkMode, setIsDarkMode }) {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
+      if (query === previousQuery) {
+        const randomNumber = Math.floor(Math.random() * 2);
+        const trimmedQuery = query.trim();
+        const spaceCount = (query.match(/ /g) || []).length; 
+  
+        if (trimmedQuery.length > 0 && spaceCount <= 4) {
+          const updatedQuery = randomNumber === 0 ? ' ' + query : query + ' ';
+          setQuery(updatedQuery);
+        }
+      }
+  
       setQueryChanged(true);
-
+      setPreviousQuery(query);
       setTimeout(() => {
         setQueryChanged(false);
       }, 9000);
-
+  
       sendQuery();
     }
   };
