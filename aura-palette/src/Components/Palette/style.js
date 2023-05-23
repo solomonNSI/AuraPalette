@@ -370,7 +370,7 @@ export const Info = styled.div`
   z-index: 10;
 
   transition: opacity 0.25s;
-  display: flex;
+  display: ${({ infoEnabled }) => (infoEnabled ? 'flex' : 'none')};
   opacity: ${({ infoEnabled }) => (infoEnabled ? '1' : '0')};
   
   @media screen and (max-width: 900px) {
@@ -428,7 +428,7 @@ export const Rate = styled.div`
   line-height: 20px;
 
   transition: opacity 0.25s;
-  display: flex;
+  display: ${({ rateEnabled }) => (rateEnabled ? 'flex' : 'none')};
   opacity: ${({ rateEnabled }) => (rateEnabled ? '1' : '0')};
 
   @media screen and (max-width: 900px) {
@@ -503,20 +503,18 @@ export const Rate = styled.div`
     background: #333; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
-
-  display: flex;
   align-items: flex-start;
 
   div {
     width: 100%;
-    display: flex;
+    display: ${({ rateEnabled }) => (rateEnabled ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0px;
 
     div {
-      display: flex;
+      display: ${({ rateEnabled }) => (rateEnabled ? 'flex' : 'none')};
       align-items: center;
       justify-content: center;
       flex-direction: row;
