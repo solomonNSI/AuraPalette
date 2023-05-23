@@ -41,6 +41,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [queryChanged, setQueryChanged] = useState(false);
   const [lock, setLock] = useState([false, false, false, false, false]);
   const [palette,  setPalette] = useState({ palette: getDefaultPalette(lock) });
+  const [gptCommentInput, setGptComment] = useState("Please wait...");
   const [editedColorIndex, setEditedColorIndex] = useState("");
   const [editedColor, setEditedColor] = useState();
   const [colorBlindness, setColorBlindness] = useState("None");
@@ -115,6 +116,33 @@ function App({ DarkMode, setIsDarkMode }) {
     setCookieAccepted(true)
   }
 
+  async function gptComment() {
+
+    //if(sessionStorage.getItem('user_token') != null){
+    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+    xmlhttp.open("POST", "http://127.0.0.1:8000/chatgpt/sendgpt/");
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+    var qInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
+    + palette[1] + '", "color3": "' + palette[2] + '", "color4": "' + palette[3] + '", "color5": "' + palette[4] + '"}'
+    console.log("in gptComment")
+    //xmlhttp.onload  = function() {
+      console.log("in gptComment onload")
+        var jsonResponse = xmlhttp.response;
+        jsonResponse = JSON.parse(jsonResponse);
+        console.log('response', jsonResponse);
+        if(jsonResponse['code'] == 200){
+            console.log('response', jsonResponse['response']);
+            setGptComment(jsonResponse['response']);
+            console.log(gptCommentInput)
+            console.log("gptCommentInput")
+        //};
+        xmlhttp.send(qInfo)
+    //}
+    console.log("out gptComment")
+    }
+  }
+
   async function sendQuery(){
     setIsError(false);
     setLoading(true);
@@ -125,7 +153,7 @@ function App({ DarkMode, setIsDarkMode }) {
     }
     setIsEmpty(false);
 
-    xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/model/getpalette/");
+    xmlhttp.open("POST", "http://127.0.0.1:8000/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query.toLowerCase() + '"}';
 
@@ -143,10 +171,11 @@ function App({ DarkMode, setIsDarkMode }) {
         // }
         updatePalette(colorResponse[0]);
         setLoading(false);
+        gptComment()
         // if logged in add the palette to history
         if(sessionStorage.getItem('user_token') != null){
           var xmlhttp2 = new XMLHttpRequest();
-          xmlhttp2.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addhistory/");
+          xmlhttp2.open("POST", "http://127.0.0.1:8000/account/addhistory/");
           xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + colorResponse[0]+ '", "color2": "'
@@ -415,6 +444,7 @@ function App({ DarkMode, setIsDarkMode }) {
                 DarkMode={DarkMode}
                 query = {query}
                 queryChanged = {queryChanged}
+                gptCommentPalette = {gptCommentInput}
             />
             </S.PaletteContainer>
         </S.Content>
