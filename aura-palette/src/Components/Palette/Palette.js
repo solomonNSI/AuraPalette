@@ -160,7 +160,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         document.getElementById("paletteCopy").style.setProperty("fill", "#64E225", "important")
 
         setInterval(function(){
-            document.getElementById("paletteCopy").style.fill = "#333333";
+            if(DarkMode == "dark")
+                document.getElementById("paletteCopy").style.fill = "#888888";
+            else
+                document.getElementById("paletteCopy").style.fill = "#333333";
          }, 2000);
 
     }
