@@ -575,8 +575,8 @@ export const Rate = styled.div`
 export const StyledStarIcon = styled(StarIcon)`
   margin: 0 18px;
   cursor: pointer;
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
   &.dark {
     path
     {
@@ -594,8 +594,8 @@ export const StyledStarIcon = styled(StarIcon)`
 export const StyledFullStarIcon = styled(FullStarIcon)`
   margin: 0 18px;
   cursor: pointer;
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
   &.dark {
     path
     {
@@ -630,8 +630,8 @@ export const StyledPaletteCopyIcon = styled(PaletteCopyIcon)`
   cursor: pointer;
   fill: #333333;
   margin-right: 4px;
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
 
   &.dark {
     fill: #888888;
