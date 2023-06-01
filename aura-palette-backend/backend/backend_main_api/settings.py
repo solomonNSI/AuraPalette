@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'environ',
     'account_api',
     'auth_api',
-    'feedback_api'
+    'feedback_api',
+    'chatgpt_api'
 ]
 
 MIDDLEWARE = [

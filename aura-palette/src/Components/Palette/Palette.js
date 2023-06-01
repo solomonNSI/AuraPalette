@@ -10,7 +10,7 @@ import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 import { getColorForMedium } from "../../Helpers/Medium";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged, gptCommentPalette }) => {
     const infoRef = useRef(null);
     const rateRef = useRef(null);
     const logNotifyRef = useRef(null);
@@ -80,7 +80,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
           xmlhttp.open("POST", "http://127.0.0.1:8000/account/addfavorite/");
-          //xmlhttp.open("POST", "http://127.0.0.1:8000/account/addfavorite/");
           xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -306,11 +305,11 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.MainPalette id="palette-container"  className = {DarkMode}>
         <S.Header id="palette-header"  className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
-            <S.StyledInfoIcon className={`${DarkMode} info-icon`} onClick={showInfo}/>
-            <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}> 
-                Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong>
+            <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
+            <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}>
+              {gptCommentPalette}
             </S.Info>
-            <S.StyledRateIcon className={`${DarkMode} info-icon`} onClick={showRate} />
+            <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
             <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} rateEnabled={rateEnabled}>
                 <div>
                     <p>Rate This Palette</p>
