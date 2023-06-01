@@ -118,6 +118,19 @@ function App({ DarkMode, setIsDarkMode }) {
   }
 
   async function sendQuery(){
+    if (query === previousQuery) {
+      const randomNumber = Math.floor(Math.random() * 2);
+      const trimmedQuery = query.trim();
+      const spaceCount = (query.match(/ /g) || []).length; 
+
+      if (trimmedQuery.length > 0 && spaceCount <= 4) {
+        const updatedQuery = randomNumber === 0 ? ' ' + query : query + ' ';
+        setQuery(updatedQuery);
+      } else {
+        setQuery(trimmedQuery);
+      }
+    }
+    setPreviousQuery(query);
     setIsError(false);
     setLoading(true);
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
@@ -127,13 +140,14 @@ function App({ DarkMode, setIsDarkMode }) {
     }
     setIsEmpty(false);
 
-    xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/model/getpalette/");
+    xmlhttp.open("POST", "http://127.0.0.1:8000/model/getpalette/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var qInfo = '{"query" : "' + query.toLowerCase() + '"}';
 
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse);
+
       if(jsonResponse['code'] == 200){
         var response = jsonResponse['response'];
         var colorResponse = response['samples'];
@@ -144,7 +158,7 @@ function App({ DarkMode, setIsDarkMode }) {
         // if logged in add the palette to history
         if(sessionStorage.getItem('user_token') != null){
           var xmlhttp2 = new XMLHttpRequest();
-          xmlhttp2.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addhistory/");
+          xmlhttp2.open("POST", "http://127.0.0.1:8000/account/addhistory/");
           xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + colorResponse[0][0]+ '", "color2": "'
@@ -246,23 +260,21 @@ function App({ DarkMode, setIsDarkMode }) {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      if (query === previousQuery) {
-        const randomNumber = Math.floor(Math.random() * 2);
-        const trimmedQuery = query.trim();
-        const spaceCount = (query.match(/ /g) || []).length; 
+      // if (query === previousQuery) {
+      //   const randomNumber = Math.floor(Math.random() * 2);
+      //   const trimmedQuery = query.trim();
+      //   const spaceCount = (query.match(/ /g) || []).length; 
   
-        if (trimmedQuery.length > 0 && spaceCount <= 4) {
-          const updatedQuery = randomNumber === 0 ? ' ' + query : query + ' ';
-          setQuery(updatedQuery);
-        }
-      }
+      //   if (trimmedQuery.length > 0 && spaceCount <= 4) {
+      //     const updatedQuery = randomNumber === 0 ? ' ' + query : query + ' ';
+      //     setQuery(updatedQuery);
+      //   }
+      // }
   
       setQueryChanged(true);
-      setPreviousQuery(query);
       setTimeout(() => {
         setQueryChanged(false);
       }, 9000);
-  
       sendQuery();
     }
   };
