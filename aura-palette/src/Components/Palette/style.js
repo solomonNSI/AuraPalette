@@ -356,12 +356,40 @@ export const ColorModeButton = styled.button`
 `;
 
 export const Info = styled.div`
-  
   position: absolute;
   margin-top: 160px;
   margin-left: 90px;
   height: 100px;
   width: 300px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #ddd;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  z-index: 10;
+
+  transition: opacity 0.25s;
+  display: ${({ infoEnabled }) => (infoEnabled ? 'flex' : 'none')};
+  opacity: ${({ infoEnabled }) => (infoEnabled ? '1' : '0')};
+  
+  @media screen and (max-width: 900px) {
+    margin-left: 10px;
+    zoom: 0.8;
+  }
+
+  &.dark {
+    background-color: #666;
+    color: white;
+  }
+`;
+
+export const LogInNotify = styled.div`
+  right: 0;
+  max-width: 160px;
+  margin-right: 60px;
+  position: absolute;
+  margin-top: 160px;
   padding: 10px;
   border-radius: 8px;
   background-color: #ddd;
@@ -400,11 +428,15 @@ export const Rate = styled.div`
   line-height: 20px;
 
   transition: opacity 0.25s;
-  display: flex;
+  display: ${({ rateEnabled }) => (rateEnabled ? 'flex' : 'none')};
   opacity: ${({ rateEnabled }) => (rateEnabled ? '1' : '0')};
 
   @media screen and (max-width: 900px) {
     margin-left: 10px;
+    zoom: 0.8;
+  }
+
+  @media screen and (max-height: 500px) {
     zoom: 0.8;
   }
 
@@ -471,20 +503,18 @@ export const Rate = styled.div`
     background: #333; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
-
-  display: flex;
   align-items: flex-start;
 
   div {
     width: 100%;
-    display: flex;
+    display: ${({ rateEnabled }) => (rateEnabled ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0px;
 
     div {
-      display: flex;
+      display: ${({ rateEnabled }) => (rateEnabled ? 'flex' : 'none')};
       align-items: center;
       justify-content: center;
       flex-direction: row;
@@ -541,8 +571,10 @@ export const Rate = styled.div`
 
 
 export const StyledStarIcon = styled(StarIcon)`
-  margin: 0 16px;
+  margin: 0 18px;
   cursor: pointer;
+  height: 22px;
+  width: 22px;
   &.dark {
     path
     {
@@ -554,16 +586,14 @@ export const StyledStarIcon = styled(StarIcon)`
     {
       fill: #666;
     }
-  }
-
-  @media screen and (max-width: 600px) {
-    margin: 0 12px;
   }
 `;
 
 export const StyledFullStarIcon = styled(FullStarIcon)`
-  margin: 0 14px;
+  margin: 0 18px;
   cursor: pointer;
+  height: 22px;
+  width: 22px;
   &.dark {
     path
     {
@@ -575,10 +605,6 @@ export const StyledFullStarIcon = styled(FullStarIcon)`
     {
       fill: #666;
     }
-  }
-
-  @media screen and (max-width: 600px) {
-    margin: 0 12px;
   }
 `;
 
@@ -602,6 +628,8 @@ export const StyledPaletteCopyIcon = styled(PaletteCopyIcon)`
   cursor: pointer;
   fill: #333333;
   margin-right: 4px;
+  height: 22px;
+  width: 22px;
 
   &.dark {
     fill: #888888;

@@ -13,6 +13,7 @@ import { getColorForMedium } from "../../Helpers/Medium";
 export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged, gptCommentPalette }) => {
     const infoRef = useRef(null);
     const rateRef = useRef(null);
+    const logNotifyRef = useRef(null);
 
     const [colorMode, setColorMode] = useState("HEX");
     const [lock0, setLock0] = useState("Not Locked");
@@ -22,10 +23,12 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [lock4, setLock4] = useState("Not Locked");
     const [infoEnabled, setInfoEnabled] = useState(false);
     const [rateEnabled, setRateEnabled] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [sliderValue, setSliderValue] = useState(3);
     const [textAreaValue, setTextAreaValue] = useState("");
     const [feedbackButtonText, setFeedbackButtonText] = useState("Send Feedback");
     const [clickedFavorite, setClickedFavorite] = useState(false);
+    const [collectedColors, setCollectedColors] = useState([]);
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
     const [mediumVisible, setMediumVisible] = useState(false);
@@ -67,8 +70,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             xmlhttp.onload  = function() {
                 var jsonResponse = xmlhttp.response;
                 console.log(jsonResponse);
-                console.log(qInfo);
-
             };
             xmlhttp.send(qInfo)
         }
@@ -76,11 +77,9 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     function addToFavorites(){
-        setClickedFavorite(true);
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
           xmlhttp.open("POST", "http://127.0.0.1:8000/account/addfavorite/");
-          //xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
           xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -89,33 +88,65 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         }
     }
 
+    useEffect(() => {
+    }, [clickedFavorite]);
+
+    useEffect(() => {
+        checkLoggedInForFav1();
+    }, []);
+
+    function checkLoggedInForFav1(){
+        var xmlhttp = new XMLHttpRequest();
+        var token_to_check;
+        xmlhttp.open("GET", "http://127.0.0.1:8000/account/checktoken/");
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
+        xmlhttp.onload  = function() {
+          var jsonResponse = xmlhttp.response;
+          jsonResponse = JSON.parse(jsonResponse);
+          token_to_check = JSON.stringify(jsonResponse['user_token']);
+          if(token_to_check === sessionStorage.getItem('user_token')){
+            // user is logged in
+            setLoggedIn(true);
+          }
+          else{
+            setLoggedIn(false);
+          }   
+        }
+        xmlhttp.send();
+    }
+
+    function handleFavLogic() {
+        if(!loggedIn) {
+            setClickedFavorite(prevClickedFavorite => !prevClickedFavorite);
+        } else {
+            addToFavorites();
+            setClickedFavorite(prevClickedFavorite => !prevClickedFavorite);
+        }
+    }
+
     function removeFromFavorites(){
         setClickedFavorite(false);
     }
 
+    useEffect(() => {
+    }, [infoEnabled]);
+
+    useEffect(() => {
+    }, [rateEnabled]);
+    
     function showInfo() {
-        if(infoEnabled)
-            setInfoEnabled(false);
-        else
-            setInfoEnabled(true);
-            setRateEnabled(false);
+        setInfoEnabled(prevInfoEnabled => !prevInfoEnabled);
     }
 
     function showRate() {
-        if(rateEnabled)
-            setRateEnabled(false);
-        else
-            setRateEnabled(true);
-            setInfoEnabled(false);
+        setRateEnabled(prevRateEnabled => !prevRateEnabled);
     }
 
     function displayPaletteColors(colorNumber) {
         if (colorMode === "RGB") return hexToRgbWriter(palette[colorNumber]);
         else if (colorMode === "HSL") return hexToHSLWriter(palette[colorNumber]);
-        else if (colorMode === "HEX") {
-            console.log("trial", palette[colorNumber]);
-            return palette[colorNumber];
-        } 
+        else if (colorMode === "HEX") return palette[colorNumber];
     }
 
     function copyPaletteColors(){
@@ -129,16 +160,15 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         document.getElementById("paletteCopy").style.setProperty("fill", "#64E225", "important")
 
         setInterval(function(){
-            document.getElementById("paletteCopy").style.fill = "#333333";
+            if(DarkMode == "dark") document.getElementById("paletteCopy").style.fill = "#888888";
+            else document.getElementById("paletteCopy").style.fill = "#333333";
          }, 2000);
-
     }
 
     function updateLockArray(index) {
         var newArray = lock;
         var newValue = !lock[index];
         newArray[index] = newValue;
-
         setLock(newArray);
 
         switch(index) {
@@ -225,26 +255,41 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         return blindColors;
     }
 
-    function renderMediumColors(){
-        var mediumColors = [];
-        for (var i = 0; i < 5; i++) {
-            mediumColors.push(
-                <S.Color colorHex={getColorForMedium(palette[i], medium)}>
-                    <S.ColorCode>
-                    {getColorForMedium(palette[i], medium)}
-                    </S.ColorCode>
-                </S.Color>
-            );
+
+    const renderMediumColors = () => {
+        const mediumColors = [];
+        for (let i = 0; i < 5; i++) {
+          mediumColors.push(getColorForMedium(palette[i], medium));
         }
-        return mediumColors;
-    }
+        setCollectedColors(mediumColors);
+    };
+    
+    useEffect(() => {
+        renderMediumColors();
+    }, [palette, medium]);
 
     const handleClickOutside = (event) => {
-        if (infoRef.current && !infoRef.current.contains(event.target)) {
-          setInfoEnabled(false);
+        if ((
+            infoRef.current &&
+            !infoRef.current.contains(event.target) &&
+            !event.target.classList.contains("info-icon") 
+        )) {
+            setInfoEnabled(false);
         }
-        if (rateRef.current && !rateRef.current.contains(event.target)) {
-          setRateEnabled(false);
+        if ((
+            rateRef.current && 
+            !rateRef.current.contains(event.target) && 
+            !event.target.classList.contains("info-icon") 
+        ))
+            {
+            setRateEnabled(false);
+        }
+        if ((
+            logNotifyRef.current && 
+            !logNotifyRef.current.contains(event.target) &&
+            !event.target.classList.contains("info-icon") 
+        )) {
+          setClickedFavorite(false);
         }
     };
 
@@ -254,15 +299,16 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
           document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-    
+
     return (
     <S.Container className = {DarkMode}>
         <S.MainPalette id="palette-container"  className = {DarkMode}>
         <S.Header id="palette-header"  className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
-            <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}>{gptCommentPalette}</S.Info>
-            
+            <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}>
+              {gptCommentPalette}
+            </S.Info>
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
             <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} rateEnabled={rateEnabled}>
                 <div>
@@ -272,7 +318,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
                         <p>{sliderValue}</p>
                     </div>
                     <textarea placeholder="Give Feedback" rows="2" value={textAreaValue} onChange={(e) => setTextAreaValue(e.target.value)}></textarea>
-                    <button disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
+                    <button id="feedbackButton" disabled={!textAreaValue} onClick={sendFeedback}>{feedbackButtonText}</button>
                 </div>
             </S.Rate>
 
@@ -280,10 +326,11 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.ColorModeButton className = {DarkMode} onClick={changeColorMode}>
                 <span>Color Mode: </span> {colorMode}
             </S.ColorModeButton>
-            {clickedFavorite ? 
+            {(clickedFavorite && loggedIn) ? 
                 <S.StyledFullStarIcon className = {DarkMode} width="26px" onClick={removeFromFavorites} /> : 
-                <S.StyledStarIcon className = {DarkMode} width="22px" onClick={addToFavorites} />
+                <S.StyledStarIcon className = {`${DarkMode} info-icon`} width="22px" onClick={handleFavLogic} />
             }
+            <S.LogInNotify ref={logNotifyRef} className = {DarkMode} infoEnabled={(clickedFavorite && !loggedIn)}>If you like this palette and want to use it in your future projects, you can log in to save it.</S.LogInNotify>
             <S.StyledPaletteCopyIcon className = {DarkMode} id="paletteCopy" height="20px" onClick={copyPaletteColors} />
         </S.Header>
         <S.Colors>
@@ -411,11 +458,17 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.MediumColors className={`choose ${DarkMode}`} style = {{display: mediumVisible ? "none" : "flex" }}>
                 <S.PaletteTitle className={`chooseText ${DarkMode}`}>Please select a medium from the adjustments menu</S.PaletteTitle>
             </S.MediumColors>
-            <S.MediumColors className = {DarkMode} visible={mediumVisible}>
-                <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
-                <S.ColorBlindPalette>
-                    {renderMediumColors()}
-                </S.ColorBlindPalette>
+            <S.MediumColors className={DarkMode} visible={mediumVisible}>
+                <S.PaletteTitle className={DarkMode}>For medium {medium} we suggest this palette: </S.PaletteTitle>
+                {collectedColors.length > 0 && (
+                    <S.ColorBlindPalette>
+                    {collectedColors.map((color, index) => (
+                        <S.Color key={index} colorHex={color}>
+                            <S.ColorCode>{color}</S.ColorCode>
+                        </S.Color>
+                    ))}
+                    </S.ColorBlindPalette>
+                )}
             </S.MediumColors>
 
             {/* COLOR BLIND PALETTE */}

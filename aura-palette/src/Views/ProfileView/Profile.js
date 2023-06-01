@@ -22,7 +22,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
     function logOut(){
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         //xmlhttp.open("POST", "https://164.92.237.219/auth/register/");
-        xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/auth/signout/");
+        xmlhttp.open("POST", "http://127.0.0.1:8000/auth/signout/");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.onload  = function() {
         var jsonResponse = xmlhttp.response;
@@ -61,8 +61,8 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
     function historyList(){
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-        xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/gethistory/");
-        //xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/gethistory/");
+        xmlhttp.open("GET", "http://127.0.0.1:8000/account/gethistory/");
+        //xmlhttp.open("GET", "http://127.0.0.1:8000/account/gethistory/");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
         xmlhttp.onload  = function() {
@@ -75,8 +75,8 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
 
     function favoriteList(){
       var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-      xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/getfavorites/");
-      //xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/getfavorites/");
+      xmlhttp.open("GET", "http://127.0.0.1:8000/account/getfavorites/");
+      //xmlhttp.open("GET", "http://127.0.0.1:8000/account/getfavorites/");
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
       xmlhttp.onload  = function() {
@@ -109,7 +109,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
       }
       var p_list = favorites['favorites']
 
-      for (var i = 0; i < p_list.length; i++) {
+      for (var i = p_list.length-1; i >= 0; i--) {
         var palette = []
         palette.push(p_list[i]['color1'])
         palette.push(p_list[i]['color2'])
@@ -169,7 +169,7 @@ const Profile = ({ DarkMode, setIsDarkMode }) => {
         <S.Title className = {DarkMode}>Profile Tabs</S.Title>
         <S.Button className = {DarkMode} style = {{backgroundColor: favoritesEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showFavorites}><span>Favorite Palettes</span><span className="text">See, share and use your favorite palettes.</span></S.Button>
         <S.Button className = {DarkMode} style = {{backgroundColor: historyEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showHistory}><span>Palette History</span><span className="text">Discover, export and manage your palette history.</span></S.Button>
-        <S.Button className = {DarkMode} style = {{backgroundColor: settingsEnabled ? defaultSelectedColor : defaultBackgroundColor }} onClick={showSettings}><span>User & App Settings</span><span className="text">Access information and change your preferences.</span></S.Button>
+        {/* <S.Button className = {DarkMode} style = "display: none" onClick={showSettings}><span>User & App Settings</span><span className="text">Access information and change your preferences.</span></S.Button> */}
         <S.Button className = {DarkMode} onClick={logOut} style={{backgroundColor: defaultBackgroundColor, color: "#f34a55"}}>
           <span>Log Out from Aura</span>
           <span className="text">All your data will be saved.</span>
