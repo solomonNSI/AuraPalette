@@ -116,31 +116,25 @@ function App({ DarkMode, setIsDarkMode }) {
     setCookieAccepted(true)
   }
 
-  async function gptComment() {
-
+  async function gptComment(colors) {
+    var response;
     //if(sessionStorage.getItem('user_token') != null){
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     xmlhttp.open("POST", "http://127.0.0.1:8000/chatgpt/sendgpt/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
-    var qInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
-    + palette[1] + '", "color3": "' + palette[2] + '", "color4": "' + palette[3] + '", "color5": "' + palette[4] + '"}'
+    var qInfo = '{"query":"' +  query + '", "color1": "' + colors[0]+ '", "color2": "'
+    + colors[1] + '", "color3": "' + colors[2] + '", "color4": "' + colors[3] + '", "color5": "' + colors[4] + '"}'
     console.log("in gptComment")
-    //xmlhttp.onload  = function() {
-      console.log("in gptComment onload")
-        var jsonResponse = xmlhttp.response;
-        jsonResponse = JSON.parse(jsonResponse);
-        console.log('response', jsonResponse);
-        if(jsonResponse['code'] == 200){
-            console.log('response', jsonResponse['response']);
-            setGptComment(jsonResponse['response']);
-            console.log(gptCommentInput)
-            console.log("gptCommentInput")
-        //};
-        xmlhttp.send(qInfo)
-    //}
-    console.log("out gptComment")
-    }
+
+    xmlhttp.onload  = function() {
+      response = xmlhttp.response;
+      response = JSON.parse(response);
+      console.log(response.explanation);
+      setGptComment(response.explanation);
+      console.log(qInfo);
+      };
+    xmlhttp.send(qInfo)
+
   }
 
   async function sendQuery(){
@@ -171,7 +165,7 @@ function App({ DarkMode, setIsDarkMode }) {
         // }
         updatePalette(colorResponse[0]);
         setLoading(false);
-        gptComment()
+        gptComment(colorResponse)
         // if logged in add the palette to history
         if(sessionStorage.getItem('user_token') != null){
           var xmlhttp2 = new XMLHttpRequest();
