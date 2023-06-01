@@ -19,6 +19,11 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
       setMediumEnabled(true);
   }
 
+  const handleMediumChange = (selectedMedium) => {
+    setMedium(selectedMedium);
+    setMediumEnabled(false);
+  };
+
 
   return (
     <S.MenuContainer id="adjustments-menu" style = {adjustmentsEnabled ? {display: "block"} : {display: "none"}} className = {DarkMode}>
@@ -74,7 +79,6 @@ export const AdjustmentsMenu = ({ setHarmony, setColorBlindness, setMedium, Dark
             <S.Checkmark className={`checkmark ${DarkMode}`} />
             </S.Container>
         </div>
-
         <div>
             <S.Subtitle className = {`pointer ${DarkMode}`} onClick={toggleMedium}>Medium
             <span className= "arrow" style={{display: mediumEnabled ? "none" : "inline" }}>&#9660;</span>

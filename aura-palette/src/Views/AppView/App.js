@@ -52,6 +52,7 @@ function App({ DarkMode, setIsDarkMode }) {
   const [isEmpty, setIsEmpty] = useState(false);
   const [cookieAccepted, setCookieAccepted] = useState(getCookie("cookies"));
   const [run, setRun] = useState(true);
+  const [chatGPT, setChatGPT] = useState("");
   const [steps, setSteps] = useState([
       {
         content: <h2>Welcome to The Aura Palette where words radiate with colors! 🌈</h2>,
@@ -133,15 +134,11 @@ function App({ DarkMode, setIsDarkMode }) {
     xmlhttp.onload  = function() {
       var jsonResponse = xmlhttp.response;
       jsonResponse = JSON.parse(jsonResponse);
-      console.log('response', jsonResponse);
       if(jsonResponse['code'] == 200){
-        console.log('response', jsonResponse['response']);
         var response = jsonResponse['response'];
         var colorResponse = response['samples'];
-        console.log("color response", colorResponse[0]);
-        // for ( var i = 0; i < 5; i++) {
-        //   if (!lock[i]) colorResponse[i] = rgbToHex(colorResponse[0],colorResponse[i][1],colorResponse[i][2]);
-        // }
+        var chatGPTResponse = response['chatgpt'];
+        setChatGPT(chatGPTResponse);
         updatePalette(colorResponse[0]);
         setLoading(false);
         // if logged in add the palette to history
@@ -152,13 +149,11 @@ function App({ DarkMode, setIsDarkMode }) {
           xmlhttp2.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + colorResponse[0][0]+ '", "color2": "'
           + colorResponse[0][1] + '", "color3": "' + colorResponse[0][2] + '", "color4": "' + colorResponse[0][3] + '", "color5": "' + colorResponse[0][4] + '"}'
-          console.log(palInfo)
           xmlhttp2.send(palInfo)
         }
       }
       else {
-        if (jsonResponse['err_msg'] == "INVALID_QUERY")
-        {
+        if (jsonResponse['err_msg'] == "INVALID_QUERY") {
             updatePalette(getDefaultPalette(lock));
             setIsError(true)
             setLoading(false)
@@ -167,15 +162,6 @@ function App({ DarkMode, setIsDarkMode }) {
     };
     xmlhttp.send(qInfo)
 
-    // At request level
-    // const agent = new https.Agent({  
-    //   rejectUnauthorized: false,
-    //   requestCert: false,
-    //   agent: false,
-    // });
-    // await axios.post("http://164.92.237.219/model/getpalette/", {https: agent}).then((resp) => {
-    //   console.log(resp);
-    // })
   }
 
   function updatePalette(pal){
@@ -377,37 +363,18 @@ function App({ DarkMode, setIsDarkMode }) {
       </S.CookieAlert>
 
       <S.Content className = {DarkMode}>
-            <S.Title className = {DarkMode}>{title}</S.Title>
-            <S.Search className = {DarkMode}>
-              <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
-              <S.GenerateButton className = {DarkMode} onClick={sendQuery}>Generate</S.GenerateButton>
-            </S.Search>
+        <S.Title className = {DarkMode}>{title}</S.Title>
+        <S.Search className = {DarkMode}>
+          <S.SearchBar className = {DarkMode} id="search-bar" placeholder="Enter some keywords and AI will generate a palette..." onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} colorList={palette.palette}></S.SearchBar>
+          <S.GenerateButton className = {DarkMode} onClick={sendQuery}>Generate</S.GenerateButton>
+        </S.Search>
 
-            <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>
-                The generated palette may not fully represent the meaning of this text. Please try another word for more accurate results.
-            </p>
-            <p className="errmsg" style = {{display: isEmpty ? "flex" : "none" }}>
-                Ready to add some color? Enter your text to create a stunning palette!
-            </p>
-        <S.TopKeywords>
-          <S.TopSearch style={{ fontWeight: "500" }}>Top Searches</S.TopSearch>
-          <S.TopSearch>water</S.TopSearch>
-          <S.TopSearch>finance</S.TopSearch>
-          <S.TopSearch>sunset</S.TopSearch>
-          <S.TopSearch>rainbow</S.TopSearch>
-          <S.TopSearch>happy</S.TopSearch>
-          <S.TopSearch>summer</S.TopSearch>
-          <S.TopSearch>sadness</S.TopSearch>
-          <S.TopSearch>freedom</S.TopSearch>
-          <S.TopSearch>politics</S.TopSearch>
-          <S.TopSearch>ocean</S.TopSearch>
-          <S.TopSearch>spring</S.TopSearch>
-          <S.TopSearch>palette</S.TopSearch>
-          <S.TopSearch>agriculture</S.TopSearch>
-          <S.TopSearch>exciting</S.TopSearch>
-          <S.TopSearch>sea</S.TopSearch>
-          <S.TopSearch>discipline</S.TopSearch>
-        </S.TopKeywords>
+        <p className="errmsg" style = {{display: isError ? "flex" : "none" }}>
+          The generated palette may not fully represent the meaning of this text. Please try another word for more accurate results.
+        </p>
+        <p className="errmsg" style = {{display: isEmpty ? "flex" : "none" }}>
+          Ready to add some color? Enter your text to create a stunning palette!
+        </p>
 
         <S.PaletteContainer>
             <S.AdjustmentsClosed className={DarkMode} onClick={showAdjustments}> 
@@ -427,6 +394,7 @@ function App({ DarkMode, setIsDarkMode }) {
                 DarkMode={DarkMode}
                 query = {query}
                 queryChanged = {queryChanged}
+                chatGPT={chatGPT}
             />
             </S.PaletteContainer>
         </S.Content>

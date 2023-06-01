@@ -52,7 +52,7 @@ const Login = ({DarkMode, setIsDarkMode}) => {
               setEmailAlert(true);
             }
             // ERROR WAS RAISED
-            console.log(jsonResponse)
+
           }
           if(sessionStorage.getItem('user_token') != null){
           setIsLoading(false);

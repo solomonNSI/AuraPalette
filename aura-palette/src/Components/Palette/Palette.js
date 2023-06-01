@@ -10,7 +10,7 @@ import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 import { getColorForMedium } from "../../Helpers/Medium";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged, chatGPT }) => {
     const infoRef = useRef(null);
     const rateRef = useRef(null);
     const logNotifyRef = useRef(null);
@@ -28,7 +28,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     const [textAreaValue, setTextAreaValue] = useState("");
     const [feedbackButtonText, setFeedbackButtonText] = useState("Send Feedback");
     const [clickedFavorite, setClickedFavorite] = useState(false);
-
+    const [collectedColors, setCollectedColors] = useState([]);
     const [visibility, setVisibility] = useState([false, false, false, false, false]);
     const [colorBlindnessVisible, setColorBlindnessVisible] = useState(false);
     const [mediumVisible, setMediumVisible] = useState(false);
@@ -70,8 +70,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             xmlhttp.onload  = function() {
                 var jsonResponse = xmlhttp.response;
                 console.log(jsonResponse);
-                console.log(qInfo);
-
             };
             xmlhttp.send(qInfo)
         }
@@ -92,7 +90,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     }
 
     useEffect(() => {
-        console.log("clickedFavorite has changed:", clickedFavorite);
     }, [clickedFavorite]);
 
     useEffect(() => {
@@ -102,7 +99,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function checkLoggedInForFav1(){
         var xmlhttp = new XMLHttpRequest();
         var token_to_check;
-        var loggedIn = false;
         xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/checktoken/");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
@@ -115,7 +111,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             setLoggedIn(true);
           }
           else{
-            console.log("not logged in")
             setLoggedIn(false);
           }   
         }
@@ -131,17 +126,14 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         }
     }
 
-
     function removeFromFavorites(){
         setClickedFavorite(false);
     }
 
     useEffect(() => {
-        console.log("infoEnabled has changed:", infoEnabled);
     }, [infoEnabled]);
 
     useEffect(() => {
-        console.log("rateEnabled has changed:", rateEnabled);
     }, [rateEnabled]);
     
     function showInfo() {
@@ -155,9 +147,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function displayPaletteColors(colorNumber) {
         if (colorMode === "RGB") return hexToRgbWriter(palette[colorNumber]);
         else if (colorMode === "HSL") return hexToHSLWriter(palette[colorNumber]);
-        else if (colorMode === "HEX") {
-            return palette[colorNumber];
-        } 
+        else if (colorMode === "HEX") return palette[colorNumber];
     }
 
     function copyPaletteColors(){
@@ -171,19 +161,15 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         document.getElementById("paletteCopy").style.setProperty("fill", "#64E225", "important")
 
         setInterval(function(){
-            if(DarkMode == "dark")
-                document.getElementById("paletteCopy").style.fill = "#888888";
-            else
-                document.getElementById("paletteCopy").style.fill = "#333333";
+            if(DarkMode == "dark") document.getElementById("paletteCopy").style.fill = "#888888";
+            else document.getElementById("paletteCopy").style.fill = "#333333";
          }, 2000);
-
     }
 
     function updateLockArray(index) {
         var newArray = lock;
         var newValue = !lock[index];
         newArray[index] = newValue;
-
         setLock(newArray);
 
         switch(index) {
@@ -270,19 +256,18 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         return blindColors;
     }
 
-    function renderMediumColors(){
-        var mediumColors = [];
-        for (var i = 0; i < 5; i++) {
-            mediumColors.push(
-                <S.Color colorHex={getColorForMedium(palette[i], medium)}>
-                    <S.ColorCode>
-                    {getColorForMedium(palette[i], medium)}
-                    </S.ColorCode>
-                </S.Color>
-            );
+
+    const renderMediumColors = () => {
+        const mediumColors = [];
+        for (let i = 0; i < 5; i++) {
+          mediumColors.push(getColorForMedium(palette[i], medium));
         }
-        return mediumColors;
-    }
+        setCollectedColors(mediumColors);
+    };
+    
+    useEffect(() => {
+        renderMediumColors();
+    }, [palette, medium]);
 
     const handleClickOutside = (event) => {
         if ((
@@ -290,7 +275,6 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             !infoRef.current.contains(event.target) &&
             !event.target.classList.contains("info-icon") 
         )) {
-            console.log("handleClickOutside");
             setInfoEnabled(false);
         }
         if ((
@@ -323,7 +307,11 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         <S.Header id="palette-header"  className = {DarkMode}>
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className={`${DarkMode} info-icon`} onClick={showInfo}/>
-            <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}>Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong></S.Info>
+            <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}> 
+                {chatGPT || <div>
+                    Comments of ChatGPT&nbsp;<strong>(Coming Soon)</strong>
+                </div>}
+            </S.Info>
             
             <S.StyledRateIcon className={`${DarkMode} info-icon`} onClick={showRate} />
             <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} rateEnabled={rateEnabled}>
@@ -474,11 +462,17 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.MediumColors className={`choose ${DarkMode}`} style = {{display: mediumVisible ? "none" : "flex" }}>
                 <S.PaletteTitle className={`chooseText ${DarkMode}`}>Please select a medium from the adjustments menu</S.PaletteTitle>
             </S.MediumColors>
-            <S.MediumColors className = {DarkMode} visible={mediumVisible}>
-                <S.PaletteTitle className = {DarkMode}>For medium {medium} we suggest this palette:</S.PaletteTitle>
-                <S.ColorBlindPalette>
-                    {renderMediumColors()}
-                </S.ColorBlindPalette>
+            <S.MediumColors className={DarkMode} visible={mediumVisible}>
+                <S.PaletteTitle className={DarkMode}>For medium {medium} we suggest this palette: </S.PaletteTitle>
+                {collectedColors.length > 0 && (
+                    <S.ColorBlindPalette>
+                    {collectedColors.map((color, index) => (
+                        <S.Color key={index} colorHex={color}>
+                            <S.ColorCode>{color}</S.ColorCode>
+                        </S.Color>
+                    ))}
+                    </S.ColorBlindPalette>
+                )}
             </S.MediumColors>
 
             {/* COLOR BLIND PALETTE */}
