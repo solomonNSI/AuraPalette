@@ -10,7 +10,7 @@ import { EditCanvas } from "../EditCanvas/EditCanvas";
 import { getColorBlindSimulation } from "../../Helpers/ColorBlindness";
 import { getColorForMedium } from "../../Helpers/Medium";
 
-export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged, gptCommentPalette }) => {
+export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEditedColorIndex, setEditedColor, colorBlindness, medium, DarkMode, query, queryChanged }) => {
     const infoRef = useRef(null);
     const rateRef = useRef(null);
     const logNotifyRef = useRef(null);
@@ -61,7 +61,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
         if(sessionStorage.getItem('user_token') != null){
             var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-            xmlhttp.open("POST", "http://127.0.0.1:8000/feedback/sendfeedback/");
+            xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/feedback/sendfeedback/");
             xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
             var qInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -79,7 +79,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function addToFavorites(){
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
-          xmlhttp.open("POST", "http://127.0.0.1:8000/account/addfavorite/");
+          xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
           xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -98,7 +98,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function checkLoggedInForFav1(){
         var xmlhttp = new XMLHttpRequest();
         var token_to_check;
-        xmlhttp.open("GET", "http://127.0.0.1:8000/account/checktoken/");
+        xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/checktoken/");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
         xmlhttp.onload  = function() {
@@ -287,8 +287,10 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
         if ((
             logNotifyRef.current && 
             !logNotifyRef.current.contains(event.target) &&
-            !event.target.classList.contains("info-icon") 
+            !event.target.classList.contains("info-icon") &&
+            !loggedIn
         )) {
+        console.log("i am er");
           setClickedFavorite(false);
         }
     };
@@ -307,7 +309,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
             <S.PaletteTitle className = {DarkMode}>Palette</S.PaletteTitle>
             <S.StyledInfoIcon className = {DarkMode} onClick={showInfo}/>
             <S.Info ref={infoRef} className = {DarkMode} infoEnabled={infoEnabled}>
-              {gptCommentPalette}
+              GPT API is on high demand rn
             </S.Info>
             <S.StyledRateIcon className = {DarkMode} onClick={showRate} />
             <S.Rate ref={rateRef} className = {`slidecontainer ${DarkMode}`} rateEnabled={rateEnabled}>
