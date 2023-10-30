@@ -33,7 +33,7 @@ export const NavBar = ({ palette, DarkMode, setIsDarkMode }) => {
     var xmlhttp = new XMLHttpRequest();
     var token_to_check;
     var loggedIn = false;
-    xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/checktoken/");
+    xmlhttp.open("GET", "https://may22-vhxzdlegrq-uc.a.run.app/account/checktoken/");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
     xmlhttp.onload  = function() {
