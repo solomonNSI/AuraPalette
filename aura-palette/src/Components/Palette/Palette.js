@@ -61,7 +61,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
 
         if(sessionStorage.getItem('user_token') != null){
             var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-            xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/feedback/sendfeedback/");
+            xmlhttp.open("POST", "https://may22-vhxzdlegrq-uc.a.run.app/feedback/sendfeedback/");
             xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
             var qInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -79,7 +79,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function addToFavorites(){
         var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
         if(sessionStorage.getItem('user_token') != null){
-          xmlhttp.open("POST", "https://may22-vhxzdlegrq-ew.a.run.app/account/addfavorite/");
+          xmlhttp.open("POST", "https://may22-vhxzdlegrq-uc.a.run.app/account/addfavorite/");
           xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
           var palInfo = '{"query":"' +  query + '", "color1": "' + palette[0]+ '", "color2": "'
@@ -98,7 +98,7 @@ export const Palette = ({ palette, lock, setLock, setHarmony, harmony, setEdited
     function checkLoggedInForFav1(){
         var xmlhttp = new XMLHttpRequest();
         var token_to_check;
-        xmlhttp.open("GET", "https://may22-vhxzdlegrq-ew.a.run.app/account/checktoken/");
+        xmlhttp.open("GET", "https://may22-vhxzdlegrq-uc.a.run.app/account/checktoken/");
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xmlhttp.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('user_token'));
         xmlhttp.onload  = function() {
